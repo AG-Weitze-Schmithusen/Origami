@@ -1,0 +1,6 @@
+#! @ExampleSession
+#! gap> S5 := SymmetricGroup(5);
+#! Sym( [ 1 .. 5 ] )
+#! gap> Order(S5);
+#! 120
+#! @EndExampleSession
