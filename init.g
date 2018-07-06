@@ -21,3 +21,4 @@ ReadPackage("Origami/lib/origami.gd");
 ReadPackage("Origami/lib/action.gd");
 ReadPackage("Origami/lib/canonical.gd");
 ReadPackage("Origami/lib/sl2_test.gd");
+ReadPackage("Origami/lib/hash.gd");

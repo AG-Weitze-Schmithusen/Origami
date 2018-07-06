@@ -4,6 +4,10 @@ InstallMethod(String, [IsOrigami], function(Origami)
 	end
 );
 
+InstallMethod(\=, [IsOrigami, IsOrigami], function(O1, O2)
+	return (VerticalPerm(O1) = VerticalPerm(O2)) and (HorizontalPerm(O1) = HorizontalPerm(O2));
+	end
+);
 
 # determines an random origami of a given degree
 # INPUT degree d
@@ -37,7 +41,7 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 				foundM := false;
 				canonicalM := CanonicalOrigamiViaDelecroix(ActionOfSl(M, O));
 				for i in [1..Length(Rep)] do
-					if Equals(canonicalOrigamiList[i], canonicalM) then
+					if canonicalOrigamiList[i] = canonicalM then
 						D:=Rep[i];
 						Add(Gen,  M * D^-1); # D^-1 * M ?
 						foundM := true;
@@ -48,6 +52,86 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 				if foundM = false then
 					Add(Rep, M);
 					Add(canonicalOrigamiList, canonicalM);
+					Add(NewGlList, M);
+					sigma[j][Position(Rep, W)]:=Position(Rep, M);  # = Length(Rep) -1 ?
+				fi;
+			od;
+		od;
+		if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
+	end;
+	HelpCalc([S*S^-1]);
+	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
+end);
+
+InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
+local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, canonicalOrigamiList, i, j, canonicalM, newReps, counter, HelpO;
+counter := 2;
+Gen:= [];
+Rep:= [S*S^-1];
+sigma:=[[],[]];
+canonicalOrigamiList := [];
+HelpO := CanonicalOrigami(O);
+SetindexOrigami (HelpO, 1);
+AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
+HelpCalc := function(GlList)
+	NewGlList := [];
+	for W in GlList do
+		newReps := [W*T,W*S];
+		for j in [1, 2] do
+			M := newReps[j];
+			canonicalM := CanonicalOrigamiViaDelecroix(ActionOfSl(M, O));
+
+			i := ContainHash(canonicalOrigamiList, canonicalM, hashForOrigamis);
+			if i = 0 then foundM := false; else foundM := true; fi;
+
+			if foundM then
+				D := Rep[i];
+				Add(Gen,  M * D^-1);
+				sigma[j][Position(Rep, W)] := Position(Rep, D);
+			fi;
+
+			if foundM = false then
+				Add(Rep, M);
+				SetindexOrigami(canonicalM, counter);
+				AddHash(canonicalOrigamiList, canonicalM, hashForOrigamis);
+				counter := counter + 1;
+				Add(NewGlList, M);
+				sigma[j][Position(Rep, W)]:=Position(Rep, M);  # = Length(Rep) -1 ?
+			fi;
+		od;
+	od;
+	if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
+end;
+HelpCalc([S*S^-1]);
+return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
+end);
+
+InstallGlobalFunction(CalcVeechGroupViaEquivalentTest,  function(O)
+	local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, OrigamiList, i, j, currentOrigami, newReps;
+	Gen := [];
+	Rep := [S*S^-1];
+	sigma := [[],[]];
+	OrigamiList := [O];
+	HelpCalc := function(GlList)
+		NewGlList := [];
+		for W in GlList do
+			newReps := [W*T,W*S];
+			for j in [1, 2] do
+				M := newReps[j];
+				foundM := false;
+				currentOrigami := ActionOfSl(M, O);
+				for i in [1..Length(Rep)] do
+					if EquivalentOrigami(OrigamiList[i], currentOrigami)  then
+						D := Rep[i];
+						Add(Gen,  M * D^-1);
+						foundM := true;
+						sigma[j][Position(Rep, W)] := Position(Rep, D);
+						break;
+					fi;
+				od;
+				if foundM = false then
+					Add(Rep, M);
+					Add(OrigamiList, currentOrigami);
 					Add(NewGlList, M);
 					sigma[j][Position(Rep, W)]:=Position(Rep, M);  # = Length(Rep) -1 ?
 				fi;
@@ -96,11 +180,6 @@ InstallGlobalFunction(ToRec, function(O)
 	return rec( d:= DegreeOrigami(O), x:= HorizontalPerm(O), y:= VerticalPerm(O));
 end);
 
-InstallGlobalFunction(Equals, function(O1, O2)
-	if (HorizontalPerm(O1) = HorizontalPerm(O2)) and (VerticalPerm(O1) = VerticalPerm(O2) ) then return true; fi;
-	return false;
-	end
-);
 
 InstallGlobalFunction( KinderzeichnungenFromCuspsOfOrigami, function(O)
 	local cycles, kz, index, orbitOrigami;
@@ -114,6 +193,11 @@ InstallGlobalFunction( KinderzeichnungenFromCuspsOfOrigami, function(O)
 end);
 
 InstallGlobalFunction( EquivalentOrigami, function(O1, O2)
-	return Equals( CanonicalOrigami(O1), CanonicalOrigami(O2));
+	if RepresentativeAction(SymmetricGroup(DegreeOrigami(O1)), [HorizontalPerm(O1), VerticalPerm(O1)],
+																			[HorizontalPerm(O2), VerticalPerm(O2)], OnTuples) = fail
+		 then return false;
+	else
+		return true;
+	fi;
 end
 );

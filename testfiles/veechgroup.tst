@@ -1,11 +1,25 @@
-gap> START_TEST( "veechgroup test" );
-gap> O := Origami((1,2,3), (2,3), 3);
-Origami((1,2,3), (2,3), 3)
-gap> SAction(VeechGroup(O));
-(1,2)
-gap> O := Origami((1,4,2,3,5,6), (1,3,6)(2,4), 6);
-Origami((1,4,2,3,5,6), (1,3,6)(2,4), 6)
-gap> SAction(VeechGroup(O));
-(1,3,7,14)(2,5,11,20)(4,9,18,29)(6,13,24,35)(8,16,28,40)(10,19,30,17)(12,22,32,43)(15,26,37,49)(21,27,39,52)(23,34,46,25)(31,42,55,67)(33,45,57,70)(36,48,60,75)(38,51,62,78)(41,54,66,
-83)(44,56,69,65)(47,59,74,87)(50,61,77,73)(53,64,81,93)(58,72,86,91)(63,79,90,76)(68,71,82,94)(80,92,96,84)(85,89,95,88)
-gap> STOP_TEST( "veechgroup.tst" );
+gap> O := Origami((1,2,4,3), (), 4);
+Origami((1,2,4,3), (), 4)
+gap> IsSimultanConjugatedForTestfile := function(a1, a2, b1, b2, n)
+>   if RepresentativeAction( SymmetricGroup(n), [a1, a2], [b1, b2], OnTuples) = fail then return false;
+>   else return true;
+>   fi;
+> end;
+function( a1, a2, b1, b2, n ) ... end
+gap> IsSimultanConjugatedForTestfile(SAction(VeechGroup(O)), TAction(VeechGroup(O)), (1,3)(2,5)(4,6), (1,2,4,5), DegreeOrigami(O));
+true
+gap> CosetsTest := function(TestCoset, O)
+> 	local RepTest1, RepTest2, CTest;
+> 	for RepTest1 in TestCoset do
+> 		CTest:= false;
+> 		for RepTest2 in Cosets(O) do
+> 			if SameCoset(RepTest1, RepTest2, SAction(VeechGroup(O)), TAction(VeechGroup(O))) then CTest := true; fi;
+> 		od;
+> 		if CTest = false then return false; fi;
+> 	od;
+> 	return true;
+> end;
+function( TestCoset, O ) ... end
+gap> CosetsTest([ S*S^-1 , T, S, T^2, T*S, T^2*S ], O);
+true
+gap> quit;

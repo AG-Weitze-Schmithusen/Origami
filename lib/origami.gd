@@ -29,6 +29,8 @@ DeclareAttribute("DegreeOrigami", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Stratum", IsOrigami);
 
+DeclareAttribute("indexOrigami", IsOrigami);
+
 #! @Description
 #! This calculates the Veechgroup of an Origami. This is a subgroup of $Sl_2(\mathbb{Z})$ of finite degree. The group is
 #! stored as ModularSubgroup from the ModularSubgroup package. The Veechgroup is represented as the coset permutations $\sigma_S$
@@ -62,7 +64,7 @@ BindGlobal(
 #! @Arguments Origami1, Origami2
 #! @Returns true or false
 #! @Description This tests wether Origami1 is equal to Origami2 with same numbering of squares.
-#!              That is, the defining permutations are the same. 
+#!              That is, the defining permutations are the same.
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("Equals");
 
@@ -87,6 +89,29 @@ DeclareGlobalFunction("ExampleOrigami");
 #!  			of the matrix group Sl_2(Z).
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("CalcVeechGroup");
+
+#! @Arguments Origami
+#! @Returns A list with tree entrys
+#! @Description This function is used to calculate some attributes.
+#!             It calculates the Veechgroup of a given origami and .
+#!              the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+#!  			The cosets of the veechgroup is stored in a list of words in the generators S and T
+#!  			of the matrix group Sl_2(Z).
+#!        In Contrast to CalcVeechGroup, this uses equivalent tests instead of canonical Origamis.
+#! @ChapterInfo The Origami object, The Origami object
+DeclareGlobalFunction("CalcVeechGroupViaEquivalentTest");
+
+#! @Arguments Origami
+#! @Returns A list with tree entrys
+#! @Description This function is used to calculate some attributes.
+#!             It calculates the Veechgroup of a given origami and .
+#!              the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+#!  			The cosets of the veechgroup is stored in a list of words in the generators S and T
+#!  			of the matrix group Sl_2(Z). In contrast to CalcVeechGroup, this uses hash tables to
+#!				store Origamis.
+#! @ChapterInfo The Origami object, The Origami object
+DeclareGlobalFunction("CalcVeechGroupWithHashTables");
+
 
 #! @Arguments Origami
 #! @Returns	nothing
