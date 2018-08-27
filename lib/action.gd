@@ -6,6 +6,7 @@ DeclareGlobalFunction("ActionOfInvS");
 
 
 
+
 #! @Arguments word, Origami
 #! @Returns the Origami Object word.Origami
 #! @Description
@@ -16,7 +17,7 @@ DeclareGlobalFunction("ActionOfSl");
 #! @Arguments word, Origami
 #! @Returns the Origami Object word.Origami
 #! @Description
-#!	This lets act a word in the free group $Group(S, T)$, representing an element of $Sl_2(\mathbb{Z})$, on an Origami and returns word.Origami. But in 
+#!	This lets act a word in the free group $Group(S, T)$, representing an element of $Sl_2(\mathbb{Z})$, on an Origami and returns word.Origami. But in
 #!contrast to
 #! "ActionOfSl" the result is stored in the canonical representation.
 #! @ChapterInfo The Origami object, The action on the Origami

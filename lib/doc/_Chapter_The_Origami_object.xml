@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<Chapter Label="Chapter_The_Origami_object">
+<Heading>The Origami object</Heading>
+
+<Section Label="Chapter_The_Origami_object_Section_The_action_on_the_Origami">
+<Heading>The action on the Origami</Heading>
+
+<ManSection>
+  <Func Arg="word, Origami" Name="ActionOfSl" />
+ <Returns>the Origami Object word.Origami
+</Returns>
+ <Description>
+This lets act a word in the free group <Math>Group(S, T)</Math> ,representing an element of <Math>Sl_2(\mathbb{Z})</Math> on an Origami and returns <Math>word.Origami</Math>.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="word, Origami" Name="ActionOfF2ViaCanonical" />
+ <Returns>the Origami Object word.Origami
+</Returns>
+ <Description>
+This lets act a word in the free group <Math>Group(S, T)</Math>, representing an element of <Math>Sl_2(\mathbb{Z})</Math>, on an Origami and returns word.Origami. But in
+contrast to
+"ActionOfSl" the result is stored in the canonical representation.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="word, Origami" Name="RightActionOfF2ViaCanonical" />
+ <Returns>the Origami Object Origami.word
+</Returns>
+ <Description>
+This lets act a word in the free group <Math>Group(S, T)</Math> on an Origami from right and returns <Math>Origami.word = word^-1.Origami</Math>, where the left action
+is the common action of <Math>Sl_2(\mathbb{Z})</Math> on 2 mannifolds. This action has the same Veechgroup and orbits as the left action. In contrast to
+"ActionOfSl" the result is stored in the canonical representation.
+ </Description>
+</ManSection>
+
+
+</Section>
+
+
+<Section Label="Chapter_The_Origami_object_Section_The_Origami_object">
+<Heading>The Origami object</Heading>
+
+<ManSection>
+  <Func Arg="Origami, start" Name="CanonicalOrigamiViaDelecroixAndStart" />
+ <Returns>An Origami
+</Returns>
+ <Description>
+This calculates a canonical representation of an origami depending on a given number start (Between 1 and the degree of
+of the Origami). To determine a canonical numbering the algorithm starts at the square with number start and walks over the origami
+in a certain way and numbers the squares in the order, they are visited . First it walks in horizontal direction one loop. Then it walks
+one step up (in vertical direection) and then again a loop in horizontal direction. This wil be repeated until the vertical
+loop is complete or all squares have been visited. If there are unvisited squares, we continue with the smallest number (in
+the new numbering), that has not been in a vertical loop. An Origami is connected, so that number exists.
+Two origamis are equal if they are described by the same permutations in their
+canonical representation.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CanonicalOrigamiViaDelecroix" />
+ <Returns>An Origami
+</Returns>
+ <Description>
+This calculates a canonical representation of an origami. It calculates the representation from CanonicalOrigamiViaDelecroixAndStart with
+several start squares, independent of the given representation. Then it takes the minimum with respect to some order.
+Two origamis are equal if they are described by the same permutations in their
+canonical representation.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CanonicalOrigami" />
+ <Returns>An Origami
+</Returns>
+ <Description>
+This calculates a canonical representation of an origami, represented as record rec(d := * , x := *, y := *).
+Two origamis are equal if they are described by the same permutations in their
+canonical representation.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="VerticalPerm" Label="for IsOrigami"/>
+ <Returns>a permutation
+</Returns>
+ <Description>
+This returns the horizontal permutation <Math>\sigma_x</Math> of the Origami.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="HorizontalPerm" Label="for IsOrigami"/>
+ <Returns>a permutation
+</Returns>
+ <Description>
+This returns the vertical permutation <Math>\sigma_y</Math> of the Origami.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="DegreeOrigami" Label="for IsOrigami"/>
+ <Returns>an integer
+</Returns>
+ <Description>
+This returns the degree of an Origami.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="Stratum" Label="for IsOrigami"/>
+ <Returns>a list of integers
+</Returns>
+ <Description>
+This calculates the stratum of an Origami. That is a list of the orders of the singularities.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="VeechGroup" Label="for IsOrigami"/>
+ <Returns>a ModularSubgroup object
+</Returns>
+ <Description>
+This calculates the Veechgroup of an Origami. This is a subgroup of <Math>Sl_2(\mathbb{Z})</Math> of finite degree. The group is
+stored as ModularSubgroup from the ModularSubgroup package. The Veechgroup is represented as the coset permutations <Math>\sigma_S</Math>
+and <Math>\sigma_T</Math> with respect to the generators <Math>S</Math> and <Math>T</Math>. This means if <Math>i</Math> is the integer associated to the rigth coset <Math>G</Math> (Cosets( O ) [ i ] VeechGroup = H)
+then we have for the coset H, associated to <Math>\sigma_S(i)</Math>, that <Math>SG = H</Math>. Dito for <Math>\sigma_T</Math>.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Attr Arg="Origami" Name="Cosets" Label="for IsOrigami"/>
+ <Returns>a list of words in the Free group, generated by <Math>S</Math> and <Math>T</Math>.
+</Returns>
+ <Description>
+This Calculates the right cosets of the Veechgroup of an Origami.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami1, Origami2" Name="Equals" />
+ <Returns>true or false
+</Returns>
+ <Description>
+This tests wether Origami1 is equal to Origami2 with same numbering of squares.
+That is, the defining permutations are the same.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami1, Origami2" Name="EquivalentOrigami" />
+ <Returns>true or false
+</Returns>
+ <Description>
+This tests wether Origami1 is equal up to Origami2 up to numbering of the squares.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="d" Name="ExampleOrigami" />
+ <Returns>a random origami
+</Returns>
+ <Description>
+This creates a random origami of degree d.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CalcVeechGroup" />
+ <Returns>A list with tree entrys
+</Returns>
+ <Description>
+This function is used to calculate some attributes.
+It calculates the Veechgroup of a given origami and .
+the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+The cosets of the veechgroup is stored in a list of words in the generators S and T
+of the matrix group Sl_2(Z).
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CalcVeechGroupViaEquivalentTest" />
+ <Returns>A list with tree entrys
+</Returns>
+ <Description>
+This function is used to calculate some attributes.
+It calculates the Veechgroup of a given origami and .
+the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+The cosets of the veechgroup is stored in a list of words in the generators S and T
+of the matrix group Sl_2(Z).
+In Contrast to CalcVeechGroup, this uses equivalent tests instead of canonical Origamis.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CalcVeechGroupWithHashTables" />
+ <Returns>A list with tree entrys
+</Returns>
+ <Description>
+This function is used to calculate some attributes.
+It calculates the Veechgroup of a given origami and .
+the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+The cosets of the veechgroup is stored in a list of words in the generators S and T
+of the matrix group Sl_2(Z). In contrast to CalcVeechGroup, this uses hash tables to
+store Origamis.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="CalcStratum" />
+ <Returns>nothing
+</Returns>
+ <Description>
+Calculates the stratum of an object and sets its attribute. The stratum is stored as list of integers.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="Origami" Name="ToRec" />
+ <Returns>record of the form rec(d := * , x := *, y := *) Describtion This calculates a record representation for an origami object.
+</Returns>
+ <Description>
+ </Description>
+</ManSection>
+
+
+</Section>
+
+
+</Chapter>
+

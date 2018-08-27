@@ -1,0 +1,22 @@
+  
+  
+  [1XIndex[101X
+  
+  [2X[102X 1.3-1 
+  [2XActionOfF2ViaCanonical[102X 1.3-1 
+  [2XActionOfSl[102X 1.3-1 
+  [2XCanonicalOrigami[102X 1.3-1 
+  [2XCanonicalOrigamiViaDelecroix[102X 1.3-1 
+  [2XCanonicalOrigamiViaDelecroixAndStart[102X 1.3-1 
+  [2XCosets[102X 1.3-1 
+  [2XDegreeOrigami[102X 1.3-1 
+  [2XGenus[102X 1.3-1 
+  [2XHorizontalPerm[102X 1.3-1 
+  [2XOrigamiFamily[102X 1.3-1 
+  [2XRightActionOfF2ViaCanonical[102X 1.3-1 
+  [2XStratum[102X 1.3-1 
+  [2XVeechGroup[102X 1.3-1 
+  [2XVerticalPerm[102X 1.3-1 
+  
+  
+  -------------------------------------------------------

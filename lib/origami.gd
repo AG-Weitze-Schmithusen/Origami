@@ -29,6 +29,13 @@ DeclareAttribute("DegreeOrigami", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Stratum", IsOrigami);
 
+#! @Description
+#! This calculates the genus of the Origami surface.
+#! @Returns an natural number
+#! @Arguments Origami
+#! @ChapterInfo The Origami object, The Origami object
+DeclareAttribute("Genus", IsOrigami);
+
 DeclareAttribute("indexOrigami", IsOrigami);
 
 #! @Description
@@ -48,6 +55,7 @@ DeclareAttribute("VeechGroup", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Cosets", IsOrigami);
 
+DeclareGlobalFunction("IsConnectedOrigami");
 
 BindGlobal(
 	"Origami", function(horizontal, vertical, d)
@@ -58,7 +66,7 @@ BindGlobal(
 		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsOrigami and IsAttributeStoringRep) , HorizontalPerm, ori.x, VerticalPerm, ori.y, DegreeOrigami, d );
 		return Obj;
 	end
-);
+	);
 
 
 #! @Arguments Origami1, Origami2
@@ -112,13 +120,13 @@ DeclareGlobalFunction("CalcVeechGroupViaEquivalentTest");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("CalcVeechGroupWithHashTables");
 
-
 #! @Arguments Origami
-#! @Returns	nothing
-#! @Description Calculates the stratum of an object and sets its attribute. The stratum is stored as list of integers.
-#! @ChapterInfo The Origami object, The Origami object
-DeclareGlobalFunction("CalcStratum");
-
+#! @Returns true or false
+#!Description This Function tests weather the veechgrouo of the origami is the full group $Sl_2(mathbb{Z})$. This can be much
+#! faster than calculating the veechgroup and then check weather it is $Sl_2(mathbb{Z})$, in the case, that the Index of the
+#! Veechgroup is large.
+#! @ChapterInfo he Origami object, The Origami object
+DeclareGlobalFunction("HasVeechGroupSl_2");
 
 #! @Arguments Origami
 #! @Returns record of the form rec(d := * , x := *, y := *)

@@ -21,6 +21,9 @@ InstallGlobalFunction(ExampleOrigami, function (d)
 	return Origami(x, y, d);
 end);
 
+InstallGlobalFunction(IsConnectedOrigami, function(origami)
+	return IsTransitive(Group(HorizontalPerm(origami), VerticalPerm(origami)), [1..DegreeOrigami(origami)]);
+end);
 
 
 #This function calculates the coset Graph of the Veech group of an given Origami O
@@ -143,6 +146,16 @@ InstallGlobalFunction(CalcVeechGroupViaEquivalentTest,  function(O)
 	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
 end);
 
+InstallMethod(Genus, "for a origami", [IsOrigami], function(Origami)
+	local s, i, e;
+	e := 0;
+	s := Stratum(Origami);
+	for i in s do
+		e := e + i;
+	od;
+	return ( e + 2 ) / 2;
+end);
+
 InstallMethod(VeechGroup, "for a origami", [IsOrigami], function(Origami)
 	local help;
 	help := CalcVeechGroup(Origami);
@@ -161,7 +174,7 @@ end);
 #This function calculates the Stratum of an given Origami
 #INPUT: An Origami O
 #OUTPUT: The Stratum of the Origami as List of Integers.
-InstallGlobalFunction(CalcStratum, function(O)
+InstallMethod(Stratum,"for a origami", [IsOrigami], function(O)
 	local com, Stratum, CycleStructure, current,i, j;
 	com:=HorizontalPerm(O)* VerticalPerm(O) * HorizontalPerm(O)^(-1) * VerticalPerm(O)^(-1);
 	CycleStructure:= CycleStructurePerm(com);
@@ -173,7 +186,7 @@ InstallGlobalFunction(CalcStratum, function(O)
 			od;
 		fi;
 	od;
-	SetStratum(O ,Stratum);
+	return Stratum;
 end);
 
 InstallGlobalFunction(ToRec, function(O)
@@ -187,9 +200,9 @@ InstallGlobalFunction( KinderzeichnungenFromCuspsOfOrigami, function(O)
 	cycles := OrbitsDomain(Group(TAction(VeechGroup(O))), [1..Length(Cosets(O))]);
 	for index in [1..Length(cycles)] do
 		orbitOrigami := ActionOfSl( Cosets ( O ) [ cycles [ index ][ 1 ] ], O);
-		Add(kz, Origami( HorizontalPerm( orbitOrigami ), VerticalPerm( orbitOrigami ) * HorizontalPerm( orbitOrigami ) * VerticalPerm( orbitOrigami )^-1, DegreeOrigami(O) ));
+		Add(kz,  ( HorizontalPerm( orbitOrigami ), VerticalPerm( orbitOrigami ) * HorizontalPerm( orbitOrigami ) * VerticalPerm( orbitOrigami )^-1, DegreeOrigami(O) ));
 	od;
-	return List( kz, o -> OrbitsDomain(Group(HorizontalPerm(o), VerticalPerm(o))));
+	return List(kz, NormalKZForm);
 end);
 
 InstallGlobalFunction( EquivalentOrigami, function(O1, O2)
@@ -199,5 +212,15 @@ InstallGlobalFunction( EquivalentOrigami, function(O1, O2)
 	else
 		return true;
 	fi;
+end
+);
+
+InstallGlobalFunction(HasVeechGroupSl_2, function(O)
+	if EquivalentOrigami( O, ActionOfS(O) ) then
+		if EquivalentOrigami( O, ActionOfT(O)) then
+			return true;
+		fi;
+	fi;
+	return false;
 end
 );
