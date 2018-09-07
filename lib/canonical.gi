@@ -71,19 +71,19 @@ end);
 #Calculates the canonical image of an origami
 #INPUT: an origami Origami
 #OUTPUT: the canonical representation ("image") of the origami Origami
-InstallGlobalFunction(CanonicalOrigami, function(O)
-	local g,C, y, Sd, Cent;
-	Sd:=SymmetricGroup(DegreeOrigami(O));
-	C := CanonicalPerm(HorizontalPerm(O));
-	g := RepresentativeActionOp(Sd, HorizontalPerm(O), C , OnPoints);
-	y := VerticalPerm(O)^g;
-	Cent:= Centralizer(Sd,C);
-	#y := CanonicalImage(Cent, y, OnPoints);
-	y := Minimum( Orbit( Cent, y, OnPoints ) );
-	return Origami(C, y, DegreeOrigami(O));
-end);
+#InstallGlobalFunction(CanonicalOrigami, function(O)
+	#local g,C, y, Sd, Cent;
+	#Sd:=SymmetricGroup(DegreeOrigami(O));
+	#C := CanonicalPerm(HorizontalPerm(O));
+	#g := RepresentativeActionOp(Sd, HorizontalPerm(O), C , OnPoints);
+	#y := VerticalPerm(O)^g;
+	#Cent:= Centralizer(Sd,C);
+	##y := CanonicalImage(Cent, y, OnPoints);
+	#y := Minimum( Orbit( Cent, y, OnPoints ) );
+	#return Origami(C, y, DegreeOrigami(O));
+#end);
 
-InstallGlobalFunction(CanonicalOrigamiViaDelecroixAndStart, function(O, start)
+InstallGlobalFunction(CanonicalOrigamiAndStart, function(O, start)
 	local xLoopStart, yLoopStart, NotVisitedY, xlevel, i, newxPerm, newyPerm, renumbering, currentxPosition, currentyPosition, help;
 	renumbering := [ ];
 	NotVisitedY := [ 1.. DegreeOrigami(O) ];
@@ -142,12 +142,78 @@ InstallGlobalFunction(CanonicalOrigamiViaDelecroixAndStart, function(O, start)
 	return Origami(newxPerm, newyPerm, DegreeOrigami(O));
 end);
 
-InstallGlobalFunction(CanonicalOrigamiViaDelecroix, function(O)
+InstallGlobalFunction(CanonicalOrigami, function(O)
 	local i, res, resOrigami;
 	res := [];
 	for i in [1 .. DegreeOrigami(O)] do
-		Add(res, CanonicalOrigamiViaDelecroixAndStart(O, i));
+		Add(res, CanonicalOrigamiAndStart(O, i));
 	od;
 	resOrigami := Minimum( List(res, o -> [HorizontalPerm(o), VerticalPerm(o)]) );
 	return Origami(resOrigami[1], resOrigami[2], DegreeOrigami(O));
+end);
+
+
+## Graph equivaltent test
+InstallGlobalFunction(OrigamiNormalForm, function(origami)
+  local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
+        minimizeCycleLengths, cycleLengths, m, l, x, y;
+
+	x := HorizontalPerm(origami);
+	y := VerticalPerm(origami);
+  n := Maximum(LargestMovedPoint([x,y]), 1);
+
+  # Find points which minimize the lengths of the cycles in which they occur.
+  # In most cases, this greatly reduces the number of breadths-first searches below.
+  minimalCycleLengths := [n, n];
+  minimizeCycleLengths := [];
+  for i in [1..n] do
+    cycleLengths := [Length(Cycles(x, [i])[1]), Length(Cycles(y, [i])[1])];
+    if cycleLengths = minimalCycleLengths then
+      Add(minimizeCycleLengths, i);
+    elif cycleLengths < minimalCycleLengths then
+      minimizeCycleLengths := [i];
+      minimalCycleLengths := cycleLengths;
+    fi;
+  od;
+
+  m := Length(minimizeCycleLengths);
+  G := ListWithIdenticalEntries(m, 0);
+
+  # Starting from each of the vertices found above, do a breadth-first search
+  # and list the vertices in the order they appear.
+  # This defines a permutation l with which we conjugate x and y.
+  # From the resulting list of pairs of permutations (all of which are by
+  # definition simultaneously conjugated to (x,y)) we choose the lexicographically
+  # smallest one as the canonical form.
+  for i in minimizeCycleLengths do
+    L := ListWithIdenticalEntries(n, 0);
+    seen := ListWithIdenticalEntries(n, false);
+    Q := [i];
+    seen[i] := true;
+    numSeen := 1;
+    L[i] := 1;
+    while numSeen < n do
+      v := Remove(Q, 1);
+      wx := v^x;
+      wy := v^y;
+      if not seen[wx] then
+        Add(Q, wx);
+        seen[wx] := true;
+        numSeen := numSeen + 1;
+        L[wx] := numSeen;
+      fi;
+      if not seen[wy] then
+        Add(Q, wy);
+        seen[wy] := true;
+        numSeen := numSeen + 1;
+        L[wy] := numSeen;
+      fi;
+    od;
+    G[Position(minimizeCycleLengths, i)] := L;
+  od;
+
+  Apply(G, l -> PermList(l));
+  Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
+
+  return Origami(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
 end);

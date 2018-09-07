@@ -14,7 +14,7 @@ DeclareGlobalFunction("CanonicalPerm");
 #!  			Two origamis are equal if they are described by the same permutations in their
 #!				canonical representation.
 #! @ChapterInfo The Origami object, The Origami object
-DeclareGlobalFunction("CanonicalOrigamiViaDelecroixAndStart");
+DeclareGlobalFunction("CanonicalOrigamiAndStart");
 
 #! @Arguments Origami
 #! @Returns An Origami
@@ -23,7 +23,7 @@ DeclareGlobalFunction("CanonicalOrigamiViaDelecroixAndStart");
 #!  			Two origamis are equal if they are described by the same permutations in their
 #!				canonical representation.
 #! @ChapterInfo The Origami object, The Origami object
-DeclareGlobalFunction("CanonicalOrigamiViaDelecroix");
+DeclareGlobalFunction("CanonicalOrigami");
 
 
 #! @Arguments Origami
@@ -32,4 +32,6 @@ DeclareGlobalFunction("CanonicalOrigamiViaDelecroix");
 #!  			Two origamis are equal if they are described by the same permutations in their
 #!				canonical representation.
 #! @ChapterInfo The Origami object, The Origami object
-DeclareGlobalFunction("CanonicalOrigami");
+#DeclareGlobalFunction("CanonicalOrigami");
+
+DeclareGlobalFunction("OrigamiNormalForm");

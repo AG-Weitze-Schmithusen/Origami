@@ -37,10 +37,12 @@ InstallGlobalFunction(ActionOfInvS, function(O)
 end);
 
 #This Function let act A in Sl_2(Z) on an Origami O
-#INPUT: A Word word in S and T and an Origami O
+#INPUT: A Word word in S and T as string and an Origami O
 #OUTPUT: The Origami word.O
-InstallGlobalFunction(ActionOfSl, function(word, O)
-	local letter;
+InstallGlobalFunction(ActionOfSl, function(wordString, O)
+	local letter, F, word;
+	F := FreeGroup("S","T");
+	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
 	for letter in LetterRepAssocWord(word) do
 		if letter = 1 then
 			O := ActionOfS(O);

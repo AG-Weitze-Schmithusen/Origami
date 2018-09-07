@@ -34,7 +34,7 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 	Gen:= [];
 	Rep:= [S*S^-1];
 	sigma:=[[],[]];
-	canonicalOrigamiList:=[CanonicalOrigami(O)];
+	canonicalOrigamiList := [OrigamiNormalForm(O)];
 	HelpCalc := function(GlList)
 		NewGlList := [];
 		for W in GlList do
@@ -42,13 +42,13 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 			for j in [1, 2] do
 				M := newReps[j];
 				foundM := false;
-				canonicalM := CanonicalOrigamiViaDelecroix(ActionOfSl(M, O));
+				canonicalM := OrigamiNormalForm(ActionOfSl(M, O));
 				for i in [1..Length(Rep)] do
 					if canonicalOrigamiList[i] = canonicalM then
 						D:=Rep[i];
 						Add(Gen,  M * D^-1); # D^-1 * M ?
 						foundM := true;
-						sigma[j][Position(Rep, W)]:=Position(Rep, D);
+						sigma[j][Position(Rep, W)] := Position(Rep, D);
 						break;
 					fi;
 				od;
@@ -82,7 +82,7 @@ HelpCalc := function(GlList)
 		newReps := [W*T,W*S];
 		for j in [1, 2] do
 			M := newReps[j];
-			canonicalM := CanonicalOrigamiViaDelecroix(ActionOfSl(M, O));
+			canonicalM := OrigamiNormalForm(ActionOfSl(M, O));
 
 			i := ContainHash(canonicalOrigamiList, canonicalM, hashForOrigamis);
 			if i = 0 then foundM := false; else foundM := true; fi;
@@ -200,7 +200,7 @@ InstallGlobalFunction( KinderzeichnungenFromCuspsOfOrigami, function(O)
 	cycles := OrbitsDomain(Group(TAction(VeechGroup(O))), [1..Length(Cosets(O))]);
 	for index in [1..Length(cycles)] do
 		orbitOrigami := ActionOfSl( Cosets ( O ) [ cycles [ index ][ 1 ] ], O);
-		Add(kz,  ( HorizontalPerm( orbitOrigami ), VerticalPerm( orbitOrigami ) * HorizontalPerm( orbitOrigami ) * VerticalPerm( orbitOrigami )^-1, DegreeOrigami(O) ));
+		Add(kz,  Kinderzeichnung( HorizontalPerm( orbitOrigami ), VerticalPerm( orbitOrigami ) * HorizontalPerm( orbitOrigami ) * VerticalPerm( orbitOrigami )^-1));
 	od;
 	return List(kz, NormalKZForm);
 end);

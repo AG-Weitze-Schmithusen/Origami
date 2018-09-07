@@ -4,14 +4,8 @@ LoadPackage("profiling");
 #SetPackagePath("ModularGroup","/home/pk/src/ModularGroup");
 #LoadPackage("ModularGroup");
 
-#Definition of the free group F_2 in S and T = <S,T>
-
-if not IsBound(F) then
-	F:=FreeGroup("S", "T");
-	gens:= GeneratorsOfGroup(F);
-	S:=gens[1];
-	T:=gens[2];
-fi;
+F := FreeGroup("S", "T");
+AssignGeneratorVariables(F);
 
 if not IsBound(conjugacyClassesOfx) then
 	conjugacyClassesOfx := [];
