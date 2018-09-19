@@ -39,7 +39,7 @@ end);
 #This Function let act A in Sl_2(Z) on an Origami O
 #INPUT: A Word word in S and T as string and an Origami O
 #OUTPUT: The Origami word.O
-InstallGlobalFunction(ActionOfSl, function(wordString, O)
+InstallGlobalFunction(ActionOfSpecialLinearGroup, function(wordString, O)
 	local letter, F, word;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
@@ -61,12 +61,12 @@ end);
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami word.O as represented as canonical Image
 InstallGlobalFunction(ActionOfF2ViaCanonical, function(o, g)
-	return CanonicalOrigami(ActionOfSl(g,o));
+	return OrigamiNormalForm(ActionOfSl(g,o));
 end);
 
 # This function convertes the action of ActionOfF2ViaCanonical in a right action, that has the same orbits and stabilizer.
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami O.word as represented as canonical Image
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return CanonicalOrigami(ActionOfSl(g^-1,o));
+	return OrigamiNormalForm(ActionOfSl(g^-1,o));
 end);

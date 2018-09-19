@@ -29,42 +29,76 @@ end);
 #This function calculates the coset Graph of the Veech group of an given Origami O
 #INPUT: An origami O
 #OUTPUT: The coset Graph as Permutations sigma_S and Sigma_T
+#InstallGlobalFunction(CalcVeechGroup, function(O)
+#	local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, canonicalOrigamiList, i, j, canonicalM, newReps;
+#	Gen:= [];
+#	Rep:= [S*S^-1];
+#	sigma:=[[],[]];
+#	canonicalOrigamiList := [OrigamiNormalForm(O)];
+#	HelpCalc := function(GlList)
+#		NewGlList := [];
+#		for W in GlList do
+#			newReps := [W*T,W*S];
+#			for j in [1, 2] do
+#				M := newReps[j];
+#				foundM := false;
+#				canonicalM := OrigamiNormalForm(ActionOfSl(M, O));
+#				for i in [1..Length(Rep)] do
+#					if canonicalOrigamiList[i] = canonicalM then
+#						D := Rep[i];
+#						Add(Gen,  M * D^-1); # D^-1 * M ?
+#						foundM := true;
+#						sigma[j][Position(Rep, W)] := Position(Rep, D);
+#						break;
+#					fi;
+#				od;
+#				if foundM = false then
+#					Add(Rep, M);
+#					Add(canonicalOrigamiList, canonicalM);
+#					Add(NewGlList, M);
+#					sigma[j][Position(Rep, W)] := Position(Rep, M);  # = Length(Rep) -1 ?
+#				fi;
+#			od;
+#		od;
+#		if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
+#	end;
+#	HelpCalc([S*S^-1]);
+#	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
+#end);
+
+#This function calculates the coset Graph of the Veech group of an given Origami O
+#INPUT: An origami O
+#OUTPUT: The coset Graph as Permutations sigma_S and Sigma_T
 InstallGlobalFunction(CalcVeechGroup, function(O)
-	local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, canonicalOrigamiList, i, j, canonicalM, newReps;
-	Gen:= [];
-	Rep:= [S*S^-1];
+	local  sigma, HelpCalc, D, foundM, W, NewOrigamiPositions, canonicalOrigamiList, i, j, newOrigamis;
 	sigma:=[[],[]];
 	canonicalOrigamiList := [OrigamiNormalForm(O)];
 	HelpCalc := function(GlList)
-		NewGlList := [];
-		for W in GlList do
-			newReps := [W*T,W*S];
+		NewOrigamiPositions := [];
+		for W in canonicalOrigamiList do
+			newOrigamis := [OrigamiNormalForm( ActionOfT(W) ), OrigamiNormalForm( ActionOfS(W) )];
 			for j in [1, 2] do
-				M := newReps[j];
-				foundM := false;
-				canonicalM := OrigamiNormalForm(ActionOfSl(M, O));
-				for i in [1..Length(Rep)] do
-					if canonicalOrigamiList[i] = canonicalM then
-						D:=Rep[i];
-						Add(Gen,  M * D^-1); # D^-1 * M ?
+				foundM := false;			 #canonicalM = newOrigamis[j]
+				for i in [1..Length(canonicalOrigamiList)] do
+					if canonicalOrigamiList[i] = newOrigamis[j] then
 						foundM := true;
-						sigma[j][Position(Rep, W)] := Position(Rep, D);
+						sigma[j][Position(canonicalOrigamiList, W)] := i;
 						break;
 					fi;
 				od;
 				if foundM = false then
-					Add(Rep, M);
-					Add(canonicalOrigamiList, canonicalM);
-					Add(NewGlList, M);
-					sigma[j][Position(Rep, W)]:=Position(Rep, M);  # = Length(Rep) -1 ?
+					Add(canonicalOrigamiList, newOrigamis[j]);
+					Add(NewOrigamiPositions, newOrigamis[j]);
+					sigma[j][Position(canonicalOrigamiList, W)] := Position(canonicalOrigamiList, newOrigamis[j]);  # = Length(Rep) -1 ?
 				fi;
 			od;
 		od;
-		if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
+		if Length(NewOrigamiPositions) > 0 then HelpCalc(NewOrigamiPositions); fi;
 	end;
-	HelpCalc([S*S^-1]);
-	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
+	HelpCalc([O]);
+	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
 end);
+
 
 InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, canonicalOrigamiList, i, j, canonicalM, newReps, counter, HelpO;
