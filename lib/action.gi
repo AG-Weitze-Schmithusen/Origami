@@ -61,12 +61,12 @@ end);
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami word.O as represented as canonical Image
 InstallGlobalFunction(ActionOfF2ViaCanonical, function(o, g)
-	return OrigamiNormalForm(ActionOfSl(g,o));
+	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g,o));
 end);
 
 # This function convertes the action of ActionOfF2ViaCanonical in a right action, that has the same orbits and stabilizer.
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami O.word as represented as canonical Image
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return OrigamiNormalForm(ActionOfSl(g^-1,o));
+	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g^-1,o));
 end);

@@ -1,5 +1,5 @@
-\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }The Veechgroup of origamis }}{4}{chapter.1}
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }The Veechgroup of Origamis }}{4}{chapter.1}
 \contentsline {section}{\numberline {1.1}\leavevmode {\color {Chapter }Introduction}}{4}{section.1.1}
 \contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter } The Free Group }}{4}{section.1.2}
-\contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }The Origmai Object}}{4}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }ActionOfSl}}{4}{subsection.1.3.1}
+\contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }The Origami Object}}{4}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }ActionOfSpecialLinearGroup}}{4}{subsection.1.3.1}
