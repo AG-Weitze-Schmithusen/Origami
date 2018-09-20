@@ -18,3 +18,4 @@ ReadPackage("Origami/lib/sl2_test.gd");
 ReadPackage("Origami/lib/hash.gd");
 ReadPackage("Origami/lib/origami-list.gd");
 ReadPackage("Origami/lib/kinderzeichnungen.gd");
+ReadPackage("Origami/lib/sagefunction.gd");

@@ -45,5 +45,5 @@ InstallGlobalFunction(hashForPermutations, function(p)
 end);
 
 InstallGlobalFunction(hashForOrigamis, function( origami )
-    return (hashForPermutations( HorizontalPerm(origami) ) + hashForPermutations( VerticalPerm(origami) )) mod 1000000;
+    return (hashForPermutations( HorizontalPerm(origami) ) + hashForPermutations( VerticalPerm(origami) )) mod 1000000 + 1;
 end);

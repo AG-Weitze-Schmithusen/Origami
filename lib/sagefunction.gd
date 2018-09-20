@@ -1,0 +1,2 @@
+DeclareGlobalFunction("VeechgroupBySage");
+DeclareGlobalFunction("NormalFormBySage");

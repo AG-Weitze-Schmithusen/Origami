@@ -103,12 +103,12 @@ end);
 InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
 	 				counter, HelpO;
-	counter := 2;
+	counter := 1;
 	sigma:=[[],[]];
 	canonicalOrigamiList := [];
 	HelpO := CanonicalOrigami(O);
 	SetindexOrigami (HelpO, 1);
-	AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
+	#AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
 	HelpCalc := function(GlList)
 		NewOrigamiList := [];
 		for W in GlList do
@@ -131,7 +131,7 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 		od;
 		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
 	end;
-	HelpCalc([S*S^-1]);
+	HelpCalc([HelpO]);
 	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
 end);
 

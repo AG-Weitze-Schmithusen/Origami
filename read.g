@@ -5,3 +5,4 @@ ReadPackage("Origami/lib/sl2_test.gi");
 ReadPackage("Origami/lib/hash.gi");
 ReadPackage("Origami/lib/origami-list.gi");
 ReadPackage("Origami/lib/kinderzeichnungen.gi");
+ReadPackage("Origami/lib/sagefunction.gi");
