@@ -2,7 +2,7 @@ DeclareGlobalFunction("ActionOfS");
 DeclareGlobalFunction("ActionOfT");
 DeclareGlobalFunction("ActionOfInvT");
 DeclareGlobalFunction("ActionOfInvS");
-
+DeclareGlobalFunction("ActionOfSpecialLinearGroupPresentation");
 
 
 

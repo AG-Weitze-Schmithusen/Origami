@@ -1,2 +1,14 @@
 DeclareGlobalFunction("VeechgroupBySage");
 DeclareGlobalFunction("NormalFormBySage");
+DeclareGlobalFunction("IsHyperellipticBySage");
+DeclareGlobalFunction("IsPrimitiveBySage");
+DeclareGlobalFunction("ReduceBySage");
+DeclareGlobalFunction("AbsolutePeriodGeneratorsBySage");
+DeclareGlobalFunction("LatticeOfAbsolutePeriodsBySage");
+DeclareGlobalFunction("LatticeOfQuotientsBySage");
+DeclareGlobalFunction("OptimalDegreeBySage");
+DeclareGlobalFunction("PeriodGeneratorsBySage");
+DeclareGlobalFunction("WidthsAndHeightsBySage");
+DeclareGlobalFunction("SumOfLyapunovExponentsBySage");
+DeclareGlobalFunction("LyapunovExponentsApproxBySage");
+DeclareGlobalFunction("IntermediateCoversBySage");
