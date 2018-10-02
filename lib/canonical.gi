@@ -167,7 +167,7 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   minimalCycleLengths := [n, n];
   minimizeCycleLengths := [];
   for i in [1..n] do
-    cycleLengths := [Length(Cycles(x, [i])[1]), Length(Cycles(y, [i])[1])];
+    cycleLengths := [CycleLength(x, i), CycleLength(y, i)];
     if cycleLengths = minimalCycleLengths then
       Add(minimizeCycleLengths, i);
     elif cycleLengths < minimalCycleLengths then
@@ -177,7 +177,7 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   od;
 
   m := Length(minimizeCycleLengths);
-  G := ListWithIdenticalEntries(m, 0);
+  G := [];
 
   # Starting from each of the vertices found above, do a breadth-first search
   # and list the vertices in the order they appear.
@@ -209,10 +209,10 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
         L[wy] := numSeen;
       fi;
     od;
-    G[Position(minimizeCycleLengths, i)] := L;
+		Add(G, L);
   od;
 
-  Apply(G, l -> PermList(l));
+  Apply(G, PermList);
   Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
 
   return Origami(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
