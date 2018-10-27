@@ -133,7 +133,7 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
 	end;
 	HelpCalc([HelpO]);
-	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
+	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
 end);
 
 #InstallGlobalFunction(CalcVeechGroupViaEquivalentTest,  function(O)
@@ -184,17 +184,11 @@ InstallMethod(Genus, "for a origami", [IsOrigami], function(Origami)
 end);
 
 InstallMethod(VeechGroup, "for a origami", [IsOrigami], function(Origami)
-	local help;
-	help := CalcVeechGroup(Origami);
-#	SetCosets(help[2]);
-	return help[1];
+	return CalcVeechGroupWithHashTables(Origami);
 end);
 
 InstallMethod(Cosets, "for a origami", [IsOrigami], function(Origami)
-	local help;
-	help := CalcVeechGroup(Origami);
-#	SetVeechGroup(help[1]);
-	return help[2];
+	return RightCosetRepresentatives(VeechGroup(Origami));
 end);
 
 

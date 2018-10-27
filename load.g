@@ -1,4 +1,4 @@
-SetPackagePath("ModularGroup", "/home/pk/src/ModularGroup");
-SetPackagePath("Origami", "/home/pk/src/Origami");
+SetPackagePath("ModularGroup", "/home/kattler/src/ModularGroup");
+SetPackagePath("Origami", "/home/kattler/src/Origami");
 LoadPackage("ModularGroup");
 LoadPackage("Origami");
