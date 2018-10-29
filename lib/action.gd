@@ -2,7 +2,7 @@ DeclareGlobalFunction("ActionOfS");
 DeclareGlobalFunction("ActionOfT");
 DeclareGlobalFunction("ActionOfInvT");
 DeclareGlobalFunction("ActionOfInvS");
-DeclareGlobalFunction("ActionOfSpecialLinearGroupPresentation");
+#DeclareGlobalFunction("ActionOfSpecialLinearGroupPresentation");
 
 
 
@@ -12,7 +12,7 @@ DeclareGlobalFunction("ActionOfSpecialLinearGroupPresentation");
 #! @Description
 #! 	This lets act a word in the free group  $Group(S, T)$ ,representing an element of $Sl_2(\mathbb{Z})$ on an Origami and returns $word.Origami$.
 #! @ChapterInfo The Origami object, The action on the Origami
-DeclareGlobalFunction("ActionOfSpecialLinearGroup");
+DeclareOperation("ActionOfSpecialLinearGroup", [IsObject , IsOrigami]);
 
 #! @Arguments word, Origami
 #! @Returns the Origami Object word.Origami

@@ -39,7 +39,7 @@ end);
 #This Function let act A in Sl_2(Z) on an Origami O
 #INPUT: A Word word in S and T as string and an Origami O
 #OUTPUT: The Origami word.O
-InstallGlobalFunction(ActionOfSpecialLinearGroupPresentation, function(wordString, O)
+InstallMethod(ActionOfSpecialLinearGroup,[IsString, IsOrigami], function(wordString, O)
 	local letter, F, word;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
@@ -57,8 +57,8 @@ InstallGlobalFunction(ActionOfSpecialLinearGroupPresentation, function(wordStrin
 	return O;
 end);
 
-InstallGlobalFunction(ActionOfSpecialLinearGroup, function(A, origami)
-	 return ActionOfSpecialLinearGroupPresentation(String(STDecomposition(A)), origami);
+InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, origami)
+	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
 end);
 
 ActionOfSl := function(word, O)
