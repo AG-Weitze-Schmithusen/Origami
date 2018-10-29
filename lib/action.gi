@@ -4,7 +4,7 @@
 #output the Origmi S.O
 InstallGlobalFunction(ActionOfS, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
+	NewOrigami := Origami( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O), "");
 	return NewOrigami;
 end);
 
@@ -14,7 +14,7 @@ end);
 
 InstallGlobalFunction(ActionOfT, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
+	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O), "");
 	return NewOrigami;
 end);
 
@@ -23,7 +23,7 @@ end);
 #output the Origmi T⁻¹.O
 InstallGlobalFunction(ActionOfInvT, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
+	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O), "");
 	return NewOrigami;
 end);
 
@@ -32,7 +32,7 @@ end);
 #output the Origmi S⁻¹.O
 InstallGlobalFunction(ActionOfInvS, function(O)
 	local NewOrigami;
-	NewOrigami := Origami(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
+	NewOrigami := Origami(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O),, "");
 	return NewOrigami;
 end);
 
@@ -61,21 +61,6 @@ InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, ori
 	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
 end);
 
-ActionOfSl := function(word, O)
-	local letter;
-	for letter in LetterRepAssocWord(word) do
-		if letter = 1 then
-			O := ActionOfS(O);
-		elif letter = 2 then
-			O := ActionOfT(O);
-		elif letter = -1 then
-			O := ActionOfInvS(O);
-		else
-			O := ActionOfInvT(O);
-		fi;
-	od;
-	return O;
-end;
 
 #This Function let act A in Sl_2(Z) on an Origami O represented as canonical Image
 #INPUT  A Word word in S and T and an Origami O in any representation
