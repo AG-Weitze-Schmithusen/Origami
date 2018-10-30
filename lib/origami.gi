@@ -232,7 +232,7 @@ InstallMethod(Stratum,"for a origami", [IsOrigami], function(O)
 			od;
 		fi;
 	od;
-	return Stratum;
+	return AsSortedList( Stratum);
 end);
 
 InstallGlobalFunction(ToRec, function(O)

@@ -11,3 +11,7 @@ DeclareGlobalFunction("CalcH1_1");
 DeclareGlobalFunction("RepresentantsH1_1");
 
 DeclareGlobalFunction("CalcListOfOrigamisWithFullVeechGroup");
+
+DeclareGlobalFunction("OrigamiList");
+
+DeclareGlobalFunction("OrigamiListWithStratum");

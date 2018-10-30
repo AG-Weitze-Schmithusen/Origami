@@ -32,7 +32,7 @@ end);
 #output the Origmi S⁻¹.O
 InstallGlobalFunction(ActionOfInvS, function(O)
 	local NewOrigami;
-	NewOrigami := Origami(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O),, "");
+	NewOrigami := Origami(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O), "");
 	return NewOrigami;
 end);
 
