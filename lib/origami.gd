@@ -57,7 +57,9 @@ DeclareAttribute("Cosets", IsOrigami);
 
 DeclareGlobalFunction("IsConnectedOrigami");
 
-DeclareOperation("Origami", [IsPerm, IsPerm, IsInt]);
+DeclareGlobalFunction("Origami");
+
+DeclareGlobalFunction("OrigamiWithoutTest");
 
 
 

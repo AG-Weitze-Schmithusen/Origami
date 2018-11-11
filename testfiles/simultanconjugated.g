@@ -1,8 +1,10 @@
 IsSimultanConjugatedForTestfile := function(a1, a2, b1, b2, n)
-
+	local p;
 	if RepresentativeAction( SymmetricGroup(n), [a1, a2], [b1, b2], OnTuples) = fail then return false;
-	else return true;
+	else p := RepresentativeAction( SymmetricGroup(n), [a1, a2], [b1, b2], OnTuples);
+		if 1^p = 1 then return true; else return false; fi;
 	fi;
+	return true;
 end;
 
 

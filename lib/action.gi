@@ -4,7 +4,7 @@
 #output the Origmi S.O
 InstallGlobalFunction(ActionOfS, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O), "");
+	NewOrigami := OrigamiWithoutTest( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -14,7 +14,7 @@ end);
 
 InstallGlobalFunction(ActionOfT, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O), "");
+	NewOrigami := OrigamiWithoutTest( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -23,7 +23,7 @@ end);
 #output the Origmi T⁻¹.O
 InstallGlobalFunction(ActionOfInvT, function(O)
 	local NewOrigami;
-	NewOrigami := Origami( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O), "");
+	NewOrigami := OrigamiWithoutTest( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -32,7 +32,7 @@ end);
 #output the Origmi S⁻¹.O
 InstallGlobalFunction(ActionOfInvS, function(O)
 	local NewOrigami;
-	NewOrigami := Origami(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O), "");
+	NewOrigami := OrigamiWithoutTest(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -43,6 +43,22 @@ InstallMethod(ActionOfSpecialLinearGroup,[IsString, IsOrigami], function(wordStr
 	local letter, F, word;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
+	for letter in LetterRepAssocWord(word) do
+		if letter = 1 then
+			O := ActionOfS(O);
+		elif letter = 2 then
+			O := ActionOfT(O);
+		elif letter = -1 then
+			O := ActionOfInvS(O);
+		else
+			O := ActionOfInvT(O);
+		fi;
+	od;
+	return O;
+end);
+
+helpFunction := function(word, O)
+	local letter;
 	for letter in LetterRepAssocWord(word) do
 		if letter = 1 then
 			O := ActionOfS(O);
@@ -73,5 +89,5 @@ end);
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami O.word as represented as canonical Image
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g^-1,o));
+	return OrigamiNormalForm(helpFunction(g^-1,o));
 end);

@@ -6,10 +6,10 @@
                        [1XComputing Veechgroups of Origamis[101X
   
   
-                         Version UNKNOWNEntity(VERSION)
+                                 Version 1.0.0
   
   
-                           UNKNOWNEntity(RELEASEDATE)
+                                   13.11.2018
   
   
                                  Pascal Kattler
@@ -39,7 +39,7 @@
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© UNKNOWNEntity(RELEASEYEAR) by Pascal Kattler[133X
+  [33X[0;0Y© 2018 by Pascal Kattler[133X
   
   
   -------------------------------------------------------
@@ -57,7 +57,11 @@
     1.1 [33X[0;0YIntroduction[133X
     1.2 [33X[0;0YThe Free Group[133X
     1.3 [33X[0;0YThe Origami Object[133X
-      1.3-1 ActionOfSpecialLinearGroup
+      1.3-1 Origami
+    1.4 [33X[0;0YList of Origamis[133X
+      1.4-1 OrigamiList
+    1.5 [33X[0;0YUsing SageMath functions[133X
+      1.5-1 VeechgroupBySage
   
   
   [32X

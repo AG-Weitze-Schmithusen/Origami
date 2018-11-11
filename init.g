@@ -1,8 +1,8 @@
 LoadPackage("orb");
-LoadPackage("images");
-LoadPackage("profiling");
+#LoadPackage("images");
+#LoadPackage("profiling");
 #SetPackagePath("ModularGroup","/home/pk/src/ModularGroup");
-#LoadPackage("ModularGroup");
+LoadPackage("ModularGroup");
 
 if not IsBound(conjugacyClassesOfx) then
 	conjugacyClassesOfx := [];

@@ -98,8 +98,8 @@
 {\Huge \textbf{Computing Veechgroups of Origamis\mbox{}}}\\
 \vfill
 
-{\Huge Version UNKNOWNEntity(VERSION)\mbox{}}\\[1cm]
-{UNKNOWNEntity(RELEASEDATE)\mbox{}}\\[1cm]
+{\Huge Version 1.0.0\mbox{}}\\[1cm]
+{13.11.2018\mbox{}}\\[1cm]
 \mbox{}\\[2cm]
 {\Large \textbf{Pascal Kattler    \mbox{}}}\\
 {\Large \textbf{Andrea Thevis    \mbox{}}}\\
@@ -133,7 +133,7 @@
 {\small 
 \section*{Copyright}
 \logpage{[ 0, 0, 1 ]}
-{\copyright} UNKNOWNEntity(RELEASEYEAR) by Pascal Kattler \mbox{}}\\[1cm]
+{\copyright} 2018 by Pascal Kattler \mbox{}}\\[1cm]
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
@@ -181,17 +181,51 @@ shown that the Veechgroup of an origami is a subgroup of $SL_2(\mathbb{Z})$ of f
 {
   In this section we describe the main functions of this package. 
 
-\subsection{\textcolor{Chapter }{ActionOfSpecialLinearGroup}}
+\subsection{\textcolor{Chapter }{Origami}}
 \logpage{[ 1, 3, 1 ]}\nobreak
-\hyperdef{L}{X8433A81187FD1092}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ActionOfSpecialLinearGroup({\mdseries\slshape word, origami})\index{ActionOfSpecialLinearGroup@\texttt{ActionOfSpecialLinearGroup}}
-\label{ActionOfSpecialLinearGroup}
+\hyperdef{L}{X80F0ED3B78404E71}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{Origami({\mdseries\slshape permX, permy, d})\index{Origami@\texttt{Origami}}
+\label{Origami}
 }\hfill{\scriptsize (function)}}\\
 
 
- The group $SL_2(\mathbb{Z}) $ acts on the set of origamis of fixed degree. Given a word in the free group $Group(\tilde{S}, \tilde{T})$ this function computes $\pi(word) \in SL_2(\mathbb{Z})$ and returns $\pi(word).origami$. The word is given as a string, as shown in the following example. 
+ This function generates a new origami object with $ \sigma_x =$ \mbox{\texttt{\mdseries\slshape  permX }}, $ \sigma_y =$ \mbox{\texttt{\mdseries\slshape  permY }} and degree \mbox{\texttt{\mdseries\slshape d}}. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@Origami((1,2), (2,3), 3);|
+  Origami((1,2), (2,3), 3)
+          
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OrigamiWithoutTest({\mdseries\slshape permX, permy, d})\index{OrigamiWithoutTest@\texttt{OrigamiWithoutTest}}
+\label{OrigamiWithoutTest}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function does the same as \texttt{Origami}, but in contrast it does not test, weather the origami describes a connected
+surface. \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ActionOfSpecialLinearGroup({\mdseries\slshape matrix, origami})\index{ActionOfSpecialLinearGroup@\texttt{ActionOfSpecialLinearGroup}}
+\label{ActionOfSpecialLinearGroup}
+}\hfill{\scriptsize (operation)}}\\
+
+
+ The group $SL_2(\mathbb{Z}) $ acts on the set of origamis of fixed degree. The follwoing methods for this
+operation are installed. \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ActionOfSpecialLinearGroup({\mdseries\slshape word, origami})\index{ActionOfSpecialLinearGroup@\texttt{ActionOfSpecialLinearGroup}}
+\label{ActionOfSpecialLinearGroup}
+}\hfill{\scriptsize (method)}}\\
+
+
+ Given a word \mbox{\texttt{\mdseries\slshape word}} in the free group $Group(\tilde{S}, \tilde{T})$ this function computes $\pi(\mbox{\texttt{\mdseries\slshape word}}) \in SL_2(\mathbb{Z})$ and returns $\pi(\mbox{\texttt{\mdseries\slshape word}}).\mbox{\texttt{\mdseries\slshape origami}}$. The word is given as a string, as shown in the following example. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5), 5));|
+  Origami((1,3)(2,5,4), (2,4,5,3), 5)
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ActionOfSpecialLinearGroup({\mdseries\slshape matrix, origami})\index{ActionOfSpecialLinearGroup@\texttt{ActionOfSpecialLinearGroup}}
+\label{ActionOfSpecialLinearGroup}
+}\hfill{\scriptsize (method)}}\\
+
+
+ Given matrix in $SL_2(\mathbb{Z}) $ this function returns \mbox{\texttt{\mdseries\slshape matrix}}.\mbox{\texttt{\mdseries\slshape origami}}. The word is given as a string, as shown in the following example. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@ActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), |
+  >(1,3)(2,4,5), 5)); 
   Origami((1,3)(2,5,4), (2,4,5,3), 5)
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ActionOfF2ViaCanonical({\mdseries\slshape origami, word})\index{ActionOfF2ViaCanonical@\texttt{ActionOfF2ViaCanonical}}
@@ -199,9 +233,8 @@ shown that the Veechgroup of an origami is a subgroup of $SL_2(\mathbb{Z})$ of f
 }\hfill{\scriptsize (function)}}\\
 
 
- Given a word in the free group $Group(\tilde{S}, \tilde{T})$ this function computes $\pi(word) \in SL_2(\mathbb{Z})$ and returns $\pi(word).origami$. But in contrast to \texttt{ActionOfSpecialLinearGroup} the result is stored in the canonical representation. ATTENTION: the order of
-arguments is switched compared to the order of the arguments in the function
-ActionOfSpecialLinearGroup. 
+ Given a word \mbox{\texttt{\mdseries\slshape word}} in the free group $Group(\tilde{S}, \tilde{T})$ this function computes $\pi(\mbox{\texttt{\mdseries\slshape word}}) \in SL_2(\mathbb{Z})$ and returns $\pi(\mbox{\texttt{\mdseries\slshape word}}).\mbox{\texttt{\mdseries\slshape origami}}$. But in contrast to \texttt{ActionOfSpecialLinearGroup} the result is stored in the canonical representation. ATTENTION: the order of
+arguments is switched compared to the order of the arguments in the function \texttt{ActionOfSpecialLinearGroup}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@ActionOfF2ViaCanonical(Origami((1,2), (1,3), 3), "S");|
   Origami((1,2), (2,3), 3)
@@ -212,12 +245,10 @@ ActionOfSpecialLinearGroup.
 }\hfill{\scriptsize (function)}}\\
 
 
- This function computes the right action of the projection of a word in the
-free group $Group(\tilde{S}, \tilde{T})$ on an Origami. It returns $Origami.\pi(word) = \pi(word)^-1.Origami$, where the left action is the common action of $_2(\mathbb{Z})$ on 2-mannifolds. This action has the same orbits as the left action. For the
-Veechgroup computation both actions can be used and give the same result. In
-contrast to \texttt{ActionOfSpecialLinearGroup} the result is stored in the canonical representation. ATTENTION: the order of
-arguments is switched compared to the order of the arguments in the function
-ActionOfSpecialLinearGroup. 
+ This function computes the right action of the projection of a word \mbox{\texttt{\mdseries\slshape word}} in the free group $Group(\tilde{S}, \tilde{T})$ on an origami \mbox{\texttt{\mdseries\slshape origami}}. It returns $\mbox{\texttt{\mdseries\slshape origami}}.\pi(\mbox{\texttt{\mdseries\slshape word}}) = \pi(\mbox{\texttt{\mdseries\slshape word}})^-1.\mbox{\texttt{\mdseries\slshape origami}}$, where the left action is the common action of $SL_2(\mathbb{Z})$ on origamis of a given degree. This action has the same orbits as the left
+action. For the Veechgroup computation both actions can be used and give the
+same result. In contrast to \texttt{ActionOfSpecialLinearGroup} the result is stored in the canonical representation. ATTENTION: the order of
+arguments is switched compared to the order of the arguments in the function \texttt{ActionOfSpecialLinearGroup}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");|
   Origami((1,2), (2,3), 3)
@@ -272,7 +303,7 @@ permutations in their canonical representation.
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function returns the horizontal permutation $\sigma_y$ of an origami. 
+ This function returns the horizontal permutation $\sigma_y$ of an origami \mbox{\texttt{\mdseries\slshape origami}}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));|
   (1,3,5)
@@ -282,7 +313,7 @@ permutations in their canonical representation.
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function returns the vertical permutation $\sigma_x$ of an origami. 
+ This function returns the vertical permutation $\sigma_x$ of an origami \mbox{\texttt{\mdseries\slshape origami}}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@VerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));|
   (1,3)(2,4,5)
@@ -292,19 +323,18 @@ permutations in their canonical representation.
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function returns the degree of an origami. 
+ This function returns the degree of an \mbox{\texttt{\mdseries\slshape origami}}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));|
   5
 \end{Verbatim}
- \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{Stratum({\mdseries\slshape Origami})\index{Stratum@\texttt{Stratum}}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{Stratum({\mdseries\slshape origami})\index{Stratum@\texttt{Stratum}}
 \label{Stratum}
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function calculates the stratum of an origami. The stratum of an origami
-is a list of the nonzero degrees of the singularities. For a singularity with
-cone angle $2\pi k$ the degree of the singularity is $k-1$. 
+ This function calculates the stratum of an origami \mbox{\texttt{\mdseries\slshape origami}}. The stratum of an origami is a list of the nonzero degrees of the
+singularities. For a singularity with cone angle $2\pi k$ the degree of the singularity is $k-1$. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8));|
   [ 1, 5 ]
@@ -324,8 +354,7 @@ cone angle $2\pi k$ the degree of the singularity is $k-1$.
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function calculates the Veechgroup of an origami. The Veechgroup $G$ of an origami is a subgroup $SL_2(\mathbb{Z})$ of finite index. The group is stored as a ModularSubgroup from the \textsf{ModularSubgroup} package. It is represented by two permutations $\sigma_S$ and $\sigma_T$ describing how the generators $S$ and $T$ of $SL_2(\mathbb{Z})$ act on the cosets of $G$ in $SL_2(\mathbb{Z})$. E.g, if $SH_i = H_j$ and $H_i,H_j$ are the cosets associated to the integers $i,j$, respectively, then $\sigma_S(i)=j$. The algorithm was introduced by Gabriela Weitze-Schmith{\"u}sen in (REFERENZ
-HINZUF{\"U}GEN!). You get the coset permutations using the \textsf{ModularSubgroup} package as in the following example. 
+ This function calculates the Veechgroup of an origami \mbox{\texttt{\mdseries\slshape origami}}. The Veechgroup $G$ of \mbox{\texttt{\mdseries\slshape origami}} is a subgroup $SL_2(\mathbb{Z})$ of finite index. The group is stored as a ModularSubgroup from the \textsf{ModularSubgroup} package. It is represented by two permutations $\sigma_S$ and $\sigma_T$ describing how the generators $S$ and $T$ of $SL_2(\mathbb{Z})$ act on the cosets of $G$ in $SL_2(\mathbb{Z})$. E.g, if $SH_i = H_j$ and $H_i,H_j$ are the cosets associated to the integers $i,j$, respectively, then $\sigma_S(i)=j$. The algorithm was introduced by Gabriela Weitze-Schmith{\"u}sen in \cite{weitze_schmithuesen_phd}. You get the coset permutations using the \textsf{ModularSubgroup} package as in the following example. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));|
   (1,3)(2,5)(4,7)(6,8)(9,10)
@@ -338,19 +367,17 @@ HINZUF{\"U}GEN!). You get the coset permutations using the \textsf{ModularSubgro
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function calculates the right cosets of the Veechgroup of an origami as a
-list of words in $S$ and $T$. 
+ This function calculates the right cosets of the Veechgroup of an origami \mbox{\texttt{\mdseries\slshape origami}} as a list of words in $S$ and $T$. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@Cosets(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6));|
-  [ < identity ...>, T, S, T^2, T*S, S*T, T^2*S, T*S*T, T^2*S*T, T^2*S*T^2 ]
+  [ <identity ...>, S, T, T^-1, S*T, S*T^-1, T*S, T^-1*S, S*T*S, S*T^-1*S ]
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{EquivalentOrigami({\mdseries\slshape origami1, origami2})\index{EquivalentOrigami@\texttt{EquivalentOrigami}}
 \label{EquivalentOrigami}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function tests whether origami1 is equal to origami2 up to renumbering of
-the squares. 
+ This function tests whether \mbox{\texttt{\mdseries\slshape origami1}} is equal to \mbox{\texttt{\mdseries\slshape origami2}} up to renumbering of the squares. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,4,3)|
   >(2,5), (1,5,3,4)(2,6), 6));
@@ -364,9 +391,203 @@ the squares.
 
  }
 
+ 
+\section{\textcolor{Chapter }{List of Origamis}}\logpage{[ 1, 4, 0 ]}
+\hyperdef{L}{X86D3DB9D82100CED}{}
+{
+  The following functions generarte lists of Origamis. 
+
+\subsection{\textcolor{Chapter }{OrigamiList}}
+\logpage{[ 1, 4, 1 ]}\nobreak
+\hyperdef{L}{X7CED322D7B64C6C3}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OrigamiList({\mdseries\slshape d})\index{OrigamiList@\texttt{OrigamiList}}
+\label{OrigamiList}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This Function calculates a list of all origamis, with a given degree \mbox{\texttt{\mdseries\slshape d}}. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@OrigamiList(2);|
+  [ Origami((), (1,2), 2), Origami((1,2), (), 2), Origami((1,2), (1,2), 2) ]
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OrigamiListWithStratum({\mdseries\slshape d, stratum})\index{OrigamiListWithStratum@\texttt{OrigamiListWithStratum}}
+\label{OrigamiListWithStratum}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function calculates a list of all origamis with a given degree \mbox{\texttt{\mdseries\slshape d}} and stratum \mbox{\texttt{\mdseries\slshape stratum}}. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@OrigamiListWithStratum(5, [1,1]);|
+  [ Origami((1,2), (1,3)(2,4,5), 5), Origami((1,2), (1,3,2,4,5), 5), 
+    Origami((1,2,3), (1,2)(3,4,5), 5), Origami((1,2,3), (2,3,4,5), 5), 
+    Origami((1,2,3), (2,4,5,3), 5), Origami((1,2)(3,4,5), (2,3), 5), 
+    Origami((1,2)(3,4,5), (1,2,3), 5), Origami((1,2)(3,4,5), (2,3,4,5), 5), 
+    Origami((1,2)(3,4,5), (2,3,5,4), 5), Origami((1,2)(3,4,5), (1,2,3,4,5), 5), 
+    Origami((1,2)(3,4,5), (1,2,3,5,4), 5), Origami((1,2,3,4), (3,4,5), 5), 
+    Origami((1,2,3,4), (3,5,4), 5), Origami((1,2,3,4), (1,2,3)(4,5), 5), 
+    Origami((1,2,3,4), (1,3,2)(4,5), 5), Origami((1,2,3,4), (2,3,4,5), 5), 
+    Origami((1,2,3,4), (2,5,4,3), 5), Origami((1,2,3,4), (1,2,4,5,3), 5), 
+    Origami((1,2,3,4), (1,3,5,4,2), 5), Origami((1,2,3,4,5), (3,5), 5), 
+    Origami((1,2,3,4,5), (1,2)(3,4,5), 5), Origami((1,2,3,4,5), (1,2)(3,5,4), 5)
+      , Origami((1,2,3,4,5), (2,4,3,5), 5), Origami((1,2,3,4,5), (2,5,3,4), 5) ]
+\end{Verbatim}
  }
 
- \def\indexname{Index\logpage{[ "Ind", 0, 0 ]}
+ }
+
+ 
+\section{\textcolor{Chapter }{ Using SageMath functions}}\logpage{[ 1, 5, 0 ]}
+\hyperdef{L}{X868D83F186ECD853}{}
+{
+  The SageMath Package surface{\textunderscore}dynamics from Vincent Delecroix
+provides methods for origamis. To use the functions of this chapter, Sage must
+be installed on your operation system. 
+
+\subsection{\textcolor{Chapter }{VeechgroupBySage}}
+\logpage{[ 1, 5, 1 ]}\nobreak
+\hyperdef{L}{X7983495981F365DF}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{VeechgroupBySage({\mdseries\slshape origami})\index{VeechgroupBySage@\texttt{VeechgroupBySage}}
+\label{VeechgroupBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method Veechgroup to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{NormalFormBySage({\mdseries\slshape origami})\index{NormalFormBySage@\texttt{NormalFormBySage}}
+\label{NormalFormBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method NormalForm to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{IsHyperellipticBySage({\mdseries\slshape origami})\index{IsHyperellipticBySage@\texttt{IsHyperellipticBySage}}
+\label{IsHyperellipticBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method IsHyperelliptic to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{IsPrimitiveBySage({\mdseries\slshape origami})\index{IsPrimitiveBySage@\texttt{IsPrimitiveBySage}}
+\label{IsPrimitiveBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method IsPrimitive to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ReduceBySage({\mdseries\slshape origami})\index{ReduceBySage@\texttt{ReduceBySage}}
+\label{ReduceBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method Reduce to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{AbsolutePeriodGeneratorsBySage({\mdseries\slshape origami})\index{AbsolutePeriodGeneratorsBySage@\texttt{AbsolutePeriodGeneratorsBySage}}
+\label{AbsolutePeriodGeneratorsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method AbsolutePeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LatticeOfAbsolutePeriodsBySage({\mdseries\slshape origami})\index{LatticeOfAbsolutePeriodsBySage@\texttt{LatticeOfAbsolutePeriodsBySage}}
+\label{LatticeOfAbsolutePeriodsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method LatticeOfAbsolutePeriods to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LatticeOfQuotientsBySage({\mdseries\slshape origami})\index{LatticeOfQuotientsBySage@\texttt{LatticeOfQuotientsBySage}}
+\label{LatticeOfQuotientsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method LatticeOfQuotients to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OptimalDegreeBySage({\mdseries\slshape origami})\index{OptimalDegreeBySage@\texttt{OptimalDegreeBySage}}
+\label{OptimalDegreeBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method OptimalDegree to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{PeriodGeneratorsBySage({\mdseries\slshape origami})\index{PeriodGeneratorsBySage@\texttt{PeriodGeneratorsBySage}}
+\label{PeriodGeneratorsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method PeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{WidthsAndHeightsBySage({\mdseries\slshape origami})\index{WidthsAndHeightsBySage@\texttt{WidthsAndHeightsBySage}}
+\label{WidthsAndHeightsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method WidthsAndHeights to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{SumOfLyapunovExponentsBySage({\mdseries\slshape origami})\index{SumOfLyapunovExponentsBySage@\texttt{SumOfLyapunovExponentsBySage}}
+\label{SumOfLyapunovExponentsBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method SumOfLyapunovExponents to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LyapunovExponentsApproxBySage({\mdseries\slshape origami})\index{LyapunovExponentsApproxBySage@\texttt{LyapunovExponentsApproxBySage}}
+\label{LyapunovExponentsApproxBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method LyapunovExponentsApprox to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{IntermediateCoversBySage({\mdseries\slshape origami})\index{IntermediateCoversBySage@\texttt{IntermediateCoversBySage}}
+\label{IntermediateCoversBySage}
+}\hfill{\scriptsize (function)}}\\
+
+
+ This function executes the SageMath method NormalFormBySage to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  
+\end{Verbatim}
+ }
+
+ }
+
+ }
+
+ \def\bibname{References\logpage{[ "Bib", 0, 0 ]}
+\hyperdef{L}{X7A6F98FD85F02BFE}{}
+}
+
+\bibliographystyle{alpha}
+\bibliography{Origami}
+
+\addcontentsline{toc}{chapter}{References}
+
+\def\indexname{Index\logpage{[ "Ind", 0, 0 ]}
 \hyperdef{L}{X83A0356F839C696F}{}
 }
 

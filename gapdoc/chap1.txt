@@ -44,27 +44,58 @@
   
   [33X[0;0YIn this section we describe the main functions of this package.[133X
   
-  [1X1.3-1 ActionOfSpecialLinearGroup[101X
+  [1X1.3-1 Origami[101X
   
-  [29X[2XActionOfSpecialLinearGroup[102X( [3Xword[103X, [3Xorigami[103X ) [32X function
+  [33X[1;0Y[29X[2XOrigami[102X( [3XpermX[103X, [3Xpermy[103X, [3Xd[103X ) [32X function[133X
   
-  [33X[0;0YThe  group [22XSL_2(Z)[122X acts on the set of origamis of fixed degree. Given a word
-  in  the  free  group  [22XGroup(tildeS, tildeT)[122X this function computes [22Xπ(word) ∈
-  SL_2(Z)[122X and returns [22Xπ(word).origami[122X. The word is given as a string, as shown
-  in the following example.[133X
+  [33X[0;0YThis  function  generates  a  new  origami object with [22Xσ_x =[122X [3X permX [103X, [22Xσ_y =[122X [3X
+  permY [103X and degree [3Xd[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigami((1,2), (2,3), 3);[127X[104X
+    [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
+    [4X[28X        [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOrigamiWithoutTest[102X( [3XpermX[103X, [3Xpermy[103X, [3Xd[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  does  the same as [2XOrigami[102X, but in contrast it does not test,
+  weather the origami describes a connected surface.[133X
+  
+  [33X[1;0Y[29X[2XActionOfSpecialLinearGroup[102X( [3Xmatrix[103X, [3Xorigami[103X ) [32X operation[133X
+  
+  [33X[0;0YThe group [22XSL_2(Z)[122X acts on the set of origamis of fixed degree. The follwoing
+  methods for this operation are installed.[133X
+  
+  [33X[1;0Y[29X[2XActionOfSpecialLinearGroup[102X( [3Xword[103X, [3Xorigami[103X ) [32X method[133X
+  
+  [33X[0;0YGiven  a  word  [3Xword[103X  in  the free group [22XGroup(tildeS, tildeT)[122X this function
+  computes [22Xπ([3Xword[103X) ∈ SL_2(Z)[122X and returns [22Xπ([3Xword[103X).[3Xorigami[103X[122X. The word is given as
+  a string, as shown in the following example.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
     [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
   [4X[32X[104X
   
-  [29X[2XActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function
+  [33X[1;0Y[29X[2XActionOfSpecialLinearGroup[102X( [3Xmatrix[103X, [3Xorigami[103X ) [32X method[133X
   
-  [33X[0;0YGiven  a word in the free group [22XGroup(tildeS, tildeT)[122X this function computes
-  [22Xπ(word)   ∈   SL_2(Z)[122X  and  returns  [22Xπ(word).origami[122X.  But  in  contrast  to
+  [33X[0;0YGiven  matrix  in  [22XSL_2(Z)[122X this function returns [3Xmatrix[103X.[3Xorigami[103X. The word is
+  given as a string, as shown in the following example.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), [127X[104X
+    [4X[28X>(1,3)(2,4,5), 5)); [128X[104X
+    [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function[133X
+  
+  [33X[0;0YGiven  a  word  [3Xword[103X  in  the free group [22XGroup(tildeS, tildeT)[122X this function
+  computes  [22Xπ([3Xword[103X)  ∈ SL_2(Z)[122X and returns [22Xπ([3Xword[103X).[3Xorigami[103X[122X. But in contrast to
   [2XActionOfSpecialLinearGroup[102X   the   result   is   stored   in  the  canonical
   representation.  ATTENTION:  the  order of arguments is switched compared to
-  the order of the arguments in the function ActionOfSpecialLinearGroup.[133X
+  the order of the arguments in the function [2XActionOfSpecialLinearGroup[102X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XActionOfF2ViaCanonical(Origami((1,2), (1,3), 3), "S");[127X[104X
@@ -72,23 +103,24 @@
     [4X[28X  [128X[104X
   [4X[32X[104X
   
-  [29X[2XRightActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function
+  [33X[1;0Y[29X[2XRightActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function[133X
   
-  [33X[0;0YThis  function  computes the right action of the projection of a word in the
-  free group [22XGroup(tildeS, tildeT)[122X on an Origami. It returns [22XOrigami.π(word) =
-  π(word)^-1.Origami[122X,  where  the left action is the common action of [22X_2(Z)[122X on
-  2-mannifolds.  This  action  has the same orbits as the left action. For the
-  Veechgroup computation both actions can be used and give the same result. In
-  contrast to [2XActionOfSpecialLinearGroup[102X the result is stored in the canonical
-  representation.  ATTENTION:  the  order of arguments is switched compared to
-  the order of the arguments in the function ActionOfSpecialLinearGroup.[133X
+  [33X[0;0YThis  function computes the right action of the projection of a word [3Xword[103X in
+  the  free  group  [22XGroup(tildeS,  tildeT)[122X  on  an origami [3Xorigami[103X. It returns
+  [22X[3Xorigami[103X.π([3Xword[103X)  =  π([3Xword[103X)^-1.[3Xorigami[103X[122X,  where the left action is the common
+  action  of  [22XSL_2(Z)[122X  on origamis of a given degree. This action has the same
+  orbits  as  the left action. For the Veechgroup computation both actions can
+  be  used and give the same result. In contrast to [2XActionOfSpecialLinearGroup[102X
+  the  result  is stored in the canonical representation. ATTENTION: the order
+  of  arguments  is  switched  compared  to  the order of the arguments in the
+  function [2XActionOfSpecialLinearGroup[102X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XRightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");[127X[104X
     [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
   [4X[32X[104X
   
-  [29X[2XCanonicalOrigamiViaDelecroixAndStart[102X( [3Xorigami[103X, [3Xstart[103X ) [32X function
+  [33X[1;0Y[29X[2XCanonicalOrigamiViaDelecroixAndStart[102X( [3Xorigami[103X, [3Xstart[103X ) [32X function[133X
   
   [33X[0;0YThis  function calculates a canonical representation of an origami depending
   on  a  given  number  start (Between 1 and the degree of of the origami). To
@@ -112,7 +144,7 @@
     [4X[28XOrigami((1,2,3,4,5,6,7)(8,9), (1,5,8,9)(2,4,7)(3,10,6), 10)[128X[104X
   [4X[32X[104X
   
-  [29X[2XCanonicalOrigamiViaDelecroix[102X( [3Xorigami[103X ) [32X function
+  [33X[1;0Y[29X[2XCanonicalOrigamiViaDelecroix[102X( [3Xorigami[103X ) [32X function[133X
   
   [33X[0;0YThis  function  computes  a  canonical  representation  of  an  origami.  It
   calculates the representation from CanonicalOrigamiViaDelecroixAndStart with
@@ -127,42 +159,42 @@
     [4X[28XOrigami((2,3,4,5,6,7,8)(9,10), (1,2,6)(3,5,7)(4,8,9,10), 10)[128X[104X
   [4X[32X[104X
   
-  [29X[2XOrigamiFamily[102X[32X family
+  [33X[1;0Y[29X[2XOrigamiFamily[102X[32X family[133X
   
   [33X[0;0YSince  origamis do not fit in any existing family in [5XGAP[105X, we introduce a new
   family for origami objects called OrigamiFamily.[133X
   
-  [29X[2XHorizontalPerm[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XHorizontalPerm[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis function returns the horizontal permutation [22Xσ_y[122X of an origami.[133X
+  [33X[0;0YThis function returns the horizontal permutation [22Xσ_y[122X of an origami [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XHorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
     [4X[28X(1,3,5)[128X[104X
   [4X[32X[104X
   
-  [29X[2XVerticalPerm[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XVerticalPerm[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis function returns the vertical permutation [22Xσ_x[122X of an origami.[133X
+  [33X[0;0YThis function returns the vertical permutation [22Xσ_x[122X of an origami [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XVerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
     [4X[28X(1,3)(2,4,5)[128X[104X
   [4X[32X[104X
   
-  [29X[2XDegreeOrigami[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XDegreeOrigami[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis function returns the degree of an origami.[133X
+  [33X[0;0YThis function returns the degree of an [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XDegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
     [4X[28X5[128X[104X
   [4X[32X[104X
   
-  [29X[2XStratum[102X( [3XOrigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XStratum[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis  function  calculates  the  stratum  of  an  origami. The stratum of an
-  origami  is  a  list  of  the  nonzero  degrees  of the singularities. For a
+  [33X[0;0YThis  function  calculates the stratum of an origami [3Xorigami[103X. The stratum of
+  an  origami  is  a  list  of the nonzero degrees of the singularities. For a
   singularity with cone angle [22X2π k[122X the degree of the singularity is [22Xk-1[122X.[133X
   
   [4X[32X  Example  [32X[104X
@@ -170,7 +202,7 @@
     [4X[28X[ 1, 5 ][128X[104X
   [4X[32X[104X
   
-  [29X[2XGenus[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XGenus[102X( [3Xorigami[103X ) [32X attribute[133X
   
   [33X[0;0YThis function calculates the genus of the origami surface.[133X
   
@@ -179,17 +211,17 @@
     [4X[28X2[128X[104X
   [4X[32X[104X
   
-  [29X[2XVeechGroup[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XVeechGroup[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis  function  calculates the Veechgroup of an origami. The Veechgroup [22XG[122X of
-  an  origami  is a subgroup [22XSL_2(Z)[122X of finite index. The group is stored as a
-  ModularSubgroup  from  the [5XModularSubgroup[105X package. It is represented by two
-  permutations  [22Xσ_S[122X  and  [22Xσ_T[122X describing how the generators [22XS[122X and [22XT[122X of [22XSL_2(Z)[122X
-  act  on  the  cosets of [22XG[122X in [22XSL_2(Z)[122X. E.g, if [22XSH_i = H_j[122X and [22XH_i,H_j[122X are the
-  cosets  associated  to  the  integers  [22Xi,j[122X, respectively, then [22Xσ_S(i)=j[122X. The
-  algorithm   was  introduced  by  Gabriela  Weitze-Schmithüsen  in  (REFERENZ
-  HINZUFÜGEN!).  You  get  the  coset  permutations  using the [5XModularSubgroup[105X
-  package as in the following example.[133X
+  [33X[0;0YThis   function  calculates  the  Veechgroup  of  an  origami  [3Xorigami[103X.  The
+  Veechgroup  [22XG[122X of [3Xorigami[103X is a subgroup [22XSL_2(Z)[122X of finite index. The group is
+  stored  as  a  ModularSubgroup  from  the  [5XModularSubgroup[105X  package.  It  is
+  represented  by two permutations [22Xσ_S[122X and [22Xσ_T[122X describing how the generators [22XS[122X
+  and  [22XT[122X  of [22XSL_2(Z)[122X act on the cosets of [22XG[122X in [22XSL_2(Z)[122X. E.g, if [22XSH_i = H_j[122X and
+  [22XH_i,H_j[122X  are  the  cosets associated to the integers [22Xi,j[122X, respectively, then
+  [22Xσ_S(i)=j[122X.  The  algorithm  was  introduced by Gabriela Weitze-Schmithüsen in
+  [WS04].  You get the coset permutations using the [5XModularSubgroup[105X package as
+  in the following example.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XSAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));[127X[104X
@@ -199,19 +231,19 @@
     [4X[28X        [128X[104X
   [4X[32X[104X
   
-  [29X[2XCosets[102X( [3Xorigami[103X ) [32X attribute
+  [33X[1;0Y[29X[2XCosets[102X( [3Xorigami[103X ) [32X attribute[133X
   
-  [33X[0;0YThis function calculates the right cosets of the Veechgroup of an origami as
-  a list of words in [22XS[122X and [22XT[122X.[133X
+  [33X[0;0YThis  function  calculates  the right cosets of the Veechgroup of an origami
+  [3Xorigami[103X as a list of words in [22XS[122X and [22XT[122X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XCosets(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6));[127X[104X
-    [4X[28X[ < identity ...>, T, S, T^2, T*S, S*T, T^2*S, T*S*T, T^2*S*T, T^2*S*T^2 ][128X[104X
+    [4X[28X[ <identity ...>, S, T, T^-1, S*T, S*T^-1, T*S, T^-1*S, S*T*S, S*T^-1*S ][128X[104X
   [4X[32X[104X
   
-  [29X[2XEquivalentOrigami[102X( [3Xorigami1[103X, [3Xorigami2[103X ) [32X function
+  [33X[1;0Y[29X[2XEquivalentOrigami[102X( [3Xorigami1[103X, [3Xorigami2[103X ) [32X function[133X
   
-  [33X[0;0YThis  function tests whether origami1 is equal to origami2 up to renumbering
+  [33X[0;0YThis  function tests whether [3Xorigami1[103X is equal to [3Xorigami2[103X up to renumbering
   of the squares.[133X
   
   [4X[32X  Example  [32X[104X
@@ -222,5 +254,177 @@
     [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,2,5)[127X[104X
     [4X[28X>(3,4,6), (1,2)(5,6), 6));[128X[104X
     [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.4 [33X[0;0YList of Origamis[133X[101X
+  
+  [33X[0;0YThe following functions generarte lists of Origamis.[133X
+  
+  [1X1.4-1 OrigamiList[101X
+  
+  [33X[1;0Y[29X[2XOrigamiList[102X( [3Xd[103X ) [32X function[133X
+  
+  [33X[0;0YThis Function calculates a list of all origamis, with a given degree [3Xd[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigamiList(2);[127X[104X
+    [4X[28X[ Origami((), (1,2), 2), Origami((1,2), (), 2), Origami((1,2), (1,2), 2) ][128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOrigamiListWithStratum[102X( [3Xd[103X, [3Xstratum[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  calculates  a list of all origamis with a given degree [3Xd[103X and
+  stratum [3Xstratum[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigamiListWithStratum(5, [1,1]);[127X[104X
+    [4X[28X[ Origami((1,2), (1,3)(2,4,5), 5), Origami((1,2), (1,3,2,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3), (1,2)(3,4,5), 5), Origami((1,2,3), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3), (2,4,5,3), 5), Origami((1,2)(3,4,5), (2,3), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (1,2,3), 5), Origami((1,2)(3,4,5), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (2,3,5,4), 5), Origami((1,2)(3,4,5), (1,2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (1,2,3,5,4), 5), Origami((1,2,3,4), (3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (3,5,4), 5), Origami((1,2,3,4), (1,2,3)(4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (1,3,2)(4,5), 5), Origami((1,2,3,4), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (2,5,4,3), 5), Origami((1,2,3,4), (1,2,4,5,3), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (1,3,5,4,2), 5), Origami((1,2,3,4,5), (3,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4,5), (1,2)(3,4,5), 5), Origami((1,2,3,4,5), (1,2)(3,5,4), 5)[128X[104X
+    [4X[28X    , Origami((1,2,3,4,5), (2,4,3,5), 5), Origami((1,2,3,4,5), (2,5,3,4), 5) ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.5 [33X[0;0YUsing SageMath functions[133X[101X
+  
+  [33X[0;0YThe  SageMath  Package  surface_dynamics  from  Vincent  Delecroix  provides
+  methods  for  origamis.  To  use the functions of this chapter, Sage must be
+  installed on your operation system.[133X
+  
+  [1X1.5-1 VeechgroupBySage[101X
+  
+  [33X[1;0Y[29X[2XVeechgroupBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis function executes the SageMath method Veechgroup to [3Xorigami[103X and returns
+  its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XNormalFormBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis function executes the SageMath method NormalForm to [3Xorigami[103X and returns
+  its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XIsHyperellipticBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the SageMath method IsHyperelliptic to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XIsPrimitiveBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the  SageMath  method  IsPrimitive  to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XReduceBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis function executes the SageMath method Reduce to [3Xorigami[103X and returns its
+  result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XAbsolutePeriodGeneratorsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the  SageMath  method  AbsolutePeriodGenerators to
+  [3Xorigami[103X and returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XLatticeOfAbsolutePeriodsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the  SageMath  method  LatticeOfAbsolutePeriods to
+  [3Xorigami[103X and returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XLatticeOfQuotientsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis function executes the SageMath method LatticeOfQuotients to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOptimalDegreeBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the  SageMath  method OptimalDegree to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XPeriodGeneratorsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes the SageMath method PeriodGenerators to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XWidthsAndHeightsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes the SageMath method WidthsAndHeights to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XSumOfLyapunovExponentsBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis function executes the SageMath method SumOfLyapunovExponents to [3Xorigami[103X
+  and returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XLyapunovExponentsApproxBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes  the  SageMath  method  LyapunovExponentsApprox  to
+  [3Xorigami[103X and returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XIntermediateCoversBySage[102X( [3Xorigami[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  executes the SageMath method NormalFormBySage to [3Xorigami[103X and
+  returns its result as [5XGAP[105X object.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
   [4X[32X[104X
   
