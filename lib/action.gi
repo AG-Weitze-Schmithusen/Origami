@@ -71,7 +71,7 @@ helpFunction := function(word, O)
 		fi;
 	od;
 	return O;
-end);
+end;
 
 InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, origami)
 	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
