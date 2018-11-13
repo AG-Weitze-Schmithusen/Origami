@@ -7,4 +7,4 @@
 \contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }OrigamiList}}{8}{subsection.1.4.1}
 \contentsline {section}{\numberline {1.5}\leavevmode {\color {Chapter } Using SageMath functions}}{8}{section.1.5}
 \contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }VeechgroupBySage}}{9}{subsection.1.5.1}
-\contentsline {chapter}{References}{11}{chapter*.4}
+\contentsline {chapter}{References}{12}{chapter*.4}

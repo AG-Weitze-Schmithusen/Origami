@@ -57,21 +57,6 @@ InstallMethod(ActionOfSpecialLinearGroup,[IsString, IsOrigami], function(wordStr
 	return O;
 end);
 
-helpFunction := function(word, O)
-	local letter;
-	for letter in LetterRepAssocWord(word) do
-		if letter = 1 then
-			O := ActionOfS(O);
-		elif letter = 2 then
-			O := ActionOfT(O);
-		elif letter = -1 then
-			O := ActionOfInvS(O);
-		else
-			O := ActionOfInvT(O);
-		fi;
-	od;
-	return O;
-end);
 
 InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, origami)
 	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
@@ -89,5 +74,5 @@ end);
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami O.word as represented as canonical Image
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return OrigamiNormalForm(helpFunction(g^-1,o));
+	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g^-1 ,o));
 end);

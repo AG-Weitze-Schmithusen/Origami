@@ -439,9 +439,9 @@ singularities. For a singularity with cone angle $2\pi k$ the degree of the sing
 \section{\textcolor{Chapter }{ Using SageMath functions}}\logpage{[ 1, 5, 0 ]}
 \hyperdef{L}{X868D83F186ECD853}{}
 {
-  The SageMath Package surface{\textunderscore}dynamics from Vincent Delecroix
-provides methods for origamis. To use the functions of this chapter, Sage must
-be installed on your operation system. 
+  The SageMath Package surface{\textunderscore}dynamics from Vincent Delecroix \cite{Delecroix} provides methods for origamis. To use the functions of this chapter, Sage must
+be installed on your operation system. The following descriptions and examples
+are mainly taken from the manual of \cite{Delecroix}. 
 
 \subsection{\textcolor{Chapter }{VeechgroupBySage}}
 \logpage{[ 1, 5, 1 ]}\nobreak
@@ -451,8 +451,10 @@ be installed on your operation system.
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method Veechgroup to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method veech{\textunderscore}group to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It does the same as \texttt{VeechGroup} (\ref{VeechGroup}). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));|
+  <modular subgroup of index 24>
   
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{NormalFormBySage({\mdseries\slshape origami})\index{NormalFormBySage@\texttt{NormalFormBySage}}
@@ -460,61 +462,83 @@ be installed on your operation system.
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method NormalForm to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method
+to{\textunderscore}standard{\textunderscore}form to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. In principle it makes the same as \texttt{OrigamiNormalForm} (\ref{OrigamiNormalForm}), but it has an other representation. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));|
+  Origami((3,4,5), (1,2,3)(4,5), 5)
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{IsHyperellipticBySage({\mdseries\slshape origami})\index{IsHyperellipticBySage@\texttt{IsHyperellipticBySage}}
 \label{IsHyperellipticBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method IsHyperelliptic to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method IsHyperelliptic to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It tests, weather \mbox{\texttt{\mdseries\slshape origami}} is hyperelliptic. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@IsHyperellipticBySage(Origami((1,3), (1,2), 3));                                                                                           |
+  true
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{IsPrimitiveBySage({\mdseries\slshape origami})\index{IsPrimitiveBySage@\texttt{IsPrimitiveBySage}}
 \label{IsPrimitiveBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method IsPrimitive to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method IsPrimitive to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. An origami is primitive if it does not cover an other origami. An
+origami is primitive if the action of the monodromy group has no non trivial
+block. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@IsPrimitiveBySage(Origami((1,3), (1,2),3));|
+  true
+  !gapprompt@gap>| !gapinput@IsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));|
+  false
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{ReduceBySage({\mdseries\slshape origami})\index{ReduceBySage@\texttt{ReduceBySage}}
 \label{ReduceBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method Reduce to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method Reduce to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It returns a reduced origami isomorphic (up to $SL(2,\mathbb{Q})$ action) to that origami. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));|
+  Origami((1,2), (1,3), 6)
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{AbsolutePeriodGeneratorsBySage({\mdseries\slshape origami})\index{AbsolutePeriodGeneratorsBySage@\texttt{AbsolutePeriodGeneratorsBySage}}
 \label{AbsolutePeriodGeneratorsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method AbsolutePeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method AbsolutePeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It return a generating set of the absolute periods of this origami. To
+each curve on an origami, we can associate its holonomy (that is an element of
+ZZ x ZZ). This function returns a generating set of the module generated by
+holonomies of closed curves. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6),6)); |
+  [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ]
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LatticeOfAbsolutePeriodsBySage({\mdseries\slshape origami})\index{LatticeOfAbsolutePeriodsBySage@\texttt{LatticeOfAbsolutePeriodsBySage}}
 \label{LatticeOfAbsolutePeriodsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method LatticeOfAbsolutePeriods to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method LatticeOfAbsolutePeriods to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It returns (a,t,u) where ((a,0),(t,u)) is a standard basis for the
+lattice of the absolute periods of self The lattice of periods of an origami
+is the sublattice of $ \mathbb{Z}^2$ generated by the holonomy vectors of its saddle connections. Any sublattice of
+ZZ\texttt{\symbol{94}}2 has a standard basis consisting of a horizontal vector
+(a,0) and a nonhorizontal vector (t,u), where a, t, u are integers satisfying
+0 {\textless} t {\textless} a and 0 {\textless} t. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3), 4));   |
+  [ [ 2, 0 ], [ 0, 1 ] ]
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LatticeOfQuotientsBySage({\mdseries\slshape origami})\index{LatticeOfQuotientsBySage@\texttt{LatticeOfQuotientsBySage}}
 \label{LatticeOfQuotientsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method LatticeOfQuotients to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method LatticeOfQuotients to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It return the lattice of quotients of this origami. The set of
+quotients of an origami contain a maximal element (itself) and a minimal
+element (the 1-torus). More generally, it is organised as a lattice. Not
+implemented. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   
 \end{Verbatim}
@@ -523,36 +547,41 @@ be installed on your operation system.
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method OptimalDegree to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method OptimalDegree to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. The optimal degree of self is the degree of the map to the largest
+torus. Any origami $X \Rightarrow T$ factor as $i \circ \pi_{opt}$ where i is an isogeny. The optimal degree is the degree of $\pi_{opt}$. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@OptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));|
+  2
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{PeriodGeneratorsBySage({\mdseries\slshape origami})\index{PeriodGeneratorsBySage@\texttt{PeriodGeneratorsBySage}}
 \label{PeriodGeneratorsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method PeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method PeriodGenerators to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It return a list of periods that generate the lattice of periods. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7),7));    |
+  [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ]
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{WidthsAndHeightsBySage({\mdseries\slshape origami})\index{WidthsAndHeightsBySage@\texttt{WidthsAndHeightsBySage}}
 \label{WidthsAndHeightsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method WidthsAndHeights to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method WidthsAndHeights to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It return the list of widths and heigths of cylinder. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4),4));        |
+  [ [ 1, 2 ], [ 2, 2 ] ]
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{SumOfLyapunovExponentsBySage({\mdseries\slshape origami})\index{SumOfLyapunovExponentsBySage@\texttt{SumOfLyapunovExponentsBySage}}
 \label{SumOfLyapunovExponentsBySage}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method SumOfLyapunovExponents to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method SumOfLyapunovExponents to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It returns the sum of Lyapunov exponents for this origami. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
+  !gapprompt@gap>| !gapinput@SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3),4));|
+  3/2
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{LyapunovExponentsApproxBySage({\mdseries\slshape origami})\index{LyapunovExponentsApproxBySage@\texttt{LyapunovExponentsApproxBySage}}
 \label{LyapunovExponentsApproxBySage}
@@ -568,9 +597,9 @@ be installed on your operation system.
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method NormalFormBySage to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method NormalFormBySage to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. It return the list of intermediate covers of this origami. Not
+implemented 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  
 \end{Verbatim}
  }
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  11 NOV 2018 12:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  13 NOV 2018 11:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -626,120 +626,260 @@ Underfull \hbox (badness 10000) in paragraph at lines 469--472
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 478--481
+Underfull \hbox (badness 10000) in paragraph at lines 481--484
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 487--490
+LaTeX Warning: Reference `OrigamiNormalForm' on page 9 undefined on input line 
+487.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--496
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 496--499
+Underfull \hbox (badness 10000) in paragraph at lines 504--507
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 505--508
+Underfull \hbox (badness 10000) in paragraph at lines 520--523
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--517
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--526
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 532--535
+Underfull \hbox (badness 10000) in paragraph at lines 531--534
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 541--544
+Underfull \hbox (badness 10000) in paragraph at lines 545--548
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 550--553
+Underfull \hbox (badness 10000) in paragraph at lines 561--564
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 559--562
+Underfull \hbox (badness 10000) in paragraph at lines 573--576
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 568--571
+Underfull \hbox (badness 10000) in paragraph at lines 585--588
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--580
+Underfull \hbox (badness 10000) in paragraph at lines 596--599
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 607--610
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 586--589
+Underfull \hbox (badness 10000) in paragraph at lines 618--621
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 627--630
+
+ []
+
+! FancyVerb Error:
+  Empty verbatim environment
+.
+\FV@Error ... {FancyVerb Error:
+\space \space #1
+}
+                                                  
+l.635 \end{Verbatim}
+                    
+? 
 (./Origami.bbl (./Origami.brf)
 \tf@brf=\write8
 \openout8 = `Origami.brf'.
 
- [10]) [11
+ [11]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.7 
+    
+? 
+
+! LaTeX Error: Command $ invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 
+    
+? 
+
+! LaTeX Error: Command \ttfamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 
+    
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.7 
+    
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.7 
+    
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.7 
+    
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.7 
+    
+? 
+! Undefined control sequence.
+\Url@FormatString ...ndafter \UrlLeft \Url@String 
+                                                  \UrlRight \m@th $
+l.7 
+    
+? 
+! Extra }, or forgotten $.
+<recently read> }
+                 
+l.7 
+    
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.7 
+    
+? 
+! Extra \endgroup.
+\Hy@endcolorlink ->\endgroup 
+                             
+l.7 
+    
+? 
+! Extra \endgroup.
+\hyper@linkurl ...ce@end \close@pdflink \endgroup 
+                                                  
+l.7 
+    
+? 
+
+Overfull \hbox (16.83525pt too wide) in paragraph at lines 7--7
+[]\T1/ptm/m/n/10.95 Samuel Leli√^^Dvre Vin-cent Dele-croix, Charles Fougeron.  
+surface$[]\OML/ztmcm/m/it/10.95 ynamicssagemathpackageversion\OT1/ztmcm/m/n/10.
+95 0\OML/ztmcm/m/it/10.95 :\OT1/ztmcm/m/n/10.95 4\OML/ztmcm/m/it/10.95 :\OT1/zt
+mcm/m/n/10.95 0\OML/ztmcm/m/it/10.95 : [][][][]$$$[]\T1/ptm/m/n/10.95 .
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 
+     
+? 
+
+Underfull \hbox (badness 10000) detected at line 12
+[][]
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{thebibliography}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \end{thebibliography}
+                          
+? 
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.13 \end{thebibliography}
+                          
+? 
+) [12
 
 ] (./Origami.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 624.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 624.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 665.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 665.
  (./Origami.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 624.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 624.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 665.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 665.
 Package rerunfilecheck Info: File `Origami.out' has not changed.
 (rerunfilecheck)             Checksum: 6AB3990BDFBA6A1FBDBC559DD88CC2E9;425.
 Package rerunfilecheck Info: File `Origami.brf' has not changed.
-(rerunfilecheck)             Checksum: 09D22ECC27C46C6D9BDFB2F5E5F412CC;66.
+(rerunfilecheck)             Checksum: AF9D62951C55D2E0483E4DAE71EB2AEB;156.
+
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 624.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 665.
  ) 
 Here is how much of TeX's memory you used:
- 6936 strings out of 492982
- 102572 string characters out of 6134895
- 181836 words of memory out of 5000000
- 10334 multiletter control sequences out of 15000+600000
+ 6944 strings out of 492982
+ 102675 string characters out of 6134895
+ 181869 words of memory out of 5000000
+ 10340 multiletter control sequences out of 15000+600000
  75388 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,8n,28p,833b,623s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
-fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfst1095.pfb></usr
-/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/t
-ype1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
-hvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.p
-fb>
-Output written on Origami.pdf (11 pages, 212445 bytes).
+ 32i,8n,28p,833b,637s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{cite.weitze_schmithuesen_phd} has been referenced
+ but does not exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fo
+nts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfst1095.pfb></usr/s
+hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/typ
+e1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhv
+r8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on Origami.pdf (12 pages, 220515 bytes).
 PDF statistics:
- 187 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
+ 200 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

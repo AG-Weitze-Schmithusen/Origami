@@ -1,5 +1,10 @@
 \begin{thebibliography}{WS04}
 
+\bibitem[VD]{Delecroix}
+Samuel~Lelièvre Vincent~Delecroix, Charles~Fougeron.
+\newblock surface_dynamics sagemath package version 0.4.0.
+\newblock \url{https://pypi.org/project/surface_dynamics/}.
+
 \bibitem[WS04]{weitze_schmithuesen_phd}
 Gabriela Weitze-Schmithuesen.
 \newblock An algorithm for finding the veech group of an origami.

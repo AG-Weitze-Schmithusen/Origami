@@ -7,8 +7,8 @@ LoadPackage("rings");
 
 BindGlobal("PrepareSage", function()
 	streamForSage := LaunchCAS("HOMALG_IO_Sage");
-	streamForSage.CUT_POS_END := 13;
-	streamForSage.CUT_POS_BEGIN := 10;
+	streamForSage.CUT_POS_END := 9;
+	streamForSage.CUT_POS_BEGIN := 7;
 	homalgSendBlocking(["from surface_dynamics.all import*"],"need_display", streamForSage);
 end);
 
@@ -116,6 +116,8 @@ InstallGlobalFunction(LatticeOfQuotientsBySage, function(origami)
 
 	O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 		String(VerticalPerm(origami))	, "\")"],streamForSage);
+	Error("Not implemented");
+	
 end);
 
 InstallGlobalFunction(OptimalDegreeBySage, function(origami)
@@ -201,4 +203,5 @@ fi;
 
 O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 	String(VerticalPerm(origami))	, "\")"],streamForSage);
+	Error("Not implemented");
 end);
