@@ -99,14 +99,14 @@ end);
 InstallGlobalFunction(CalcListOfOrigamisWithFullVeechGroup, function(d)
 	local OrigamiList;
 	OrigamiList := CalcOrigamiList(d);
-	OrigamiList := List(OrigamiList, O-> Origami(O.x, O.y, O.d), "");
+	OrigamiList := List(OrigamiList, O-> OrigamiWithoutTest(O.x, O.y, O.d));
 	return Filtered( Filtered(OrigamiList, O -> HasVeechGroupSl_2(O)), O-> IsTransitive(Group(HorizontalPerm(O), VerticalPerm(O))));
 end);
 
 InstallGlobalFunction(OrigamiList, function(d)
 	local L;
 	L := CalcOrigamiListExperiment(d);
-	Apply(L, x -> Origami(x.x, x.y, x.d, ""));
+	Apply(L, x -> OrigamiWithoutTest(x.x, x.y, x.d));
 	return Filtered (L, IsConnectedOrigami);
 end
 );
@@ -114,5 +114,4 @@ end
 InstallGlobalFunction(OrigamiListWithStratum, function(d, stratum)
 	stratum := AsSortedList(stratum);
 	return Filtered( OrigamiList(d), O -> Stratum(O) = stratum );
-	end
-);
+end);

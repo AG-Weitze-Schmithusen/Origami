@@ -57,7 +57,6 @@ InstallMethod(ActionOfSpecialLinearGroup,[IsString, IsOrigami], function(wordStr
 	return O;
 end);
 
-
 InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, origami)
 	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
 end);
