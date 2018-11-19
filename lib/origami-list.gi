@@ -1,21 +1,6 @@
 #This functions calculate a complete list of origamis of a given degree up to equivalence. Here we allow disconnected origamis
 
-#calculates a list of all origamis of a given degree
-# INPUT degree d
-# OUTPUT a list of origamis of degree d
-InstallGlobalFunction(CalcOrigamiList, function(d)
-	local C, part, Sd, canonicals, canonicals_x, canonicals_y, x;
-  part := Partitions(d);
-  canonicals := [];
-  canonicals_x := List(part, x -> CanonicalPermFromCycleStructure(CycleStructureFromPartition(x)));
-	Sd := SymmetricGroup(d);
-	for x in canonicals_x do
-    	C:=Centralizer(Sd, x);
-    	canonicals_y := List( OrbitsDomain(C, Sd, OnPoints), Minimum);
-    	Append(canonicals, List(canonicals_y, y -> rec(d := d, x := x, y := y)));
-	od;
-	return canonicals;
-end);
+
 
 # the following two functions divide the last function
 
@@ -32,26 +17,13 @@ InstallGlobalFunction(CalcOrigamiListForx, function(permx, d)
 	return partOfCanonicals;
 end);
 
-# calculates a list of all origamis, uses CalcOrigamiListForx
-# INPUT degree d
-# OUTPUT a list of origamis of degree d
-InstallGlobalFunction(CalcOrigamiListWithSubroutine, function(d)
-	local C, part, Sd, canonicals, canonicals_x, canonicals_y, x;
-  part := Partitions(d);
-  canonicals := [];
-  canonicals_x := List(part, x -> CanonicalPermFromCycleStructure(CycleStructureFromPartition(x)));
-	Sd := SymmetricGroup(d);
-	for x in canonicals_x do
-		Append(canonicals, CalcOrigamiListForx(x, d));
-	od;
-	return canonicals;
-end);
+
 
 #calculates a list of origamis of a given degree. Here by partition into the orbits of the conjugation of the cenralizer, we first partition Sd in the orbits of conjugation with
 #the whoole Sd
 # INPUT degree d
 # OUTPUT a list of origamis of degree d
-InstallGlobalFunction(CalcOrigamiListExperiment, function(d)
+InstallGlobalFunction(CalcOrigamiList, function(d)
 	local C, part, Sd, canonicals, canonicals_x, canonicals_y, x, i, conjugacyClassesOfx, conjugacyClassOfx;
   part := Partitions(d);
   canonicals := [];
@@ -73,35 +45,10 @@ InstallGlobalFunction(CalcOrigamiListExperiment, function(d)
 	return canonicals;
 end);
 
-InstallGlobalFunction(CalcH1_1, function( n )
-	local OrigamiList;
-	OrigamiList := CalcOrigamiList(n);
-	OrigamiList := List(OrigamiList, O-> Origami(O.x, O.y, O.d));
-	Perform(OrigamiList, Stratum);
-	OrigamiList := Filtered(OrigamiList, O -> (Stratum(O) = [1, 1]));
-	return OrigamiList;
-end);
 
-InstallGlobalFunction(RepresentantsH1_1, function(d)
-	local origamiList, repList, orbit, orbitLength;
-	orbitLength:=[];
-	repList := [];
-	origamiList := Set(List(CalcH1_1(d), O -> ToRec(O)));
-	while Length(origamiList) > 0 do
-		orbit:= CalcVeechGroup(origamiList[1]).orbit;
-		Add(orbitLength, Length(orbit));
-		SubtractSet(origamiList, orbit);
-		Add(repList, orbit[1]);
-	od;
-	return [orbitLength, repList];
-end);
 
-InstallGlobalFunction(CalcListOfOrigamisWithFullVeechGroup, function(d)
-	local OrigamiList;
-	OrigamiList := CalcOrigamiList(d);
-	OrigamiList := List(OrigamiList, O-> OrigamiWithoutTest(O.x, O.y, O.d));
-	return Filtered( Filtered(OrigamiList, O -> HasVeechGroupSl_2(O)), O-> IsTransitive(Group(HorizontalPerm(O), VerticalPerm(O))));
-end);
+
+
 
 InstallGlobalFunction(OrigamiList, function(d)
 	local L;

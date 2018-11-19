@@ -57,79 +57,7 @@ InstallGlobalFunction(IsConnectedOrigami, function(origami)
 end);
 
 
-#This function calculates the coset Graph of the Veech group of an given Origami O
-#INPUT: An origami O
-#OUTPUT: The coset Graph as Permutations sigma_S and Sigma_T
-#CalcVeechGroupGenerators := function(O)
-	#local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, canonicalOrigamiList, i, j, canonicalM, newReps;
-	#Gen:= [];
-	#Rep:= [S*S^-1];
-	#sigma:=[[],[]];
-	#canonicalOrigamiList := [OrigamiNormalForm(O)];
-	#HelpCalc := function(GlList)
-	#	NewGlList := [];
-	#	for W in GlList do
 
-	#		newReps := [W*T,W*S];
-	#		for j in [1, 2] do
-	#			M := newReps[j];
-	#			foundM := false;
-	#			canonicalM := OrigamiNormalForm(ActionOfSl(M, O));
-	#			for i in [1..Length(Rep)] do
-	#				if canonicalOrigamiList[i] = canonicalM then
-	#					D := Rep[i];
-	#					Add(Gen,  M * D^-1); # D^-1 * M ?
-	#					foundM := true;
-	#					sigma[j][Position(Rep, W)] := Position(Rep, D);
-	#					break;
-	#				fi;
-	#			od;
-	#			if foundM = false then
-	#				Add(Rep, M);
-	#				Add(canonicalOrigamiList, canonicalM);
-	#				Add(NewGlList, M);
-	#				sigma[j][Position(Rep, W)] := Position(Rep, M);  # = Length(Rep) -1 ?
-	#			fi;
-	#		od;
-	#	od;
-	#	if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
-	#end;
-	#HelpCalc([S*S^-1]);
-	#return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep, Gen];
-#end;
-
-#This function calculates the coset Graph of the Veech group of an given Origami O
-#INPUT: An origami O
-#OUTPUT: The coset Graph as Permutations sigma_S and Sigma_T
-InstallGlobalFunction(CalcVeechGroup, function(O)
-	local  sigma, HelpCalc, D, foundM, W, NewOrigamiPositions, canonicalOrigamiList, i, j, newOrigamis;
-	sigma:=[[],[]];
-	canonicalOrigamiList := [OrigamiNormalForm(O)];
-	HelpCalc := function(GlList)
-		NewOrigamiPositions := [];
-		for W in GlList do
-			newOrigamis := [OrigamiNormalForm( ActionOfT(W) ), OrigamiNormalForm( ActionOfS(W) )];
-			for j in [1, 2] do
-				foundM := false;
-				for i in [1..Length(canonicalOrigamiList)] do
-					if canonicalOrigamiList[i] = newOrigamis[j] then
-						foundM := true;
-						sigma[j][Position(canonicalOrigamiList, W)] := i;
-						break;
-					fi;
-				od;
-				if foundM = false then
-					Add(canonicalOrigamiList, newOrigamis[j]);
-					Add(NewOrigamiPositions, newOrigamis[j]);
-					sigma[j][Position(canonicalOrigamiList, W)] := Length(canonicalOrigamiList);  # = Length(Rep) -1 ?
-				fi;
-			od;
-		od;
-		if Length(NewOrigamiPositions) > 0 then HelpCalc(NewOrigamiPositions); fi;
-	end;
-	HelpCalc([OrigamiNormalForm(O)]);
-	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
-end);
 
 
 InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
@@ -167,42 +95,7 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
 end);
 
-#InstallGlobalFunction(CalcVeechGroupViaEquivalentTest,  function(O)
-#	local  sigma, Gen,Rep, HelpCalc, D, M, foundM, W, NewGlList, OrigamiList, i, j, currentOrigami, newReps;
-#	Gen := [];
-#	Rep := [S*S^-1];
-#	sigma := [[],[]];
-#	OrigamiList := [O];
-#	HelpCalc := function(GlList)
-#		NewGlList := [];
-#		for W in GlList do
-#			newReps := [W*T,W*S];
-#			for j in [1, 2] do
-#				M := newReps[j];
-#				foundM := false;
-#				currentOrigami := ActionOfSpecialLinearGroup(M, O);
-#				for i in [1..Length(Rep)] do
-#					if EquivalentOrigami(OrigamiList[i], currentOrigami)  then
-#						D := Rep[i];
-#						Add(Gen,  M * D^-1);
-#						foundM := true;
-#						sigma[j][Position(Rep, W)] := Position(Rep, D);
-#	 					break;
-#					fi;
-#				od;
-#				if foundM = false then
-#					Add(Rep, M);
-#					Add(OrigamiList, currentOrigami);
-#					Add(NewGlList, M);
-#					sigma[j][Position(Rep, W)]:=Position(Rep, M);  # = Length(Rep) -1 ?
-#				fi;
-#			od;
-#		od;
-#		if Length(NewGlList) > 0 then HelpCalc(NewGlList); fi;
-#	end;
-#	HelpCalc([S*S^-1]);
-#	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1])), Rep];
-#end);
+
 
 InstallMethod(Genus, "for a origami", [IsOrigami], function(Origami)
 	local s, i, e;
@@ -241,21 +134,6 @@ InstallMethod(Stratum,"for a origami", [IsOrigami], function(O)
 	return AsSortedList( Stratum);
 end);
 
-InstallGlobalFunction(ToRec, function(O)
-	return rec( d:= DegreeOrigami(O), x:= HorizontalPerm(O), y:= VerticalPerm(O));
-end);
-
-
-InstallGlobalFunction( KinderzeichnungenFromCuspsOfOrigami, function(O)
-	local cycles, kz, index, orbitOrigami;
-	kz := [];
-	cycles := OrbitsDomain(Group(TAction(VeechGroup(O))), [1..Length(Cosets(O))]);
-	for index in [1..Length(cycles)] do
-		orbitOrigami := ActionOfSpecialLinearGroup( Cosets ( O ) [ cycles [ index ][ 1 ] ], O);
-		Add(kz,  Kinderzeichnung( HorizontalPerm( orbitOrigami ), VerticalPerm( orbitOrigami ) * HorizontalPerm( orbitOrigami ) * VerticalPerm( orbitOrigami )^-1));
-	od;
-	return List(kz, NormalKZForm);
-end);
 
 InstallGlobalFunction( EquivalentOrigami, function(O1, O2)
 	if RepresentativeAction(SymmetricGroup(DegreeOrigami(O1)), [HorizontalPerm(O1), VerticalPerm(O1)],
