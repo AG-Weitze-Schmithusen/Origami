@@ -3,8 +3,8 @@
 \contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter } The Free Group }}{4}{section.1.2}
 \contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }The Origami Object}}{4}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }Origami}}{4}{subsection.1.3.1}
-\contentsline {section}{\numberline {1.4}\leavevmode {\color {Chapter }List of Origamis}}{8}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }OrigamiList}}{8}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.4}\leavevmode {\color {Chapter }List of Origamis}}{7}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }OrigamiList}}{7}{subsection.1.4.1}
 \contentsline {section}{\numberline {1.5}\leavevmode {\color {Chapter } Using SageMath functions}}{8}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }VeechgroupBySage}}{9}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }VeechgroupBySage}}{8}{subsection.1.5.1}
 \contentsline {chapter}{References}{12}{chapter*.4}

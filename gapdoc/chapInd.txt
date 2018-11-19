@@ -5,8 +5,6 @@
   [2XAbsolutePeriodGeneratorsBySage[102X 1.5-1 
   [2XActionOfF2ViaCanonical[102X 1.3-1 
   [2XActionOfSpecialLinearGroup[102X 1.3-1  1.3-1  1.3-1 
-  [2XCanonicalOrigamiViaDelecroix[102X 1.3-1 
-  [2XCanonicalOrigamiViaDelecroixAndStart[102X 1.3-1 
   [2XCosets[102X 1.3-1 
   [2XDegreeOrigami[102X 1.3-1 
   [2XEquivalentOrigami[102X 1.3-1 
@@ -24,6 +22,7 @@
   [2XOrigamiFamily[102X 1.3-1 
   [2XOrigamiList[102X 1.4-1 
   [2XOrigamiListWithStratum[102X 1.4-1 
+  [2XOrigamiNormalForm[102X 1.3-1 
   [2XOrigamiWithoutTest[102X 1.3-1 
   [2XPeriodGeneratorsBySage[102X 1.5-1 
   [2XReduceBySage[102X 1.5-1 

@@ -1,13 +1,17 @@
-\begin{thebibliography}{WS04}
+\begin{thebibliography}{Sch04}
+
+\bibitem[McK]{ONF}
+Brendan McKay.
+\newblock The simultaneous conjugacy problem in the symmetric group s_n.
+
+\bibitem[Sch04]{MR2118271}
+Gabriela Schmith\"{u}sen.
+\newblock An algorithm for finding the {V}eech group of an origami.
+\newblock {\em Experiment. Math.}, 13(4):459--472, 2004.
 
 \bibitem[VD]{Delecroix}
 Samuel~Lelièvre Vincent~Delecroix, Charles~Fougeron.
 \newblock surface_dynamics sagemath package version 0.4.0.
 \newblock \url{https://pypi.org/project/surface_dynamics/}.
-
-\bibitem[WS04]{weitze_schmithuesen_phd}
-Gabriela Weitze-Schmithuesen.
-\newblock An algorithm for finding the veech group of an origami.
-\newblock {\em Experimental Mathematics}, 13(4):459--472, 2004.
 
 \end{thebibliography}

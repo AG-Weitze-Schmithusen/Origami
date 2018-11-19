@@ -44,7 +44,8 @@ implemented in the surface_dynamics package in sage. Some of the
 functionality of the surface_dynamics package can be used in this
 package as well. For this we use an interface between GAP and sage. We
 are thankful to Mohamed Barakat and Markus Pfeiffer for helping using
-the interface.
+the interface. Moreover, we thank Thomas Breuer for helpful ideas and comments on some
+algorithms implemented in this package.
 
       Supported by Project I.8 of SFB-TRR 195 'Symbolic Tools in Mathematics and
       their Application' of the German Research Foundation (DFG).
@@ -169,34 +170,15 @@ Origami((1,2), (2,3), 3)
 </Example>
 </Description>
 
-<Func Name="CanonicalOrigamiViaDelecroixAndStart" Arg="origami, start"/>
+<Func Name="OrigamiNormalForm" Arg="origami"/>
 <Description>
-          This function calculates a canonical representation of an origami depending on a given number start (Between 1 and the degree of
-        of the origami). To determine a canonical numbering the algorithm starts at the square with number start. This sqare is
-        labeled as 1 in the new numbering. The algorithm walks along the origami
-        in the following way and numbers the squares in the order, they are visited. First it walks in horizontal direction until it reaches the
-        square with number start again. Then it walks one step up (in vertical direction) and then again a loop in horizontal direction.
-        This will be repeated until the vertical loop is complete or all squares have been visited. If there are unvisited squares,
-        we continue with the smallest number (in the new numbering), that has not been in a vertical loop. An origami is connected,
-        so that number exists. This function is used to determine a canonical origami independent of the starting point. The idea for the algorithm
-        derives from the algorithm to_standard_form implemented in the SageMath package surface_dynamics. (REFERENZ HINZUFÜGEN!)
+          This function calculates a canonical representation of <Arg> origami</Arg>. Two origamis are equivaent, if they have the same canonical representation. This function has been implemented by Luca Junk and the algorithm is from <Cite Key = "ONF" />.
 <Example>
-gap> CanonicalOrigamiAndStart(Origami((1,10,7,6,8,9,2)(4,5),
-> (1,8,5,4)(2,10,6)(3,9,7), 10), 1);
-Origami((1,2,3,4,5,6,7)(8,9), (1,5,8,9)(2,4,7)(3,10,6), 10)
+gap> OrigamiNormalForm(Origami((1,3,5,7)(2,8,4,10)(6,9), (1,5,2,6,3)(4,10)(7,9) ));
+Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 </Example>
 </Description>
 
-<Func Name="CanonicalOrigamiViaDelecroix" Arg="origami"/>
-<Description> This function computes a canonical representation of an origami. It calculates the representation from CanonicalOrigamiViaDelecroixAndStart with
-          all squares as start squares, independent of the given representation. Then it takes the minimum with respect to the order which &GAP; automatically
-          uses to compare paires of permutations. Two origamis are equal (up to renumbering of the squares) if they are described by the same permutations in their canonical representation.
-<Example>
-gap> CanonicalOrigami(Origami((1,10,7,6,8,9,2)(4,5), (1,8,5,4)(2,10,6)(3,9,7), 10));
-Origami((2,3,4,5,6,7,8)(9,10), (1,2,6)(3,5,7)(4,8,9,10), 10)
-</Example>
-
-</Description>
 <!--
 <Func Name="CanonicalOrigami" Arg="origami"/>
 <Description>
@@ -270,7 +252,7 @@ gap> Genus( Origami((1,2,3,4),(1,2)(3,4), 4) );
            E.g, if <M>SH_i = H_j</M> and <M>H_i,H_j</M> are the cosets associated to the integers <M>i,j</M>, respectively, then
            <M>\sigma_S(i)=j</M>.
 
-           The algorithm was introduced by Gabriela Weitze-Schmithüsen in <Cite Key="weitze_schmithuesen_phd"/>.
+           The algorithm was introduced by Gabriela Weitze-Schmithüsen in <Cite Key="MR2118271"/>.
 
            You get the coset permutations using the <Package>ModularSubgroup</Package> package as in the following example.
         <Example>
@@ -356,7 +338,7 @@ gap> VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));
 
 <Func Name="NormalFormBySage" Arg="origami"/>
 <Description>
-	This function executes the SageMath method to_standard_form to <Arg>origami</Arg> and returns its result as &GAP; object. In principle it makes the same as <Ref Func="FOrigamiNormalForm"/>, but it has an other representation.
+	This function executes the SageMath method to_standard_form to <Arg>origami</Arg> and returns its result as &GAP; object. In principle it makes the same as <Ref Func="OrigamiNormalForm"/>, but it has an other representation.
 <Example>
 gap> NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));
 Origami((3,4,5), (1,2,3)(4,5), 5)
@@ -435,7 +417,7 @@ The set of quotients of an origami contain a maximal element
 <Description>
 	This function executes the SageMath method OptimalDegree to <Arg>origami</Arg> and returns its result as &GAP; object. The optimal degree of self is the degree of the map to the largest
    torus.
-   Any origami <M>X \Rightarrow T</M> factor as <M>i \circ \pi_{opt}</M> where i is an
+   Any origami <M>X \rightarrow T</M> factor as <M>i \circ \pi_{opt}</M> where i is an
    isogeny. The optimal degree is the degree of <M>\pi_{opt}</M>.
 
 <Example>
@@ -473,7 +455,7 @@ gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3),4));
 
 <Func Name="LyapunovExponentsApproxBySage" Arg="origami"/>
 <Description>
-	This function executes the SageMath method LyapunovExponentsApprox to <Arg>origami</Arg> and returns its result as &GAP; object. 
+	This function executes the SageMath method LyapunovExponentsApprox to <Arg>origami</Arg> and returns its result as &GAP; object. Not implemented.
 <Example>
 
 </Example>

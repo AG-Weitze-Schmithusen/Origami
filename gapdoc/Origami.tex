@@ -137,8 +137,17 @@
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
- Supported by Project I.8 of SFB-TRR 195 'Symbolic Tools in Mathematics and
-their Application' of the German Research Foundation (DFG). \mbox{}}\\[1cm]
+ We thank Sergio Siccha for his support and valuable input at the beginning of
+this project. Further, we would like to thank Vincent Delecroix and Samuel
+Leli{\a`e}vre for fruitful discussions about algorithms implemented in the
+surface{\textunderscore}dynamics package in sage. Some of the functionality of
+the surface{\textunderscore}dynamics package can be used in this package as
+well. For this we use an interface between GAP and sage. We are thankful to
+Mohamed Barakat and Markus Pfeiffer for helping using the interface. Moreover,
+we thank Thomas Breuer for helpful ideas and comments on some algorithms
+implemented in this package. Supported by Project I.8 of SFB-TRR 195 'Symbolic
+Tools in Mathematics and their Application' of the German Research Foundation
+(DFG). \mbox{}}\\[1cm]
 \newpage
 
 \def\contentsname{Contents\logpage{[ 0, 0, 3 ]}}
@@ -253,45 +262,16 @@ arguments is switched compared to the order of the arguments in the function \te
   !gapprompt@gap>| !gapinput@RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");|
   Origami((1,2), (2,3), 3)
 \end{Verbatim}
- \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{CanonicalOrigamiViaDelecroixAndStart({\mdseries\slshape origami, start})\index{CanonicalOrigamiViaDelecroixAndStart@\texttt{Canonical}\-\texttt{Origami}\-\texttt{Via}\-\texttt{Delecroix}\-\texttt{And}\-\texttt{Start}}
-\label{CanonicalOrigamiViaDelecroixAndStart}
+ \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OrigamiNormalForm({\mdseries\slshape origami})\index{OrigamiNormalForm@\texttt{OrigamiNormalForm}}
+\label{OrigamiNormalForm}
 }\hfill{\scriptsize (function)}}\\
 
 
- This function calculates a canonical representation of an origami depending on
-a given number start (Between 1 and the degree of of the origami). To
-determine a canonical numbering the algorithm starts at the square with number
-start. This sqare is labeled as 1 in the new numbering. The algorithm walks
-along the origami in the following way and numbers the squares in the order,
-they are visited. First it walks in horizontal direction until it reaches the
-square with number start again. Then it walks one step up (in vertical
-direction) and then again a loop in horizontal direction. This will be
-repeated until the vertical loop is complete or all squares have been visited.
-If there are unvisited squares, we continue with the smallest number (in the
-new numbering), that has not been in a vertical loop. An origami is connected,
-so that number exists. This function is used to determine a canonical origami
-independent of the starting point. The idea for the algorithm derives from the
-algorithm to{\textunderscore}standard{\textunderscore}form implemented in the
-SageMath package surface{\textunderscore}dynamics. (REFERENZ HINZUF{\"U}GEN!) 
+ This function calculates a canonical representation of \mbox{\texttt{\mdseries\slshape  origami}}. Two origamis are equivaent, if they have the same canonical representation.
+This function has been implemented by Luca Junk and the algorithm is from \cite{ONF}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@CanonicalOrigamiAndStart(Origami((1,10,7,6,8,9,2)(4,5),|
-  !gapprompt@>| !gapinput@(1,8,5,4)(2,10,6)(3,9,7), 10), 1);|
-  Origami((1,2,3,4,5,6,7)(8,9), (1,5,8,9)(2,4,7)(3,10,6), 10)
-\end{Verbatim}
- \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{CanonicalOrigamiViaDelecroix({\mdseries\slshape origami})\index{CanonicalOrigamiViaDelecroix@\texttt{CanonicalOrigamiViaDelecroix}}
-\label{CanonicalOrigamiViaDelecroix}
-}\hfill{\scriptsize (function)}}\\
-
-
- This function computes a canonical representation of an origami. It calculates
-the representation from CanonicalOrigamiViaDelecroixAndStart with all squares
-as start squares, independent of the given representation. Then it takes the
-minimum with respect to the order which \textsf{GAP} automatically uses to compare paires of permutations. Two origamis are equal
-(up to renumbering of the squares) if they are described by the same
-permutations in their canonical representation. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@CanonicalOrigami(Origami((1,10,7,6,8,9,2)(4,5), (1,8,5,4)(2,10,6)(3,9,7), 10));|
-  Origami((2,3,4,5,6,7,8)(9,10), (1,2,6)(3,5,7)(4,8,9,10), 10)
+  !gapprompt@gap>| !gapinput@OrigamiNormalForm(Origami((1,3,5,7)(2,8,4,10)(6,9), (1,5,2,6,3)(4,10)(7,9) ));|
+  Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 \end{Verbatim}
  \noindent\textcolor{FuncColor}{$\triangleright$\enspace\texttt{OrigamiFamily\index{OrigamiFamily@\texttt{OrigamiFamily}}
 \label{OrigamiFamily}
@@ -354,7 +334,7 @@ singularities. For a singularity with cone angle $2\pi k$ the degree of the sing
 }\hfill{\scriptsize (attribute)}}\\
 
 
- This function calculates the Veechgroup of an origami \mbox{\texttt{\mdseries\slshape origami}}. The Veechgroup $G$ of \mbox{\texttt{\mdseries\slshape origami}} is a subgroup $SL_2(\mathbb{Z})$ of finite index. The group is stored as a ModularSubgroup from the \textsf{ModularSubgroup} package. It is represented by two permutations $\sigma_S$ and $\sigma_T$ describing how the generators $S$ and $T$ of $SL_2(\mathbb{Z})$ act on the cosets of $G$ in $SL_2(\mathbb{Z})$. E.g, if $SH_i = H_j$ and $H_i,H_j$ are the cosets associated to the integers $i,j$, respectively, then $\sigma_S(i)=j$. The algorithm was introduced by Gabriela Weitze-Schmith{\"u}sen in \cite{weitze_schmithuesen_phd}. You get the coset permutations using the \textsf{ModularSubgroup} package as in the following example. 
+ This function calculates the Veechgroup of an origami \mbox{\texttt{\mdseries\slshape origami}}. The Veechgroup $G$ of \mbox{\texttt{\mdseries\slshape origami}} is a subgroup $SL_2(\mathbb{Z})$ of finite index. The group is stored as a ModularSubgroup from the \textsf{ModularSubgroup} package. It is represented by two permutations $\sigma_S$ and $\sigma_T$ describing how the generators $S$ and $T$ of $SL_2(\mathbb{Z})$ act on the cosets of $G$ in $SL_2(\mathbb{Z})$. E.g, if $SH_i = H_j$ and $H_i,H_j$ are the cosets associated to the integers $i,j$, respectively, then $\sigma_S(i)=j$. The algorithm was introduced by Gabriela Weitze-Schmith{\"u}sen in \cite{MR2118271}. You get the coset permutations using the \textsf{ModularSubgroup} package as in the following example. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));|
   (1,3)(2,5)(4,7)(6,8)(9,10)
@@ -548,7 +528,7 @@ implemented.
 
 
  This function executes the SageMath method OptimalDegree to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. The optimal degree of self is the degree of the map to the largest
-torus. Any origami $X \Rightarrow T$ factor as $i \circ \pi_{opt}$ where i is an isogeny. The optimal degree is the degree of $\pi_{opt}$. 
+torus. Any origami $X \rightarrow T$ factor as $i \circ \pi_{opt}$ where i is an isogeny. The optimal degree is the degree of $\pi_{opt}$. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   !gapprompt@gap>| !gapinput@OptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));|
   2
@@ -588,7 +568,7 @@ torus. Any origami $X \Rightarrow T$ factor as $i \circ \pi_{opt}$ where i is an
 }\hfill{\scriptsize (function)}}\\
 
 
- This function executes the SageMath method LyapunovExponentsApprox to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. 
+ This function executes the SageMath method LyapunovExponentsApprox to \mbox{\texttt{\mdseries\slshape origami}} and returns its result as \textsf{GAP} object. Not implemented. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
   
 \end{Verbatim}

@@ -120,43 +120,15 @@
     [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XCanonicalOrigamiViaDelecroixAndStart[102X( [3Xorigami[103X, [3Xstart[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XOrigamiNormalForm[102X( [3Xorigami[103X ) [32X function[133X
   
-  [33X[0;0YThis  function calculates a canonical representation of an origami depending
-  on  a  given  number  start (Between 1 and the degree of of the origami). To
-  determine  a  canonical  numbering  the  algorithm starts at the square with
-  number start. This sqare is labeled as 1 in the new numbering. The algorithm
-  walks  along the origami in the following way and numbers the squares in the
-  order,  they  are  visited.  First it walks in horizontal direction until it
-  reaches  the  square  with number start again. Then it walks one step up (in
-  vertical direction) and then again a loop in horizontal direction. This will
-  be  repeated  until  the  vertical loop is complete or all squares have been
-  visited.  If  there  are  unvisited  squares,  we continue with the smallest
-  number  (in  the  new  numbering),  that has not been in a vertical loop. An
-  origami  is  connected,  so  that  number  exists.  This function is used to
-  determine  a  canonical  origami independent of the starting point. The idea
-  for the algorithm derives from the algorithm to_standard_form implemented in
-  the SageMath package surface_dynamics. (REFERENZ HINZUFÜGEN!)[133X
+  [33X[0;0YThis  function  calculates  a  canonical  representation  of  [3X  origami[103X. Two
+  origamis are equivaent, if they have the same canonical representation. This
+  function has been implemented by Luca Junk and the algorithm is from [McK].[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XCanonicalOrigamiAndStart(Origami((1,10,7,6,8,9,2)(4,5),[127X[104X
-    [4X[25X>[125X [27X(1,8,5,4)(2,10,6)(3,9,7), 10), 1);[127X[104X
-    [4X[28XOrigami((1,2,3,4,5,6,7)(8,9), (1,5,8,9)(2,4,7)(3,10,6), 10)[128X[104X
-  [4X[32X[104X
-  
-  [33X[1;0Y[29X[2XCanonicalOrigamiViaDelecroix[102X( [3Xorigami[103X ) [32X function[133X
-  
-  [33X[0;0YThis  function  computes  a  canonical  representation  of  an  origami.  It
-  calculates the representation from CanonicalOrigamiViaDelecroixAndStart with
-  all  squares as start squares, independent of the given representation. Then
-  it  takes the minimum with respect to the order which [5XGAP[105X automatically uses
-  to compare paires of permutations. Two origamis are equal (up to renumbering
-  of  the  squares)  if  they  are described by the same permutations in their
-  canonical representation.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XCanonicalOrigami(Origami((1,10,7,6,8,9,2)(4,5), (1,8,5,4)(2,10,6)(3,9,7), 10));[127X[104X
-    [4X[28XOrigami((2,3,4,5,6,7,8)(9,10), (1,2,6)(3,5,7)(4,8,9,10), 10)[128X[104X
+    [4X[25Xgap>[125X [27XOrigamiNormalForm(Origami((1,3,5,7)(2,8,4,10)(6,9), (1,5,2,6,3)(4,10)(7,9) ));[127X[104X
+    [4X[28XOrigami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)[128X[104X
   [4X[32X[104X
   
   [33X[1;0Y[29X[2XOrigamiFamily[102X[32X family[133X
@@ -220,7 +192,7 @@
   and  [22XT[122X  of [22XSL_2(Z)[122X act on the cosets of [22XG[122X in [22XSL_2(Z)[122X. E.g, if [22XSH_i = H_j[122X and
   [22XH_i,H_j[122X  are  the  cosets associated to the integers [22Xi,j[122X, respectively, then
   [22Xσ_S(i)=j[122X.  The  algorithm  was  introduced by Gabriela Weitze-Schmithüsen in
-  [WS04].  You get the coset permutations using the [5XModularSubgroup[105X package as
+  [Sch04]. You get the coset permutations using the [5XModularSubgroup[105X package as
   in the following example.[133X
   
   [4X[32X  Example  [32X[104X
@@ -318,8 +290,7 @@
   
   [33X[0;0YThis  function  executes the SageMath method to_standard_form to [3Xorigami[103X and
   returns  its  result  as  [5XGAP[105X  object.  In  principle  it  makes the same as
-  [2XOrigamiNormalForm[102X   ([14X???OrigamiNormalForm???[114X),   but   it   has   an   other
-  representation.[133X
+  [2XOrigamiNormalForm[102X ([14X1.3-1[114X), but it has an other representation.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XNormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
@@ -408,7 +379,7 @@
   
   [33X[0;0YThis  function  executes  the  SageMath  method OptimalDegree to [3Xorigami[103X and
   returns  its  result as [5XGAP[105X object. The optimal degree of self is the degree
-  of the map to the largest torus. Any origami [22XX ⇒ T[122X factor as [22Xi ∘ π_opt[122X where
+  of the map to the largest torus. Any origami [22XX → T[122X factor as [22Xi ∘ π_opt[122X where
   i is an isogeny. The optimal degree is the degree of [22Xπ_opt[122X.[133X
   
   [4X[32X  Example  [32X[104X
@@ -452,7 +423,7 @@
   [33X[1;0Y[29X[2XLyapunovExponentsApproxBySage[102X( [3Xorigami[103X ) [32X function[133X
   
   [33X[0;0YThis  function  executes  the  SageMath  method  LyapunovExponentsApprox  to
-  [3Xorigami[103X and returns its result as [5XGAP[105X object.[133X
+  [3Xorigami[103X and returns its result as [5XGAP[105X object. Not implemented.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
