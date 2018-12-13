@@ -129,6 +129,8 @@ DeclareGlobalFunction("CalcVeechGroupViaEquivalentTest");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("CalcVeechGroupWithHashTables");
 
+DeclareGlobalFunction("CalcVeechGroupWithHashTablesOld");
+
 #! @Arguments Origami
 #! @Returns true or false
 #!Description This Function tests weather the veechgrouo of the origami is the full group $Sl_2(mathbb{Z})$. This can be much

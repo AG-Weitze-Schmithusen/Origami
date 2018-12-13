@@ -35,10 +35,35 @@ InstallMethod(String, [IsOrigami], function(Origami)
 	end
 );
 
+InstallMethod( DisplayString, [IsOrigami], function( origami )
+	local s;
+	s := Concatenation("horizontal permutation = ", String(HorizontalPerm(origami)), "\n", "vertical permutation = ", String(VerticalPerm(origami)), "\n");
+	return s;
+end);
+
+InstallMethod(ViewString, [IsOrigami], function( origami )
+	return String( origami );
+end);
+
+InstallMethod(PrintString, [IsOrigami], function( origami )
+	return String( origami );
+end);
+
 InstallMethod(\=, [IsOrigami, IsOrigami], function(O1, O2)
 	return (VerticalPerm(O1) = VerticalPerm(O2)) and (HorizontalPerm(O1) = HorizontalPerm(O2));
 	end
 );
+
+
+# This method specifies the hash key for origamis
+InstallMethod(SparseIntKey, [IsObject, IsOrigami], function( b , origami )
+	local HashForOrigami;
+	HashForOrigami := function( origami )
+    	return (hashForPermutations( HorizontalPerm(origami) ) + hashForPermutations( VerticalPerm(origami) ));
+	end;	
+	return HashForOrigami;
+end);
+
 
 # determines an random origami of a given degree
 # INPUT degree d
@@ -132,7 +157,7 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 end);
 
 
-InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
+InstallGlobalFunction(CalcVeechGroupWithHashTablesOld, function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
 	 				counter, HelpO;
 	counter := 1;
@@ -147,7 +172,7 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
 			for j in [1, 2] do
 				 #M = newOrigamis[
-				i := ContainHash(canonicalOrigamiList, newOrigamis[j], hashForOrigamis);
+				i := ContainHash( canonicalOrigamiList, newOrigamis[j], hashForOrigamis );
 				if i = 0 then foundM := false; else foundM := true; fi;
 				if foundM then
 					sigma[j][indexOrigami(W)] := i;
@@ -157,6 +182,39 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 					AddHash(canonicalOrigamiList, newOrigamis[j], hashForOrigamis);
 					Add(NewOrigamiList, newOrigamis[j]);
 					sigma[j][indexOrigami(W)] := counter;
+					counter := counter + 1;
+				fi;
+			od;
+		od;
+		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
+	end;
+	HelpCalc([HelpO]);
+	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
+end);
+
+
+InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
+	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
+	 				counter, HelpO;
+	counter := 2;
+	sigma:=[[],[]];
+	canonicalOrigamiList := SparseHashTable();
+	HelpO := OrigamiNormalForm(O);
+	AddDictionary( canonicalOrigamiList, HelpO, 1 );
+	HelpCalc := function(GlList)
+		NewOrigamiList := [];
+		for W in GlList do
+			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
+			for j in [1, 2] do
+				i := LookupDictionary(canonicalOrigamiList, newOrigamis[j]);
+				if i = fail then foundM := false; else foundM := true; fi;
+				if foundM then
+					sigma[j][LookupDictionary(canonicalOrigamiList, W) ] := i;
+				fi;
+				if foundM = false then
+					AddDictionary( canonicalOrigamiList, newOrigamis[j], counter  );
+					Add(NewOrigamiList, newOrigamis[j]);
+					sigma[j][ LookupDictionary(canonicalOrigamiList, W) ] := counter;
 					counter := counter + 1;
 				fi;
 			od;

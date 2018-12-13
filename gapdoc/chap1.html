@@ -87,12 +87,12 @@
 
 <h5>1.3-1 Origami</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Origami</code>( <var class="Arg">permX</var>, <var class="Arg">permy</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>This function generates a new origami object with <span class="SimpleMath">σ_x =</span> <var class="Arg"> permX </var>, <span class="SimpleMath">σ_y =</span> <var class="Arg"> permY </var> and degree <var class="Arg">d</var>.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Origami</code>( <var class="Arg">permX</var>, <var class="Arg">permy</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function generates a new origami object with <span class="SimpleMath">σ_x =</span> <var class="Arg"> permX </var>, <span class="SimpleMath">σ_y =</span> <var class="Arg"> permY </var>.</p>
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Origami((1,2), (2,3), 3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Origami((1,2), (2,3));</span>
 Origami((1,2), (2,3), 3)
         </pre></div>
 
@@ -107,7 +107,7 @@ Origami((1,2), (2,3), 3)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5)));</span>
 Origami((1,3)(2,5,4), (2,4,5,3), 5)
 </pre></div>
 
@@ -117,7 +117,7 @@ Origami((1,3)(2,5,4), (2,4,5,3), 5)
 
 <div class="example"><pre>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), </span>
-&gt;(1,3)(2,4,5), 5)); 
+&gt;(1,3)(2,4,5))); 
 Origami((1,3)(2,5,4), (2,4,5,3), 5)
 </pre></div>
 
@@ -126,7 +126,7 @@ Origami((1,3)(2,5,4), (2,4,5,3), 5)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActionOfF2ViaCanonical(Origami((1,2), (1,3), 3), "S");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActionOfF2ViaCanonical(Origami((1,2), (1,3)), "S");</span>
 Origami((1,2), (2,3), 3)
   </pre></div>
 
@@ -135,7 +135,7 @@ Origami((1,2), (2,3), 3)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2)),"T");</span>
 Origami((1,2), (2,3), 3)
 </pre></div>
 
@@ -156,7 +156,7 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5)));</span>
 (1,3,5)
 </pre></div>
 
@@ -165,7 +165,7 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VerticalPerm( Origami((1,3,5), (1,3)(2,4,5) ));</span>
 (1,3)(2,4,5)
 </pre></div>
 
@@ -174,7 +174,7 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5) ));</span>
 5
 </pre></div>
 
@@ -183,7 +183,7 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6) ));</span>
 [ 1, 5 ]
 </pre></div>
 
@@ -192,7 +192,7 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genus( Origami((1,2,3,4),(1,2)(3,4), 4) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genus( Origami((1,2,3,4),(1,2)(3,4) ) );</span>
 2
 </pre></div>
 
@@ -201,9 +201,9 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));</span>
 (1,3)(2,5)(4,7)(6,8)(9,10)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));</span>
 (1,2,4)(3,6)(5,8,7,9,10)
         </pre></div>
 
@@ -221,12 +221,12 @@ Origami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,4,3)</span>
-&gt;(2,5), (1,5,3,4)(2,6), 6));
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,4,3)</span>
+&gt;(2,5), (1,5,3,4)(2,6) ));
 true
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,2,5)</span>
-&gt;(3,4,6), (1,2)(5,6), 6));
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,2,5)</span>
+&gt;(3,4,6), (1,2)(5,6) ));
 false
 </pre></div>
 
@@ -284,7 +284,7 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5) ));</span>
 &lt;modular subgroup of index 24&gt;
 
 </pre></div>
@@ -294,7 +294,7 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5) ));</span>
 Origami((3,4,5), (1,2,3)(4,5), 5)
 </pre></div>
 
@@ -303,7 +303,7 @@ Origami((3,4,5), (1,2,3)(4,5), 5)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsHyperellipticBySage(Origami((1,3), (1,2), 3));                                                                                           </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsHyperellipticBySage(Origami((1,3), (1,2) ));                                                                                           </span>
 true
 </pre></div>
 
@@ -312,9 +312,9 @@ true
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimitiveBySage(Origami((1,3), (1,2),3));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimitiveBySage(Origami((1,3), (1,2) ));</span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));</span>
 false
 </pre></div>
 
@@ -323,7 +323,7 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));</span>
 Origami((1,2), (1,3), 6)
 </pre></div>
 
@@ -332,16 +332,16 @@ Origami((1,2), (1,3), 6)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6),6)); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) )); </span>
 [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ]
 </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LatticeOfAbsolutePeriodsBySage</code>( <var class="Arg">origami</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>This function executes the SageMath method LatticeOfAbsolutePeriods to <var class="Arg">origami</var> and returns its result as <strong class="pkg">GAP</strong> object. It returns (a,t,u) where ((a,0),(t,u)) is a standard basis for the lattice of the absolute periods of self The lattice of periods of an origami is the sublattice of <span class="SimpleMath">Z^2</span> generated by the holonomy vectors of its saddle connections. Any sublattice of ZZ^2 has a standard basis consisting of a horizontal vector (a,0) and a nonhorizontal vector (t,u), where a, t, u are integers satisfying 0 &lt; t &lt; a and 0 &lt; t.</p>
+<p>This function executes the SageMath method LatticeOfAbsolutePeriods to <var class="Arg">origami</var> and returns its result as <strong class="pkg">GAP</strong> object. It returns (a,t,u) where ((a,0),(t,u)) is a standard basis for the lattice of the absolute periods of self The lattice of periods of an origami is the sublattice of <span class="SimpleMath">Z^2</span> generated by the holonomy vectors of its saddle connections. Any sublattice of <span class="SimpleMath">Z^2</span> has a standard basis consisting of a horizontal vector (a,0) and a nonhorizontal vector (t,u), where a, t, u are integers satisfying 0 &lt; t &lt; a and 0 &lt; t.</p>
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3), 4));   </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));   </span>
 [ [ 2, 0 ], [ 0, 1 ] ]
 </pre></div>
 
@@ -358,7 +358,7 @@ Origami((1,2), (1,3), 6)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));</span>
 2
 </pre></div>
 
@@ -367,7 +367,7 @@ Origami((1,2), (1,3), 6)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7),7));    </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));    </span>
 [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ]
 </pre></div>
 
@@ -376,7 +376,7 @@ Origami((1,2), (1,3), 6)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4),4));        </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));        </span>
 [ [ 1, 2 ], [ 2, 2 ] ]
 </pre></div>
 
@@ -385,7 +385,7 @@ Origami((1,2), (1,3), 6)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3),4));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));</span>
 3/2
 </pre></div>
 

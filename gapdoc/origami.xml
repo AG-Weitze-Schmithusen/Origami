@@ -101,11 +101,11 @@ algorithms implemented in this package.
       In this section we describe the main functions of this package.
       <ManSection>
 
-        <Func Name="Origami" Arg="permX , permy, d"/>
+        <Func Name="Origami" Arg="permX , permy"/>
         <Description>
-		This function generates a new origami object with <M> \sigma_x =</M> <Arg> permX </Arg>, <M> \sigma_y =</M> <Arg> permY </Arg> and degree <Arg>d</Arg>.
+		This function generates a new origami object with <M> \sigma_x =</M> <Arg> permX </Arg>, <M> \sigma_y =</M> <Arg> permY </Arg>.
         <Example>
-gap> Origami((1,2), (2,3), 3);
+gap> Origami((1,2), (2,3));
 Origami((1,2), (2,3), 3)
         </Example>
         </Description>
@@ -127,7 +127,7 @@ Origami((1,2), (2,3), 3)
           <M>\pi(<Arg>word</Arg>) \in SL_2(\mathbb{Z})</M> and returns <M>\pi(<Arg>word</Arg>).<Arg>origami</Arg></M>. The word is given
           as a string, as shown in the following example.
 <Example>
-gap> ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5)));
 Origami((1,3)(2,5,4), (2,4,5,3), 5)
 </Example>
         </Description>
@@ -138,7 +138,7 @@ Origami((1,3)(2,5,4), (2,4,5,3), 5)
           as a string, as shown in the following example.
 <Example>
 gap> ActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), 
->(1,3)(2,4,5), 5)); 
+>(1,3)(2,4,5))); 
 Origami((1,3)(2,5,4), (2,4,5,3), 5)
 </Example>
         </Description>
@@ -150,7 +150,7 @@ Origami((1,3)(2,5,4), (2,4,5,3), 5)
  But in contrast to <Ref Func="ActionOfSpecialLinearGroup"/> the result is stored in the canonical representation.
  ATTENTION: the order of arguments is switched compared to the order of the arguments in the function <Ref Func="ActionOfSpecialLinearGroup"/>.
   <Example>
-gap> ActionOfF2ViaCanonical(Origami((1,2), (1,3), 3), "S");
+gap> ActionOfF2ViaCanonical(Origami((1,2), (1,3)), "S");
 Origami((1,2), (2,3), 3)
   </Example>
 </Description>
@@ -165,7 +165,7 @@ Origami((1,2), (2,3), 3)
  <Ref Func="ActionOfSpecialLinearGroup" /> the result is stored in the canonical representation.
  ATTENTION: the order of arguments is switched compared to the order of the arguments in the function <Ref Func="ActionOfSpecialLinearGroup" />.
  <Example>
-gap> RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");
+gap> RightActionOfF2ViaCanonical(Origami((2,3), (1,3,2)),"T");
 Origami((1,2), (2,3), 3)
 </Example>
 </Description>
@@ -201,7 +201,7 @@ Origami((1,2)(3,4,5,6,7,8,9), (1,2,3,7)(4,6,9)(5,10,8), 10)
         <Description>
            This function returns the horizontal permutation <M>\sigma_y</M> of an origami <Arg>origami</Arg>.
 <Example>
-gap> HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5)));
 (1,3,5)
 </Example>
         </Description>
@@ -210,7 +210,7 @@ gap> HorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));
         <Description>
             This function returns the vertical permutation <M>\sigma_x</M> of an origami <Arg>origami</Arg>.
 <Example>
-gap> VerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> VerticalPerm( Origami((1,3,5), (1,3)(2,4,5) ));
 (1,3)(2,4,5)
 </Example>
         </Description>
@@ -219,7 +219,7 @@ gap> VerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));
         <Description>
         This function returns the degree of an <Arg>origami</Arg>.
 <Example>
-gap> DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5) ));
 5
 </Example>
         </Description>
@@ -229,7 +229,7 @@ gap> DegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));
            This function calculates the stratum of an origami <Arg>origami</Arg>. The stratum of an origami is a list of the nonzero degrees
            of the singularities. For a singularity with cone angle <M>2\pi k</M> the degree of the singularity is <M>k-1</M>.
 <Example>
-gap> Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8));
+gap> Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6) ));
 [ 1, 5 ]
 </Example>
         </Description>
@@ -238,7 +238,7 @@ gap> Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8));
         <Description>
          This function calculates the genus of the origami surface.
 <Example>
-gap> Genus( Origami((1,2,3,4),(1,2)(3,4), 4) );
+gap> Genus( Origami((1,2,3,4),(1,2)(3,4) ) );
 2
 </Example>
         </Description>
@@ -256,9 +256,9 @@ gap> Genus( Origami((1,2,3,4),(1,2)(3,4), 4) );
 
            You get the coset permutations using the <Package>ModularSubgroup</Package> package as in the following example.
         <Example>
-gap> SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));
+gap> SAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));
 (1,3)(2,5)(4,7)(6,8)(9,10)
-gap> TAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));
+gap> TAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));
 (1,2,4)(3,6)(5,8,7,9,10)
         </Example>
         </Description>
@@ -277,12 +277,12 @@ gap> Cosets(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6));
         <Description>
           This function tests whether <Arg>origami1</Arg> is equal  to <Arg>origami2</Arg> up to renumbering of the squares.
 <Example>
-gap> EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,4,3)
->(2,5), (1,5,3,4)(2,6), 6));
+gap> EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,4,3)
+>(2,5), (1,5,3,4)(2,6) ));
 true
 
-gap> EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,2,5)
->(3,4,6), (1,2)(5,6), 6));
+gap> EquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,2,5)
+>(3,4,6), (1,2)(5,6) ));
 false
 </Example>
         </Description>
@@ -330,7 +330,7 @@ To use the functions of this chapter, Sage must be installed on your operation s
 <Description>
 	This function executes the SageMath method veech_group to <Arg>origami</Arg> and returns its result as &GAP; object. It does the same as <Ref Func="VeechGroup"/>.
 <Example>
-gap> VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5) ));
 &lt;modular subgroup of index 24>
 
 </Example>
@@ -340,7 +340,7 @@ gap> VeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));
 <Description>
 	This function executes the SageMath method to_standard_form to <Arg>origami</Arg> and returns its result as &GAP; object. In principle it makes the same as <Ref Func="OrigamiNormalForm"/>, but it has an other representation.
 <Example>
-gap> NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));
+gap> NormalFormBySage(Origami((1,3,5), (1,3)(2,4,5) ));
 Origami((3,4,5), (1,2,3)(4,5), 5)
 </Example>
 </Description>
@@ -348,7 +348,7 @@ Origami((3,4,5), (1,2,3)(4,5), 5)
 <Description>
 	This function executes the SageMath method IsHyperelliptic to <Arg>origami</Arg> and returns its result as &GAP; object. It tests, weather <Arg>origami</Arg> is hyperelliptic.
 <Example>
-gap> IsHyperellipticBySage(Origami((1,3), (1,2), 3));                                                                                           
+gap> IsHyperellipticBySage(Origami((1,3), (1,2) ));                                                                                           
 true
 </Example>
 </Description>
@@ -359,9 +359,9 @@ true
 	An origami is primitive if the action of the monodromy group has no
    non trivial block.
 <Example>
-gap> IsPrimitiveBySage(Origami((1,3), (1,2),3));
+gap> IsPrimitiveBySage(Origami((1,3), (1,2) ));
 true
-gap> IsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));
+gap> IsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));
 false
 </Example>
 </Description>
@@ -370,7 +370,7 @@ false
 <Description>
 	This function executes the SageMath method Reduce to <Arg>origami</Arg> and returns its result as &GAP; object. It returns a reduced origami isomorphic (up to <M>SL(2,\mathbb{Q})</M> action) to that origami.
 <Example>
-gap> ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));
+gap> ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));
 Origami((1,2), (1,3), 6)
 </Example>
 </Description>
@@ -382,7 +382,7 @@ Origami((1,2), (1,3), 6)
    an element of ZZ x ZZ). This function returns a generating
    set of the module generated by holonomies of closed curves.
 <Example>
-gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6),6)); 
+gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) )); 
 [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ]
 </Example>
 </Description>
@@ -393,11 +393,11 @@ gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6),6));
    lattice of the absolute periods of self
 	The lattice of periods of an origami is the sublattice of <M> \mathbb{Z}^2</M>
    generated by the holonomy vectors of its saddle connections. Any
-   sublattice of ZZ^2 has a standard basis consisting of a horizontal
+   sublattice of <M> \mathbb{Z}^2</M> has a standard basis consisting of a horizontal
    vector (a,0) and a nonhorizontal vector (t,u), where a, t, u are
    integers satisfying 0 &lt; t &lt; a and 0 &lt; t.
 <Example>
-gap> LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3), 4));   
+gap> LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));   
 [ [ 2, 0 ], [ 0, 1 ] ]
 </Example>
 </Description>
@@ -421,7 +421,7 @@ The set of quotients of an origami contain a maximal element
    isogeny. The optimal degree is the degree of <M>\pi_{opt}</M>.
 
 <Example>
-gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));
+gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));
 2
 </Example>
 </Description>
@@ -430,7 +430,7 @@ gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));
 <Description>
 	This function executes the SageMath method PeriodGenerators to <Arg>origami</Arg> and returns its result as &GAP; object. It return a list of periods that generate the lattice of periods.
 <Example>
-gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7),7));    
+gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));    
 [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ]
 </Example>
 </Description>
@@ -439,7 +439,7 @@ gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7),7));
 <Description>
 	This function executes the SageMath method WidthsAndHeights to <Arg>origami</Arg> and returns its result as &GAP; object. It return the list of widths and heigths of cylinder.
 <Example>
-gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4),4));        
+gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));        
 [ [ 1, 2 ], [ 2, 2 ] ]
 </Example>
 </Description>
@@ -448,7 +448,7 @@ gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4),4));
 <Description>
 	This function executes the SageMath method SumOfLyapunovExponents to <Arg>origami</Arg> and returns its result as &GAP; object. It returns the sum of Lyapunov exponents for this origami.
 <Example>
-gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3),4));
+gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));
 3/2
 </Example>
 </Description>

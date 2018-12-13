@@ -10,4 +10,8 @@ t := GAPDoc2Text(r, path);;
 GAPDoc2TextPrintTextFiles(t, path);
 l := GAPDoc2LaTeX(r);;
 FileString(Filename(path, Concatenation(bookname, ".tex")), l);
+AddPageNumbersToSix(r, Filename(path, "Origami.pnr"));
+PrintSixFile(Filename(path, "manual.six"), r, bookname);
+h := GAPDoc2HTML(r, path);;
+GAPDoc2HTMLPrintHTMLFiles(h, path);
 #quit;

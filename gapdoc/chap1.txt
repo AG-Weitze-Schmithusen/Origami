@@ -46,13 +46,13 @@
   
   [1X1.3-1 Origami[101X
   
-  [33X[1;0Y[29X[2XOrigami[102X( [3XpermX[103X, [3Xpermy[103X, [3Xd[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XOrigami[102X( [3XpermX[103X, [3Xpermy[103X ) [32X function[133X
   
   [33X[0;0YThis  function  generates  a  new  origami object with [22Xσ_x =[122X [3X permX [103X, [22Xσ_y =[122X [3X
-  permY [103X and degree [3Xd[103X.[133X
+  permY [103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XOrigami((1,2), (2,3), 3);[127X[104X
+    [4X[25Xgap>[125X [27XOrigami((1,2), (2,3));[127X[104X
     [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
     [4X[28X        [128X[104X
   [4X[32X[104X
@@ -74,7 +74,7 @@
   a string, as shown in the following example.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5)));[127X[104X
     [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
   [4X[32X[104X
   
@@ -85,7 +85,7 @@
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), [127X[104X
-    [4X[28X>(1,3)(2,4,5), 5)); [128X[104X
+    [4X[28X>(1,3)(2,4,5))); [128X[104X
     [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
   [4X[32X[104X
   
@@ -98,7 +98,7 @@
   the order of the arguments in the function [2XActionOfSpecialLinearGroup[102X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XActionOfF2ViaCanonical(Origami((1,2), (1,3), 3), "S");[127X[104X
+    [4X[25Xgap>[125X [27XActionOfF2ViaCanonical(Origami((1,2), (1,3)), "S");[127X[104X
     [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
     [4X[28X  [128X[104X
   [4X[32X[104X
@@ -116,7 +116,7 @@
   function [2XActionOfSpecialLinearGroup[102X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XRightActionOfF2ViaCanonical(Origami((2,3), (1,3,2), 3),"T");[127X[104X
+    [4X[25Xgap>[125X [27XRightActionOfF2ViaCanonical(Origami((2,3), (1,3,2)),"T");[127X[104X
     [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
   [4X[32X[104X
   
@@ -141,7 +141,7 @@
   [33X[0;0YThis function returns the horizontal permutation [22Xσ_y[122X of an origami [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XHorizontalPerm(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XHorizontalPerm(Origami((1,3,5), (1,3)(2,4,5)));[127X[104X
     [4X[28X(1,3,5)[128X[104X
   [4X[32X[104X
   
@@ -150,7 +150,7 @@
   [33X[0;0YThis function returns the vertical permutation [22Xσ_x[122X of an origami [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XVerticalPerm( Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XVerticalPerm( Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
     [4X[28X(1,3)(2,4,5)[128X[104X
   [4X[32X[104X
   
@@ -159,7 +159,7 @@
   [33X[0;0YThis function returns the degree of an [3Xorigami[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XDegreeOrigami(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XDegreeOrigami(Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
     [4X[28X5[128X[104X
   [4X[32X[104X
   
@@ -170,7 +170,7 @@
   singularity with cone angle [22X2π k[122X the degree of the singularity is [22Xk-1[122X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XStratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8));[127X[104X
+    [4X[25Xgap>[125X [27XStratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6) ));[127X[104X
     [4X[28X[ 1, 5 ][128X[104X
   [4X[32X[104X
   
@@ -179,7 +179,7 @@
   [33X[0;0YThis function calculates the genus of the origami surface.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XGenus( Origami((1,2,3,4),(1,2)(3,4), 4) );[127X[104X
+    [4X[25Xgap>[125X [27XGenus( Origami((1,2,3,4),(1,2)(3,4) ) );[127X[104X
     [4X[28X2[128X[104X
   [4X[32X[104X
   
@@ -196,9 +196,9 @@
   in the following example.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XSAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));[127X[104X
+    [4X[25Xgap>[125X [27XSAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));[127X[104X
     [4X[28X(1,3)(2,5)(4,7)(6,8)(9,10)[128X[104X
-    [4X[25Xgap>[125X [27XTAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6)));[127X[104X
+    [4X[25Xgap>[125X [27XTAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));[127X[104X
     [4X[28X(1,2,4)(3,6)(5,8,7,9,10)[128X[104X
     [4X[28X        [128X[104X
   [4X[32X[104X
@@ -219,12 +219,12 @@
   of the squares.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,4,3)[127X[104X
-    [4X[28X>(2,5), (1,5,3,4)(2,6), 6));[128X[104X
+    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,4,3)[127X[104X
+    [4X[28X>(2,5), (1,5,3,4)(2,6) ));[128X[104X
     [4X[28Xtrue[128X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4), 6), Origami((1,2,5)[127X[104X
-    [4X[28X>(3,4,6), (1,2)(5,6), 6));[128X[104X
+    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,2,5)[127X[104X
+    [4X[28X>(3,4,6), (1,2)(5,6) ));[128X[104X
     [4X[28Xfalse[128X[104X
   [4X[32X[104X
   
@@ -281,7 +281,7 @@
   returns its result as [5XGAP[105X object. It does the same as [2XVeechGroup[102X ([14X1.3-1[114X).[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XVeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XVeechgroupBySage(Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
     [4X[28X<modular subgroup of index 24>[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -293,7 +293,7 @@
   [2XOrigamiNormalForm[102X ([14X1.3-1[114X), but it has an other representation.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XNormalFormBySage(Origami((1,3,5), (1,3)(2,4,5), 5));[127X[104X
+    [4X[25Xgap>[125X [27XNormalFormBySage(Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
     [4X[28XOrigami((3,4,5), (1,2,3)(4,5), 5)[128X[104X
   [4X[32X[104X
   
@@ -304,7 +304,7 @@
   hyperelliptic.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XIsHyperellipticBySage(Origami((1,3), (1,2), 3));                                                                                           [127X[104X
+    [4X[25Xgap>[125X [27XIsHyperellipticBySage(Origami((1,3), (1,2) ));                                                                                           [127X[104X
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
@@ -316,9 +316,9 @@
   monodromy group has no non trivial block.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XIsPrimitiveBySage(Origami((1,3), (1,2),3));[127X[104X
+    [4X[25Xgap>[125X [27XIsPrimitiveBySage(Origami((1,3), (1,2) ));[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XIsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));[127X[104X
+    [4X[25Xgap>[125X [27XIsPrimitiveBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));[127X[104X
     [4X[28Xfalse[128X[104X
   [4X[32X[104X
   
@@ -329,7 +329,7 @@
   action) to that origami.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4), 6));[127X[104X
+    [4X[25Xgap>[125X [27XReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));[127X[104X
     [4X[28XOrigami((1,2), (1,3), 6)[128X[104X
   [4X[32X[104X
   
@@ -343,7 +343,7 @@
   curves.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XAbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6),6)); [127X[104X
+    [4X[25Xgap>[125X [27XAbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) )); [127X[104X
     [4X[28X[ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ][128X[104X
   [4X[32X[104X
   
@@ -353,13 +353,12 @@
   [3Xorigami[103X  and  returns  its  result  as  [5XGAP[105X object. It returns (a,t,u) where
   ((a,0),(t,u)) is a standard basis for the lattice of the absolute periods of
   self The lattice of periods of an origami is the sublattice of [22XZ^2[122X generated
-  by  the  holonomy  vectors of its saddle connections. Any sublattice of ZZ^2
-  has  a  standard  basis  consisting  of  a  horizontal  vector  (a,0)  and a
-  nonhorizontal  vector (t,u), where a, t, u are integers satisfying 0 < t < a
-  and 0 < t.[133X
+  by the holonomy vectors of its saddle connections. Any sublattice of [22XZ^2[122X has
+  a standard basis consisting of a horizontal vector (a,0) and a nonhorizontal
+  vector (t,u), where a, t, u are integers satisfying 0 < t < a and 0 < t.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XLatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3), 4));   [127X[104X
+    [4X[25Xgap>[125X [27XLatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));   [127X[104X
     [4X[28X[ [ 2, 0 ], [ 0, 1 ] ][128X[104X
   [4X[32X[104X
   
@@ -383,7 +382,7 @@
   i is an isogeny. The optimal degree is the degree of [22Xπ_opt[122X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XOptimalDegreeBySage(Origami((1,2)(3,4), (2,3), 4));[127X[104X
+    [4X[25Xgap>[125X [27XOptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));[127X[104X
     [4X[28X2[128X[104X
   [4X[32X[104X
   
@@ -394,7 +393,7 @@
   the lattice of periods.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XPeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7),7));    [127X[104X
+    [4X[25Xgap>[125X [27XPeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));    [127X[104X
     [4X[28X[ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ][128X[104X
   [4X[32X[104X
   
@@ -405,7 +404,7 @@
   of cylinder.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XWidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4),4));        [127X[104X
+    [4X[25Xgap>[125X [27XWidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));        [127X[104X
     [4X[28X[ [ 1, 2 ], [ 2, 2 ] ][128X[104X
   [4X[32X[104X
   
@@ -416,7 +415,7 @@
   exponents for this origami.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XSumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3),4));[127X[104X
+    [4X[25Xgap>[125X [27XSumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));[127X[104X
     [4X[28X3/2[128X[104X
   [4X[32X[104X
   
