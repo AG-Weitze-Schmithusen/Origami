@@ -17,7 +17,7 @@ SetPackageInfo( rec(
 Dependencies := rec(
 		GAP := "4.5.3",
 
-		NeededOtherPackages := [["ModularGroup", "0.0.1"], ["Orb", "4.7.6"],  ],
+		NeededOtherPackages := [["ModularGroup", "0.0.1"], ["Orb", "4.7.6"], ["IO", ">=4.0.0"]],
 
 		SuggestedOtherPackages := [["HomalgToCAS" ,"2018.06.15"], ["IO_ForHomalg", "2017.09.02"], ["IO", "4.5.1"], ["RingsForHomalg", "2018.04.04"]],
 
