@@ -105,7 +105,7 @@ end);
 
 InstallGlobalFunction(OrigamiList, function(d)
 	local L;
-	L := CalcOrigamiListExperiment(d);
+	L := CalcOrigamiList(d);
 	Apply(L, x -> OrigamiWithoutTest(x.x, x.y, x.d));
 	return Filtered (L, IsConnectedOrigami);
 end

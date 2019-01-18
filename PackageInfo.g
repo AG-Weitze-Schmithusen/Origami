@@ -8,9 +8,9 @@ SetPackageInfo( rec(
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
-		HTMLStart := "doc/chap0.html",
-		PDFFile   := "doc/manual.pdf",
-		SixFile   := "doc/manual.six",
+		HTMLStart := "gapdoc/chap0.html",
+		PDFFile   := "gapdoc/Origami.pdf",
+		SixFile   := "gapdoc/manual.six",
 		LongTitle := ~.Subtitle,
 ),
 

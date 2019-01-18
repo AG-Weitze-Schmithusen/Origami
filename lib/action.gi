@@ -73,5 +73,5 @@ end);
 #INPUT  A Word word in S and T and an Origami O in any representation
 #OUTPUT The origami O.word as represented as canonical Image
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g^-1 ,o));
+	return OrigamiNormalForm(ActionOfSpecialLinearGroup(String( g^-1 ) ,o));
 end);

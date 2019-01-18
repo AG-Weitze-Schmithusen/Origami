@@ -145,5 +145,8 @@ DeclareGlobalFunction("HasVeechGroupSl_2");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("ToRec");
 
+DeclareGlobalFunction("SL2Orbit");
+
+DeclareOperation("SL2Representants", [IsObject]);
 
 DeclareGlobalFunction("KinderzeichnungenFromCuspsOfOrigami");

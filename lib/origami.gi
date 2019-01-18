@@ -37,7 +37,7 @@ InstallMethod(String, [IsOrigami], function(Origami)
 
 InstallMethod( DisplayString, [IsOrigami], function( origami )
 	local s;
-	s := Concatenation("horizontal permutation = ", String(HorizontalPerm(origami)), "\n", "vertical permutation = ", String(VerticalPerm(origami)), "\n");
+	s := Concatenation(String( origami ), "\n", "horizontal permutation = ", String(HorizontalPerm(origami)), "\n", "vertical permutation = ", String(VerticalPerm(origami)), "\n", "Genus = ", 			String( Genus( origami ) ), "\n", "Stratum = ", String( Stratum( origami ) ) );
 	return s;
 end);
 
@@ -54,6 +54,12 @@ InstallMethod(\=, [IsOrigami, IsOrigami], function(O1, O2)
 	end
 );
 
+
+InstallMethod(\<, [IsOrigami, IsOrigami], function(o1, o2) 
+	if HorizontalPerm(o1) >  HorizontalPerm (o1) then return true;
+		else if HorizontalPerm(o1) <  HorizontalPerm (o1) then return false; else return VerticalPerm(o1) < VerticalPerm(o2);fi; 
+		fi;
+end);
 
 # This method specifies the hash key for origamis
 InstallMethod(SparseIntKey, [IsObject, IsOrigami], function( b , origami )
@@ -157,7 +163,7 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 end);
 
 
-InstallGlobalFunction(CalcVeechGroupWithHashTablesOld, function(O)
+InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
 	 				counter, HelpO;
 	counter := 1;
@@ -193,7 +199,7 @@ InstallGlobalFunction(CalcVeechGroupWithHashTablesOld, function(O)
 end);
 
 
-InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
+InstallGlobalFunction(CalcVeechGroupWithHashTablesOld, function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
 	 				counter, HelpO;
 	counter := 2;
@@ -223,6 +229,31 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 	end;
 	HelpCalc([HelpO]);
 	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
+end);
+
+InstallGlobalFunction(SL2Orbit, function(O)
+	local NewOrigamiList, newOrigamis, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
+	 				counter, HelpO;
+	canonicalOrigamiList := SparseHashTable();
+	HelpO := OrigamiNormalForm(O);
+	AddDictionary( canonicalOrigamiList, HelpO, HelpO );
+	HelpCalc := function(GlList)
+		NewOrigamiList := [];
+		for W in GlList do
+			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
+			for j in [1, 2] do
+				i := LookupDictionary(canonicalOrigamiList, newOrigamis[j]);
+				if i = fail then foundM := false; else foundM := true; fi;
+				if foundM = false then
+					AddDictionary( canonicalOrigamiList, newOrigamis[j], newOrigamis[j]  );
+					Add(NewOrigamiList, newOrigamis[j]);
+				fi;
+			od;
+		od;
+		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
+	end;
+	HelpCalc([HelpO]);
+	return AsList(canonicalOrigamiList);
 end);
 
 #InstallGlobalFunction(CalcVeechGroupViaEquivalentTest,  function(O)
@@ -334,3 +365,22 @@ InstallGlobalFunction(HasVeechGroupSl_2, function(O)
 	return false;
 end
 );
+
+InstallMethod(SL2Representants, [IsCollection], function(origamiList)
+	local Rep;
+	Apply(origamiList, OrigamiNormalForm);
+	#origamiList := AsSet(OrigamiList);
+	Rep := [];
+	while origamiList <> [] do
+		Add(Rep, origamiList[1]);
+		origamiList := Difference(origamiList, SL2Orbit(origamiList[1]));
+	od;
+	return Rep;
+end);
+
+
+
+
+InstallMethod(SL2Representants, [IsInt], function(n)
+	return SL2Representants(OrigamiList(n));
+end);
