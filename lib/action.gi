@@ -4,7 +4,7 @@
 #output the Origmi S.O
 InstallGlobalFunction(ActionOfS, function(O)
 	local NewOrigami;
-	NewOrigami := OrigamiWithoutTest( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
+	NewOrigami := OrigamiNC( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -14,7 +14,7 @@ end);
 
 InstallGlobalFunction(ActionOfT, function(O)
 	local NewOrigami;
-	NewOrigami := OrigamiWithoutTest( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
+	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -23,7 +23,7 @@ end);
 #output the Origmi T⁻¹.O
 InstallGlobalFunction(ActionOfInvT, function(O)
 	local NewOrigami;
-	NewOrigami := OrigamiWithoutTest( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
+	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
 end);
 
@@ -32,7 +32,7 @@ end);
 #output the Origmi S⁻¹.O
 InstallGlobalFunction(ActionOfInvS, function(O)
 	local NewOrigami;
-	NewOrigami := OrigamiWithoutTest(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
+	NewOrigami := OrigamiNC(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
 	return NewOrigami;
 end);
 

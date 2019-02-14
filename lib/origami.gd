@@ -55,11 +55,14 @@ DeclareAttribute("VeechGroup", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Cosets", IsOrigami);
 
+# This attribute stores, weather -I is in the Veech group of the Origami.
+DeclareAttribute("MinusIdendityInVeechGroup", IsOrigami);
+
 DeclareGlobalFunction("IsConnectedOrigami");
 
 DeclareOperation("Origami", [IsPerm, IsPerm]);
 
-DeclareGlobalFunction("OrigamiWithoutTest");
+DeclareGlobalFunction("OrigamiNC");
 
 
 

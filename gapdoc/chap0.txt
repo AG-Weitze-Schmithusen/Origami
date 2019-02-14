@@ -49,11 +49,15 @@
   Samuel Lelièvre for fruitful discussions about algorithms implemented in the
   surface_dynamics   package  in  sage.  Some  of  the  functionality  of  the
   surface_dynamics  package  can  be used in this package as well. For this we
-  use  an  interface  between GAP and sage. We are thankful to Mohamed Barakat
-  and  Markus  Pfeiffer  for  helping  using the interface. Moreover, we thank
+  use  an  interface  between [5XGAP[105X and sage. We are thankful to Mohamed Barakat
+  and  Markus  Pfeiffer  for  helping using the interfaces. Moreover, we thank
   Thomas  Breuer for helpful ideas and comments on some algorithms implemented
-  in  this package. Supported by Project I.8 of SFB-TRR 195 'Symbolic Tools in
-  Mathematics and their Application' of the German Research Foundation (DFG).[133X
+  in this package.[133X
+  
+  [33X[0;0YThis  software package is part of the project I.8 'Algorithmic approaches to
+  Teichmüller  curves'  (AG  Weitze, Saarland University) supported by Project
+  I.8  of SFB-TRR 195 'Symbolic Tools in Mathematics and their Application' of
+  the German Research Foundation (DFG).[133X
   
   
   -------------------------------------------------------
@@ -61,15 +65,21 @@
   
   [1XContents (Origami Package)[101X
   
-  1 [33X[0;0YThe Veechgroup of Origamis[133X
-    1.1 [33X[0;0YIntroduction[133X
-    1.2 [33X[0;0YThe Free Group[133X
-    1.3 [33X[0;0YThe Origami Object[133X
-      1.3-1 Origami
-    1.4 [33X[0;0YList of Origamis[133X
-      1.4-1 OrigamiList
-    1.5 [33X[0;0YUsing SageMath functions[133X
-      1.5-1 VeechgroupBySage
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YOverview[133X
+    1.2 [33X[0;0YNotations[133X
+  2 [33X[0;0YThe functionality of this package[133X
+    2.1 [33X[0;0YThe Origami Object[133X
+      2.1-1 Origami
+    2.2 [33X[0;0YSL_2(Z)-Action on Origamis[133X
+      2.2-1 ActionOfSpecialLinearGroup
+    2.3 [33X[0;0YVeech groups[133X
+      2.3-1 VeechGroup
+    2.4 [33X[0;0YLists of Origamis[133X
+      2.4-1 OrigamiList
+  3 [33X[0;0YSageMath functions[133X
+    3.1 [33X[0;0YUsing SageMath functions[133X
+      3.1-1 [33X[0;0YSageMath[133X
   
   
   [32X

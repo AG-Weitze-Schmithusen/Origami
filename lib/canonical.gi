@@ -139,7 +139,7 @@ InstallGlobalFunction(CanonicalOrigamiAndStart, function(O, start)
 
 	newxPerm := PermList(renumbering)^-1 * HorizontalPerm( O ) * PermList(renumbering);
 	newyPerm := PermList(renumbering)^-1 * VerticalPerm( O ) * PermList(renumbering);
-	return OrigamiWithoutTest(newxPerm, newyPerm, DegreeOrigami(O));
+	return OrigamiNC(newxPerm, newyPerm, DegreeOrigami(O));
 end);
 
 InstallGlobalFunction(CanonicalOrigami, function(O)
@@ -149,7 +149,7 @@ InstallGlobalFunction(CanonicalOrigami, function(O)
 		Add(res, CanonicalOrigamiAndStart(O, i));
 	od;
 	resOrigami := Minimum( List(res, o -> [HorizontalPerm(o), VerticalPerm(o)]) );
-	return OrigamiWithoutTest(resOrigami[1], resOrigami[2], DegreeOrigami(O));
+	return OrigamiNC(resOrigami[1], resOrigami[2], DegreeOrigami(O));
 end);
 
 
@@ -215,5 +215,5 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   Apply(G, PermList);
   Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
 
-  return OrigamiWithoutTest(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
+  return OrigamiNC(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
 end);

@@ -1,4 +1,4 @@
-Read("load.g");
+LoadPackage("Origami");
 path := Directory("gapdoc");
 main := "origami.xml";
 files := [];
@@ -14,4 +14,4 @@ AddPageNumbersToSix(r, Filename(path, "Origami.pnr"));
 PrintSixFile(Filename(path, "manual.six"), r, bookname);
 h := GAPDoc2HTML(r, path);;
 GAPDoc2HTMLPrintHTMLFiles(h, path);
-#quit;
+quit;

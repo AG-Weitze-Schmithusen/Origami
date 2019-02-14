@@ -1,7 +1,11 @@
-\BOOKMARK [0][-]{chapter.1}{The Veechgroup of Origamis }{}% 1
-\BOOKMARK [1][-]{section.1.1}{Introduction}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{ The Free Group }{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{The Origami Object}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.4}{List of Origamis}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.5}{ Using SageMath functions}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter*.4}{References}{}% 7
+\BOOKMARK [0][-]{chapter.1}{ Introduction }{}% 1
+\BOOKMARK [1][-]{section.1.1}{Overview}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{ Notations }{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{ The functionality of this package }{}% 4
+\BOOKMARK [1][-]{section.2.1}{The Origami Object}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{SL\1372\(Z\)-Action on Origamis}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Veech groups}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Lists of Origamis}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{ SageMath functions }{}% 9
+\BOOKMARK [1][-]{section.3.1}{ Using SageMath functions}{chapter.3}% 10
+\BOOKMARK [0][-]{chapter*.4}{References}{}% 11
