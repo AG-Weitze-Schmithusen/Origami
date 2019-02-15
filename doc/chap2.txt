@@ -1,0 +1,265 @@
+  
+  [1X2 [33X[0;0YThe functionality of this package[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YThe Origami Object[133X[101X
+  
+  [33X[0;0YIn  this  section  we  introduce a new type called 'origami', namely origami
+  objects,  which  are  created  by  this  two  permutations. The degree of an
+  origami is the number of squares. Origamis are stored as such objects.[133X
+  
+  [1X2.1-1 Origami[101X
+  
+  [33X[1;0Y[29X[2XOrigami[102X( [3XpermX[103X, [3XpermY[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[0;0YThis  function  generates  a  new  origami object with [22Xσ_x =[122X [3X permX [103X, [22Xσ_y =[122X [3X
+  permY  [103X.  The  function  tests whether ([3X permX [103X,[3X permY [103X) defines a connected
+  surface and returns false otherwise.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigami((1,2), (2,3));[127X[104X
+    [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
+    [4X[28X        [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOrigamiNC[102X( [3XpermX[103X, [3XpermY[103X, [3Xd[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[0;0YThis  function  does  the same as [2XOrigami[102X, but in contrast it does not test,
+  whether the origami describes a connected surface.[133X
+  
+  [33X[1;0Y[29X[2XOrigamiNormalForm[102X( [3Xorigami[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[0;0YThis  function  calculates  a  canonical  representation  of  [3X  origami[103X. Two
+  origamis  are  equivalent,  if  they have the same canonical representation.
+  This  function  has  been implemented by Luca Junk and the algorithm is from
+  [McK].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigamiNormalForm(Origami((1,3,5,7)(2,8,4,10)(6,9), [127X[104X
+    [4X[28X>(1,5,2,6,3)(4,10)(7,9) ));[128X[104X
+    [4X[28XOrigami((1,2)(3,5,4,6)(7,8,9,10), (1,3)(2,4,5,6,7)(9,10), 10)[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOrigamiFamily[102X[32X family[133X
+  
+  [33X[0;0YSince  origamis do not fit in any existing family in [5XGAP[105X, we introduce a new
+  family for origami objects called OrigamiFamily.[133X
+  
+  [33X[1;0Y[29X[2XHorizontalPerm[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA permutation.[133X
+  
+  [33X[0;0YThis function returns the horizontal permutation [22Xσ_y[122X of an origami.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XHorizontalPerm(Origami((1,3,5), (1,3)(2,4,5)));[127X[104X
+    [4X[28X(1,3,5)[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XVerticalPerm[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA permutation.[133X
+  
+  [33X[0;0YThis function returns the vertical permutation [22Xσ_x[122X of an origami.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XVerticalPerm( Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
+    [4X[28X(1,3)(2,4,5)[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XDegreeOrigami[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YAn Int.[133X
+  
+  [33X[0;0YThis function returns the degree of an origami.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDegreeOrigami(Origami((1,3,5), (1,3)(2,4,5) ));[127X[104X
+    [4X[28X5[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XStratum[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA list of Ints.[133X
+  
+  [33X[0;0YThis  function  calculates  the  stratum  of  an  origami. The stratum of an
+  origami  is  a  list  of  the  nonzero  degrees  of the singularities. For a
+  singularity of cone angle [22X2π k[122X the degree of the singularity is [22Xk-1[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XStratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6) ));[127X[104X
+    [4X[28X[ 1, 5 ][128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XGenus[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YAn Int.[133X
+  
+  [33X[0;0YThis function calculates the genus of the origami surface.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XGenus( Origami((1,2,3,4),(1,2)(3,4) ) );[127X[104X
+    [4X[28X2[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.2 [33X[0;0YSL_2(Z)-Action on Origamis[133X[101X
+  
+  [33X[0;0YThe group [22XSL_2(Z)[122X acts on the set of origamis of fixed degree. The following
+  methods  help  calculating this operation both for matrices and words in the
+  free group [22XF[122X.[133X
+  
+  [1X2.2-1 ActionOfSpecialLinearGroup[101X
+  
+  [33X[1;0Y[29X[2XActionOfSpecialLinearGroup[102X( [3Xword[103X, [3Xorigami[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami object.[133X
+  
+  [33X[0;0YGiven  a  word [3Xword[103X in the free group [22XF=[122X [22XGroup(tildeS, tildeT)[122X this function
+  computes [22Xπ([3Xword[103X) ∈ SL_2(Z)[122X and returns [22Xπ([3Xword[103X).[3Xorigami[103X[122X. The word is given as
+  a string, as shown in the following example.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5)));[127X[104X
+    [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
+  [4X[32X[104X
+  
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[1;0Y[29X[2XActionOfSpecialLinearGroup[102X( [3Xmatrix[103X, [3Xorigami[103X ) [32X method[133X
+  
+  [33X[0;0YGiven matrix in [22XSL_2(Z)[122X this function returns [3Xmatrix[103X.[3Xorigami[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5), [127X[104X
+    [4X[28X>(1,3)(2,4,5))); [128X[104X
+    [4X[28XOrigami((1,3)(2,5,4), (2,4,5,3), 5)[128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[0;0YGiven  a  word  [3Xword[103X  in  the free group [22XGroup(tildeS, tildeT)[122X this function
+  computes  [22Xπ([3Xword[103X)  ∈ SL_2(Z)[122X and returns [22Xπ([3Xword[103X).[3Xorigami[103X[122X. But in contrast to
+  [2XActionOfSpecialLinearGroup[102X   the   result   is   stored   in  the  canonical
+  representation.  ATTENTION:  the  order of arguments is switched compared to
+  the order of the arguments in the function [2XActionOfSpecialLinearGroup[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XActionOfF2ViaCanonical(Origami((1,2), (1,3)), "S");[127X[104X
+    [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
+    [4X[28X  [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XRightActionOfF2ViaCanonical[102X( [3Xorigami[103X, [3Xword[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
+  
+  [33X[0;0YThis  function computes the right action of the projection of a word [3Xword[103X in
+  the  free  group  [22XGroup(tildeS,  tildeT)[122X  on  an origami [3Xorigami[103X. It returns
+  [22X[3Xorigami[103X.π([3Xword[103X)  =  π([3Xword[103X)^-1.[3Xorigami[103X[122X,  where the left action is the common
+  action  of  [22XSL_2(Z)[122X  on origamis of a given degree. This action has the same
+  orbits  as the left action. For the Veech group computation both actions can
+  be  used and give the same result. In contrast to [2XActionOfSpecialLinearGroup[102X
+  the  result  is stored in the canonical representation. ATTENTION: the order
+  of  arguments  is  switched  compared  to  the order of the arguments in the
+  function [2XActionOfSpecialLinearGroup[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XRightActionOfF2ViaCanonical(Origami((2,3), (1,3,2)),"T");[127X[104X
+    [4X[28XOrigami((1,2), (2,3), 3)[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.3 [33X[0;0YVeech groups[133X[101X
+  
+  [33X[0;0YThe  Veech  group [22XG[122X of an origami is a subgroup [22XSL_2(Z)[122X of finite index. The
+  group is stored as a ModularSubgroup from the [5XModularSubgroup[105X package. It is
+  represented  by two permutations [22Xσ_S[122X and [22Xσ_T[122X describing how the generators [22XS[122X
+  and  [22XT[122X  of [22XSL_2(Z)[122X act on the cosets of [22XG[122X in [22XSL_2(Z)[122X. E.g, if [22XSH_i = H_j[122X and
+  [22XH_i,H_j[122X  are  the  cosets  associated  to  integers  [22Xi,j[122X, respectively, then
+  [22Xσ_S(i)=j[122X. See [Sch04] for a detailed version of the algorithm.[133X
+  
+  [1X2.3-1 VeechGroup[101X
+  
+  [33X[1;0Y[29X[2XVeechGroup[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA ModularSubGroup.[133X
+  
+  [33X[0;0YThis  function  calculates  the Veech group of an origami. You get the coset
+  permutations using the [5XModularSubgroup[105X package as in the following example.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));[127X[104X
+    [4X[28X(1,3)(2,5)(4,7)(6,8)(9,10)[128X[104X
+    [4X[25Xgap>[125X [27XTAction(VeechGroup(Origami((1,2,5)(3,4,6), (1,2)(5,6) )));[127X[104X
+    [4X[28X(1,2,4)(3,6)(5,8,7,9,10)[128X[104X
+    [4X[28X        [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XCosets[102X( [3Xorigami[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA list of element of the free group with generators S and T.[133X
+  
+  [33X[0;0YThis  function  calculates the right cosets of the Veech group of an origami
+  as a list of words in [22XS[122X and [22XT[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCosets(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6));[127X[104X
+    [4X[28X[ <identity ...>, S, T, T^-1, S*T, S*T^-1, T*S, T^-1*S, S*T*S, S*T^-1*S ][128X[104X
+  [4X[32X[104X
+  
+  [6XReturns:[106X  [33X[0;10YA boolean.[133X
+  
+  [33X[1;0Y[29X[2XEquivalentOrigami[102X( [3Xorigami1[103X, [3Xorigami2[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function tests whether [3Xorigami1[103X is equal to [3Xorigami2[103X up to renumbering
+  of the squares.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,4,3)[127X[104X
+    [4X[28X>(2,5), (1,5,3,4)(2,6) ));[128X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XEquivalentOrigami(Origami((1,4)(2,6,3), (1,5)(2,3,6,4) ), Origami((1,2,5)[127X[104X
+    [4X[28X>(3,4,6), (1,2)(5,6) ));[128X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAt  this  point  we thank Thomas Breuer for the idea to implement the latter
+  function.[133X
+  
+  
+  [1X2.4 [33X[0;0YLists of Origamis[133X[101X
+  
+  [33X[0;0YThe  following  functions  generate lists of origamis of a given degree (and
+  stratum).[133X
+  
+  [1X2.4-1 OrigamiList[101X
+  
+  [33X[1;0Y[29X[2XOrigamiList[102X( [3Xd[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of Origamis.[133X
+  
+  [33X[0;0YThis function calculates a list of all origamis with a given degree [3Xd[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigamiList(2);[127X[104X
+    [4X[28X[ Origami((), (1,2), 2), Origami((1,2), (), 2), Origami((1,2), (1,2), 2) ][128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XOrigamiListWithStratum[102X( [3Xd[103X, [3Xstratum[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of Origamis.[133X
+  
+  [33X[0;0YThis  function  calculates  a list of all origamis with a given degree [3Xd[103X and
+  stratum [3Xstratum[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrigamiListWithStratum(5, [1,1]);[127X[104X
+    [4X[28X[ Origami((1,2), (1,3)(2,4,5), 5), Origami((1,2), (1,3,2,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3), (1,2)(3,4,5), 5), Origami((1,2,3), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3), (2,4,5,3), 5), Origami((1,2)(3,4,5), (2,3), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (1,2,3), 5), Origami((1,2)(3,4,5), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (2,3,5,4), 5), Origami((1,2)(3,4,5), (1,2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2)(3,4,5), (1,2,3,5,4), 5), Origami((1,2,3,4), (3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (3,5,4), 5), Origami((1,2,3,4), (1,2,3)(4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (1,3,2)(4,5), 5), Origami((1,2,3,4), (2,3,4,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (2,5,4,3), 5), Origami((1,2,3,4), (1,2,4,5,3), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4), (1,3,5,4,2), 5), Origami((1,2,3,4,5), (3,5), 5), [128X[104X
+    [4X[28X  Origami((1,2,3,4,5), (1,2)(3,4,5), 5), Origami((1,2,3,4,5), (1,2)(3,5,4), 5)[128X[104X
+    [4X[28X    , Origami((1,2,3,4,5), (2,4,3,5), 5), Origami((1,2,3,4,5), (2,5,3,4), 5) ][128X[104X
+  [4X[32X[104X
+  

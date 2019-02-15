@@ -1,75 +1,84 @@
-name: GitHubPagesForGAP
-version: 0.2
-date: 2017-02-04
+name: Origami
+version: 1.0.0
+date: 2018-11-19
 description: |
-    A GitHub Pages generator for GAP packages
+    Computing Veechgroups of origamis
 
 authors:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: A. U. Thor
+    - name: Pascal Kattler
+      url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Andrea Thevis
+      url: http://www.math.uni-sb.de/ag/weitze/
 
 maintainers:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: Jan Itor
+    - name: Pascal Kattler
+      url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Andrea Thevis
+      url: http://www.math.uni-sb.de/ag/weitze/
 
-GAP: ">=4.8.1"
+GAP: "4.5.3"
 
 needed-pkgs:
-    - name: "GAPDoc"
-      version: ">= 1.2"
-      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
-    - name: "IO"
-      version: ">= 4.1"
-      url: "https://gap-packages.github.io/io"
-
-suggested-pkgs:
-    - name: "orb"
-      version: ">= 4.2"
+    - name: "ModularGroup"
+      version: "0.0.1"
+      url: "https://gap-packages.github.io/modulargroup"
+    - name: "Orb"
+      version: "4.7.6"
       url: "https://gap-packages.github.io/orb"
 
-www: https://gap-system.github.io/GitHubPagesForGAP/
+suggested-pkgs:
+    - name: "HomalgToCAS"
+      version: "2018.06.15"
+      url: "http://homalg-project.github.io/homalg_project/HomalgToCAS/"
+    - name: "IO_ForHomalg"
+      version: "2017.09.02"
+      url: "http://homalg-project.github.io/homalg_project/IO_ForHomalg/"
+    - name: "IO"
+      version: "4.5.1"
+      url: "https://gap-packages.github.io/io"
+    - name: "RingsForHomalg"
+      version: "2018.04.04"
+      url: "http://homalg-project.github.io/homalg_project/RingsForHomalg/"
+
+www: https://PascalKattler.github.io/Origami/
 readme: README.md
-packageinfo: https://gap-system.github.io/GitHubPagesForGAP/PackageInfo.g
-github: https://github.com/gap-system/GitHubPagesForGAP
+packageinfo: https://PascalKattler.github.io/Origami/PackageInfo.g
+github: https://github.com/PascalKattler/Origami
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.gz
+      url: https://github.com/PascalKattler/Origami/releases/download/v1.0.0/Origami-1.0.0.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.bz2
+      url: https://github.com/PascalKattler/Origami/releases/download/v1.0.0/Origami-1.0.0.tar.bz2
 
 abstract: |
-    This is a pseudo package that contains no actual  <span class="pkgname">GAP</span> code. Instead, it is a template for other  GAP packages that allows to quickly setup GitHub Pages.
+    This package calculates with origamis, a square tiled surface.
 
-status: other
+status: dev
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
-keywords: |
-    GitHub Pages, GAP.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>HTI17</span>]   <b class='BibAuthor'>Horn, M., Thor, A. U. and Itor, J.</b>,
-     <i class='BibTitle'>GitHubPagesForGAP, A GitHub Pages generator for GAP packages,
-             Version 0.2</i>
-     (<span class='BibYear'>2017</span>)<br />
+    [<span class='BibKey'>KT18</span>]   <b class='BibAuthor'>Kattler, P. and Thevis, A.</b>,
+     <i class='BibTitle'>Origami, Computing Veechgroups of origamis,
+             Version 1.0.0</i>
+     (<span class='BibYear'>2018</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://gap-system.github.io/GitHubPagesForGAP/">https://gap-system.github.io/GitHubPagesForGAP/</a></span>.
+    <span class='BibHowpublished'><a href="https://PascalKattler.github.io/Origami/">https://PascalKattler.github.io/Origami/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GitHubPagesForGAP0.2,
-      author =           {Horn, M. and Thor, A. U. and Itor, J.},
-      title =            {{GitHubPagesForGAP}, A GitHub Pages generator for GAP packages, {V}ersion 0.2},
-      month =            {Feb},
-      year =             {2017},
+    @misc{ Origami1.0.0,
+      author =           {Kattler, P. and Thevis, A.},
+      title =            {{Origami},    Computing   Veechgroups   of   origamis,
+                          {V}ersion 1.0.0},
+      month =            {Nov},
+      year =             {2018},
       note =             {GAP package},
-      howpublished =     {\href                              {https://gap-system.github.io/GitHubPagesForGAP/}
-                          {\texttt{https://gap-system.github.io/}\discretionary
-                          {}{}{}\texttt{GitHubPagesForGAP/}}},
-      keywords =         {GitHub Pages; GAP},
-      printedkey =       {HTI17}
+      howpublished =     {\href       {https://PascalKattler.github.io/Origami/}
+                          {\texttt{https://PascalKattler.github.io/}\discretionary
+                          {}{}{}\texttt{Origami/}}},
+      printedkey =       {KT18}
     }
 
