@@ -59,5 +59,13 @@ Persons := [
   ),
 ],
 
+PackageWWWHome := "https://pascalkattler.github.io/Origami/",
+
+ArchiveFormats := ".tar.gz .zip",
+
+ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/releases/download/Origami-", ~.Version, "/Origami-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+
 
 ) );
