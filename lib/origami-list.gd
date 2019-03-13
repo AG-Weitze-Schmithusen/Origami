@@ -1,8 +1,4 @@
 
-
-DeclareGlobalFunction("CalcOrigamiListForx");
-
-
 DeclareGlobalFunction("CalcOrigamiList");
 
 

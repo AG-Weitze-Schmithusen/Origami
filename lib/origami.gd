@@ -36,7 +36,6 @@ DeclareAttribute("Stratum", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Genus", IsOrigami);
 
-DeclareAttribute("indexOrigami", IsOrigami);
 
 #! @Description
 #! This calculates the Veechgroup of an Origami. This is a subgroup of $Sl_2(\mathbb{Z})$ of finite degree. The group is
@@ -55,12 +54,23 @@ DeclareAttribute("VeechGroup", IsOrigami);
 #! @ChapterInfo The Origami object, The Origami object
 DeclareAttribute("Cosets", IsOrigami);
 
+
 DeclareGlobalFunction("IsConnectedOrigami");
 
 DeclareOperation("Origami", [IsPerm, IsPerm]);
 
-DeclareGlobalFunction("OrigamiWithoutTest");
+DeclareGlobalFunction("OrigamiNC");
 
+
+
+
+
+#! @Arguments Origami1, Origami2
+#! @Returns true or false
+#! @Description This tests wether Origami1 is equal to Origami2 with same numbering of squares.
+#!              That is, the defining permutations are the same.
+#! @ChapterInfo The Origami object, The Origami object
+DeclareGlobalFunction("Equals");
 
 #! @Arguments Origami1, Origami2
 #! @Returns true or false
@@ -68,12 +78,15 @@ DeclareGlobalFunction("OrigamiWithoutTest");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("EquivalentOrigami");
 
-#! @Arguments d
-#! @Returns a random origami
-#! @Description This creates a random origami of degree d.
+#! @Arguments Origami
+#! @Returns A list with tree entrys
+#! @Description This function is used to calculate some attributes.
+#!             It calculates the Veechgroup of a given origami and .
+#!              the veechgroup is stored as ModularGroup Object from the ModularGroup package.
+#!  			The cosets of the veechgroup is stored in a list of words in the generators S and T
+#!  			of the matrix group Sl_2(Z).
 #! @ChapterInfo The Origami object, The Origami object
-DeclareGlobalFunction("ExampleOrigami");
-
+DeclareGlobalFunction("CalcVeechGroup");
 
 #! @Arguments Origami
 #! @Returns A list with tree entrys
@@ -86,6 +99,10 @@ DeclareGlobalFunction("ExampleOrigami");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("CalcVeechGroupWithHashTables");
 
+DeclareGlobalFunction("CalcVeechGroupWithHashTablesOld");
+
+DeclareAttribute("indexOrigami", IsOrigami);
+
 #! @Arguments Origami
 #! @Returns true or false
 #!Description This Function tests weather the veechgrouo of the origami is the full group $Sl_2(mathbb{Z})$. This can be much
@@ -93,5 +110,6 @@ DeclareGlobalFunction("CalcVeechGroupWithHashTables");
 #! Veechgroup is large.
 #! @ChapterInfo he Origami object, The Origami object
 DeclareGlobalFunction("HasVeechGroupSl_2");
+
 
 

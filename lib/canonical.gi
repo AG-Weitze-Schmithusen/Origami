@@ -70,7 +70,6 @@ end);
 
 
 
-
 ## Graph equivaltent test
 InstallGlobalFunction(OrigamiNormalForm, function(origami)
   local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
@@ -133,5 +132,5 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   Apply(G, PermList);
   Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
 
-  return OrigamiWithoutTest(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
+  return OrigamiNC(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
 end);
