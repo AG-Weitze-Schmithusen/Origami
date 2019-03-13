@@ -1,5 +1,5 @@
 Read("load.g");
-path := Directory("gapdoc");
+path := Directory("doc");
 main := "origami.xml";
 files := [];
 bookname := "Origami";
