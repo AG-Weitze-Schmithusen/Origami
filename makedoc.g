@@ -1,4 +1,3 @@
-Read("load.g");
 path := Directory("doc");
 main := "origami.xml";
 files := [];
