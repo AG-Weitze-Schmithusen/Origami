@@ -4,13 +4,14 @@ SetPackageInfo( rec(
 	Version := "1.0",
 	Date := "26/02/2018",
 	AvailabilityTest := ReturnTrue,
+	Status := "dev",
 	
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
 		HTMLStart := "doc/chap0.html",
-		PDFFile   := "doc/manual.pdf",
-		SixFile   := "doc/manual.six",
+		PDFFile   := "doc/Origami.pdf",
+		SixFile   := "doc/Origami.six",
 		LongTitle := ~.Subtitle,
 ),
 
@@ -66,6 +67,8 @@ ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/releases/download/Origami-", ~.Version, "/Origami-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+
+AbstractHTML   := "<span class=\"pkgname\">Origami</span> Origami is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.",
 
 
 ) );
