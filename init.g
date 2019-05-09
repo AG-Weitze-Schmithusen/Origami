@@ -11,4 +11,4 @@ ReadPackage("Origami/lib/canonical.gd");
 ReadPackage("Origami/lib/hash.gd");
 ReadPackage("Origami/lib/origami-list.gd");
 ReadPackage("Origami/lib/sagefunction.gd");
-
+ReadPackage("Origami/lib/dessins.gd");
