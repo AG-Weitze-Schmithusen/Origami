@@ -15,3 +15,9 @@ ReadPackage("Origami/lib/hash.gd");
 ReadPackage("Origami/lib/origami-list.gd");
 ReadPackage("Origami/lib/kinderzeichnungen.gd");
 ReadPackage("Origami/lib/sagefunction.gd");
+
+if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then
+  Info(InfoWarning, 1, "The package 'ArangoDBInterface' is currently not installed. Without this package, the origami database is not available.");
+else
+  ReadPackage("Origami/lib/db.gd");
+fi;

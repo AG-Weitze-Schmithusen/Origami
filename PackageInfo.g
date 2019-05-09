@@ -4,7 +4,7 @@ SetPackageInfo( rec(
 	Version := "1.0",
 	Date := "26/02/2018",
 	AvailabilityTest := ReturnTrue,
-	
+
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
@@ -17,9 +17,15 @@ SetPackageInfo( rec(
 Dependencies := rec(
 		GAP := "4.5.3",
 
-		NeededOtherPackages := [["ModularGroup", "0.0.1"], ["Orb", "4.7.6"],  ],
+		NeededOtherPackages := [["ModularGroup", "0.0.1"], ["Orb", "4.7.6"]],
 
-		SuggestedOtherPackages := [["HomalgToCAS" ,"2018.06.15"], ["IO_ForHomalg", "2017.09.02"], ["IO", "4.5.1"], ["RingsForHomalg", "2018.04.04"]],
+		SuggestedOtherPackages := [
+			["HomalgToCAS" ,"2018.06.15"],
+			["IO_ForHomalg", "2017.09.02"],
+			["IO", "4.5.1"],
+			["RingsForHomalg", "2018.04.04"],
+			["ArangoDBInterface", "2018.12.09"]
+		],
 
 		ExternalConditions := []
 
