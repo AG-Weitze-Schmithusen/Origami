@@ -40,11 +40,15 @@ InstallMethod( AsPermutationRepresentation, [IsNormalStoredOrigami] , function( 
 
 end);
 
+##########################  String and display methods
+
 InstallMethod(String, [IsNormalStoredOrigami], function( origami )
-	return Concatenation( "Normal Origami( ", String( HorizontalElement( origami ) ), " , " , String( VerticalElement( origami ) ), ")" , String(DeckGroup( origami )));
+	return Concatenation( "Normal Origami( ", String( HorizontalElement( origami ) ), " , " , String( VerticalElement( origami ) ), ", " , String(DeckGroup( origami )) , " )" );
 end);
 
 
+
+##############################################################
 InstallMethod(HorizontalPerm, [IsNormalStoredOrigami], function( origami )
 	local L, res, h;
 	L := AsSortedList( DeckGroup( origami ) );

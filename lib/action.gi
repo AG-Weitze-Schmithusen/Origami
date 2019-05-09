@@ -2,7 +2,7 @@
 #This function let act S on an Origami (sigma_x, sigma_y)
 #input An Origami O
 #output the Origmi S.O
-InstallGlobalFunction(ActionOfS, function(O)
+InstallMethod(ActionOfS, [IsOrigami] ,function(O)
 	local NewOrigami;
 	NewOrigami := OrigamiNC( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
@@ -12,7 +12,7 @@ end);
 #input An Origami O
 #output the Origmi T.O
 
-InstallGlobalFunction(ActionOfT, function(O)
+InstallMethod(ActionOfT, [IsOrigami] ,function(O)
 	local NewOrigami;
 	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
 	return NewOrigami;
@@ -21,7 +21,7 @@ end);
 #This function let act T⁻¹ on an Origami (sigma_x, sigma_y)
 #input An Origami O
 #output the Origmi T⁻¹.O
-InstallGlobalFunction(ActionOfInvT, function(O)
+InstallMethod(ActionOfInvT, [IsOrigami], function(O)
 	local NewOrigami;
 	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
 	return NewOrigami;
@@ -30,7 +30,7 @@ end);
 #This function let act S⁻¹ on an Origami (sigma_x, sigma_y)
 #input An Origami O
 #output the Origmi S⁻¹.O
-InstallGlobalFunction(ActionOfInvS, function(O)
+InstallMethod(ActionOfInvS, [IsOrigami] ,function(O)
 	local NewOrigami;
 	NewOrigami := OrigamiNC(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
 	return NewOrigami;
@@ -75,3 +75,42 @@ end);
 InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
 	return OrigamiNormalForm(ActionOfSpecialLinearGroup(String( g^-1 ) ,o));
 end);
+
+################ The Actions for normal origamis #####################################################################
+
+
+InstallMethod(ActionOfS, [IsNormalStoredOrigami] ,function(O)
+	local NewOrigami;
+	NewOrigami := NormalStoredOrigamiNC( VerticalElement(O)^(-1), HorizontalElement(O), DeckGroup(O));
+	return NewOrigami;
+end);
+
+#This function let act T on an Origami (sigma_x, sigma_y)
+#input An Origami O
+#output the Origmi T.O
+
+InstallMethod(ActionOfT, [IsNormalStoredOrigami] ,function(O)
+	local NewOrigami;
+	NewOrigami := NormalStoredOrigamiNC( HorizontalElement(O), VerticalElement(O) * HorizontalElement(O)^-1, DeckGroup(O) );
+	return NewOrigami;
+end);
+
+#This function let act T⁻¹ on an Origami (sigma_x, sigma_y)
+#input An Origami O
+#output the Origmi T⁻¹.O
+InstallMethod(ActionOfInvT, [IsNormalStoredOrigami], function(O)
+	local NewOrigami;
+	NewOrigami := NormalStoredOrigamiNC( HorizontalElement(O), VerticalElement(O) * HorizontalElement(O), DeckGroup(O));
+	return NewOrigami;
+end);
+
+#This function let act S⁻¹ on an Origami (sigma_x, sigma_y)
+#input An Origami O
+#output the Origmi S⁻¹.O
+InstallMethod(ActionOfInvS, [IsNormalStoredOrigami] ,function(O)
+	local NewOrigami;
+	NewOrigami := NormalStoredOrigamiNC(VerticalElement(O), HorizontalElement(O)^-1,  DeckGroup(O));
+	return NewOrigami;
+end);
+
+
