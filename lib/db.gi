@@ -151,6 +151,7 @@ end);
 InstallMethod(GetOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   local sigma_x, sigma_y, stmt, result;
 
+  O := OrigamiNormalForm(O);
   sigma_x := ListPerm(HorizontalPerm(O), DegreeOrigami(O));
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
   stmt := ORIGAMI_DB._createStatement(rec(
@@ -281,6 +282,9 @@ end);
 InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami], function(O, R)
   local rep_db_entry, degree, sigma_x, sigma_y, origami_entry;
 
+  O := OrigamiNormalForm(O);
+  R := OrigamiNormalForm(R);
+
   # check if orbit representative is already in database
   rep_db_entry := GetOrigamiOrbitRepresentativeDBEntry(R);
   if rep_db_entry = fail then
@@ -313,6 +317,7 @@ end);
 # orbit.
 InstallMethod(InsertOrigamiIntoDB, [IsOrigami], function(O)
   local orbit, db_reps, P, Q, R;
+  O := OrigamiNormalForm(O);
   if HasVeechGroup(O) then
     orbit := SL2Orbit(O);
     db_reps := GetAllOrigamiOrbitRepresentatives();
@@ -335,6 +340,7 @@ end);
 InstallMethod(GetOrigamiDBEntry, [IsOrigami], function(O)
   local sigma_x, sigma_y, stmt, result;
 
+  O := OrigamiNormalForm(O);
   sigma_x := ListPerm(HorizontalPerm(O), DegreeOrigami(O));
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
   stmt := ORIGAMI_DB._createStatement(rec(
@@ -357,6 +363,8 @@ end);
 InstallMethod(GetOrigamiOrbit, [IsOrigami], function(O)
   local origami_entry, orbit;
 
+  O := OrigamiNormalForm(O);
+  
   origami_entry := GetOrigamiDBEntry(O);
   if origami_entry = fail then
     return fail;
