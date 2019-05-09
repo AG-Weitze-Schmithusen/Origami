@@ -239,3 +239,10 @@ InstallGlobalFunction(IsConnectedOrigami, function(origami)
 	return IsTransitive(Group(HorizontalPerm(origami), VerticalPerm(origami)), [1..DegreeOrigami(origami)]);
 end);
 
+
+
+
+
+
+
+
