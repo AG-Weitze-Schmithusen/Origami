@@ -112,4 +112,6 @@ DeclareAttribute("indexOrigami", IsOrigami);
 DeclareGlobalFunction("HasVeechGroupSl_2");
 
 
+# Calculates the Vecchgroup and the orbit simultan , output is of the form rec(VeechGroup, Orbit)
+DeclareGlobalFunction("CalcVeechGroupAndOrbit");
 

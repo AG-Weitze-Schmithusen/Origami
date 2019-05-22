@@ -240,6 +240,46 @@ InstallGlobalFunction(IsConnectedOrigami, function(origami)
 end);
 
 
+# Calculates the Vecchgroup and the orbit simultan , output is of the form rec(VeechGroup, Orbit)
+InstallGlobalFunction( CalcVeechGroupAndOrbit , function(O)
+	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
+	 				counter, HelpO, Orbit;
+	counter := 1;
+	sigma:=[[],[]];
+	canonicalOrigamiList := [];
+	HelpO := OrigamiNormalForm(O);
+	SetindexOrigami (HelpO, 1);
+	Orbit := [HelpO];
+	#AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
+	HelpCalc := function(GlList)
+		NewOrigamiList := [];
+		for W in GlList do
+			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
+			for j in [1, 2] do
+				 #M = newOrigamis[
+				i := ContainHash( canonicalOrigamiList, newOrigamis[j], hashForOrigamis );
+				if i = 0 then foundM := false; else foundM := true; fi;
+				if foundM then
+					sigma[j][indexOrigami(W)] := i;
+				fi;
+				if foundM = false then
+					SetindexOrigami(newOrigamis[j], counter);
+					AddHash(canonicalOrigamiList, newOrigamis[j], hashForOrigamis);
+					Add(Orbit, newOrigamis[j]);
+					Add(NewOrigamiList, newOrigamis[j]);
+					sigma[j][indexOrigami(W)] := counter;
+					counter := counter + 1;
+				fi;
+			od;
+		od;
+		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
+	end;
+	HelpCalc([HelpO]);
+	return rec( VeechGroup := ModularSubgroup(PermList(sigma[2]), PermList(sigma[1] ) ), Orbit := Set( Orbit ) ) ;
+end);
+
+
+
 
 
 
