@@ -35,3 +35,5 @@ DeclareGlobalFunction("CanonicalOrigami");
 #DeclareGlobalFunction("CanonicalOrigami");
 
 DeclareGlobalFunction("OrigamiNormalForm");
+
+DeclareGlobalFunction("CopyOrigamiInNormalForm");

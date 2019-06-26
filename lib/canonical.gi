@@ -153,7 +153,7 @@ InstallGlobalFunction(CanonicalOrigami, function(O)
 end);
 
 
-## Graph equivaltent test
+## Graph equivalent test
 InstallGlobalFunction(OrigamiNormalForm, function(origami)
   local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
         minimizeCycleLengths, cycleLengths, m, l, x, y;
@@ -216,4 +216,20 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
 
   return OrigamiNC(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
+end);
+
+
+InstallGlobalFunction(CopyOrigamiInNormalForm, function(origami)
+	local normalform;
+	normalform := OrigamiNormalForm(origami);
+	if HasStratum(origami) then
+		SetStratum(normalform, Stratum(origami));
+	fi;
+	if HasGenus(origami) then
+		SetGenus(normalform, Genus(origami));
+	fi;
+	if HasVeechGroup(origami) then
+		SetVeechGroup(normalform, VeechGroup(origami));
+	fi;
+	return normalform;
 end);
