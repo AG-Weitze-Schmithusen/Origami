@@ -5,8 +5,7 @@ InstallMethod( NormalStoredOrigamiNC, [IsMultiplicativeElementWithInverse, IsMul
 		ori:= rec(d := Size(D), x := horizontalElement, y := verticalElement);
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, DegreeOrigami, Size(D) );
-		SetDeckGroup (Obj, D);
+		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, AbstractDeckGroup, D );
 		return Obj;
 	end
 );
@@ -43,7 +42,7 @@ end);
 ##########################  String and display methods
 
 InstallMethod(String, [IsNormalStoredOrigami], function( origami )
-	return Concatenation( "Normal Origami( ", String( HorizontalElement( origami ) ), " , " , String( VerticalElement( origami ) ), ", " , String(DeckGroup( origami )) , " )" );
+	return Concatenation( "Normal Origami( ", String( HorizontalElement( origami ) ), " , " , String( VerticalElement( origami ) ), ", " , String(AbstractDeckGroup( origami )) , " )" );
 end);
 
 
@@ -51,9 +50,9 @@ end);
 ##############################################################
 InstallMethod(HorizontalPerm, [IsNormalStoredOrigami], function( origami )
 	local L, res, h;
-	L := AsSortedList( DeckGroup( origami ) );
+	L := AsSortedList( AbstractDeckGroup( origami ) );
 	res := [];
-	for h in DeckGroup( origami ) do
+	for h in AbstractDeckGroup( origami ) do
 		res[Position(L, h)] := Position(L, HorizontalElement( origami ) * h);
 	od;
 	return PermList( res );
@@ -61,9 +60,9 @@ end);
 
 InstallMethod(VerticalPerm, [IsNormalStoredOrigami], function( origami )
 	local L, res, h;
-	L := AsSortedList( DeckGroup( origami ) );
+	L := AsSortedList( AbstractDeckGroup( origami ) );
 	res := [];
-	for h in DeckGroup( origami ) do
+	for h in AbstractDeckGroup( origami ) do
 		res[Position(L, h)] := Position(L, VerticalElement( origami ) * h);
 	od;
 	return PermList( res );
@@ -106,4 +105,21 @@ InstallMethod(ActionOfInvS, [IsNormalStoredOrigami] ,function(O)
 	local NewOrigami;
 	NewOrigami := NormalStoredOrigamiNC(VerticalElement(O), HorizontalElement(O)^-1,  DeckGroup(O));
 	return NewOrigami;
+end);
+
+#### functions that are also given for regular origamis
+
+InstallOtherMethod( DegreeOrigami, [IsNormalStoredOrigami], function( origami ) 
+	return Size(AbstractDeckGroup( origami ));
+end);
+
+InstallOtherMethod( Stratum, [IsNormalStoredOrigami], function( origami )
+	local res, OrderOfSingularity, i;
+	res := [];
+	OrderOfSingularity := Order( HorizontalElement( origami ) * VerticalElement( origami ) *  HorizontalElement( origami )^(-1) * VerticalElement( origami )^(-1) ) - 1; 
+	if OrderOfSingularity = 0 then return res; fi;
+	for i in [1.. ( DegreeOrigami( origami ) / (OrderOfSingularity + 1) )] do
+		Add(res, OrderOfSingularity);
+	od;
+	return res;
 end);

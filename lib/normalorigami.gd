@@ -11,6 +11,8 @@ DeclareAttribute( "HorizontalElement" , IsNormalStoredOrigami );
 
 DeclareAttribute( "VerticalElement" , IsNormalStoredOrigami );
 
+DeclareAttribute( "AbstractDeckGroup" ,IsNormalStoredOrigami);
+
 ## 
 
 DeclareOperation("AsPermutationRepresentation" , [IsNormalStoredOrigami]);

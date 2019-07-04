@@ -147,6 +147,41 @@ InstallGlobalFunction(CalcVeechGroupWithHashTables, function(O)
 	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
 end);
 
+InstallGlobalFunction(CalcVeechGroupWithHashTablesAndBreak, function(O, n)
+	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
+	 				counter, HelpO;
+	counter := 1;
+	sigma:=[[],[]];
+	canonicalOrigamiList := [];
+	HelpO := OrigamiNormalForm(O);
+	SetindexOrigami (HelpO, 1);
+	#AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
+	HelpCalc := function(GlList)
+		NewOrigamiList := [];
+		for W in GlList do
+			if counter >= n then Error("Orbit is too large"); fi;
+			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
+			for j in [1, 2] do
+				 #M = newOrigamis[
+				i := ContainHash( canonicalOrigamiList, newOrigamis[j], hashForOrigamis );
+				if i = 0 then foundM := false; else foundM := true; fi;
+				if foundM then
+					sigma[j][indexOrigami(W)] := i;
+				fi;
+				if foundM = false then
+					SetindexOrigami(newOrigamis[j], counter);
+					AddHash(canonicalOrigamiList, newOrigamis[j], hashForOrigamis);
+					Add(NewOrigamiList, newOrigamis[j]);
+					sigma[j][indexOrigami(W)] := counter;
+					counter := counter + 1;
+				fi;
+			od;
+		od;
+		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
+	end;
+	HelpCalc([HelpO]);
+	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]));
+end);
 
 InstallGlobalFunction(CalcVeechGroupWithHashTablesOld, function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
@@ -197,6 +232,10 @@ InstallMethod(VeechGroup, "for a origami", [IsOrigami], function(Origami)
 	return CalcVeechGroupWithHashTables(Origami);
 end);
 
+InstallOtherMethod( VeechGroup, "for a origami", [IsOrigami, IsInt], function(Origami ,n)
+	return CalcVeechGroupWithHashTablesAndBreak( Origami , n);
+end);
+
 InstallMethod(Cosets, "for a origami", [IsOrigami], function(Origami)
 	return RightCosetRepresentatives(VeechGroup(Origami));
 end);
@@ -217,7 +256,7 @@ InstallMethod(Stratum,"for a origami", [IsOrigami], function(O)
 			od;
 		fi;
 	od;
-	return AsSortedList( Stratum);
+	return AsSortedList( Stratum );
 end);
 
 
