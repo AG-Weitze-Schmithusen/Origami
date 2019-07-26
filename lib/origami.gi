@@ -240,20 +240,33 @@ InstallGlobalFunction(IsConnectedOrigami, function(origami)
 end);
 
 
-# Calculates the Vecchgroup and the orbit simultan , output is of the form rec(VeechGroup, Orbit)
+# Calculates the Vecchgroup and the orbit simultan and a matrix list [A_1, .. ,A_n], such that A[i].O = Veechgroup.Orbit[i] . Output is of the form rec(VeechGroup, Orbit,  PathList)
 InstallGlobalFunction( CalcVeechGroupAndOrbit , function(O)
 	local NewOrigamiList, newOrigamis, sigma, HelpCalc, foundM, W, canonicalOrigamiList, i, j,
-	 				counter, HelpO, Orbit;
-	counter := 1;
+	 				counter, HelpO, Orbit, F, S, T, MatrixList, currentBranch, homFreeToMatrix;
+	
+	HelpO := OrigamiNormalForm(O);
+	F := FreeGroup("S", "T");
+	S := GeneratorsOfGroup(F)[1];
+	T := GeneratorsOfGroup(F)[2];
+	counter := 2;
 	sigma:=[[],[]];
 	canonicalOrigamiList := [];
-	HelpO := OrigamiNormalForm(O);
+	AddHash(canonicalOrigamiList, HelpO, hashForOrigamis);
 	SetindexOrigami (HelpO, 1);
+	if EquivalentOrigami(ActionOfS( HelpO ), HelpO ) then 
+		sigma[2][1] := 1;
+	fi;
+	if EquivalentOrigami(ActionOfT( HelpO ), HelpO ) then 
+		sigma[1][1] := 1;
+	fi;
+	
 	Orbit := [HelpO];
-	#AddHash(canonicalOrigamiList, HelpO,  hashForOrigamis);
+	MatrixList := [One(F)];
 	HelpCalc := function(GlList)
 		NewOrigamiList := [];
-		for W in GlList do
+		for W in GlList do			
+			currentBranch :=  [ MatrixList[indexOrigami( W ) ] * T,  MatrixList[indexOrigami( W )]*S ];
 			newOrigamis := [OrigamiNormalForm(ActionOfT(W)), OrigamiNormalForm(ActionOfS(W))];
 			for j in [1, 2] do
 				 #M = newOrigamis[
@@ -266,6 +279,7 @@ InstallGlobalFunction( CalcVeechGroupAndOrbit , function(O)
 					SetindexOrigami(newOrigamis[j], counter);
 					AddHash(canonicalOrigamiList, newOrigamis[j], hashForOrigamis);
 					Add(Orbit, newOrigamis[j]);
+					Add(MatrixList, currentBranch[j]);
 					Add(NewOrigamiList, newOrigamis[j]);
 					sigma[j][indexOrigami(W)] := counter;
 					counter := counter + 1;
@@ -274,8 +288,9 @@ InstallGlobalFunction( CalcVeechGroupAndOrbit , function(O)
 		od;
 		if Length(NewOrigamiList) > 0 then HelpCalc(NewOrigamiList); fi;
 	end;
-	HelpCalc([HelpO]);
-	return rec( VeechGroup := ModularSubgroup(PermList(sigma[2]), PermList(sigma[1] ) ), Orbit := Set( Orbit ) ) ;
+	HelpCalc( [HelpO] );
+	homFreeToMatrix := GroupHomomorphismByImages(F, SpecialLinearGroup(2,Integers), [S, T], GeneratorsOfGroup(SpecialLinearGroup(2,Integers)) );
+	return rec( VeechGroup := ModularSubgroup(PermList(sigma[2]), PermList(sigma[1] ) ), Orbit :=  Orbit , PathList := List(MatrixList, x -> ImageElm( homFreeToMatrix, x )) ) ;
 end);
 
 
