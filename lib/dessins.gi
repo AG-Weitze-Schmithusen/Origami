@@ -1,9 +1,9 @@
-InstallMethod(String, [IsKinderzeichnung], function(Origami)
-	return Concatenation("Kinderzeichnug(", String(PermX(Origami)), ", ", String(PermY(Origami)), ")");
+InstallMethod(String, [IsDessin], function(Origami)
+	return Concatenation("Dessin(", String(PermX(Origami)), ", ", String(PermY(Origami)), ")");
 end
 );
 
-InstallGlobalFunction(NormalKZForm, function(kinderzeichnung)
+InstallGlobalFunction(NormalDessinsForm, function(kinderzeichnung)
 	local orbitElem, ergx, ergy;
 	ergx := [];
 	ergy := [];
@@ -11,5 +11,10 @@ InstallGlobalFunction(NormalKZForm, function(kinderzeichnung)
  		Add(ergx, RestrictedPermNC(PermX(kinderzeichnung), orbitElem));
  		Add(ergy, RestrictedPermNC(PermY(kinderzeichnung), orbitElem));
 	od;
-	return Kinderzeichnung(ergx, ergy);
+	return Dessin(ergx, ergy);
+end);
+
+InstallGlobalFunction( DessinOfOrigami, function( origami )
+	return NormalDessinsForm( Dessin( HorizontalPerm( origami ), VerticalPerm( origami ) * HorizontalPerm( origami ) * VerticalPerm( origami ) ^(-1) ));
+
 end);

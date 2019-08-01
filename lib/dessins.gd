@@ -1,19 +1,23 @@
-BindGlobal("KinderzeichnungenFamily",NewFamily("Kinderzeichnug"));
-DeclareCategory("IsKinderzeichnung", IsObject);
+BindGlobal("DessinFamily",NewFamily("Dessin"));
+DeclareCategory("IsDessin", IsObject);
 
-DeclareAttribute("PermX", IsKinderzeichnung);
+DeclareAttribute("PermX", IsDessin);
 
-DeclareAttribute("PermY", IsKinderzeichnung);
+DeclareAttribute("PermY", IsDessin);
 
 BindGlobal(
-	"Kinderzeichnung", function(horizontal, vertical)
+	"Dessin", function(horizontal, vertical)
 		local Obj, kind;
 		kind:= rec( x := horizontal, y := vertical);
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(KinderzeichnungenFamily, IsKinderzeichnung and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y );
+		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y );
 		return Obj;
 	end
 	);
 
-	DeclareGlobalFunction("NormalKZForm");
+	DeclareGlobalFunction("NormalDessinsForm");
+
+DeclareGlobalFunction("DessinOfOrigami");
+
+
