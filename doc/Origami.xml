@@ -548,9 +548,12 @@ TODO: setting up the database, where is the database file??
 
 TODO: structure of the database
 
+<Section>
+  <Heading>How to use the origami database</Heading>
+
 
 <ManSection>
-  <Func Name="ConnectToOrigamiDB" Label="ConnectToOrigamiDB"/>
+  <Func Name="ConnectToOrigamiDB" Label="ConnectToOrigamiDB" Arg=""/>
   <Returns>An <C>ArangoDatabase</C> object</Returns>
   <Description>
     Connects to the arango database 'origami' at the endpoint 'http+tcp://127.0.0.1:8529'
@@ -631,7 +634,7 @@ TODO: structure of the database
     list.
     Inserts only precomputed data. If the Veech group of <A>O</A> does not already
     exist in the database, it is also inserted.
-    This function assumes that no other element of the <M>SL_2(\mathbb{Z})<M> orbit
+    This function assumes that no other element of the <M>SL_2(\mathbb{Z})</M> orbit
     of <A>O</A> exists in the representative list, no test is performed to check this.
   </Description>
 </ManSection>
@@ -666,7 +669,7 @@ TODO: structure of the database
 
 
 <ManSection>
-  <Oper Name="GetAllOrigamiOrbitRepresentativesFromDB" Label="GetAllOrigamiOrbitRepresentativesFromDB"/>
+  <Oper Name="GetAllOrigamiOrbitRepresentativesFromDB" Label="GetAllOrigamiOrbitRepresentativesFromDB" Arg=""/>
   <Returns>A list of <C>Origami</C>s</Returns>
   <Description>
     Returns all origami orbit representatives in the database.
@@ -760,7 +763,7 @@ TODO: structure of the database
   </Description>
 </ManSection>
 
-
+</Section>
 </Chapter>
 
 
