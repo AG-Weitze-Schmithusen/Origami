@@ -24,7 +24,7 @@ Dependencies := rec(
 			["IO_ForHomalg", "2017.09.02"],
 			["IO", "4.5.1"],
 			["RingsForHomalg", "2018.04.04"],
-			["ArangoDBInterface", "2018.12.09"]
+			["ArangoDBInterface", "2019.07.30"]
 		],
 
 		ExternalConditions := []
