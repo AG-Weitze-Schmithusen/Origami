@@ -1,7 +1,4 @@
 LoadPackage("orb");
-#LoadPackage("images");
-#LoadPackage("profiling");
-#SetPackagePath("ModularGroup","/home/pk/src/ModularGroup");
 LoadPackage("ModularGroup");
 
 if not IsBound(conjugacyClassesOfx) then
@@ -13,7 +10,6 @@ ReadPackage("Origami/lib/action.gd");
 ReadPackage("Origami/lib/canonical.gd");
 ReadPackage("Origami/lib/hash.gd");
 ReadPackage("Origami/lib/origami-list.gd");
-ReadPackage("Origami/lib/kinderzeichnungen.gd");
 ReadPackage("Origami/lib/sagefunction.gd");
 
 if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then

@@ -48,7 +48,7 @@ algorithms implemented in this package.
 <Par/>
 
 This software package is part of the project I.8 'Algorithmic approaches to Teichmüller curves'
-(AG Weitze, Saarland University) supported by Project I.8 of SFB-TRR 195 'Symbolic Tools in
+(AG Weitze, Saarland University) supported by SFB-TRR 195 'Symbolic Tools in
 Mathematics and their Application' of the German Research Foundation (DFG).
     </Acknowledgements>
 
@@ -112,7 +112,7 @@ Mathematics and their Application' of the German Research Foundation (DFG).
     <Section> <Heading>The Origami Object</Heading>
 
     In this section we introduce a new type called 'origami', namely origami objects, which are created
-    by this two permutations. The degree of an origami is the number of squares. Origamis are stored as such objects.
+    by two permutations. The degree of an origami is the number of squares. Origamis are stored as such objects.
 
 
 <Br/>
@@ -210,7 +210,7 @@ gap> Genus( Origami((1,2,3,4),(1,2)(3,4) ) );
 </ManSection>
 
 </Section>
-<Section> <Heading>SL_2(Z)-Action on Origamis</Heading>
+<Section> <Heading><M>SL_2(\mathbb{Z})</M>-Action on Origamis</Heading>
 
 
         The group <M>SL_2(\mathbb{Z}) </M> acts on the set of origamis of fixed degree. The following methods help calculating this
@@ -219,7 +219,7 @@ gap> Genus( Origami((1,2,3,4),(1,2)(3,4) ) );
 <Br/>
 
 
-<ManSection>
+<ManSection> <Heading> Actions </Heading>
 <Meth Name="ActionOfSpecialLinearGroup" Arg="word, origami"/>
 		 <Returns>An Origami object.</Returns>
         <Description>
@@ -231,9 +231,10 @@ gap> ActionOfSpecialLinearGroup("ST",Origami((1,3,5), (1,3)(2,4,5)));
 Origami((1,3)(2,5,4), (2,4,5,3), 5)
 </Example>
         </Description>
-		 <Returns>An Origami.</Returns>
+
         <Meth Name="ActionOfSpecialLinearGroup" Arg="matrix, origami"/>
-        <Description>
+        <Returns>An Origami.</Returns>
+		<Description>
           Given matrix in <M>SL_2(\mathbb{Z}) </M> this function returns <Arg>matrix</Arg>.<Arg>origami</Arg>.
 <Example>
 gap> ActionOfSpecialLinearGroup([ [ 0, -1 ], [ 1, 1 ] ], Origami((1,3,5),
@@ -317,6 +318,7 @@ gap> Cosets(Origami((1,2,5)(3,4,6), (1,2)(5,6), 6));
         </Description>
 		 <Returns>A boolean.</Returns>
         <Func Name="EquivalentOrigami" Arg="origami1, origami2"/>
+		 <Returns>A boolean.</Returns>
         <Description>
           This function tests whether <Arg>origami1</Arg> is equal  to <Arg>origami2</Arg> up to renumbering of the squares.
 <Example>
@@ -330,7 +332,7 @@ false
 </Example>
 </Description>
 </ManSection>
-At this point we thank Thomas Breuer for the idea to implement the  latter function.
+At this point we thank Thomas Breuer for the idea how to implement the  latter function.
 
 
 </Section>

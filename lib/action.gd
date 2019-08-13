@@ -1,7 +1,7 @@
-DeclareGlobalFunction("ActionOfS");
-DeclareGlobalFunction("ActionOfT");
-DeclareGlobalFunction("ActionOfInvT");
-DeclareGlobalFunction("ActionOfInvS");
+DeclareOperation("ActionOfS", [IsOrigami]);
+DeclareOperation("ActionOfT", [IsOrigami]);
+DeclareOperation("ActionOfInvT", [IsOrigami]);
+DeclareOperation("ActionOfInvS", [IsOrigami]);
 
 
 
