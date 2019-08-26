@@ -16,5 +16,25 @@ end);
 
 InstallGlobalFunction( DessinOfOrigami, function( origami )
 	return NormalDessinsForm( Dessin( HorizontalPerm( origami ), VerticalPerm( origami ) * HorizontalPerm( origami ) * VerticalPerm( origami ) ^(-1) ));
-
 end);
+
+InstallMethod(Dessin, [IsPerm, IsPerm] , function(horizontal, vertical)
+		local Obj, kind;
+		kind:= rec( x := horizontal, y := vertical);
+		Obj:= rec();
+
+		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, [kind.x], PermY, [kind.y] );
+		return Obj;
+	end
+	);
+
+InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryCollections(IsPerm) and IsList] ,function(horizontal, vertical)
+		local Obj, kind;
+		kind:= rec( x := horizontal, y := vertical);
+		Obj:= rec();
+
+		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y );
+		return Obj;
+	end
+	);
+
