@@ -106,7 +106,7 @@ end);
 # inserts the normal form of an origami into the origami representative database
 # and returns the resulting arangodb document (only inserts precomputed data)
 InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
-  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry;
+  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG;
 
   O := CopyOrigamiInNormalForm(O);
   degree := DegreeOrigami(O);
@@ -115,10 +115,21 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
   origami_entry := rec(
     sigma_x := ListPerm(sigma_x, degree),
     sigma_y := ListPerm(sigma_y, degree),
-    degree := degree
-    # TODO: index_monodromy_group := IndexNC(SymmetricGroup(degree), Group(sigma_x, sigma_y))
-    # TODO: deck group ?
+    degree := degree,
+    index_monodromy_group := IndexNC(SymmetricGroup(degree), Group(sigma_x, sigma_y))
   );
+
+  if HasDeckGroup(O) then
+    DG := DeckGroup(O);
+    if Size(DG) <= 2000 and Size(DG) <> 1024 then
+      origami_entry.deck_group_description := "GAP_ID";
+      origami_entry.deck_group := IdSmallGroup(DG);
+      origami_entry.is_normal := IsNormalOrigami(O);
+    else # TODO: implement description of deck group as presentation or permutation group
+      Error("Can't store the deck group in the database.");
+    fi;
+  fi;
+
   if HasStratum(O) then
     origami_entry.stratum := Stratum(O);
   fi;
@@ -181,6 +192,14 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
           if IsBound(doc.genus) then
             SetGenus(O, doc.genus);
           fi;
+          if IsBound(doc.deck_group) then
+            SetIsNormalOrigami(O, doc.is_normal);
+            if doc.deck_group_description = "GAP_ID" then
+              SetDeckGroup(O, SmallGroup(doc.deck_group));
+            else
+              Error("Can't interpret stored deck group.");
+            fi;
+          fi;
           if IsBound(doc.veechgroup) then
             VG := GetVeechGroupsFromDB(rec(_id := doc.veechgroup))[1];
             SetVeechGroup(O, VG);
@@ -216,6 +235,14 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
     if IsBound(doc.genus) then
       SetGenus(O, doc.genus);
     fi;
+    if IsBound(doc.deck_group) then
+      SetIsNormalOrigami(O, doc.is_normal);
+      if doc.deck_group_description = "GAP_ID" then
+        SetDeckGroup(O, SmallGroup(doc.deck_group));
+      else
+        Error("Can't interpret stored deck group.");
+      fi;
+    fi;
     if IsBound(doc.veechgroup) then
       VG := GetVeechGroupsFromDB(rec(_id := doc.veechgroup))[1];
       SetVeechGroup(O, VG);
@@ -239,6 +266,15 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   fi;
   if HasGenus(O) then
     new_origami_entry.genus := Genus(O);
+  fi;
+  if HasDeckGroup(O) then
+    new_origami_entry.is_normal := IsNormalOrigami(O);
+    if Size(DeckGroup(O)) <= 2000 and Size(DeckGroup(O)) <> 1024 then
+      new_origami_entry.deck_group_description := "GAP_ID";
+      new_origami_entry.deck_group := IdSmallGroup(DeckGroup(O));
+    else # TODO: implement description of deck group as presentation or permutation group
+      Error("Can't store the deck group in the database.");
+    fi;
   fi;
   origami_entry := GetOrigamiOrbitRepresentativeDBEntry(O);
   UpdateDatabase(rec(_id := origami_entry._id), new_origami_entry, ORIGAMI_DB.origami_representatives);
@@ -294,11 +330,8 @@ InstallMethod(RemoveOrigamiOrbitRepresentativeFromDB, [IsOrigami], function(O)
   fi;
 end);
 
-# Inserts the normal from of an origami O together with a specified orbit
-# representative R (in normal form) into the database. Only checks whether R
-# already exists in the database, no check is performed if there is another
-# element of the same orbit in the table 'origami_representatives'!
-InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami, IsPosInt], function(O, R, k)
+
+InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami, IsMatrix], function(O, R, A)
   local rep_db_entry, degree, sigma_x, sigma_y, origami_entry;
 
   O := CopyOrigamiInNormalForm(O);
@@ -320,7 +353,7 @@ InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami,
     sigma_y := ListPerm(sigma_y, degree),
     degree := degree,
     orbit_representative := rep_db_entry._id,
-    orbit_position := k
+    matrix := A
   );
 
   InsertIntoDatabase(origami_entry, ORIGAMI_DB.origamis);
