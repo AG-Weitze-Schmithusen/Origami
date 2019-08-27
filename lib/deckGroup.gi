@@ -42,6 +42,6 @@ InstallMethod(DeckGroup, [IsOrigami], function( origami )
 end);
 
 InstallMethod( IsNormalOrigami, [IsOrigami], function( origami )
-	if Length( DeckGroup( origami ) ) < DegreeOrigami( origami ) then return  false; fi;
+	if Size( DeckGroup( origami ) ) < DegreeOrigami( origami ) then return  false; fi;
 	return true;
 end);
