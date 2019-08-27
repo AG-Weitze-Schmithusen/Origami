@@ -22,7 +22,7 @@ InstallMethod(DeckGroup, [IsOrigami], function( origami )
 				for tao in [VerticalPerm( origami ), HorizontalPerm( origami )] do # here we may invert all elements or before the function definition
 					if PositionSet( SheetsToVisit , i^(tao^-1) ) = fail  then
 						foundPredecessor := true;
-						sigma[ i ] := ( sigma[ i^( tao ^ -1 )] )^ tao; 
+						sigma[ i ] := ( sigma[ i^( tao ^ -1 )] )^ tao;
 						Remove(SheetsToVisit, Position(SheetsToVisit, i ));
 						break;
 					fi;
@@ -37,8 +37,8 @@ InstallMethod(DeckGroup, [IsOrigami], function( origami )
 	for i in [1..DegreeOrigami( origami )] do
 		Candidate := CandidateForDeck( origami, i);
 		if Candidate  <> fail and IsElementOfDeckGroup(origami, Candidate) then Add(deck, Candidate); fi;
-	od;	
-	return deck;
+	od;
+	return Group(deck);
 end);
 
 InstallMethod( IsNormalOrigami, [IsOrigami], function( origami )
