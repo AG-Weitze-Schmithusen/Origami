@@ -14,7 +14,7 @@ DeclareOperation("GetAllOrigamiOrbitRepresentativesFromDB", []);
 DeclareOperation("UpdateOrigamiOrbitRepresentativeDBEntry", [IsOrigami]);
 DeclareOperation("RemoveOrigamiOrbitRepresentativeFromDB", [IsOrigami]);
 
-DeclareOperation("InsertOrigamiWithOrbitRepresentativeIntoDB", [IsOrigami, IsOrigami, IsPosInt]);
+DeclareOperation("InsertOrigamiWithOrbitRepresentativeIntoDB", [IsOrigami, IsOrigami, IsMatrix]);
 DeclareOperation("InsertOrigamiIntoDB", [IsOrigami]);
 DeclareOperation("GetOrigamiDBEntry", [IsOrigami]);
 DeclareOperation("GetOrigamiOrbit", [IsOrigami]);
