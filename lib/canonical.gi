@@ -148,5 +148,9 @@ InstallGlobalFunction(CopyOrigamiInNormalForm, function(origami)
 	if HasVeechGroup(origami) then
 		SetVeechGroup(normalform, VeechGroup(origami));
 	fi;
+	if HasDeckGroup(origami) then
+		SetDeckGroup(normalform, DeckGroup(origami));
+		SetIsNormalOrigami(normalform, IsNormalOrigami(origami));
+	fi;
 	return normalform;
 end);
