@@ -230,9 +230,8 @@ InstallMethod(GetAllOrigamiOrbitRepresentativesFromDB, [], function()
   return GetOrigamiOrbitRepresentativesFromDB(rec());
 end);
 
-
 InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
-  local new_origami_entry, VG, vg_entry, origami_entry, orbit, i, new_rep;
+  local new_origami_entry, origami_entry;
 
   new_origami_entry := rec();
   if HasStratum(O) then
@@ -241,39 +240,49 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   if HasGenus(O) then
     new_origami_entry.genus := Genus(O);
   fi;
-  if HasVeechGroup(O) then
-    VG := VeechGroup(O);
-    vg_entry := GetVeechGroupDBEntry(VG);
-    if vg_entry = fail then
-      vg_entry := InsertVeechGroupIntoDB(VG);
-    fi;
-    new_origami_entry.veechgroup := vg_entry._id;
-  fi;
-
-  if not HasVeechGroup(O) then
-    origami_entry := GetOrigamiOrbitRepresentativeDBEntry(O);
-    UpdateDatabase(rec(_id := origami_entry._id), new_origami_entry, ORIGAMI_DB.origami_representatives);
-    return;
-  fi;
-
-  #TODO: use orbit attribute instead of computing the orbit again
-  orbit := ShallowCopy(SL2Orbit(O));
-  Sort(orbit);
-  new_rep := orbit[1];
-  if HasStratum(O) then
-    SetStratum(new_rep, Stratum(O));
-  fi;
-  if HasGenus(O) then
-    SetGenus(new_rep, Genus(O));
-  fi;
-  SetVeechGroup(new_rep, VeechGroup(O));
-
-  for i in [2..Length(orbit)] do
-    RemoveOrigamiOrbitRepresentativeFromDB(orbit[i]);
-    RemoveOrigamiFromDB(orbit[i]);
-    InsertOrigamiWithOrbitRepresentativeIntoDB(orbit[i], new_rep);
-  od;
+  origami_entry := GetOrigamiOrbitRepresentativeDBEntry(O);
+  UpdateDatabase(rec(_id := origami_entry._id), new_origami_entry, ORIGAMI_DB.origami_representatives);
 end);
+
+#InstallOtherMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami, IsList], function(O, orbit)
+#  local new_origami_entry, VG, vg_entry, origami_entry, i, new_rep, orb;
+
+#  new_origami_entry := rec();
+#  if HasStratum(O) then
+#    new_origami_entry.stratum := Stratum(O);
+#  fi;
+#  if HasGenus(O) then
+#    new_origami_entry.genus := Genus(O);
+#  fi;
+
+  # We can assume that the Veechgroup of O is known, since we know the SL2-orbit
+  # of O.
+#  VG := VeechGroup(O);
+#  vg_entry := GetVeechGroupDBEntry(VG);
+#  if vg_entry = fail then
+#    vg_entry := InsertVeechGroupIntoDB(VG);
+#  fi;
+#  new_origami_entry.veechgroup := vg_entry._id;
+
+#  orb := ShallowCopy(orbit); # orbit might not be mutable
+#  Sort(orb);
+#  new_rep := orb[1];
+#  if HasStratum(O) then
+#    SetStratum(new_rep, Stratum(O));
+#  fi;
+#  if HasGenus(O) then
+#    SetGenus(new_rep, Genus(O));
+#  fi;
+
+  # TODO: this is the wrong group. we need to conjugate this with something
+#  SetVeechGroup(new_rep, VeechGroup(O));
+
+#  for i in [2..Length(orb)] do
+#    RemoveOrigamiOrbitRepresentativeFromDB(orb[i]);
+#    RemoveOrigamiFromDB(orb[i]);
+#    InsertOrigamiWithOrbitRepresentativeIntoDB(orb[i], new_rep);
+#  od;
+#end);
 
 
 InstallMethod(RemoveOrigamiOrbitRepresentativeFromDB, [IsOrigami], function(O)
@@ -327,23 +336,27 @@ end);
 # This might result in entries in 'orbit_representatives' which are in the same
 # orbit.
 InstallMethod(InsertOrigamiIntoDB, [IsOrigami], function(O)
-  local orbit, db_reps, P, Q, R;
+  InsertOrigamiWithOrbitRepresentativeIntoDB(O, O);
+end);
+InstallOtherMethod(InsertOrigamiIntoDB, [IsOrigami, IsList], function(O, orbit)
+  local db_reps, P, Q, R;
   O := CopyOrigamiInNormalForm(O);
-  if HasVeechGroup(O) then
-    orbit := SL2Orbit(O);
-    db_reps := GetAllOrigamiOrbitRepresentativesFromDB();
-    for P in db_reps do
-      for Q in orbit do
-        if EquivalentOrigami(P, Q) then
-          R := P; # it's important to take P and not Q here!
-          break;
-        fi;
-      od;
-      if IsBound(R) then break; fi;
+  db_reps := GetAllOrigamiOrbitRepresentativesFromDB(); # TODO: we don't need all representatives
+  for P in db_reps do
+    for Q in orbit do
+      if EquivalentOrigami(P, Q) then
+        R := P; # it's important to take P and not Q here!
+        break;
+      fi;
     od;
+    if IsBound(R) then break; fi;
+  od;
+  if IsBound(R) then
     InsertOrigamiWithOrbitRepresentativeIntoDB(O, R);
   else
-    InsertOrigamiWithOrbitRepresentativeIntoDB(O, O);
+    Apply(orbit, ori -> OrigamiNormalForm(ori));
+    Sort(orbit);
+    InsertOrigamiWithOrbitRepresentativeIntoDB(O, orbit[1]);
   fi;
 end);
 
