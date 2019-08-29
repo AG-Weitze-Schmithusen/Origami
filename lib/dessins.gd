@@ -7,10 +7,13 @@ DeclareAttribute("PermY", IsDessin);
 
 DeclareConstructor("Dessin", [IsPerm, IsPerm]);
  
-DeclareAttribute("ValenzList", IsDessin);
+DeclareAttribute("ValencyList", IsDessin);
+
+DeclareAttribute("Genus", IsDessin);
 
 DeclareGlobalFunction("NormalDessinsForm");
 
 DeclareGlobalFunction("DessinOfOrigami");
 
 
+DeclareAttribute("DegreeDessin", IsDessin);

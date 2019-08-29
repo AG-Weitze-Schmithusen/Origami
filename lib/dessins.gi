@@ -28,7 +28,7 @@ InstallMethod(Dessin, [IsPerm, IsPerm] , function(horizontal, vertical)
 	end
 	);
 
-InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryCollections(IsPerm) and IsList] ,function(horizontal, vertical)
+InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryCollections( IsPerm ) and IsList] ,function(horizontal, vertical)
 		local Obj, kind;
 		kind:= rec( x := horizontal, y := vertical);
 		Obj:= rec();
@@ -38,3 +38,44 @@ InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryColl
 	end
 	);
 
+InstallMethod(DegreeDessin, [IsDessin], function( dessin )
+	return  Maximum(LargestMovedPoint( PermX( dessin ) ), LargestMovedPoint( PermY( dessin ) )) - Minimum(SmallestMovedPoint( PermX( dessin ) ), SmallestMovedPoint( PermY( dessin ) ) ) + 1;
+end);
+
+InstallMethod(ValencyList, [ IsDessin ], function( dessin )
+	local whiteValency, blackValency, i, j, counter;
+	whiteValency := [];
+	blackValency := [];
+	counter := 2;
+	
+	for i in CycleStructurePerm( PermX( dessin ) ) do
+		for j in [1..i] do Add(blackValency, counter); od;
+		counter := counter + 1;
+	od;	
+
+	for i in CycleStructurePerm( PermY( dessin ) ) do
+		for j in [1..i] do Add(whiteValency, counter); od;
+		counter := counter + 1;
+	od;	
+	return rec( white := whiteValency, black := blackValency);
+end);
+
+InstallMethod( Genus, [ IsDessin ], function( dessin ) 
+	local h, i, j, counter;
+	h := 0;
+	for i in ValencyList( dessin ).white do
+		h := h + (i - 1);
+	od; 
+
+	for i in ValencyList( dessin ).black do
+		h := h + (i - 1);
+	od;
+	 counter := 2;
+	for i in CycleStructurePerm( ( PermX( dessin ) * PermY( dessin ) )^(-1) ) do
+		for j in [1..i] do h := h + (counter -1); od;
+		counter := counter + 1;
+	od;
+	 
+	h := h - 2 * DegreeDessin( dessin );
+	return (h + 2) / 2;
+end);

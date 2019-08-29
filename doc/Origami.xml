@@ -377,6 +377,50 @@ gap> OrigamiListWithStratum(5, [1,1]);
 
 </Section>
 </Chapter>
+<Chapter> <Heading> Deck group and normal origamis </Heading>
+<Section> <Heading> The deck group of origamis </Heading>
+	Since origamis are covers of the one-punctured torus, we can also calcultate deck transformations and the deck group of an origami. Deck transfromations map any point <M> x </M> of any square <M> Q_i </M> to the corresponding point of the square <M> Q_j </M> for some <M> j </M>. So, deck transformations of an origami map squares to squares. We will store a deck transformation as permutation <M> \sigma </M>, in which <M> \sigma(i) = j </M> if the corresponding deck transformation maps the square <M> Q_i </M> to <M> Q_j </M>. This package provides the following functions.
+
+<ManSection> <Heading> Deck transformations </Heading>
+<Attr Name="DeckGroup" Arg="origami"/>
+ <Returns>A list of permutation.</Returns>
+<Description>
+	This method calculates the deck group of an <Arg>origami</Arg> and returns a list of permutations, in which the deck transformation, associated to the permutation <M> \sigma </M>, maps the square <M> Q_i </M> to the square <M> Q_j </M>, if <M> \sigma(i) = j </M>. Note that the describtion of the deck transformations depends on the numbering of the squares of the origami. In order to make the permutations unique, you should use <Ref Func = "OrigamiNormalForm" />.
+<Example>
+gap> DeckGroup( Origami( (1,2)(3,4)(5,6), (1,3)(2,5)(4,6)) );
+[ (), (1,2)(3,5)(4,6), (1,3)(2,4)(5,6), (1,4,5)(2,3,6), (1,5,4)(2,6,3), 
+  (1,6)(2,5)(3,4) ]
+</Example>
+</Description>
+
+<Func Name = "IsElementOfDeckGroup" Arg= "origami, sigma " />
+<Returns> A boolean, </Returns>
+<Description>
+This function tests, wether the permutation <Arg> sigma </Arg> describes a deck transformation of the <Arg> origami </Arg>. This function is used for <Ref Attr = "DeckGroup"/>.
+<Example>
+gap> IsElementOfDeckGroup( Origami( (1,2)(3,4)(5,6), (1,3)(2,5)(4,6)), 
+(1,2)(3,5)(4,6) );
+true
+</Example>
+</Description>
+</ManSection>
+
+An origami is normal, if there is for any <M> i \in \{1, \dots, d\} </M> a deck transformation that maps <M> Q_1 </M> to <M> Q_i </M>, i.e. the length of the deck group is equal the degree <M> d </M> of the origami. The following attribute tests, wether a given origami is normal.
+
+<ManSection>
+<Attr Name="IsNormalOrigami" Arg="origami"/>
+ <Returns>A boolean.</Returns>
+<Description>
+	This method tests wether a given <Arg> origami </Arg> is normal.
+<Example>
+gap> IsNormalOrigami( Origami( (1,2)(3,4)(5,6)(7,8), (1,3)(2,5)(4,7)(6,8) ) ); 
+true 
+</Example>
+</Description>
+</ManSection>
+
+</Section>
+ </Chapter>
 <Chapter> <Heading> SageMath functions </Heading>
 <Section> <Heading> Using SageMath functions</Heading>
 The SageMath Package surface_dynamics from Vincent Delecroix <Cite Key="Delecroix"/> provides functions to study origamis.
