@@ -5,7 +5,7 @@ DeclareAttribute("PermX", IsDessin);
 
 DeclareAttribute("PermY", IsDessin);
 
-DeclareConstructor("Dessin", [IsPerm, IsPerm]);
+DeclareOperation("Dessin", [IsPerm, IsPerm]);
  
 DeclareAttribute("ValencyList", IsDessin);
 
