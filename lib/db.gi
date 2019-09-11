@@ -5,6 +5,7 @@ InstallGlobalFunction(ConnectToOrigamiDB, function()
     "--server.username", "origami"
   ]));
 end);
+InstallValue(ARANGODB_MAX_INT, (2-2^(-52))*2^1023);
 
 
 InstallMethod(InsertVeechGroupIntoDB, [IsModularSubgroup], function(VG)
@@ -106,7 +107,7 @@ end);
 # inserts the normal form of an origami into the origami representative database
 # and returns the resulting arangodb document (only inserts precomputed data)
 InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
-  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG;
+  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG, rels, index_monodromy;
 
   O := CopyOrigamiInNormalForm(O);
   degree := DegreeOrigami(O);
@@ -115,9 +116,15 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
   origami_entry := rec(
     sigma_x := ListPerm(sigma_x, degree),
     sigma_y := ListPerm(sigma_y, degree),
-    degree := degree,
-    index_monodromy_group := IndexNC(SymmetricGroup(degree), Group(sigma_x, sigma_y))
+    degree := degree
   );
+  index_monodromy := IndexNC(SymmetricGroup(degree), Group(sigma_x, sigma_y));
+  if index_monodromy <= ARANGODB_MAX_INT then
+    origami_entry.index_monodromy_group := index_monodromy;
+  else
+    origami_entry.index_monodromy_group := 0;
+  fi;
+    
 
   if HasDeckGroup(O) then
     DG := DeckGroup(O);
@@ -125,7 +132,15 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
       origami_entry.deck_group_description := "GAP_ID";
       origami_entry.deck_group := IdSmallGroup(DG);
       origami_entry.is_normal := IsNormalOrigami(O);
-    else # TODO: implement description of deck group as presentation or permutation group
+    elif IsPermGroup(DG) then
+      # TODO: implement this
+    elif IsFpGroup(DG) then
+      origami_entry.deck_group_description := "PRES";
+      rels := ShallowCopy(RelatorsOfFpGroup(DG));
+      Apply(rels, ExtRepOfObj);
+      origami_entry.deck_group := rels;
+      origami_entry.is_normal := IsNormalOrigami(O);
+    else
       Error("Can't store the deck group in the database.");
     fi;
   fi;
@@ -168,7 +183,7 @@ end);
 
 
 InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constraints)
-  local result, veechgroups, vg_doc, constr, origamis, vg_entry;
+  local result, veechgroups, vg_doc, constr, origamis, vg_entry, num_gens, i, j, rels, F;
 
   if IsBound(constraints.veechgroup) then
     if IsRecord(constraints.veechgroup) then
@@ -196,6 +211,21 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
             SetIsNormalOrigami(O, doc.is_normal);
             if doc.deck_group_description = "GAP_ID" then
               SetDeckGroup(O, SmallGroup(doc.deck_group));
+            elif doc.deck_group_description = "PRES" then
+              num_gens := 1;
+              for i in [1..Length(doc.deck_group)] do
+                j := 1;
+                repeat
+                  num_gens := Maximum(num_gens, doc.deck_group[i][j]);
+                  j := j+2;
+                until j > Length(doc.deck_group[i]);
+              od;
+              F := FreeGroup(num_gens);
+              rels := ShallowCopy(doc.deck_group);
+              Apply(rels, w -> ObjByExtRep(FamilyObj(F.1), w));
+              SetDeckGroup(O, FactorGroupFpGroupByRels(F, rels));
+            elif doc.deck_group_description = "PERM" then
+              # TODO: implement this
             else
               Error("Can't interpret stored deck group.");
             fi;
@@ -239,6 +269,21 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
       SetIsNormalOrigami(O, doc.is_normal);
       if doc.deck_group_description = "GAP_ID" then
         SetDeckGroup(O, SmallGroup(doc.deck_group));
+      elif doc.deck_group_description = "PRES" then
+        num_gens := 1;
+        for i in [1..Length(doc.deck_group)] do
+          j := 1;
+          repeat
+            num_gens := Maximum(num_gens, doc.deck_group[i][j]);
+            j := j+2;
+          until j > Length(doc.deck_group[i]);
+        od;
+        F := FreeGroup(num_gens);
+        rels := ShallowCopy(doc.deck_group);
+        Apply(rels, w -> ObjByExtRep(FamilyObj(F.1), w));
+        SetDeckGroup(O, FactorGroupFpGroupByRels(F, rels));
+      elif doc.deck_group_description = "PERM" then
+        # TODO: implement this
       else
         Error("Can't interpret stored deck group.");
       fi;
@@ -258,7 +303,7 @@ InstallMethod(GetAllOrigamiOrbitRepresentativesFromDB, [], function()
 end);
 
 InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
-  local new_origami_entry, origami_entry;
+  local new_origami_entry, origami_entry, DG, rels;
 
   new_origami_entry := rec();
   if HasStratum(O) then
@@ -269,10 +314,18 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
-    if Size(DeckGroup(O)) <= 2000 and Size(DeckGroup(O)) <> 1024 then
+    DG := DeckGroup(O);
+    if Size(DG) <= 2000 and Size(DG) <> 1024 then
       new_origami_entry.deck_group_description := "GAP_ID";
-      new_origami_entry.deck_group := IdSmallGroup(DeckGroup(O));
-    else # TODO: implement description of deck group as presentation or permutation group
+      new_origami_entry.deck_group := IdSmallGroup(DG);
+    elif IsPermGroup(DG) then
+      # TODO: implement this
+    elif IsFpGroup(DG) then
+      new_origami_entry.deck_group_description := "PRES";
+      rels := ShallowCopy(RelatorsOfFpGroup(DG));
+      Apply(rels, ExtRepOfObj);
+      new_origami_entry.deck_group := rels;
+    else
       Error("Can't store the deck group in the database.");
     fi;
   fi;

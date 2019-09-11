@@ -1,5 +1,6 @@
 DeclareGlobalFunction("ConnectToOrigamiDB");
 DeclareGlobalVariable("ORIGAMI_DB");
+DeclareGlobalVariable("ARANGODB_MAX_INT");
 
 DeclareOperation("InsertVeechGroupIntoDB", [IsModularSubgroup]);
 DeclareOperation("GetVeechGroupDBEntry", [IsModularSubgroup]);
