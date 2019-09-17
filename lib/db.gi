@@ -223,7 +223,7 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
               F := FreeGroup(num_gens);
               rels := ShallowCopy(doc.deck_group);
               Apply(rels, w -> ObjByExtRep(FamilyObj(F.1), w));
-              SetDeckGroup(O, FactorGroupFpGroupByRels(F, rels));
+              SetDeckGroup(O, Image(IsomorphismPcGroup(FactorGroupFpGroupByRels(F, rels))));
             elif doc.deck_group_description = "PERM" then
               # TODO: implement this
             else
@@ -281,7 +281,7 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
         F := FreeGroup(num_gens);
         rels := ShallowCopy(doc.deck_group);
         Apply(rels, w -> ObjByExtRep(FamilyObj(F.1), w));
-        SetDeckGroup(O, FactorGroupFpGroupByRels(F, rels));
+        SetDeckGroup(O, Image(IsomorphismPcGroup(FactorGroupFpGroupByRels(F, rels))));
       elif doc.deck_group_description = "PERM" then
         # TODO: implement this
       else
