@@ -90,3 +90,15 @@ InstallMethod( Genus, [ IsDessin ], function( dessin )
 	h := h - 2 * DegreeDessin( dessin );
 	return (h + 2) / 2;
 end);
+
+InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
+	local VeechAndOrbit, TAct, orbit, current, DessinList, dessin;
+	dessin := DessinOfOrigami( origami );
+	DessinList := [];
+	VeechAndOrbit := CalcVeechGroupAndOrbit( origami );
+	TAct := TAction( VeechAndOrbit.VeechGroup );
+	orbit := VeechAndOrbit.Orbit;
+	for current in Cycles(Tact, [1..Index( VeechAndOrbit.VeechGroup )]) do
+		
+	od;
+end);
