@@ -1,23 +1,24 @@
 ########## --------------------------------- The constructors   -------------- ###########################################
 
 InstallMethod( NormalStoredOrigamiNC, [IsMultiplicativeElementWithInverse, IsMultiplicativeElementWithInverse, IsGroup], function( horizontalElement, verticalElement, D )
-		local Obj, ori;
-		ori:= rec(d := Size(D), x := horizontalElement, y := verticalElement);
+		local Obj, ori, iso_pc_group;
+		iso_pc_group := Image(IsomorphismPcGroup(D));
+		ori:= rec(d := Size(iso_pc_group), x := iso_pc_group.1, y := iso_pc_group.2);
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, DegreeOrigami, Size(D) );
-		SetDeckGroup (Obj, D);
+		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, DegreeOrigami, Size(iso_pc_group) );
+		SetDeckGroup (Obj, iso_pc_group);
 		return Obj;
 	end
 );
 
 InstallMethod( NormalStoredOrigami, [IsMultiplicativeElementWithInverse, IsMultiplicativeElementWithInverse, IsGroup], function( horizontalElement, verticalElement, D )
-		if ( ( horizontalElement in D ) and ( verticalElement in D ) ) = false 
+		if ( ( horizontalElement in D ) and ( verticalElement in D ) ) = false
 			then Error(" the first two arguments must be Elements of the third argument ");
 		fi;
 		
-		if ( Group(  horizontalElement, verticalElement )  <> D) 
-			then Error( " The described surface is not connected, the group elements must gernerate the Deck group " );
+		if ( Group(  horizontalElement, verticalElement )  <> D)
+			then Error( " The described surface is not connected, the group elements must generate the Deck group " );
 		fi;
 		return NormalStoredOrigamiNC( horizontalElement, verticalElement, D);
 	end
