@@ -128,7 +128,7 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
 
   if HasDeckGroup(O) then
     DG := DeckGroup(O);
-    if Size(DG) <= 2000 and Size(DG) <> 1024 then
+    if Size(DG) <= 2000 and Size(DG) <> 1024 and Size(DG) <> 512 then
       origami_entry.deck_group_description := "GAP_ID";
       origami_entry.deck_group := IdSmallGroup(DG);
       origami_entry.is_normal := IsNormalOrigami(O);
@@ -136,6 +136,13 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
       # TODO: implement this
     elif IsFpGroup(DG) then
       origami_entry.deck_group_description := "PRES";
+      rels := ShallowCopy(RelatorsOfFpGroup(DG));
+      Apply(rels, ExtRepOfObj);
+      origami_entry.deck_group := rels;
+      origami_entry.is_normal := IsNormalOrigami(O);
+    elif IsPcGroup(DG) then
+      origami_entry.deck_group_description := "PRES";
+      DG := Image(IsomorphismFpGroupByPcgs(FamilyPcgs(DG), "f"));
       rels := ShallowCopy(RelatorsOfFpGroup(DG));
       Apply(rels, ExtRepOfObj);
       origami_entry.deck_group := rels;
@@ -252,6 +259,11 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
   if IsBound(constraints.stratum) then
     constraints := ShallowCopy(constraints);
     constraints.stratum := ["==", constraints.stratum];
+  fi;
+
+  if IsBound(constraints.example_series) then
+    constraints := ShallowCopy(constraints);
+    constraints.example_series := ["==", constraints.example_series];
   fi;
 
   result :=  ShallowCopy(ListOp(QueryDatabase(constraints, ORIGAMI_DB.origami_representatives)));
