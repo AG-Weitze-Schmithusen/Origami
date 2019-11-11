@@ -11,6 +11,7 @@ end);
 
 InstallMethod(DeckGroup, [IsOrigami], function( origami )
 	local CandidateForDeck, i, deck, Candidate;
+	
 	CandidateForDeck := function( origami, j )
 		local sigma, SheetsToVisit, current, foundPredecessor, i, tao;
 		sigma := [];

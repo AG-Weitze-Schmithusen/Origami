@@ -30,8 +30,8 @@ InstallGlobalFunction(
 	);
 
 
-InstallMethod(String, [IsOrigami], function(Origami)
-	return Concatenation("Origami(", String(HorizontalPerm(Origami)), ", ", String(VerticalPerm(Origami)), ", ", String(DegreeOrigami(Origami)), ")");
+InstallMethod(String, [IsOrigami], function( origami )
+	return Concatenation("Origami(", String(HorizontalPerm(origami)), ", ", String(VerticalPerm(origami)), ", ", String(DegreeOrigami(origami)), ")");
 	end
 );
 
@@ -108,7 +108,7 @@ InstallGlobalFunction(CalcVeechGroup, function(O)
 		if Length(NewOrigamiPositions) > 0 then HelpCalc(NewOrigamiPositions); fi;
 	end;
 	HelpCalc([OrigamiNormalForm(O)]);
-	return [ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
+	return ModularSubgroup(PermList(sigma[2]), PermList(sigma[1]))];
 end);
 
 
@@ -279,7 +279,10 @@ InstallGlobalFunction(IsConnectedOrigami, function(origami)
 end);
 
 
-
+InstallGlobalFunction( HasVeechGroupSl_2, function( origami )
+	if EquivalentOrigami( origami, ActionOfS( origami ) ) and EquivalentOrigami( origami, ActionOfT( origami ) ) then return true; fi;
+	return false;
+end);
 
 
 
