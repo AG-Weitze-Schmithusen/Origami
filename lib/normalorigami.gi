@@ -1,22 +1,24 @@
 ########## --------------------------------- The constructors   -------------- ###########################################
 
 InstallMethod( NormalStoredOrigamiNC, [IsMultiplicativeElementWithInverse, IsMultiplicativeElementWithInverse, IsGroup], function( horizontalElement, verticalElement, D )
-		local Obj, ori;
-		ori:= rec(d := Size(D), x := horizontalElement, y := verticalElement);
+		local Obj, ori, iso_pc_group;
+		iso_pc_group := IsomorphismPcGroup(D);
+		ori:= rec(d := Size(Image(iso_pc_group)), x := Image(iso_pc_group, horizontalElement), y := Image(iso_pc_group, verticalElement));
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, AbstractDeckGroup, D );
+		ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsNormalStoredOrigami and IsAttributeStoringRep) , HorizontalElement, ori.x, VerticalElement, ori.y, DegreeOrigami, Size(Image(iso_pc_group)) );
+		SetDeckGroup (Obj, Image(iso_pc_group));
 		return Obj;
 	end
 );
 
 InstallMethod( NormalStoredOrigami, [IsMultiplicativeElementWithInverse, IsMultiplicativeElementWithInverse, IsGroup], function( horizontalElement, verticalElement, D )
-		if ( ( horizontalElement in D ) and ( verticalElement in D ) ) = false 
+		if ( ( horizontalElement in D ) and ( verticalElement in D ) ) = false
 			then Error(" the first two arguments must be Elements of the third argument ");
 		fi;
 		
-		if ( Group(  horizontalElement, verticalElement )  <> D) 
-			then Error( " The described surface is not connected, the group elements must gernerate the Deck group " );
+		if ( Group(  horizontalElement, verticalElement )  <> D)
+			then Error( " The described surface is not connected, the group elements must generate the Deck group " );
 		fi;
 		return NormalStoredOrigamiNC( horizontalElement, verticalElement, D);
 	end
@@ -109,14 +111,14 @@ end);
 
 #### functions that are also given for regular origamis
 
-InstallOtherMethod( DegreeOrigami, [IsNormalStoredOrigami], function( origami ) 
+InstallOtherMethod( DegreeOrigami, [IsNormalStoredOrigami], function( origami )
 	return Size(AbstractDeckGroup( origami ));
 end);
 
 InstallOtherMethod( Stratum, [IsNormalStoredOrigami], function( origami )
 	local res, OrderOfSingularity, i;
 	res := [];
-	OrderOfSingularity := Order( HorizontalElement( origami ) * VerticalElement( origami ) *  HorizontalElement( origami )^(-1) * VerticalElement( origami )^(-1) ) - 1; 
+	OrderOfSingularity := Order( HorizontalElement( origami ) * VerticalElement( origami ) *  HorizontalElement( origami )^(-1) * VerticalElement( origami )^(-1) ) - 1;
 	if OrderOfSingularity = 0 then return res; fi;
 	for i in [1.. ( DegreeOrigami( origami ) / (OrderOfSingularity + 1) )] do
 		Add(res, OrderOfSingularity);
