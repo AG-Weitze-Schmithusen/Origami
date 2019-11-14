@@ -201,6 +201,13 @@ InstallMethod(Cosets, "for a origami", [IsOrigami], function(Origami)
 	return RightCosetRepresentatives(VeechGroup(Origami));
 end);
 
+InstallMethod(IndexOfMonodromyGroup, [IsOrigami], function(O)
+	local sigma_x, sigma_y, d;
+	d := DegreeOrigami(O);
+	sigma_x := HorizontalPerm(O);
+	sigma_y := VerticalPerm(O);
+	return IndexNC(SymmetricGroup(d), Group(sigma_x, sigma_y));
+end);
 
 #This function calculates the Stratum of an given Origami
 #INPUT: An Origami O
