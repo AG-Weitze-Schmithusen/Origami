@@ -72,19 +72,19 @@ end);
 # updates the veech group entry in the database with newly computed data and returns
 # the corresponding updated arangodb document
 InstallMethod(UpdateVeechGroupDBEntry, [IsModularSubgroup], function(VG)
-  local index, sigma_s, sigma_t, new_vg_entry;
-
-  index := Index(VG);
-  sigma_s := ListPerm(SAction(VG), index);
-  sigma_t := ListPerm(TAction(VG), index);
-  new_vg_entry := rec();
+  local doc;
+  
+  doc := GetVeechGroupDBEntry(VG);
+  if doc = fail then return fail; fi;
+  
+  doc := DatabaseDocumentToRecord(doc);
   if HasDeficiency(VG) then
-    new_vg_entry.deficiency := Deficiency(VG);
+    doc.deficiency := Deficiency(VG);
   fi;
   if HasGenus(VG) then
-    new_vg_entry.genus := Genus(VG);
+    doc.genus := Genus(VG);
   fi;
-  UpdateDatabase(rec(sigma_s := String(sigma_s), sigma_t := String(sigma_t)), new_vg_entry, ORIGAMI_DB.veechgroups);
+  UpdateDatabase(doc._key, doc, ORIGAMI_DB.veechgroups);
 end);
 
 # removes a veech group from the database
