@@ -3,6 +3,9 @@
 InstallMethod( NormalStoredOrigamiNC, [IsMultiplicativeElementWithInverse, IsMultiplicativeElementWithInverse, IsGroup], function( horizontalElement, verticalElement, D )
 		local Obj, ori, iso_pc_group;
 		iso_pc_group := IsomorphismPcGroup(D);
+		if iso_pc_group = fail then
+			iso_pc_group := IsomorphismFpGroup(D);
+		fi;
 		ori:= rec(d := Size(Image(iso_pc_group)), x := Image(iso_pc_group, horizontalElement), y := Image(iso_pc_group, verticalElement));
 		Obj:= rec();
 
