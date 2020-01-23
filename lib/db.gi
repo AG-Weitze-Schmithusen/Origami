@@ -425,6 +425,20 @@ InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami,
 end);
 
 
+InstallMethod(AddLabelToOrigamiDBEntry, [IsOrigami, IsString], function(O, label)
+  local db_doc;
+  
+  db_doc := GetOrigamiDBEntry(O);
+  db_doc := DatabaseDocumentToRecord(db_doc);
+  if not IsBound(db_doc.labels) then
+    db_doc.labels := [];
+  fi;
+  Add(db_doc.labels, label);
+  
+  UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
+end);
+
+
 # Inserts an origami O into the database.
 # If the veech group and the orbit of O is known, this function checks if there is already a
 # representative of the orbit of O in the database. If not, O is inserted as the
