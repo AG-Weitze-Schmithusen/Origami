@@ -122,3 +122,14 @@ DeclareGlobalFunction("HasVeechGroupSl_2");
 
 # Calculates the Vecchgroup and the orbit simultan , output is of the form rec(VeechGroup, Orbit)
 DeclareGlobalFunction("CalcVeechGroupAndOrbit");
+
+
+DeclareGlobalFunction("XOrigami");
+DeclareGlobalFunction("Elevator");
+DeclareGlobalFunction("Staircase");
+
+DeclareGlobalFunction("QuasiRegularOrigami");
+DeclareGlobalFunction("DoesNotContainNormalSubgroups");
+DeclareGlobalFunction("QROFromGroup");
+DeclareGlobalFunction("TwoGeneratedSmallGroups");
+DeclareGlobalFunction("QROFromOrder");
