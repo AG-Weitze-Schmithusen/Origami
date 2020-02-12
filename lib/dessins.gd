@@ -15,6 +15,6 @@ DeclareGlobalFunction("NormalDessinsForm");
 
 DeclareGlobalFunction("DessinOfOrigami");
 
-DeclareFlobalFunction("AllDessinsOfOrigami");
+DeclareGlobalFunction("AllDessinsOfOrigami");
 
 DeclareAttribute("DegreeDessin", IsDessin);
