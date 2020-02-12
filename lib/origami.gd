@@ -99,6 +99,8 @@ DeclareGlobalFunction("CalcVeechGroup");
 #! @ChapterInfo The Origami object, The Origami object
 DeclareGlobalFunction("CalcVeechGroupWithHashTables");
 
+DeclareGlobalFunction("CalcVeechGroupAndOrbit"); 
+
 DeclareGlobalFunction("CalcVeechGroupWithHashTablesOld");
 
 DeclareAttribute("indexOrigami", IsOrigami);
