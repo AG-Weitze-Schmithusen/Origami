@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
-	Subtitle := "Computing Veechgroups of origamis",
+	Subtitle := "Computing Veech groups of origamis",
 	Version := "1.0.0",
-	Date := "13/03/2019",
+	Date := "09/03/2020",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
@@ -14,6 +14,12 @@ SetPackageInfo( rec(
 		SixFile   := "gapdoc/manual.six",
 		LongTitle := ~.Subtitle,
 ),
+
+##  <#GAPDoc Label="PKGVERSIONDATA">
+##  <!ENTITY VERSION "1.0.0">
+##  <!ENTITY RELEASEDATE "9 March 2020">
+##  <!ENTITY RELEASEYEAR "2020">
+##  <#/GAPDoc>
 
 Dependencies := rec(
 		GAP := "4.5.3",
@@ -33,6 +39,21 @@ Dependencies := rec(
 ),
 
 Persons := [
+	rec(
+		LastName      := "Junk",
+		FirstNames    := "Luca",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "junk@math.uni-sb.de",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+),
   rec(
     LastName      := "Kattler",
     FirstNames    := "Pascal",
@@ -78,7 +99,7 @@ ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/relea
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
-AbstractHTML   := "<span class=\"pkgname\">Origami</span> Origami is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.",
+AbstractHTML   := "<span class=\"pkgname\">Origami</span> is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.",
 
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation(~.GithubWWW,

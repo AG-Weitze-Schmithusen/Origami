@@ -1,5 +1,4 @@
 DeclareGlobalFunction("VeechgroupBySage");
-DeclareGlobalFunction("NormalFormBySage");
 DeclareGlobalFunction("IsHyperellipticBySage");
 DeclareGlobalFunction("IsPrimitiveBySage");
 DeclareGlobalFunction("ReduceBySage");

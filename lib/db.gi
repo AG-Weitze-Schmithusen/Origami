@@ -456,7 +456,7 @@ InstallOtherMethod(InsertOrigamiIntoDB, [IsOrigami, IsList], function(O, orbit)
   db_reps := GetAllOrigamiOrbitRepresentativesFromDB(); # TODO: we don't need all representatives
   for P in db_reps do
     for Q in orbit do
-      if EquivalentOrigami(P, Q) then
+      if OrigamisEquivalent(P, Q) then
         R := P; # it's important to take P and not Q here!
         break;
       fi;

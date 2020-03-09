@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+    [ <!ENTITY ModularGroup "<Package>Origami</Package>">
+      <#Include Label="PKGVERSIONDATA">
+    ] >
+
+<Book Name="Origami">
+
+<TitlePage>
+  <Title>The <Package>Origami</Package> Package</Title>
+  <Subtitle>Computing Veech groups of origamis</Subtitle>
+  <Date>09.03.2020</Date>
+  <Version>Version 1.0.0</Version>
+  <Author>Luca Junk
+    <Email>junk@math.uni-sb.de</Email>
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+  </Author>
+  <Author>Pascal Kattler
+    <Email>kattler@math.uni-sb.de</Email>
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+
+  </Author>
+  <Author>Andrea Thevis
+    <Email>thevis@math.uni-sb.de</Email>
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+  </Author>
+
+    <Copyright>&copyright; 2018-2020 by Luca Junk, Pascal Kattler and Andrea Thevis
+    </Copyright>
+
+    <Acknowledgements>
+      We thank Sergio Siccha for his support and valuable input at the
+      beginning of this project. Furthermore, we would like to thank Vincent
+      Delecroix and Samuel Lelièvre for fruitful discussions about algorithms
+      implemented in the surface_dynamics package in sage. Some of the
+      functionality of the surface_dynamics package can be used in this
+      package as well. For this we use an interface between &GAP; and sage. We
+      are grateful to Mohamed Barakat and Markus Pfeiffer for helping teaching us
+      how to use these interfaces. Moreover, we thank Thomas Breuer for helpful
+      ideas and comments on some algorithms implemented in this package.
+
+      <Par/>
+
+      This software package is part of the project I.8 'Algorithmic approaches to Teichmüller curves'
+      (AG Weitze-Schmithüsen, Saarland University) supported by SFB-TRR 195 'Symbolic Tools in
+      Mathematics and their Application' of the German Research Foundation (DFG).
+    </Acknowledgements>
+
+
+  </TitlePage>
+
+<TableOfContents/>
+
+<Body>
+  
+  <#Include SYSTEM "intro.xml">
+  <#Include SYSTEM "functionality.xml">
+  <#Include SYSTEM "sage.xml">
+  <#Include SYSTEM "database.xml">
+
+</Body>
+
+<Bibliography Databases="manual"/>
+
+<TheIndex/>
+
+</Book>

@@ -1,6 +1,6 @@
-aCreateHashTable := function()
-  return [];
-end;
+#####
+# implements a hash table for origamis
+#####
 
 InstallGlobalFunction(AddHash, function(HashTable, Elem, HashFunction)
     local hashValue;
@@ -12,21 +12,22 @@ InstallGlobalFunction(AddHash, function(HashTable, Elem, HashFunction)
     fi;
 end);
 
-InstallGlobalFunction(ContainHash, function(HashTable, Elem, HashFunction)
-	local HashValue;
+InstallGlobalFunction(ContainsHash, function(HashTable, Elem, HashFunction)
+	local HashValue, pos;
 	HashValue := HashFunction(Elem);
 	if IsBound(HashTable[HashValue]) = false then
 		return 0;
 	else
-		if Position(HashTable[HashValue], Elem) = fail then
+    pos := Position(HashTable[HashValue], Elem);
+		if pos = fail then
 			return 0;
 		else
-			return indexOrigami(HashTable[HashValue][ Position(HashTable[HashValue], Elem) ]);
+			return _IndexOrigami(HashTable[HashValue][pos]);
 		fi;
 	fi;
 end);
 
-InstallGlobalFunction(hashForPermutations, function(p)
+InstallGlobalFunction(HashForPermutations, function(p)
     local l;
     l:=LARGEST_MOVED_POINT_PERM(p);
     if IsPerm4Rep(p) then
@@ -44,6 +45,6 @@ InstallGlobalFunction(hashForPermutations, function(p)
     return HashKeyBag(p,255,0,2*l);
 end);
 
-InstallGlobalFunction(hashForOrigamis, function( origami )
-    return (hashForPermutations( HorizontalPerm(origami) ) + hashForPermutations( VerticalPerm(origami) )) mod 1000000 + 1;
+InstallGlobalFunction(HashForOrigamis, function(O)
+    return (HashForPermutations(HorizontalPerm(O)) + HashForPermutations(VerticalPerm(O))) mod 1000000 + 1;
 end);
