@@ -290,13 +290,13 @@ end);
 ##### METHODS FOR VEECH GROUP CALCULATION
 
 InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
-	local  sigma, ExpandTree, is_new, P, new_origami_positions, canonical_origami_list, i, j, new_origamis;
+	local  sigma, ExpandTree, is_new, P, new_origami_list, canonical_origami_list, i, j, new_origamis;
 	
 	sigma := [[],[]];
 	canonical_origami_list := [OrigamiNormalForm(O)];
 	
 	ExpandTree := function(new_leaves)
-		new_origami_positions := [];
+		new_origami_list := [];
 		for P in new_leaves do
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
 			for j in [1, 2] do
@@ -310,17 +310,17 @@ InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
 				od;
 				if is_new then
 					Add(canonical_origami_list, new_origamis[j]);
-					Add(new_origami_positions, new_origamis[j]);
+					Add(new_origami_list, new_origamis[j]);
 					sigma[j][Position(canonical_origami_list, P)] := Length(canonical_origami_list);
 				fi;
 			od;
 		od;
-		if Length(new_origami_positions) > 0 then ExpandTree(new_origami_positions); fi;
+		if Length(new_origami_list) > 0 then ExpandTree(new_origami_list); fi;
 	end;
 	
 	ExpandTree([OrigamiNormalForm(O)]);
 	
-	return [ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]))];
+	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]));
 end);
 
 InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
@@ -328,8 +328,9 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 
 	counter := 1;
 	sigma := [[],[]];
-	canonical_origami_list := [];
 	O := OrigamiNormalForm(O);
+	canonical_origami_list := [];
+	AddHash(canonical_origami_list, O, HashForOrigamis);
 	Set_IndexOrigami(O, 1);
 	
 	ExpandTree := function(new_leaves)
@@ -339,11 +340,11 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 			for j in [1, 2] do
 				i := ContainsHash(canonical_origami_list, new_origamis[j], HashForOrigamis);
 				if i = 0 then
+					counter := counter + 1;
 					Set_IndexOrigami(new_origamis[j], counter);
 					AddHash(canonical_origami_list, new_origamis[j], HashForOrigamis);
 					Add(new_origami_list, new_origamis[j]);
 					sigma[j][_IndexOrigami(P)] := counter;
-					counter := counter + 1;
 				else
 					sigma[j][_IndexOrigami(P)] := i;
 				fi;
