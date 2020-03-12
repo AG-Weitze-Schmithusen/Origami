@@ -1,13 +1,16 @@
 InstallMethod(ActionOfS, [IsOrigami], function(O)
+	# we have: S.(sigma_x, sigma_y) = (sigma_y^-1, sigma_x)
 	return OrigamiNC(VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
 end);
 
 InstallMethod(ActionOfT, [IsOrigami], function(O)
-	return OrigamiNC(HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
+	# we have: T.(sigma_x, sigma_y) = (sigma_x, sigma_y * sigma_x^-1)
+	# but note, that GAP multiplies permutations the other way around
+	return OrigamiNC(HorizontalPerm(O), HorizontalPerm(O)^-1 * VerticalPerm(O), DegreeOrigami(O));
 end);
 
 InstallMethod(ActionOfTInv, [IsOrigami], function(O)
-	return OrigamiNC(HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
+	return OrigamiNC(HorizontalPerm(O), HorizontalPerm(O) * VerticalPerm(O), DegreeOrigami(O));
 end);
 
 InstallMethod(ActionOfSInv, [IsOrigami] ,function(O)
