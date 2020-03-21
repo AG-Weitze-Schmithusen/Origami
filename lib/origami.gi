@@ -228,7 +228,7 @@ for i in [1.. Length(f2_epis)] do
 
 #the following List contains all the subgroups of G that do not contain another normal, nontrivial subgroup of G
   subgroups := AllSubgroups(G);
-  subgroups:=Filtered(subgroups, i -> DoesNotContainNormalSubgroups(G,i));
+  subgroups:=Filtered(subgroups, i -> ContainsNormalSubgroups(G,i)=false);
   #Calculating the Origamis:
   m:=1;
   origami_list:=[];
