@@ -250,11 +250,9 @@ InstallGlobalFunction(QROFromGroup, function(G)
 end);
 
 InstallGlobalFunction(TwoGeneratedSmallGroups, function(d)
-  local two_generated_groups, i;
+  local two_generated_groups;
   two_generated_groups := [];
-	for i in [1..d] do
-    Append(two_generated_groups, Filtered(AllSmallGroups(i), G -> Length(MinimalGeneratingSet(G))<=2));
-  od;
+    Append(two_generated_groups, Filtered(AllSmallGroups(d), G -> Length(MinimalGeneratingSet(G))<=2));
   return two_generated_groups;
 end);
 
