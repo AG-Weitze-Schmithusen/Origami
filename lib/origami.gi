@@ -214,39 +214,34 @@ InstallGlobalFunction(ContainsNormalSubgroups, function(G, H)
 end);
 
 InstallGlobalFunction(QROFromGroup, function(G)
-	local subgroups, i,m, origami_list, r, u, min_gen_set;
 
-	if Length(MinimalGeneratingSet(G)) <> 2 then
-		Error("The size of a minimal generating set of G must be 2.");
-	fi;
+  local subgroups, j,i,m, origami_list, r, u, F2, f2_epis;
+  #Testing if G has 2 Generators
+if Length(MinimalGeneratingSet(G))>2 then Print("Error: G has not 2 Generators."); return;
+fi;
+F2:=FreeGroup(2);
+f2_epis:=GQuotients(F2, G);
+r:=[]; u:=[];
 
-	min_gen_set := MinimalGeneratingSet(G);
-	r := min_gen_set[1];
-	u := min_gen_set[2];
+for i in [1.. Length(f2_epis)] do
+ r[i]:=Image(f2_epis[i], F2.1); u[i]:=Image(f2_epis[i],F2.2); od;
 
-	# If G is abelian, any subgroup is normal. Thus the only subgroup that does not contain
-	# non-trivial normal subgroups of G is the trivial subgroup.
-	if IsAbelian(G) then
-		return DuplicateFreeList([
-			QuasiRegularOrigami(G, Group(One(G)), r, u),
-			QuasiRegularOrigami(G, Group(One(G)), u, r)
-		]);
-	fi;
-
-	# create a list of all subgroups of G that do not contain a non-trivial normal subroup of G
+#the following List contains all the subgroups of G that do not contain another normal, nontrivial subgroup of G
   subgroups := AllSubgroups(G);
-  subgroups := Filtered(subgroups, i -> not ContainsNormalSubgroups(G,i));
+  subgroups:=Filtered(subgroups, i -> DoesNotContainNormalSubgroups(G,i));
+  #Calculating the Origamis:
+  m:=1;
+  origami_list:=[];
+for j in [1.. Length(f2_epis)] do
 
-  # construct the origamis
-  m := 1;
-  origami_list := [];
   for i in subgroups do
-  	origami_list[m]   := QuasiRegularOrigami(G, i, r, u);
-  	origami_list[m+1] := QuasiRegularOrigami(G, i, u, r);
-  	m := m+2;
+  origami_list[m]:=QuasiRegularOrigami(G,i, r[j], u[j]);
+  origami_list[m+1]:=QuasiRegularOrigami(G, i, u[j], r[j]);
+  m:=m+2;
   od;
-
-  return DuplicateFreeList(origami_list);
+od;
+  origami_list:=DuplicateFreeList(origami_list);
+  return origami_list;
 end);
 
 InstallGlobalFunction(TwoGeneratedSmallGroups, function(d)
