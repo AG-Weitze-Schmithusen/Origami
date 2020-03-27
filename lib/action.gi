@@ -28,13 +28,34 @@ InstallMethod(ActionOfSL2, [IsString, IsOrigami], function(wordString, O)
 			O := ActionOfT(O);
 		elif letter = -1 then
 			O := ActionOfSInv(O);
-		else
+		elif letter = -2 then
 			O := ActionOfTInv(O);
+		else
+			Error("<word> must be a word in two generators");
 		fi;
 	od;
 	return O;
 end);
 
-InstallOtherMethod(ActionOfSL2, [IsMatrix, IsOrigami], function(A, origami)
-	 return ActionOfSL2(String(STDecomposition(A)), origami);
+InstallOtherMethod(ActionOfSL2, [IsMatrix, IsOrigami], function(A, O)
+	 return ActionOfSL2(String(STDecomposition(A)), O);
+end);
+
+InstallOtherMethod(ActionOfSL2, [IsAssocWord, IsOrigami], function(word, O)
+	local letter;
+	# 'word' is assumed to be a word in S and T
+	for letter in LetterRepAssocWord(word) do
+		if letter = 1 then
+			O := ActionOfS(O);
+		elif letter = 2 then
+			O := ActionOfT(O);
+		elif letter = -1 then
+			O := ActionOfSInv(O);
+		elif letter = -2 then
+			O := ActionOfTInv(O);
+		else
+			Error("<word> must be a word in two generators");
+		fi;
+	od;
+	return O;
 end);
