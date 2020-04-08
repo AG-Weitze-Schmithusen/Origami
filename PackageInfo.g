@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "1.0.0",
-	Date := "09/03/2020",
+	Date := "08/04/2020",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
@@ -17,14 +17,14 @@ SetPackageInfo( rec(
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "1.0.0">
-##  <!ENTITY RELEASEDATE "9 March 2020">
+##  <!ENTITY RELEASEDATE "08 April 2020">
 ##  <!ENTITY RELEASEYEAR "2020">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
 		GAP := "4.5.3",
 
-		NeededOtherPackages := [["ModularGroup", "0.0.1"], ["Orb", "4.7.6"]],
+		NeededOtherPackages := [["ModularGroup", "1.0.0"], ["Orb", "4.7.6"]],
 
 		SuggestedOtherPackages := [
 			["HomalgToCAS" ,"2018.06.15"],

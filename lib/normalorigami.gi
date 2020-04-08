@@ -96,7 +96,7 @@ InstallMethod(AllNormalOrigamisByDegree, [IsPosInt], function(d)
 
 	groups := Filtered(AllSmallGroups(Size, d), function(G)
 		if Length(SmallGeneratingSet(G)) <= 2 then return true; fi;
-			return Length(GQuotients(FreeGroup(2), G)) >= 1;
+		return Length(GQuotients(FreeGroup(2), G)) >= 1;
 	end);
 	return Flat(List(groups, G -> AllNormalOrigamisFromGroup(G)));
 end);
