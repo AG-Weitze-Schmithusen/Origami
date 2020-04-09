@@ -1,3 +1,8 @@
+#! @Chapter Cyclic Torus Covers
+#! @ChapterLabel cyclic-torus-covers
+
+#! @Section Cyclic Torus Covers functions
+
 #! @Arguments n d hslits vslits
 #! @Returns a cyclic torus cover origami
 #! @Description
@@ -22,6 +27,8 @@ DeclareGlobalFunction("CyclicMonodromy");
 #! @Arguments n d vslits hslits
 #! @Returns the ramification indices for each of the n^2 fields
 DeclareGlobalFunction("RamificationIndices");
+
+#! @Section Comb Origami functions
 
 #! @Arguments n x y
 #! @Returns a comb origami, which is a cyclic torus cover of degree 2 specified by a single point P=(x,y)
