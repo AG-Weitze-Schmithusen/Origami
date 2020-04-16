@@ -7,8 +7,8 @@ LoadPackage("rings");
 
 BindGlobal("PrepareSage", function()
 	streamForSage := LaunchCAS("HOMALG_IO_Sage");
-	streamForSage.CUT_POS_END := 9;
-	streamForSage.CUT_POS_BEGIN := 7;
+	streamForSage.CUT_POS_END := 13;
+	streamForSage.CUT_POS_BEGIN := 9;
 	homalgSendBlocking(["from surface_dynamics.all import*"],"need_display", streamForSage);
 end);
 
