@@ -96,8 +96,8 @@ InstallMethod(RemoveVeechGroupFromDB, [IsModularSubgroup], function(VG)
   sigma_t := ListPerm(TAction(VG), index);
   stmt := ORIGAMI_DB._createStatement(rec(
     query := Concatenation(
-      "FOR vg IN veechgroups FILTER vg.sigma_s == ", String(sigma_s),
-      " AND vg.sigma_t == ", String(sigma_t), " REMOVE vg IN veechgroups"
+      "FOR vg IN veechgroups FILTER vg.sigma_s == ", GapToJsonString(sigma_s),
+      " AND vg.sigma_t == ", GapToJsonString(sigma_t), " REMOVE vg IN veechgroups"
     )
   ));
   result := stmt.execute();
@@ -481,8 +481,8 @@ InstallMethod(GetOrigamiDBEntry, [IsOrigami], function(O)
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
   stmt := ORIGAMI_DB._createStatement(rec(
     query := Concatenation(
-      "FOR o IN origamis FILTER o.sigma_x == ", String(sigma_x),
-      " AND o.sigma_y == ", String(sigma_y), " RETURN o"
+      "FOR o IN origamis FILTER o.sigma_x == ", GapToJsonString(sigma_x),
+      " AND o.sigma_y == ", GapToJsonString(sigma_y), " RETURN o"
     ),
     count := true
   ));
