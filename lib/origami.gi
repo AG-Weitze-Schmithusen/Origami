@@ -317,7 +317,7 @@ InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
 end);
 
 InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
-	local new_origami_list, new_origamis, sigma, ExpandTree, P, canonical_origami_list, i, j, counter;
+	local sigma, ExpandTree, canonical_origami_list, counter;
 
 	counter := 1;
 	sigma := [[],[]];
@@ -327,6 +327,7 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 	Set_IndexOrigami(O, 1);
 
 	ExpandTree := function(new_leaves)
+		local new_origami_list, new_origamis, i, j, P;
 		new_origami_list := [];
 		for P in new_leaves do
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
