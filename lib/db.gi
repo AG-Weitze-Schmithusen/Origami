@@ -39,7 +39,10 @@ InstallMethod(GetVeechGroupDBEntry, [IsModularSubgroup], function(VG)
   index := Index(VG);
   sigma_s := ListPerm(SAction(VG), index);
   sigma_t := ListPerm(TAction(VG), index);
-  result := QueryDatabase(rec(sigma_s := ["==", sigma_s], sigma_t := ["==", sigma_t]), ORIGAMI_DB.veechgroups);
+  result := ORIGAMI_DB._createStatement(rec(
+    query := Concatenation("FOR v IN veechgroups FILTER v.sigma_s == ", GapToJsonStringForArangoDB(sigma_s), " AND v.sigma_t == ", GapToJsonStringForArangoDB(sigma_t), " RETURN v"),
+    count := true
+  )).execute();
 
   if result.count() = 0 then
     return fail;
@@ -179,8 +182,11 @@ InstallMethod(GetOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   O := CopyOrigamiInNormalForm(O);
   sigma_x := ListPerm(HorizontalPerm(O), DegreeOrigami(O));
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
-  result := QueryDatabase(rec(sigma_x := ["==", sigma_x], sigma_y := ["==", sigma_y]), ORIGAMI_DB.origami_representatives);
-
+  result := ORIGAMI_DB._createStatement(rec(
+    query := Concatenation("FOR o IN origami_representatives FILTER o.sigma_x == ", GapToJsonStringForArangoDB(sigma_x), " AND o.sigma_y == ", GapToJsonStringForArangoDB(sigma_y), " RETURN o"),
+    count := true
+  )).execute();
+  
   if result.count() = 0 then
     return fail;
   fi;
