@@ -275,6 +275,86 @@ InstallGlobalFunction(RandomOrigami, function(d)
 	return OrigamiNC(sigma_x, sigma_y, d);
 end);
 
+InstallGlobalFunction(CylinderStructure, function(O)
+local list ,i,m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, mat_inv;
+sigma_h:=HorizontalPerm(O);
+sigma_v:=VerticalPerm(O);
+if sigma_h=() then list:=[]; else
+
+cycles:=Cycles(sigma_h, [1 ..  DegreeOrigami(O)]);
+#s is list of the cycles in the horizontal permutation of the origami
+list:=[];
+cycleLength:=List(cycles, i->(Length(i))); #Length of the cycles in the permutation
+for m in [1.. Maximum(cycleLength)] do
+
+helpcycle:=Filtered(cycles, i->Length(i)=m); #Zykel der Länge m
+helpcycle:=AsSet(helpcycle);
+while helpcycle<>[]  do
+mat:=[];
+mat_inv:=[];
+for i in [1.. Length(helpcycle[1])] do #calcutlatin the orbit under sigma_h and sigma_h^{-1} of each tile in the cycle
+mat[i]:=Orbit(Group(sigma_v), helpcycle[1][i]);
+mat_inv[i]:=Orbit(Group(Inverse(sigma_v)), helpcycle[1][i]); od;
+diff:= Intersection(helpcycle, Union(TransposedMat(mat),TransposedMat(mat_inv))); #transposing the matrix to check on whether there are cylinders lying over each other
+Add(list, [Length(diff), m]); #diff contains the cycles of same lenght which form a cylinder
+helpcycle:=Difference(helpcycle, diff);
+od;
+od;
+fi;
+return list;
+end);
+
+InstallGlobalFunction(SumOfLyapunovExponents, function(O)
+  local stratum, orbit,i,j, sum;
+sum:=0;
+if Stratum(O)=[] then; else
+if IsNormalOrigami(O) then sum:=SumOfLyapunovExponentsNormalOrigami(O); else
+  orbit:=VeechGroupAndOrbit(O).orbit;
+if Length(orbit)=1 then; else
+for i in [1.. Length(orbit)] do
+  for j in [1.. Length(CylinderStructure(orbit[i]))] do
+    sum:=sum+ CylinderStructure( orbit[i])[j][1]/CylinderStructure(orbit[i])[j][2]; #height/width of the cylinders of the orbit
+  od;
+od;
+sum:=sum/Length(orbit);
+fi;
+  stratum:=Stratum(O);
+  for i in [1.. Length(stratum)] do
+    sum:= sum + (1/12)*(stratum[i])*(stratum[i]+2)/(stratum[i]+1);
+od;
+fi;
+fi;
+return sum;
+end);
+
+InstallGlobalFunction(SumOfLyapunovExponentsNormalOrigami, function(O)
+local  sum, stratum_data, orbit,i;
+if IsNormalOrigami(O) then; else
+  Error("The given Origami must be normal");
+fi;
+sum:=0;
+if Stratum(O)=[] then; else
+
+if  IsNormalStoredOrigami(O) then O:=AsPermutationRepresentation(O); else;fi;
+orbit:=VeechGroupAndOrbit(O).orbit;
+
+#sum over the orbit (n/#orb)sum_{orb}{1/(ord(x)^2)}
+for i in [1.. Length(orbit)] do
+sum:=sum +( 1/ Order(HorizontalPerm(orbit[i]))^2);
+od;
+sum:=sum*(DegreeOrigami(O)/Length(orbit));
+
+# 1/12*k*a(a+2)/(a+1)
+stratum_data:=[];
+if Stratum(O)=[] then; else
+stratum_data[1]:=Stratum(O)[1];
+stratum_data[2]:=Length(Stratum(O));
+sum:=sum+(1/12)*stratum_data[2]*( stratum_data[1])*(stratum_data[1]+2)/(stratum_data[1]+1);
+fi;
+fi;
+return sum;
+end);
+
 #####
 
 

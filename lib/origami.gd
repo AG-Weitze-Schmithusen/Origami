@@ -11,6 +11,7 @@ DeclareAttribute("DegreeOrigami", IsOrigami);
 DeclareAttribute("Stratum", IsOrigami);
 DeclareAttribute("Genus", IsOrigami);
 DeclareAttribute("IndexOfMonodromyGroup", IsOrigami);
+DeclareAttribute("SumOfLyapunovExponents", IsOrigami);
 
 DeclareOperation("ComputeVeechGroup", [IsOrigami]);
 DeclareOperation("ComputeVeechGroupWithHashTables", [IsOrigami]);
