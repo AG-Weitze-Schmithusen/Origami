@@ -171,6 +171,9 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
     fi;
     origami_entry.veechgroup := vg_entry._id;
   fi;
+  if HasSumOfLyapunovExponents(O) then
+    origami_entry.sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+  fi;
 
   return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origami_representatives);
 end);
@@ -266,6 +269,11 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
     constraints := ShallowCopy(constraints);
     constraints.stratum := ["==", constraints.stratum];
   fi;
+  
+  if IsBound(constraints.sum_of_lyapunov_exponents) then
+    constraints := ShallowCopy(constraints);
+    constraints.sum_of_lyapunov_exponents := ["==", [NumeratorRat(constraints.sum_of_lyapunov_exponents), DenominatorRat(constraints.sum_of_lyapunov_exponents)]];
+  fi;
 
   if IsBound(constraints.example_series) then
     constraints := ShallowCopy(constraints);
@@ -329,6 +337,9 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   fi;
   if HasGenus(O) then
     new_origami_entry.genus := Genus(O);
+  fi;
+  if HasSumOfLyapunovExponents(O) then
+    new_origami_entry.sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
