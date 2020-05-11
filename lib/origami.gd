@@ -12,6 +12,7 @@ DeclareAttribute("Stratum", IsOrigami);
 DeclareAttribute("Genus", IsOrigami);
 DeclareAttribute("IndexOfMonodromyGroup", IsOrigami);
 DeclareAttribute("SumOfLyapunovExponents", IsOrigami);
+DeclareGlobalFunction("CylinderStructure");
 
 DeclareOperation("ComputeVeechGroup", [IsOrigami]);
 DeclareOperation("ComputeVeechGroupWithHashTables", [IsOrigami]);
