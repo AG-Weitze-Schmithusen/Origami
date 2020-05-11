@@ -166,7 +166,7 @@ InstallGlobalFunction(SumOfLyapunovExponentsBySage, function(origami)
 
 	O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 		String(VerticalPerm(origami))	, "\")"],streamForSage);
-	return EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) );
+	return Rat(EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) ));
 end);
 
 InstallGlobalFunction(LyapunovExponentsApproxBySage, function(origami)
