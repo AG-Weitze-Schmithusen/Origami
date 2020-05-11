@@ -24,20 +24,6 @@ InstallGlobalFunction("VeechgroupBySage", function(origami)
 	return ModularSubgroup(EvalString(S), EvalString(T));
 end);
 
-
-InstallGlobalFunction("NormalFormBySage", function(origami)
-	local O, NF, r, u;
-	if streamForSage = false then
-		PrepareSage();
-	fi;
-
-	O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"", String(VerticalPerm(origami))	, "\")"],streamForSage);
-	NF := homalgSendBlocking([O, ".to_standard_form()"],streamForSage);
-	r := EvalString(homalgSendBlocking([NF, ".r()"],"need_output",streamForSage));
-	u := EvalString(homalgSendBlocking([NF, ".u()"],"need_output",streamForSage));
-	return Origami(r, u, DegreeOrigami(origami));
-end);
-
 InstallGlobalFunction("IsHyperellipticBySage", function(origami)
 	local O;
 	if streamForSage = false then
@@ -180,7 +166,7 @@ InstallGlobalFunction(SumOfLyapunovExponentsBySage, function(origami)
 
 	O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 		String(VerticalPerm(origami))	, "\")"],streamForSage);
-	return EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) );
+	return Rat(EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) ));
 end);
 
 InstallGlobalFunction(LyapunovExponentsApproxBySage, function(origami)

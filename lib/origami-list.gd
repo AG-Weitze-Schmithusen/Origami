@@ -1,7 +1,2 @@
-
-DeclareGlobalFunction("CalcOrigamiList");
-
-
-DeclareGlobalFunction("OrigamiList");
-
-DeclareGlobalFunction("OrigamiListWithStratum");
+DeclareGlobalFunction("AllOrigamisByDegree");
+DeclareGlobalFunction("AllOrigamisInStratum");

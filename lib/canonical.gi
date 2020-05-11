@@ -1,76 +1,43 @@
-#The following functions calculate a canonical representation, the "canonical Image", of an origami w.r.t equivalence
-
-#------------------------------ help functions ----------------------------------------------------------------------
-
-#this function calculates the CycleStructure in "GAP-style" from a given partition of a number
-#Example partition = [2,2,3,4] => CycleStructureFromPartition([2,2,3,5]) = [2, 1, ,1]
-#INPUT A partition of a number
-#OUTPUT the Cyclestructure of the partition
 InstallGlobalFunction(CycleStructureFromPartition, function(partition)
-	local i,  permList, cycleStructure;
-  cycleStructure:=[];
+	local i, permList, cycleStructure;
+  cycleStructure := [];
   for i in partition do
     if i <> 1 then
       if not IsBound(cycleStructure[i-1]) then
         cycleStructure[i-1]:=1;
       else
-        cycleStructure[i-1]:=cycleStructure[i-1]+1;
+        cycleStructure[i-1] := cycleStructure[i-1] + 1;
       fi;
     fi;
   od;
 	return cycleStructure;
 end);
 
-#calculates the canonical image of a permutation from its cyclestructure
-#INPUT the cyclestructure of a permutation
-#OUTPUT the canonical image of a permutation
 InstallGlobalFunction(CanonicalPermFromCycleStructure, function(cycleStructure)
   local currentIndex, l, numberOfCycle, permList, d, i;
   if IsEmpty(cycleStructure) then
     return ();
   fi;
   currentIndex := 1;
-  d:=0;
+  d := 0;
   for i in [1..Length(cycleStructure)] do
     if IsBound(cycleStructure[i]) then
-      d:=d+(cycleStructure[i])*(i+1);
+      d := d + cycleStructure[i] * (i+1);
     fi;
   od;
-  permList:=[2.. d];
+  permList := [2.. d];
   Add(permList, 1);
-  for l in [1..Length(cycleStructure) ] do
+  for l in [1..Length(cycleStructure)] do
     if IsBound(cycleStructure[l]) then
-      for numberOfCycle in [1.. cycleStructure[l]] do
-        permList[currentIndex + l ]:= currentIndex;
-        currentIndex:= currentIndex + l + 1;
+      for numberOfCycle in [1..cycleStructure[l]] do
+        permList[currentIndex + l] := currentIndex;
+        currentIndex := currentIndex + l + 1;
       od;
     fi;
   od;
   return PermList(permList);
 end);
 
-#calculates the canonical image of a permutation from its suitable partition of a number
-#INPUT partition of a permutation
-#OUTPUT the canonical image of a permutation
-InstallGlobalFunction(CanonicalPermFromPartition, function(part)
-    return CanonicalPermFromCycleStructure(CycleStructureFromPartition(part));
-end);
-
-
-#Calculates a canonical image of a permutation
-#Input: a permutation perm
-#output: the canonical representation of perm
-InstallGlobalFunction(CanonicalPerm, function(perm)
-	local cycleStructure;
-	cycleStructure := CycleStructurePerm( perm );
-	return CanonicalPermFromCycleStructure(cycleStructure);
-end);
-
-#----------------------------------------------   main function -----------------------------------------------
-
-
-
-## Graph equivaltent test
 InstallGlobalFunction(OrigamiNormalForm, function(origami)
   local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
         minimizeCycleLengths, cycleLengths, m, l, x, y;
@@ -132,5 +99,27 @@ InstallGlobalFunction(OrigamiNormalForm, function(origami)
   Apply(G, PermList);
   Apply(G, l -> [l^-1 * x * l, l^-1 * y * l]);
 
-  return OrigamiNC(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami) );
+  return OrigamiNC(Minimum(G)[1], Minimum(G)[2], DegreeOrigami(origami));
+end);
+
+InstallGlobalFunction(CopyOrigamiInNormalForm, function(origami)
+	local normalform;
+	normalform := OrigamiNormalForm(origami);
+	if HasStratum(origami) then
+		SetStratum(normalform, Stratum(origami));
+	fi;
+	if HasGenus(origami) then
+		SetGenus(normalform, Genus(origami));
+	fi;
+	if HasVeechGroup(origami) then
+		SetVeechGroup(normalform, VeechGroup(origami));
+	fi;
+	if HasDeckGroup(origami) then
+		SetDeckGroup(normalform, DeckGroup(origami));
+		SetIsNormalOrigami(normalform, IsNormalOrigami(origami));
+	fi;
+  if HasIndexOfMonodromyGroup(origami) then
+    SetIndexOfMonodromyGroup(normalform, IndexOfMonodromyGroup(origami));
+  fi;
+	return normalform;
 end);
