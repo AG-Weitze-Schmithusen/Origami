@@ -43,3 +43,33 @@ InstallMethod(IsNormalOrigami, [IsOrigami], function(origami)
 	if Size(DeckGroup(origami)) < DegreeOrigami(origami) then return false; fi;
 	return true;
 end);
+
+InstallMethod(AsNormalStoredOrigami, [IsOrigami], function(O)
+	local G, x, y, Q;
+	if IsNormalStoredOrigami(O) then
+		return O;
+	fi;
+	if not IsNormalOrigami(O) then
+		Error("Can't convert an origami that is not normal to a 'NormalStoredOrigami'.");
+	fi;
+	x := HorizontalPerm(O);
+	y := VerticalPerm(O);
+	G := Group(x, y);
+	Q := NormalStoredOrigamiNC(x, y, G);
+	if HasStratum(O) then
+		SetStratum(Q, Stratum(O));
+	fi;
+	if HasGenus(O) then
+		SetGenus(Q, Genus(O));
+	fi;
+	if HasVeechGroup(O) then
+		SetVeechGroup(Q, VeechGroup(O));
+	fi;
+	if HasIndexOfMonodromyGroup(O) then
+		SetIndexOfMonodromyGroup(Q, IndexOfMonodromyGroup(O));
+	fi;
+	if HasSumOfLyapunovExponents(O) then
+		SetSumOfLyapunovExponents(Q, SumOfLyapunovExponents(O));
+	fi;
+	return Q;
+end);
