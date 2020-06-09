@@ -452,7 +452,7 @@ InstallMethod(AddLabelToOrigamiDBEntry, [IsOrigami, IsString], function(O, label
   fi;
   Add(db_doc.labels, label);
   
-  return UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
+  return UpdateDatabase(db_doc._key, db_doc, ORIGAMI_DB.origamis);
 end);
 InstallOtherMethod(AddLabelToOrigamiDBEntry, [IsDatabaseDocument, IsString], function(doc, label)
   doc := DatabaseDocumentToRecord(doc);
@@ -461,7 +461,7 @@ InstallOtherMethod(AddLabelToOrigamiDBEntry, [IsDatabaseDocument, IsString], fun
   fi;
   Add(doc.labels, label);
 
-  return UpdateDatabase(doc.key, doc, ORIGAMI_DB.origamis);
+  return UpdateDatabase(doc._key, doc, ORIGAMI_DB.origamis);
 end);
 
 
