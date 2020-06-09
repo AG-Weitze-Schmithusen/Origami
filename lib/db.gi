@@ -438,7 +438,7 @@ InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami,
     matrix := A
   );
 
-  InsertIntoDatabase(origami_entry, ORIGAMI_DB.origamis);
+  return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origamis);
 end);
 
 
@@ -452,7 +452,7 @@ InstallMethod(AddLabelToOrigamiDBEntry, [IsOrigami, IsString], function(O, label
   fi;
   Add(db_doc.labels, label);
   
-  UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
+  return UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
 end);
 
 
