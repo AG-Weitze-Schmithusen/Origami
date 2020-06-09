@@ -454,6 +454,15 @@ InstallMethod(AddLabelToOrigamiDBEntry, [IsOrigami, IsString], function(O, label
   
   return UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
 end);
+InstallOtherMethod(AddLabelToOrigamiDBEntry, [IsDatabaseDocument, IsString], function(doc, label)
+  doc := DatabaseDocumentToRecord(doc);
+  if not IsBound(doc.labels) then
+    doc.labels := [];
+  fi;
+  Add(doc.labels, label);
+
+  return UpdateDatabase(doc.key, doc, ORIGAMI_DB.origamis);
+end);
 
 
 # Inserts an origami O into the database.
