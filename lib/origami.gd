@@ -31,6 +31,5 @@ DeclareGlobalFunction("ElevatorOrigami");
 DeclareGlobalFunction("StaircaseOrigami");
 DeclareGlobalFunction("QuasiRegularOrigami");
 DeclareGlobalFunction("ContainsNormalSubgroups");
-DeclareGlobalFunction("TwoGeneratedSmallGroups");
 DeclareGlobalFunction("QROFromGroup");
 DeclareGlobalFunction("QROFromOrder");

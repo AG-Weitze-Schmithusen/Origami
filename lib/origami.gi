@@ -214,50 +214,50 @@ InstallGlobalFunction(ContainsNormalSubgroups, function(G, H)
 end);
 
 InstallGlobalFunction(QROFromGroup, function(G)
-
   local subgroups, j,i,m, origami_list, r, u, F2, f2_epis;
-  #Testing if G has 2 Generators
-if Length(MinimalGeneratingSet(G))>2 then Print("Error: G has not 2 Generators."); return;
-fi;
-F2:=FreeGroup(2);
-f2_epis:=GQuotients(F2, G);
-r:=[]; u:=[];
 
-for i in [1.. Length(f2_epis)] do
- r[i]:=Image(f2_epis[i], F2.1); u[i]:=Image(f2_epis[i],F2.2); od;
+	if Length(SmallGeneratingSet(G)) > 2 then
+		if Length(GQuotients(FreeGroup(2), G)) = 0 then
+			Error("The group <G> is not two-generated.");
+			return;
+		fi;
+	fi;
 
-#the following List contains all the subgroups of G that do not contain another normal, nontrivial subgroup of G
-  subgroups := AllSubgroups(G);
-  subgroups:=Filtered(subgroups, i -> ContainsNormalSubgroups(G,i)=false);
-  #Calculating the Origamis:
-  m:=1;
-  origami_list:=[];
-for j in [1.. Length(f2_epis)] do
+	F2 := FreeGroup(2);
+	f2_epis := GQuotients(F2, G);
+	r:=[]; u:=[];
 
-  for i in subgroups do
-  origami_list[m]:=QuasiRegularOrigami(G,i, r[j], u[j]);
-  origami_list[m+1]:=QuasiRegularOrigami(G, i, u[j], r[j]);
-  m:=m+2;
-  od;
-od;
-  origami_list:=DuplicateFreeList(origami_list);
+	for i in [1.. Length(f2_epis)] do
+		r[i] := Image(f2_epis[i], F2.1);
+	 	u[i] := Image(f2_epis[i], F2.2);
+	od;
+
+	subgroups := AllSubgroups(G);
+	subgroups := Filtered(subgroups, i -> not ContainsNormalSubgroups(G,i));
+
+	m := 1;
+	origami_list := [];
+	for j in [1..Length(f2_epis)] do
+	  for i in subgroups do
+	  	origami_list[m]   := QuasiRegularOrigami(G,i, r[j], u[j]);
+	  	origami_list[m+1] := QuasiRegularOrigami(G, i, u[j], r[j]);
+	  	m := m+2;
+	  od;
+	od;
+	origami_list := DuplicateFreeList(origami_list);
   return origami_list;
-end);
-
-InstallGlobalFunction(TwoGeneratedSmallGroups, function(d)
-  local two_generated_groups;
-  two_generated_groups := [];
-    Append(two_generated_groups, Filtered(AllSmallGroups(d), G -> Length(MinimalGeneratingSet(G))<=2));
-  return two_generated_groups;
 end);
 
 InstallGlobalFunction(QROFromOrder, function(d)
   local i, origami_list, group_list;
 
-  group_list := TwoGeneratedSmallGroups(d);
+  group_list := Filtered(AllSmallGroups(d), function(G)
+		if Length(SmallGeneratingSet(G)) <= 2 then return true; fi;
+		return Length(GQuotients(FreeGroup(2), G)) >= 1;
+	end);
   origami_list := [];
 
-  for i in [1 .. Length(group_list)] do
+  for i in [1..Length(group_list)] do
   	Append(origami_list, QROFromGroup(group_list[i]));
   od;
 
