@@ -12,6 +12,8 @@ DeclareAttribute("Stratum", IsOrigami);
 DeclareAttribute("Genus", IsOrigami);
 DeclareAttribute("IndexOfMonodromyGroup", IsOrigami);
 DeclareAttribute("SumOfLyapunovExponents", IsOrigami);
+DeclareAttribute("TranslationsOfOrigami", IsOrigami);
+DeclareAttribute("IsHyperelliptic", IsOrigami);
 DeclareGlobalFunction("CylinderStructure");
 
 DeclareOperation("ComputeVeechGroup", [IsOrigami]);
@@ -24,7 +26,8 @@ DeclareAttribute("_IndexOrigami", IsOrigami);
 
 DeclareOperation("OrigamisEquivalent", [IsOrigami, IsOrigami]);
 
-
+DeclareGlobalFunction("NormalformConjugators");
+DeclareGlobalFunction("ConjugatorsToInverse");
 DeclareGlobalFunction("RandomOrigami");
 DeclareGlobalFunction("XOrigami");
 DeclareGlobalFunction("ElevatorOrigami");
