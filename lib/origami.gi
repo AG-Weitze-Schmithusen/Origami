@@ -399,12 +399,13 @@ InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
 	return G;
 end);
 
-InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	local origami_1, G, G_1, veechgroupmatr,O,O_1, list,i,j;
+InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	function(origami)
+local origami_1, G, G_1, veechgroupmatr,O,O_1, list,i,j;
 	veechgroupmatr:=VeechGroup(origami);
 	if not IsElementOf([[-1,0],[0,-1]],veechgroupmatr) #testing if -1 is in the VeechGroup
 			then Error("VeechGroup must contain -1");
 	fi;
-	origami_1:=InverseOrigami(origami); #-1.O
+	origami_1:=Origami(Inverse(HorizontalPerm(origami)), Inverse(VerticalPerm(origami))); #-1.O
 	G:=NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
 	G_1:=NormalformConjugators(origami_1);
 	O:=List(G,i->Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
@@ -637,7 +638,7 @@ else
 		fi;
 	od;
 	fi;
-	return true;
+	return false;
 end);
 #####
 
