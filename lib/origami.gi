@@ -264,6 +264,12 @@ InstallGlobalFunction(QROFromOrder, function(d)
   return origami_list;
 end);
 
+InstallGlobalFunction(DefinesQuasiRegularOrigami, function(G, U, r, u)
+	local N;
+	N := Normalizer(G, U);
+	return IsNormal(G, N) and IsAbelian(G/N);
+end);
+
 InstallGlobalFunction(RandomOrigami, function(d)
 	local sigma_x, sigma_y, S_d;
 	S_d := SymmetricGroup(d);
@@ -478,7 +484,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree([O]);
 
 	return rec(
-		VeechGroup := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
+		veech_group := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
 		orbit := orbit,
 		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);

@@ -33,3 +33,4 @@ DeclareGlobalFunction("QuasiRegularOrigami");
 DeclareGlobalFunction("ContainsNormalSubgroups");
 DeclareGlobalFunction("QROFromGroup");
 DeclareGlobalFunction("QROFromOrder");
+DeclareGlobalFunction("DefinesQuasiRegularOrigami");
