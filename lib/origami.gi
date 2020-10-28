@@ -356,6 +356,75 @@ InstallOtherMethod(SumOfLyapunovExponents, [IsNormalStoredOrigami], function(O)
 	return sum;
 end);
 
+InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
+	local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
+				minimizeCycleLengths, cycleLengths, m, l, x, y;
+	x := HorizontalPerm(origami);
+	y := VerticalPerm(origami);
+	n := Maximum(LargestMovedPoint([x,y]), 1);
+
+	# Find points which minimize the lengths of the cycles in which they occur.
+	# In most cases, this greatly reduces the number of breadths-first searches below.
+
+	G := [];
+
+	# Starting from each of the vertices found above, do a breadth-first search
+	# and list the vertices in the order they appear.
+	# This defines a permutation l with which we conjugate x and y.
+	# From the resulting list of pairs of permutations (all of which are by
+	# definition simultaneously conjugated to (x,y)) we choose the lexicographically
+	# smallest one as the canonical form.
+	for i in [1..n] do
+		L := ListWithIdenticalEntries(n, 0);
+		seen := ListWithIdenticalEntries(n, false);
+		Q := [i];
+		seen[i] := true;
+		numSeen := 1;
+		L[i] := 1;
+		while numSeen < n do
+			v := Remove(Q, 1);
+			wx := v^x;
+			wy := v^y;
+			if not seen[wx] then
+				Add(Q, wx);
+				seen[wx] := true;
+				numSeen := numSeen + 1;
+				L[wx] := numSeen;
+			fi;
+			if not seen[wy] then
+				Add(Q, wy);
+				seen[wy] := true;
+				numSeen := numSeen + 1;
+				L[wy] := numSeen;
+			fi;
+		od;
+		Add(G, L);
+	od;
+
+	Apply(G, PermList);
+	return G;
+end);
+
+InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	function(origami)
+local origami_1, G, G_1, veechgroupmatr,O,O_1, list,i,j;
+	veechgroupmatr:=VeechGroup(origami);
+	if not IsElementOf([[-1,0],[0,-1]],veechgroupmatr) #testing if -1 is in the VeechGroup
+			then Error("VeechGroup must contain -1");
+	fi;
+	origami_1:=Origami(Inverse(HorizontalPerm(origami)), Inverse(VerticalPerm(origami))); #-1.O
+	G:=NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
+	G_1:=NormalformConjugators(origami_1);
+	O:=List(G,i->Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
+	O_1:=List(G_1,i->Origami(i^-1*HorizontalPerm(origami_1)*i, i^-1*VerticalPerm(origami_1)*i));#we need to calculate these to test find k s.t. sigma_i *origami *sigma_i^-1=delta_k(i)*origami_1*delta_k(i)^-1
+	#fitting the permuations together
+	list:=[];
+	#calculating now
+	for i in [1 .. Length(O)] do
+	list[i]:=[G[i], G_1[Position(O_1,O[i])]];
+	list[i]:=list[i][1]*Inverse(list[i][2]);
+	od;
+	return DuplicateFreeList(list);
+end);
 #####
 
 
@@ -493,7 +562,6 @@ end);
 InstallMethod(VeechGroup, [IsOrigami], function(O)
 	return ComputeVeechGroupWithHashTables(O);
 end);
-
 #####
 
 
@@ -533,6 +601,51 @@ InstallMethod(Stratum, "for an origami", [IsOrigami], function(O)
 	return AsSortedList(stratum);
 end);
 
+InstallMethod(TranslationsOfOrigami, [IsOrigami],function(origami)
+	local G,O, list,i,j;
+	G:=NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
+	O:=List(G,i->Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
+	list:=[];
+	for i in [1 .. Length(O)] do
+	 if Length(Positions(O,O[i]))=1 then;
+	 else
+	 for j in Positions(O, O[i]) do
+	Add(list, G[i]*Inverse(G[j]));
+	od;
+	fi;
+	od;
+return DuplicateFreeList(list);
+end);
+
+InstallMethod(IsHyperelliptic, [IsOrigami], function(origami)
+	local g,n,b,L,bool,x,y,i, sigma;
+	n:=2; #degree of th covering
+	x:=HorizontalPerm(origami);
+	y:=VerticalPerm(origami);
+	g:=Genus(origami);
+
+L:=ConjugatorsToInverse(origami);
+L:=Filtered(L, i->Order(i)=2);
+if L=[] then return false;
+else
+	for sigma in L do
+		b:=0;#fixpoints
+			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma)));
+			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*x)));
+			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*y)));
+			for i in [1.. DegreeOrigami(origami)] do
+				if  i^(sigma*Inverse(x)*Inverse(y))=i^(y*x*Inverse(x*y)) then
+					 b:=b+1;
+				fi;
+			od;
+
+		if (1/n)*(g-1-(b/2))+1 = 0 then
+			return true;
+		fi;
+	od;
+	fi;
+	return false;
+end);
 #####
 
 
