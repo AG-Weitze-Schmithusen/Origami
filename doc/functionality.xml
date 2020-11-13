@@ -350,6 +350,34 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     </Example>
   </Description>
 
+  <Oper Name="SymplecticBasisOfHomology" Arg="O"/>
+  <Returns>A list of words.</Returns>
+  <Description>
+    Computes a basis of the homology <M>H_1(O;\mathbb{Z})</M> that is symplectic with respect to the intersection form. The basis elements are represented as words in <M>x</M> and <M>y</M> which define closed paths starting from the square <M>1</M>.
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2),(2,3));
+    Origami((1,2), (2,3), 3)
+    gap> SymplecticBasisOfHomology(O);
+    [ x*y^2*x^-1, x*y^-2*x^-2*y^2*x^-1, x*y^-2*x^-1*y^-1*x*y^4*x^-1, x*y^-3*x^-1*y*x^-1 ]
+    ]]>
+    </Example>
+  </Description>
+
+  <Attr Name="SpinStructure" Arg="O"/>
+  <Returns><M>0</M> or <M>1</M></Returns>
+  <Description>
+    Computes the parity of the spin structure of <M>O</M>.
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2,3,4,5), (), 5);
+    Origami((1,2,3,4,5), (), 5)
+    gap> SpinStructure(O);
+    1
+    ]]>
+    </Example>
+  </Description>
+
   <Func Name="SumOfLyapunovExponents" Arg="O"/>
   <Returns> A positiv Integer. </Returns>
   <Description>
