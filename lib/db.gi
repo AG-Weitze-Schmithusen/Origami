@@ -110,7 +110,7 @@ end);
 # inserts the normal form of an origami into the origami representative database
 # and returns the resulting arangodb document (only inserts precomputed data)
 InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
-  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG, rels, index_monodromy;
+  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG, rels, index_monodromy, sum_of_lyapunov_exponents;
 
   O := CopyOrigamiInNormalForm(O);
   degree := DegreeOrigami(O);
@@ -127,7 +127,6 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
   else
     origami_entry.index_monodromy_group := 0;
   fi;
-    
 
   if HasDeckGroup(O) then
     DG := DeckGroup(O);
@@ -172,7 +171,11 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
     origami_entry.veechgroup := vg_entry._id;
   fi;
   if HasSumOfLyapunovExponents(O) then
-    origami_entry.sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
+  fi;
+  if HasSpinStructure(O) then
+    origami_entry.spin_structure := SpinStructure(O);
   fi;
 
   return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origami_representatives);
@@ -329,7 +332,7 @@ InstallMethod(GetAllOrigamiOrbitRepresentativesFromDB, [], function()
 end);
 
 InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
-  local new_origami_entry, origami_entry, DG, rels;
+  local new_origami_entry, origami_entry, DG, rels, sum_of_lyapunov_exponents;
 
   new_origami_entry := rec();
   if HasStratum(O) then
@@ -339,7 +342,11 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
     new_origami_entry.genus := Genus(O);
   fi;
   if HasSumOfLyapunovExponents(O) then
-    new_origami_entry.sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    new_origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
+  fi;
+  if HasSpinStructure(O) then
+    new_origami_entry.spin_structure := SpinStructure(O);
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
