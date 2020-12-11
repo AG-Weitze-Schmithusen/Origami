@@ -425,6 +425,14 @@ local origami_1, G, G_1, veechgroupmatr,O,O_1, list,i,j;
 	od;
 	return DuplicateFreeList(list);
 end);
+
+
+
+
+InstallGlobalFunction(AutomorphismsOfOrigami, [IsOrigami], function(O)
+	return Flat([TranslationsOfOrigami(O),ConjugatorsToInverse(O)]);
+end);
+
 #####
 
 

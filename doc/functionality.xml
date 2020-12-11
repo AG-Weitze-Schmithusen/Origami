@@ -619,10 +619,10 @@ In this section we describe some methods for constructing explicit examples and 
     Returns a list of all quasi-regular origamis of order <A>d</A>.
   </Description>
 
-  <Oper Name="NormalformConjugators" Arg="origami"/>
+  <Oper Name="NormalformConjugators" Arg="O"/>
   <Returns>A list of permutations.</Returns>
   <Description>
-    Calculates all permutations which yield a normal form when conjugated to the <Arg>origami</Arg>.
+    Calculates all permutations which yield a normal form when conjugated to the <Arg>O</Arg>.
     <Example>
   gap>origami:=Origami((1,2,3,4), (1,2)(3,4));
   Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -631,11 +631,11 @@ In this section we describe some methods for constructing explicit examples and 
     </Example>
   </Description>
 
-  <Oper Name="TranslationsOfOrigami" Arg="origami"/>
+  <Oper Name="TranslationsOfOrigami" Arg="O"/>
   <Returns>A list of permutations.</Returns>
   <Description>
-    Calculates all permutations which yield the origami when conjugated to the <Arg>origami</Arg>,
-    such that <M>t*y*t^-1=y</M> and <M>t*x*t^-1=x</M> where <M>x,y<M> are the permutations of the origami.
+    Calculates all permutations which yield the origami when conjugated to the <Arg>O</Arg>.
+    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y</M> and <M>t*x*t^-1=x</M>, where <M>x,y<M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
     <Example>
       gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
     Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -644,10 +644,10 @@ In this section we describe some methods for constructing explicit examples and 
     </Example>
   </Description>
 
-  <Oper Name="IsHyperelliptic" Arg="origami"/>
+  <Oper Name="IsHyperelliptic" Arg="O"/>
   <Returns>A boolean.</Returns>
   <Description>
-    Tests if an origami is hyperelliptic.
+    Tests whether an origami is hyperelliptic.
       <Example>
   gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
   Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -659,6 +659,32 @@ In this section we describe some methods for constructing explicit examples and 
   false
     </Example>
   </Description>
+
+  <Oper Name="ConjugatorsToInverse" Arg="O"/>
+  <Returns>A list.</Returns>
+  <Description>
+    Calculates all permutations which yield the inverse Origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
+    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y^-1</M> and <M>t*x*t^-1=x^-1</M>, where <M>x,y<M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
+        <Example>
+          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
+          Origami((1,2,3,4), (1,2)(3,4), 4)
+          gap> ConjugatorsToInverse(o);
+          [ (1,2)(3,4), (1,4)(2,3) ]
+    </Example>
+  </Description>
+
+  <Oper Name="AutomorphismsOfOrigami" Arg="O"/>
+  <Returns>A list.</Returns>
+  <Description>
+    Calculates all automorphisms of the origami, i.e the translations and conjugators to the inverse.
+        <Example>
+          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
+          Origami((1,2,3,4), (1,2)(3,4), 4)
+          gap> AutomorphismsOfOrigami(o);
+          [ (), (1,3)(2,4), (1,2)(3,4), (1,4)(2,3) ]
+    </Example>
+  </Description>
+
 </ManSection>
 
 </Section>

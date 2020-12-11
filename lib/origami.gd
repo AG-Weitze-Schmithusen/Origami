@@ -28,6 +28,7 @@ DeclareOperation("OrigamisEquivalent", [IsOrigami, IsOrigami]);
 
 DeclareGlobalFunction("NormalformConjugators");
 DeclareGlobalFunction("ConjugatorsToInverse");
+DeclareGlobalFunction("AutomorphismsOfOrigami");
 DeclareGlobalFunction("RandomOrigami");
 DeclareGlobalFunction("XOrigami");
 DeclareGlobalFunction("ElevatorOrigami");
