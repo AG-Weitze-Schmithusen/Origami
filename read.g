@@ -13,3 +13,7 @@ if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then
 else
   ReadPackage("Origami/lib/db.gi");
 fi;
+
+if TestPackageAvailability("IO", "4.5.1") <> fail then
+  ReadPackage("Origami/lib/io.g");
+fi;
