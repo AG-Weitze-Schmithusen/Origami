@@ -37,3 +37,19 @@ DeclareGlobalFunction("RamificationIndices");
 #!  point (0,0) is located in the lower left corner. P must not be a 2-torsion point, that is, it must not be
 #!  (0,0), (n/2, n/2), (n/2,0) or (0,n/2). The coordinates are considered modulo n.
 DeclareGlobalFunction("CombOrigami");
+
+DeclareCategory("IsCyclCov", IsObject);
+BindGlobal("CyclCovFamily",NewFamily("CyclCov"));
+
+DeclareAttribute("TorsionDegree", IsCyclCov);
+DeclareAttribute("Degree", IsCyclCov);
+DeclareAttribute("HomologyDimension", IsCyclCov);
+DeclareAttribute("BCoefficients", IsCyclCov);
+DeclareAttribute("SCoefficients", IsCyclCov);
+DeclareAttribute("Origami", IsCyclCov);
+
+DeclareOperation("CyclCovByB", [IsPosInt, IsPosInt, IsList]);
+DeclareOperation("CyclCovByS", [IsPosInt, IsPosInt, IsList]);
+
+DeclareGlobalFunction("TranslationGroup", [IsPosInt]);
+DeclareGlobalFunction("BaseChangeBS", [IsPosInt]);
