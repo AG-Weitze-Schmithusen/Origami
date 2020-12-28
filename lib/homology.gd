@@ -1,2 +1,3 @@
 DeclareAttribute("SymplecticBasisOfHomology", IsOrigami);
-DeclareAttribute("SpinStructure", IsOrigami);
+DeclareAttribute("HasSpinStructure", IsOrigami);
+DeclareAttribute("SpinParity", IsOrigami);

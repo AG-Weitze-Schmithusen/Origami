@@ -124,8 +124,8 @@ InstallGlobalFunction(CopyOrigamiInNormalForm, function(origami)
   if HasSumOfLyapunovExponents(origami) then
     SetSumOfLyapunovExponents(normalform, SumOfLyapunovExponents(origami));
   fi;
-  if HasSpinStructure(origami) then
-    SetSpinStructure(normalform, SpinStructure(origami));
+  if HasSpinParity(origami) then
+    SetSpinParity(normalform, SpinParity(origami));
   fi;
 	return normalform;
 end);

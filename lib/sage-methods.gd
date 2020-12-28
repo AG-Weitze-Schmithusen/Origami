@@ -11,3 +11,4 @@ DeclareGlobalFunction("WidthsAndHeightsBySage");
 DeclareGlobalFunction("SumOfLyapunovExponentsBySage");
 DeclareGlobalFunction("LyapunovExponentsApproxBySage");
 DeclareGlobalFunction("IntermediateCoversBySage");
+DeclareGlobalFunction("SpinParityBySage");

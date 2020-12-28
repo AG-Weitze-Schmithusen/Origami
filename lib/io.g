@@ -35,8 +35,8 @@ InstallMethod(IO_Pickle, "for an origami", [IsFile, IsOrigami], function(f, O)
     if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   fi;
 
-	if HasSpinStructure(O) then
-    if IO_Pickle(f, SpinStructure(O)) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
+	if HasSpinParity(O) then
+    if IO_Pickle(f, SpinParity(O)) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   else
     if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   fi;
@@ -90,7 +90,7 @@ IO_Unpicklers.ORIG := function(f)
 	if index_of_monodromy_group <> fail then SetIndexOfMonodromyGroup(O, index_of_monodromy_group); fi;
 	if lyapunov <> fail then SetSumOfLyapunovExponents(O, lyapunov); fi;
 	if hyperelliptic <> fail then SetIsHyperelliptic(O, hyperelliptic); fi;
-	if spin <> fail then SetSpinStructure(O, spin); fi;
+	if spin <> fail then SetSpinParity(O, spin); fi;
 	if deckgroup <> fail then SetDeckGroup(O, OneSmallGroup(deckgroup)); fi;
 	if vg <> fail then SetVeechGroup(O, vg); fi;
 

@@ -354,6 +354,8 @@ _ORIGAMI_AugmentedHandleNormalization := function(boundary, generators)
       continue;
     fi;
 
+    # cut [a...a^-1] glue to b^-1
+
     pos_a := i;
     a := boundary[pos_a];
     pos_ainv := Position(boundary, -a);
@@ -381,6 +383,8 @@ _ORIGAMI_AugmentedHandleNormalization := function(boundary, generators)
       boundary{[pos_binv+1..Length(boundary)]}# E
     );
 
+    # cut (b...b^-1) glue to a
+
     pos_a := Position(boundary, a);
     pos_ainv := Position(boundary, ainv);
     pos_b := Position(boundary, b);
@@ -388,9 +392,9 @@ _ORIGAMI_AugmentedHandleNormalization := function(boundary, generators)
 
     for e in Concatenation(boundary{[pos_b+1..pos_ainv-1]}, boundary{[pos_ainv+1..pos_binv-1]}) do
       if e > 0 then
-        generators[e] := (generators[AbsoluteValue(b)]^SignInt(b))^-1 * generators[e];
+        generators[e] := (generators[AbsoluteValue(ainv)]^SignInt(ainv))^-1 * generators[e];
       else
-        generators[-e] := generators[-e] * generators[AbsoluteValue(b)]^SignInt(b);
+        generators[-e] := generators[-e] * generators[AbsoluteValue(ainv)]^SignInt(ainv);
       fi;
     od;
 
@@ -413,55 +417,46 @@ _ORIGAMI_SurfaceNormalForm := function(O)
 end;
 
 _ORIGAMI_PathIndex := function(p)
-  local w, last, l, res;
+  local F2, x, y, w, last, ind, dir, diff, it;
 
-  w := LetterRepAssocWord(p); # 1 = x, 2 = y
+  F2 := FreeGroup(["x", "y"]);
+  x := F2.1;
+  y := F2.2;
+  p := ObjByExtRep(FamilyObj(x), ExtRepOfObj(p));
+  w := LetterRepAssocWord(p);
+  ind := 0;
+  dir := 1;
 
-  res := 0;
+  while (not IsOne(p) and w[1] = -w[Length(w)]) do
+    dir := w[1];
+    p := ObjByExtRep(FamilyObj(x), [dir, -1]) * p * ObjByExtRep(FamilyObj(x), [dir, 1]);
+    w := LetterRepAssocWord(p);
+  od;
+  if IsOne(p) then return 1; fi;
+
+  diff := 0;
   last := w[Length(w)];
 
-  for l in w do
-    if last = 1 then
-      if l = 1 then
-      elif l = 2 then
-        res := res + 1;
-      elif l = -1 then
-        res := res + 2;
-      elif l = -2 then
-        res := res - 1;
-      fi;
-    elif last = 2 then
-      if l = 1 then
-        res := res - 1;
-      elif l = 2 then
-      elif l = -1 then
-        res := res + 1;
-      elif l = -2 then
-        res := res + 2;
-      fi;
-    elif last = -1 then
-      if l = 1 then
-        res := res + 2;
-      elif l = 2 then
-        res := res - 1;
-      elif l = -1 then
-      elif l = -2 then
-        res := res + 1;
-      fi;
-    elif last = -2 then
-      if l = 1 then
-        res := res + 1;
-      elif l = 2 then
-        res := res + 2;
-      elif l = -1 then
-        res := res - 1;
-      elif l = -2 then
-      fi;
+  for it in w do
+    if it = last then diff := 0;
+    elif it = 1 then
+      if last = -2 then diff := 1;
+      else diff := -1; fi;
+    elif it = 2 then
+      if last = 1 then diff := 1;
+      else diff := -1; fi;
+    elif it = -1 then
+      if last = 2 then diff := 1;
+      else diff := -1; fi;
+    else # it = -2
+      if last = -1 then diff := 1;
+      else diff := -1; fi;
     fi;
-    last := l;
+    ind := ind + diff;
+    last := it;
   od;
 
-  return res;
+  return ind/4;
 end;
 
 ###
@@ -481,7 +476,19 @@ InstallMethod(SymplecticBasisOfHomology, [IsOrigami], function(O)
   return basis;
 end);
 
-InstallMethod(SpinStructure, [IsOrigami], function(O)
+InstallMethod(HasSpinStructure, [IsOrigami], function(O)
+  local sx, sy, c, orbit_lengths, k;
+  sx := HorizontalPerm(O);
+  sy := VerticalPerm(O);
+  c := sx^-1 * sy^-1 * sx * sy;
+  orbit_lengths := OrbitLengths(Group(c), [1..DegreeOrigami(O)]);
+  for k in orbit_lengths do
+    if k mod 2 = 0 then return false; fi;
+  od;
+  return true;
+end);
+
+InstallMethod(SpinParity, [IsOrigami], function(O)
   local basis, g, i, s;
 
   basis := SymplecticBasisOfHomology(O);

@@ -174,8 +174,8 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
     sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
     origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
   fi;
-  if HasSpinStructure(O) then
-    origami_entry.spin_structure := SpinStructure(O);
+  if HasSpinParity(O) then
+    origami_entry.spin_parity := SpinParity(O);
   fi;
 
   return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origami_representatives);
@@ -345,8 +345,8 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
     sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
     new_origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
   fi;
-  if HasSpinStructure(O) then
-    new_origami_entry.spin_structure := SpinStructure(O);
+  if HasSpinParity(O) then
+    new_origami_entry.spin_parity := SpinParity(O);
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
