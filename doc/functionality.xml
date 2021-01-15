@@ -684,7 +684,65 @@ In this section we describe some methods for constructing explicit examples and 
           [ (), (1,3)(2,4), (1,2)(3,4), (1,4)(2,3) ]
     </Example>
   </Description>
+  
+  <Oper Name="FixedPointsOfConjugatorToInverse" Arg="O, sigma"/>
+  <Returns>Two lists.</Returns>
+  <Description>
+  This function calculates the fixed points of a conjugator to inverse <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the inverse origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
+  The funtion does not check whether <Arg>sigma</Arg> is a conjugator to inverse.
+  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square <M>a</M>.
+    <Example>
+      <![CDATA[
+      gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> sigma:=ConjugatorsToInverse(origami)[1];
+      (1,2)(3,4)
+      gap> FixedPointsOfConjugatorToInverse(origami, sigma);
+      [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ]
+      ]]>
+    </Example>
+  </Description>
 
+  <Oper Name="FixedPointsOfTranslation" Arg="O, sigma"/>
+  <Returns>Two lists.</Returns>
+  <Description>
+  This function calculates the fixed points of a translation <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the origami <M>O</M> when conjugated to <Arg>O</Arg>..
+  The function does not check whether <Arg>sigma</Arg> is a translation.
+  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square <M>a</M>.
+    <Example>
+      <![CDATA[
+          gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> TranslationsOfOrigami(origami);
+      [ (), (1,3)(2,4) ]
+      gap> sigma:=TranslationsOfOrigami(origami)[2];
+      (1,3)(2,4)
+      gap> FixedPointsOfTranslation(origami, sigma);
+      [ [ 1, 0, 0 ], [ 2, 0, 0 ], [ 3, 0, 0 ], [ 4, 0, 0 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+
+  <Oper Name="FixedPointsOfAutomorphism" Arg="O, sigma"/>
+  <Returns>Two lists.</Returns>
+  <Description>
+  This function calculates the fixed points of an automorphism <Arg>sigma</Arg> of the origami <Arg>O</Arg>.
+  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square.
+    <Example>
+      <![CDATA[
+      gap> O:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> sigma:=(1,3)(2,4);
+      (1,3)(2,4)
+      gap> FixedPointsOfAutomorphism(O,sigma);
+      [ [ 1, 0, 0 ], [ 2, 0, 0 ], [ 3, 0, 0 ], [ 4, 0, 0 ] ]
+  ]]>
+    </Example>
+  </Description>
 </ManSection>
 
 </Section>

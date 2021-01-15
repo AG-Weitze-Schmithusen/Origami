@@ -38,3 +38,6 @@ DeclareGlobalFunction("ContainsNormalSubgroups");
 DeclareGlobalFunction("QROFromGroup");
 DeclareGlobalFunction("QROFromOrder");
 DeclareGlobalFunction("DefinesQuasiRegularOrigami");
+DeclareGlobalFunction("FixedPointsOfConjugatorToInverse");
+DeclareGlobalFunction("FixedPointsOfTranslation");
+DeclareGlobalFunction("FixedPointsOfAutomorphism");
