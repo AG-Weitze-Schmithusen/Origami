@@ -673,33 +673,35 @@ return DuplicateFreeList(list);
 end);
 
 InstallMethod(IsHyperelliptic, [IsOrigami], function(origami)
-	local g,n,b,L,bool,x,y,i, sigma;
-	n:=2; #degree of th covering
-	x:=HorizontalPerm(origami);
-	y:=VerticalPerm(origami);
-	g:=Genus(origami);
-
+local g,n,b,L,bool,x,y,i, sigma;
+n:=2; #degree of th covering
+x:=HorizontalPerm(origami);
+y:=VerticalPerm(origami);
+g:=Genus(origami);
+if not IsElementOf([[-1,0],[0,-1]],VeechGroup(origami)) #testing if -1 is in the VeechGroup
+		then return false;
+fi;
 L:=ConjugatorsToInverse(origami);
 L:=Filtered(L, i->Order(i)=2);
 if L=[] then return false;
 else
-	for sigma in L do
-		b:=0;#fixpoints
-			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma)));
-			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*x)));
-			b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*y)));
-			for i in [1.. DegreeOrigami(origami)] do
-				if  i^(sigma*Inverse(x)*Inverse(y))=i^(y*x*Inverse(x*y)) then
-					 b:=b+1;
-				fi;
-			od;
+for sigma in L do
+	b:=0;#fixpoints
+		b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma)));
+		b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*x)));
+		b:=b+Length(Difference([1.. DegreeOrigami(origami)], MovedPoints(sigma*y)));
+		for i in [1.. DegreeOrigami(origami)] do
+			if  i^(sigma*Inverse(x)*Inverse(y))=i^(y*x*Inverse(x*y)) then
+				 b:=b+1;
+			fi;
+		od;
 
-		if (1/n)*(g-1-(b/2))+1 = 0 then
-			return true;
-		fi;
-	od;
+	if (1/n)*(g-1-(b/2))+1 = 0 then
+		return true;
 	fi;
-	return false;
+od;
+fi;
+return false;
 end);
 #####
 
