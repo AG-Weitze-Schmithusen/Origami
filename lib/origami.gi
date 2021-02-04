@@ -1,3 +1,5 @@
+gap> TranslationsOfOrigami(O);
+[ (), (1,6)(2,7)(3,8)(4,5) ]
 ##### CONSTRUCTORS
 
 InstallMethod(Origami, [IsPerm, IsPerm], function(sigma_x, sigma_y)
@@ -459,7 +461,7 @@ InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
 fixedpoints:=[];
   for j in [1.. DegreeOrigami(o)] do                                                      #fixedpoints at (0,0)
     if  j^(sigma) in Orbit(Group(Comm(x,y)),j) then  #i and x^-1y-^1sigma(i) are in the same cykel of [x,y]
-       Add(fixedpoints,[j,0,0]);
+       Add(fixedpoints,j,);
     fi;
   od;
 return fixedpoints;
@@ -660,7 +662,7 @@ InstallMethod(TranslationsOfOrigami, [IsOrigami],function(origami)
 	local G,O, list,i,j;
 	G:=NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
 	O:=List(G,i->Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
-	list:=[];
+	list:=[()];
 	for i in [1 .. Length(O)] do
 	 if Length(Positions(O,O[i]))=1 then;
 	 else
