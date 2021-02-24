@@ -1,5 +1,3 @@
-gap> TranslationsOfOrigami(O);
-[ (), (1,6)(2,7)(3,8)(4,5) ]
 ##### CONSTRUCTORS
 
 InstallMethod(Origami, [IsPerm, IsPerm], function(sigma_x, sigma_y)
