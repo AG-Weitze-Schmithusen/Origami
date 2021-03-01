@@ -24,7 +24,7 @@ end);
 
 InstallOtherMethod(OrigamiNC, [IsPerm, IsPerm, IsPosInt], function(sigma_x, sigma_y, d)
 	local Obj, ori;
-	ori:= rec(d := d, x := sigma_x, y := sigma_y);
+	ori:= rec(d := d, x := sigma_x, y := sigma_y);  
 	Obj:= rec();
 
 	ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsOrigami and IsAttributeStoringRep) , HorizontalPerm, ori.x, VerticalPerm, ori.y, DegreeOrigami, d );
@@ -453,15 +453,17 @@ end
 );
 
 InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
-  local x,y, fixedpoints,j;
+ local x,y, fixedpoints,j, singularities;
   x:=HorizontalPerm(o);
   y:=VerticalPerm(o);
 fixedpoints:=[];
-  for j in [1.. DegreeOrigami(o)] do                                                      #fixedpoints at (0,0)
-    if  j^(sigma) in Orbit(Group(Comm(x,y)),j) then  #i and x^-1y-^1sigma(i) are in the same cykel of [x,y]
-       Add(fixedpoints,j,);
+singularities:=OrigamiSingularities(o);
+  for j in singularities do
+    if  j=OnSets(j,sigma) then  
+       Add(fixedpoints,j);
     fi;
   od;
+
 return fixedpoints;
 end);
 
@@ -480,6 +482,84 @@ else
 fi;
 return fixedpoints;
 end);
+
+InstallGlobalFunction(Quotientengeschlecht, function(O)
+  local g,x,y,trans,n, fixedpoints, singularities, ram_index, j,i, sum;
+  g:=Genus(O); #genus of the origami
+  x:=HorizontalPerm(O);
+  y:=VerticalPerm(O);
+
+  trans:=TranslationsOfOrigami(O);
+  n:=Length(trans);  # #Trans(X)
+  trans:=Filtered(trans, i->i<>()); #Removing the trivial translation under which all points are fixed
+fixedpoints:=List(trans, i->FixedPointsOfTranslation(O,i));
+fixedpoints:=DuplicateFreeList(fixedpoints);
+fixedpoints:=Concatenation(fixedpoints);
+fixedpoints:=List(fixedpoints, i->Minimum(i)); #choosing a representative tile for each fixedpoint
+  if n=1 then return g; else; fi; #if n=1, then all ramification indices are 1 thus, the sum over e-1=0
+    singularities:=OrigamiSingularities(O); #returns the points [[a,..,b],..,[c,..,d]] where the bottom left corners of a,b form the singularity
+    ram_index:=List(singularities, i->Size(Stabilizer(Group(trans), i,OnSets))); #calculating #Stab(S_i)
+    sum:=0;
+  for i in fixedpoints do
+    j:=Position(singularities, Representative(Filtered(singularities, j-> i in j))); #in which singularity S_k is i
+    sum:=sum+ram_index[j]-1;
+  od;
+  sum:=   (2*g-2-sum)/(2*n)+1;
+  return sum;
+end);
+
+InstallGlobalFunction(OrigamiQuotient, function(O)
+    local g, orbits,x,y, sigma_x, sigma_y,i,j;
+  x:=HorizontalPerm(O);
+  y:=VerticalPerm(O);
+  g:=Group(TranslationsOfOrigami(O));
+  sigma_x:=[];
+  sigma_y:=[];
+  orbits:=Orbits(g, [1.. DegreeOrigami(O)]);
+  orbits:=List(orbits,i->AsSet(i));
+  for i in [1.. Length(orbits)] do
+
+
+    sigma_x[i]:=[]; #permutation is a list and cycles are the sublists
+    if not i in Flat(sigma_x) then
+    Add(sigma_x[i],i); #first position
+    j:=1;
+    while(OnSets(orbits[sigma_x[i][1]],x^j)<>orbits[ sigma_x[i][1] ]) do #checking if full cycle
+    Add(sigma_x[i], Position(orbits, OnSets(orbits[ sigma_x[i][1] ], x^j)));
+    j:=j+1;
+    od;
+    fi;
+
+    j:=1;
+
+    sigma_y[i]:=[];
+    if not i in Flat(sigma_y) then
+    Add(sigma_y[i],i); #first position
+    while(OnSets(orbits[sigma_y[i][1]],y^j)<>orbits[ sigma_y[i][1] ]) do
+    Add(sigma_y[i], Position(orbits, OnSets(orbits[ sigma_y[i][1] ], y^j)));
+    j:=j+1;
+    od;
+    fi;
+  od;
+  sigma_x:=List(sigma_x, i-> CycleFromList(i));
+  sigma_y:=List(sigma_y, i-> CycleFromList(i));
+  sigma_x:=Product(sigma_x);
+  sigma_y:=Product(sigma_y);
+  return(Origami(sigma_x,sigma_y));
+end);
+
+InstallGlobalFunction(OrigamiSingularities, function(O)
+   local x,y, singularities;
+  x:=HorizontalPerm(O);
+  y:=VerticalPerm(O);
+  singularities:=[];
+  if Comm(x,y)=() then; else
+    singularities:=Cycles(Comm(x,y), MovedPoints(Comm(x,y))); #returns the points [[a,..,b],..,[c,..,d]] where the bottom left corners of a,b form the singularity
+  fi;
+  singularities:=List(singularities, i->AsSet(i));
+ return singularities;
+end);
+
 #####
 
 

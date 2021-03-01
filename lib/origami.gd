@@ -41,3 +41,8 @@ DeclareGlobalFunction("DefinesQuasiRegularOrigami");
 DeclareGlobalFunction("FixedPointsOfConjugatorToInverse");
 DeclareGlobalFunction("FixedPointsOfTranslation");
 DeclareGlobalFunction("FixedPointsOfAutomorphism");
+DeclareGlobalFunction("OrigamiQuotient");
+DeclareGlobalFunction("Quotientengeschlecht");
+DeclareGlobalFunction("OrigamiSingularities");
+
+
