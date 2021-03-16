@@ -20,9 +20,9 @@ DeclareOperation("ComputeVeechGroup", [IsOrigami]);
 DeclareOperation("ComputeVeechGroupWithHashTables", [IsOrigami]);
 DeclareAttribute("VeechGroup", IsOrigami);
 DeclareOperation("VeechGroupAndOrbit", [IsOrigami]);
+DeclareGlobalFunction("VeechGroupIsOdd")
 # this is a hidden attribute only used in the veech group computation
 DeclareAttribute("_IndexOrigami", IsOrigami);
-
 
 DeclareOperation("OrigamisEquivalent", [IsOrigami, IsOrigami]);
 
