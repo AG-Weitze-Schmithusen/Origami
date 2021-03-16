@@ -177,6 +177,9 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
   if HasSpinParity(O) then
     origami_entry.spin_parity := SpinParity(O);
   fi;
+  if HasIsHyperelliptic(O) then
+    origami_entry.is_hyperelliptic := IsHyperelliptic(O);
+  fi;
 
   return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origami_representatives);
 end);
@@ -283,6 +286,14 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
     constraints.example_series := ["==", constraints.example_series];
   fi;
 
+  if IsBound(constraints.spin_parity) then
+    constraints.spin_parity := ["==", constraints.spin_parity];
+  fi;
+
+  if IsBound(constraints.is_hyperelliptic) then
+    constraints.is_hyperelliptic := ["==", constraints.is_hyperelliptic];
+  fi;
+
   result :=  ShallowCopy(ListOp(QueryDatabase(constraints, ORIGAMI_DB.origami_representatives)));
   Apply(result, doc -> DatabaseDocumentToRecord(doc));
   Apply(result, function(doc)
@@ -347,6 +358,9 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   fi;
   if HasSpinParity(O) then
     new_origami_entry.spin_parity := SpinParity(O);
+  fi;
+  if HasIsHyperelliptic(O) then
+    new_origami_entry.is_hyperelliptic := IsHyperelliptic(O);
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
