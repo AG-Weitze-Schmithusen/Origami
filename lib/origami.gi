@@ -407,7 +407,7 @@ end);
 
 InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	function(origami)
  local origami_1, G, G_1, O, O_1, list, i, j;
-	if not VeechGroupIsOdd(origami) then # testing if -1 is in the VeechGroup
+	if not VeechGroupIsEven(origami) then # testing if -1 is in the VeechGroup
 			Error("VeechGroup must contain -1");
 	fi;
 	origami_1 := Origami(Inverse(HorizontalPerm(origami)), Inverse(VerticalPerm(origami))); #-1.O
@@ -758,7 +758,7 @@ InstallMethod(IsHyperelliptic, [IsOrigami], function(origami)
 	x := HorizontalPerm(origami);
 	y := VerticalPerm(origami);
 	g := Genus(origami);
-	if not VeechGroupIsOdd(origami) then return false; fi; # check whether -1 is in the veech group
+	if not VeechGroupIsEven(origami) then return false; fi; # check whether -1 is in the veech group
 	L := ConjugatorsToInverse(origami);
 	L := Filtered(L, i -> Order(i) = 2);
 	if L = [] then return false;
