@@ -87,6 +87,21 @@ InstallMethod(UpdateVeechGroupDBEntry, [IsModularSubgroup], function(VG)
   if HasGenus(VG) then
     doc.genus := Genus(VG);
   fi;
+  if HasGeneralizedLevel(VG) then
+    doc.level := GeneralizedLevel(VG);
+  fi;
+  if HasWohlfahrtLevel(VG) then
+    doc.wohlfahrt_level := WohlfahrtLevel(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    doc.congruence_level := CongruenceLevel(VG);
+  fi;
+  if HasIsCongruence(VG) then
+    doc.congruence := IsCongruence(VG);
+  fi;
+  if HasDeficiency(VG) then
+    doc.deficiency := Deficiency(VG);
+  fi;
   UpdateDatabase(doc._key, doc, ORIGAMI_DB.veechgroups);
 end);
 
