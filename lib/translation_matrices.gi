@@ -18,15 +18,24 @@ TranslationMatrix := function(n, is_right)
     mat[in_axis] := List([1..N], i->0);
     mat[in_axis][in_axis] := 1;
     mat[cross_axis] := List([1..N], i->0);
-    mat[cross_axis][in_axis] := 1;
-    for i in [0..n-1] do
-        if is_right then 
-            j := 2 + (2 + i * n);
+    mat[cross_axis][cross_axis] := 1;
+    if n = 2 then
+        # n = 2 is a special case, the only loop on the 2nd row/column is the 2nd/3rd one
+        if is_right then
+            mat[cross_axis][2 + 2] := 1;
         else
-            j := 2 + (1 + i + n);
+            mat[cross_axis][2 + 3] := 1;
         fi;
-        mat[cross_axis][j] := 1; 
-    od;
+    else
+        for i in [0..n-1] do
+            if is_right then 
+                j := 2 + (2 + i * n);
+            else
+                j := 2 + (1 + i + n);
+            fi;
+            mat[cross_axis][j] := 1; 
+        od;
+    fi;
     for i in [1..n*n-1] do
         if i = extra_point then continue; fi;
         mat[2+i] := List([1..N], i->0);
