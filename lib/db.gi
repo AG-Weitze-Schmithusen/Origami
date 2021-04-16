@@ -19,13 +19,17 @@ InstallMethod(InsertVeechGroupIntoDB, [IsModularSubgroup], function(VG)
     sigma_s := sigma_s,
     sigma_t := sigma_t,
     congruence := IsCongruence(VG),
-    level := GeneralizedLevel(VG)
-    );
+    level := GeneralizedLevel(VG),
+    wohlfahrt_level := WohlfahrtLevel(VG)
+  );
   if HasDeficiency(VG) then
     vg_entry.deficiency := Deficiency(VG);
   fi;
   if HasGenus(VG) then
     vg_entry.genus := Genus(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    vg_entry.congruence_level := CongruenceLevel(VG);
   fi;
 
   return InsertIntoDatabase(vg_entry, ORIGAMI_DB.veechgroups);
