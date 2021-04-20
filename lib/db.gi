@@ -70,7 +70,9 @@ InstallMethod(GetVeechGroupsFromDB, [IsRecord], function(constraints)
   Apply(result, function(doc)
     local VG;
     VG := ModularSubgroup(PermList(doc.sigma_s), PermList(doc.sigma_t));
-    SetWohlfahrtLevel(VG, doc.wohlfahrt_level);
+    if IsBound(doc.wohlfahrt_level) then
+      SetWohlfahrtLevel(VG, doc.wohlfahrt_level);
+    fi;
     if IsBound(doc.genus) then
       SetGenus(VG, doc.genus);
     fi;
