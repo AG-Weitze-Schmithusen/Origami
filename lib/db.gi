@@ -18,10 +18,17 @@ InstallMethod(InsertVeechGroupIntoDB, [IsModularSubgroup], function(VG)
     index := index,
     sigma_s := sigma_s,
     sigma_t := sigma_t,
-    congruence := IsCongruence(VG),
-    level := GeneralizedLevel(VG),
     wohlfahrt_level := WohlfahrtLevel(VG)
   );
+  if HasIsCongruence(VG) then
+    vg_entry.congruence := IsCongruence(VG);
+  fi;
+  if HasGeneralizedLevel(VG) then
+    vg_entry.level := GeneralizedLevel(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    vg_entry.congruence_level := CongruenceLevel(VG);
+  fi;
   if HasDeficiency(VG) then
     vg_entry.deficiency := Deficiency(VG);
   fi;
@@ -63,10 +70,18 @@ InstallMethod(GetVeechGroupsFromDB, [IsRecord], function(constraints)
   Apply(result, function(doc)
     local VG;
     VG := ModularSubgroup(PermList(doc.sigma_s), PermList(doc.sigma_t));
-    SetGeneralizedLevel(VG, doc.level);
-    SetIsCongruence(VG, doc.congruence);
+    SetWohlfahrtLevel(VG, doc.wohlfahrt_level);
     if IsBound(doc.genus) then
       SetGenus(VG, doc.genus);
+    fi;
+    if IsBound(doc.congruence) then
+      SetIsCongruence(VG, doc.congruence);
+    fi;
+    if IsBound(doc.congruence_level) then
+      SetCongruenceLevel(VG, doc.congruence_level);
+    fi;
+    if IsBound(doc.level) then
+      SetGeneralizedLevel(VG, doc.level);
     fi;
     if IsBound(doc.deficiency) then
       SetDeficiency(VG, doc.deficiency);
