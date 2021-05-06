@@ -40,6 +40,21 @@ Dependencies := rec(
 
 Persons := [
 	rec(
+		LastName      := "Ertl",
+		FirstNames    := "Simon",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
 		LastName      := "Junk",
 		FirstNames    := "Luca",
 		IsAuthor      := true,
@@ -53,7 +68,7 @@ Persons := [
 										 	"D-66041 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-),
+	),
   rec(
     LastName      := "Kattler",
     FirstNames    := "Pascal",
@@ -69,13 +84,42 @@ Persons := [
     Place         := "Saarbrücken",
     Institution   := "Universität des Saarlandes"
   ),
-
+	rec(
+		LastName      := "Rogovskyy",
+		FirstNames    := "Alexander",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
 	rec(
 		LastName      := "Thevis",
 		FirstNames    := "Andrea",
 		IsAuthor      := true,
 		IsMaintainer  := true,
 		Email         := "thevis@math.uni-sb.de",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+                       "AG Weitze-Schmithüsen\n",
+                       "FR 6.1 Mathematik\n",
+                       "Universität des Saarlandes\n",
+                       "D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+  ),
+	rec(
+		LastName      := "Weitze-Schmithüsen",
+		FirstNames    := "Gabriela",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "weitze@math.uni-sb.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
                        "AG Weitze-Schmithüsen\n",
