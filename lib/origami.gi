@@ -432,20 +432,22 @@ end);
 
 
 InstallGlobalFunction(FixedPointsOfConjugatorToInverse, function(o,sigma)
-	local x, y, fixedpoints, i, j;
-  x := HorizontalPerm(o);
-  y := VerticalPerm(o);
-	#fixed points of (1/2,1/2)
-	fixedpoints := [];
-	fixedpoints := List(Difference([1..DegreeOrigami(o)], MovedPoints(sigma)), i -> [i, 0.5, 0.5]); #fixedpoints at (0.5,0.5)
-	Append(fixedpoints, List(Difference([1..DegreeOrigami(o)], MovedPoints(sigma*x)), i -> [i, 0, 0.5])); #fixedpoints at (0,0.5)
-	Append(fixedpoints, List(Difference([1..DegreeOrigami(o)], MovedPoints(sigma*y)), i -> [i, 0.5, 0])); #fixedpoints at (0.5,0)
-	for j in [1..DegreeOrigami(o)] do                                                      #fixedpoints at (0,0)
-  	if  j^(sigma * Inverse(x) * Inverse(y)) in Orbit(Group(Comm(x,y)),j) then  #i and x^-1y-^1sigma(i) are in the same cykel of [x,y]
-    	Add(fixedpoints,[j, 0, 0]);
-  	fi;
-	od;
-	return fixedpoints;
+local x,y, fixedpoints,i,j,tile_rep;
+x:=HorizontalPerm(o);
+y:=VerticalPerm(o);
+#fixed points of (1/2,1/2)
+fixedpoints:=[];
+fixedpoints:=List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma)),i->[i,0.5,0.5]); #fixedpoints at (0.5,0.5)
+Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*x)),i->[i,0,0.5])); #fixedpoints at (0,0.5)
+Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*y)),i->[i,0.5,0])); #fixedpoints at (0.5,0)
+tile_rep:= Difference([1..DegreeOrigami(o)] , Flat(OrigamiSingularities(o))); #taking representatives of lower left corners
+Append(tile_rep, List(OrigamiSingularities(o), i->i[1]));
+for j in tile_rep do                                                      #fixedpoints at (0,0)
+if  j^(Inverse(y)*Inverse(x)*sigma) in Orbit(Group(Comm(x,y)),j) then  #i and sigma*x^-1*y^-1 are in the same cykel of [x,y]
+	 Add(fixedpoints,[j,0,0]);                                           # so if V(i)=V(sigma*x^-1*y^-1)
+fi;
+od;
+return fixedpoints;
 end);
 
 InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
@@ -463,17 +465,19 @@ InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
 end);
 
 InstallGlobalFunction(FixedPointsOfAutomorphism, function(o, sigma)
-  local fixedpoints, x, y;
-  x := HorizontalPerm(o);
-  y := VerticalPerm(o);
-  if Inverse(sigma) * x * sigma = x and Inverse(sigma) * y * sigma = y then
-		fixedpoints := FixedPointsOfTranslation(o, sigma);
-	elif Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y) then
-		fixedpoints := FixedPointsOfConjugatorToInverse(o,sigma);
-	else
-  	Error("the given permutation is not an automorphism of the origami.");
-	fi;
-	return fixedpoints;
+local fixedpoints, x, y;
+x:=HorizontalPerm(o);
+y:=VerticalPerm(o);
+if Inverse(sigma)*x*sigma=x and Inverse(sigma)*y*sigma=y
+	then  fixedpoints:=[FixedPointsOfTranslation(o,sigma),1];
+elif
+Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y)
+ then
+fixedpoints:=[FixedPointsOfConjugatorToInverse(o,sigma),-1];
+else
+Error("the given permutation is not an automorphism of the origami.");
+fi;
+return fixedpoints;
 end);
 
 InstallGlobalFunction(Quotientengeschlecht, function(O)
