@@ -691,7 +691,7 @@ In this section we describe some methods for constructing explicit examples and 
   This function calculates the fixed points of a conjugator to inverse <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the inverse origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
   The funtion does not check whether <Arg>sigma</Arg> is a conjugator to inverse.
   The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
-  and <M>(b,c)</M> are the local coordinates in the square <M>a</M>.
+  and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
     <Example>
       <![CDATA[
       gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
@@ -727,11 +727,11 @@ In this section we describe some methods for constructing explicit examples and 
 
 
   <Oper Name="FixedPointsOfAutomorphism" Arg="O, sigma"/>
-  <Returns>Two lists.</Returns>
+  <Returns>A list.</Returns>
   <Description>
   This function calculates the fixed points of an automorphism <Arg>sigma</Arg> of the origami <Arg>O</Arg>.
-  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
-  and <M>(b,c)</M> are the local coordinates in the square.
+  The fixed points are returned in a list with entries <M>[[a,b,c],d]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square and <M>d</M> is <M>1</M> if <Arg>sigma</Arg> is a translation and <M>-1</M> if it is a conjugator to inverse.
     <Example>
       <![CDATA[
       gap> O:=Origami((1,2,3,4),(1,2)(3,4));
