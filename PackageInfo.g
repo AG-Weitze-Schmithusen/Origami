@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "1.0.0",
-	Date := "11/05/2020",
+	Date := "07/05/2021",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
@@ -17,8 +17,8 @@ SetPackageInfo( rec(
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "1.0.0">
-##  <!ENTITY RELEASEDATE "11 May 2020">
-##  <!ENTITY RELEASEYEAR "2020">
+##  <!ENTITY RELEASEDATE "07 May 2021">
+##  <!ENTITY RELEASEYEAR "2021">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
@@ -133,13 +133,13 @@ Persons := [
 
 
 
-GithubUser := "PascalKattler",
+GithubUser := "AG-Weitze-Schmithusen",
 GithubRepository := ~.PackageName,
 GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
 PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
 
-ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/releases/download/Origami-", ~.Version, "/Origami-", ~.Version ),
+ArchiveURL     := Concatenation( "https://github.com/", ~.GithubUser, "/", ~.GithubRepository, "/releases/download/Origami-", ~.Version, "/", ~.GithubRepository, "-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 

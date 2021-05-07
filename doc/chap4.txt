@@ -16,10 +16,10 @@
   
   [33X[0;0YIn  this  database, create three collections called [13Xorigami_representatives[113X,
   [13Xorigamis[113X    and    [13Xveechgroups[113X.    Please    download    the    data    from
-  [7Xhttps://www.math.uni-sb.de/ag/weitze/CMS/index.php/de/forschung[107X  and  import
-  the  [13Xjson[113X-files  into the corresponding collections. All of this can be done
-  in   the   web   interface   of   ArangoDB,   which   you  can  reach  under
-  [7Xhttp://127.0.0.1:8529[107X.[133X
+  [7Xhttps://www.math.uni-sb.de/origami/[107X  and  import  the  [13Xjson[113X-files  into  the
+  corresponding  collections.  All of this can be done in the web interface of
+  ArangoDB,  which  you can reach under [7Xhttp://127.0.0.1:8529[107X (unless you have
+  specified a different endpoint for your local ArangoDB-Server).[133X
   
   
   [1X4.2 [33X[0;0YUsing the origami database[133X[101X
@@ -30,7 +30,9 @@
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDatabase[110X object[133X
   
   [33X[0;0YConnects    to    the    arango   database   'origami'   at   the   endpoint
-  'http+tcp://127.0.0.1:8529' with the user 'origami' and password 'secret'.[133X
+  'http+tcp://127.0.0.1:8529' with the user 'origami'.[133X
+  
+  [1X4.2-2 InsertVeechGroupIntoDB[101X
   
   [33X[1;0Y[29X[2XInsertVeechGroupIntoDB[102X( [3XG[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
@@ -41,11 +43,15 @@
   in  the  database.  The  resulting  [10XArangoDocument[110X  corresponding to the new
   database entry is returned.[133X
   
+  [1X4.2-3 GetVeechGroupDBEntry[101X
+  
   [33X[1;0Y[29X[2XGetVeechGroupDBEntry[102X( [3XG[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
   
   [33X[0;0YTakes  a  [10XModularSubgroup[110X  [3XG[103X and returns the corresponding database entry or
   [10Xfail[110X if [3XG[103X is not in the database.[133X
+  
+  [1X4.2-4 GetVeechGroupsFromDB[101X
   
   [33X[1;0Y[29X[2XGetVeechGroupsFromDB[102X( [3Xconstraints[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA list of [10XModularSubgroup[110Xs[133X
@@ -65,17 +71,23 @@
     [4X[28X    [128X[104X
   [4X[32X[104X
   
+  [1X4.2-5 UpdateVeechGroupDBEntry[101X
+  
   [33X[1;0Y[29X[2XUpdateVeechGroupDBEntry[102X( [3XG[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
   
   [33X[0;0YUpdates  the  Veech group entry in the database with newly computed data and
   returns the corresponding [10XArangoDocument[110X.[133X
   
+  [1X4.2-6 RemoveVeechGroupFromDB[101X
+  
   [33X[1;0Y[29X[2XRemoveVeechGroupFromDB[102X( [3XG[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YNothing.[133X
   
   [33X[0;0YRemoves  the  Veech  group  [3XG[103X  from  the  database  (if  present).  NOT  YET
   IMPLEMENTED[133X
+  
+  [1X4.2-7 InsertOrigamiRepresentativeIntoDB[101X
   
   [33X[1;0Y[29X[2XInsertOrigamiRepresentativeIntoDB[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
@@ -86,11 +98,15 @@
   that no other element of the [22XSL_2(Z)[122X orbit of [3XO[103X exists in the representative
   list, no test is performed to check this.[133X
   
+  [1X4.2-8 GetOrigamiOrbitRepresentativeDBEntry[101X
+  
   [33X[1;0Y[29X[2XGetOrigamiOrbitRepresentativeDBEntry[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
   
   [33X[0;0YTakes an Origami [3XO[103X and returns the corresponding database entry or [10Xfail[110X if [3XO[103X
   is not in the database.[133X
+  
+  [1X4.2-9 GetOrigamiOrbitRepresentativesFromDB[101X
   
   [33X[1;0Y[29X[2XGetOrigamiOrbitRepresentativesFromDB[102X( [3Xconstraints[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
@@ -108,11 +124,15 @@
     [4X[28X    [128X[104X
   [4X[32X[104X
   
+  [1X4.2-10 GetAllOrigamiOrbitRepresentativesFromDB[101X
+  
   [33X[1;0Y[29X[2XGetAllOrigamiOrbitRepresentativesFromDB[102X(  ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
   
   [33X[0;0YReturns  all  origami  orbit  representatives in the database. Shorthand for
   [10XGetOrigamiOrbitRepresentativesFromDB(rec());[110X[133X
+  
+  [1X4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry[101X
   
   [33X[1;0Y[29X[2XUpdateOrigamiOrbitRepresentativeDBEntry[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
@@ -121,11 +141,15 @@
   computed  data  and returns the corresponding [10XArangoDocument[110X. If the origami
   orbit representative [3XO[103X does not exist in the database, it is inserted.[133X
   
+  [1X4.2-12 RemoveOrigamiOrbitRepresentativeFromDB[101X
+  
   [33X[1;0Y[29X[2XRemoveOrigamiOrbitRepresentativeFromDB[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YNothing.[133X
   
   [33X[0;0YRemoves the origami orbit representative [3XO[103X from the database if present. NOT
   YET IMPLEMENTED![133X
+  
+  [1X4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB[101X
   
   [33X[1;0Y[29X[2XInsertOrigamiWithOrbitRepresentativeIntoDB[102X( [3XO[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
@@ -133,6 +157,8 @@
   [33X[0;0YInserts  the  origami  [3XO[103X  into  the origami list with orbit representative [3XR[103X
   which  is  inserted  into the origami orbit representative list if it is not
   already in there. Returns the [10XArangoDocument[110X corresponding to [3XO[103X.[133X
+  
+  [1X4.2-14 InsertOrigamiIntoDB[101X
   
   [33X[1;0Y[29X[2XInsertOrigamiIntoDB[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
@@ -145,21 +171,29 @@
   as its own representative. This might result in entries in the origami orbit
   representative list which are in the same orbit.[133X
   
+  [1X4.2-15 GetOrigamiDBEntry[101X
+  
   [33X[1;0Y[29X[2XGetOrigamiDBEntry[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
   
   [33X[0;0YReturns  the [10XArangoDocument[110X in the origami list corresponding to the origami
   [3XO[103X or fail if does not exist in the database.[133X
   
+  [1X4.2-16 GetOrigamiOrbit[101X
+  
   [33X[1;0Y[29X[2XGetOrigamiOrbit[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
   
   [33X[0;0YReturns all origamis in the database which are in the orbit of [3XO[103X.[133X
   
+  [1X4.2-17 UpdateRepresentativeOfOrigami[101X
+  
   [33X[1;0Y[29X[2XUpdateRepresentativeOfOrigami[102X( [3XO[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YNothing.[133X
   
   [33X[0;0YUpdates the orbit representative of [3XO[103X to be [3XR[103X.[133X
+  
+  [1X4.2-18 RemoveOrigamiFromDB[101X
   
   [33X[1;0Y[29X[2XRemoveOrigamiFromDB[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YNothing.[133X

@@ -9,15 +9,29 @@
                                  Version 1.0.0
   
   
-                                   09.03.2020
+                                   07.05.2021
   
+  
+                                   Simon Ertl
   
                                    Luca Junk
   
                                  Pascal Kattler
   
+                              Alexander Rogovskyy
+  
                                  Andrea Thevis
   
+                          Gabriela Weitze-Schmithüsen
+  
+  
+  
+  Simon Ertl
+      Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
+      Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
+                [33X[0;14YFR 6.1 Mathematik[133X
+                [33X[0;14YUniversität des Saarlandes[133X
+                [33X[0;14YD-66041 Saarbrücken[133X
   
   
   Luca Junk
@@ -38,8 +52,25 @@
                 [33X[0;14YD-66041 Saarbrücken[133X
   
   
+  Alexander Rogovskyy
+      Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
+      Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
+                [33X[0;14YFR 6.1 Mathematik[133X
+                [33X[0;14YUniversität des Saarlandes[133X
+                [33X[0;14YD-66041 Saarbrücken[133X
+  
+  
   Andrea Thevis
       Email:    [7Xmailto:thevis@math.uni-sb.de[107X
+      Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
+      Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
+                [33X[0;14YFR 6.1 Mathematik[133X
+                [33X[0;14YUniversität des Saarlandes[133X
+                [33X[0;14YD-66041 Saarbrücken[133X
+  
+  
+  Gabriela Weitze-Schmithüsen
+      Email:    [7Xmailto:weitze@math.uni-sb.de[107X
       Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
       Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
                 [33X[0;14YFR 6.1 Mathematik[133X
@@ -50,7 +81,8 @@
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2018-2020 by Luca Junk, Pascal Kattler and Andrea Thevis[133X
+  [33X[0;0Y©  2018-2021  by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy,
+  Andrea Thevis and Gabriela Weitze-Schmithüsen[133X
   
   
   -------------------------------------------------------
@@ -99,6 +131,23 @@
     4.1 [33X[0;0YSetting up the database[133X
     4.2 [33X[0;0YUsing the origami database[133X
       4.2-1 ConnectToOrigamiDB
+      4.2-2 InsertVeechGroupIntoDB
+      4.2-3 GetVeechGroupDBEntry
+      4.2-4 GetVeechGroupsFromDB
+      4.2-5 UpdateVeechGroupDBEntry
+      4.2-6 RemoveVeechGroupFromDB
+      4.2-7 InsertOrigamiRepresentativeIntoDB
+      4.2-8 GetOrigamiOrbitRepresentativeDBEntry
+      4.2-9 GetOrigamiOrbitRepresentativesFromDB
+      4.2-10 GetAllOrigamiOrbitRepresentativesFromDB
+      4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry
+      4.2-12 RemoveOrigamiOrbitRepresentativeFromDB
+      4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB
+      4.2-14 InsertOrigamiIntoDB
+      4.2-15 GetOrigamiDBEntry
+      4.2-16 GetOrigamiOrbit
+      4.2-17 UpdateRepresentativeOfOrigami
+      4.2-18 RemoveOrigamiFromDB
   
   
   [32X

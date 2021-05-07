@@ -1,6 +1,6 @@
 name: Origami
 version: 1.0.0
-date: 2020-05-11
+date: 2021-05-07
 description: |
     Computing Veech groups of origamis
 
@@ -59,16 +59,16 @@ suggested-pkgs:
       version: "2019.07.30"
       url: "https://github.com/homalg-project/ArangoDBInterface/"
 
-www: https://PascalKattler.github.io/Origami/
+www: https://AG-Weitze-Schmithusen.github.io/Origami/
 readme: README.md
-packageinfo: https://PascalKattler.github.io/Origami/PackageInfo.g
-github: https://github.com/PascalKattler/Origami
+packageinfo: https://AG-Weitze-Schmithusen.github.io/Origami/PackageInfo.g
+github: https://github.com/AG-Weitze-Schmithusen/Origami
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/PascalKattler/Origami/releases/download/v1.0.0/Origami-1.0.0.tar.gz
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v1.0.0/Origami-1.0.0.tar.gz
     - name: .zip
-      url: https://github.com/PascalKattler/Origami/releases/download/v1.0.0/Origami-1.0.0.zip
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v1.0.0/Origami-1.0.0.zip
 
 abstract: |
     <span class="pkgname">Origami</span> is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.
@@ -78,12 +78,12 @@ doc-html: doc/chap0.html
 doc-pdf: doc/Origami.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>EJKRTW20</span>]   <b class='BibAuthor'>Ertl, S., Junk, L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
+    [<span class='BibKey'>EJKRTW21</span>]   <b class='BibAuthor'>Ertl, S., Junk, L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
      <i class='BibTitle'>Origami, Computing Veech groups of origamis,
              Version 1.0.0</i>
-     (<span class='BibYear'>2020</span>)<br />
+     (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://PascalKattler.github.io/Origami/">https://PascalKattler.github.io/Origami/</a></span>.
+    <span class='BibHowpublished'><a href="https://AG-Weitze-Schmithusen.github.io/Origami/">https://AG-Weitze-Schmithusen.github.io/Origami/</a></span>.
     </p>
     
 
@@ -94,11 +94,12 @@ bibtex: |
       title =            {{Origami},   Computing   Veech   groups  of  origamis,
                           {V}ersion 1.0.0},
       month =            {May},
-      year =             {2020},
+      year =             {2021},
       note =             {GAP package},
-      howpublished =     {\href       {https://PascalKattler.github.io/Origami/}
-                          {\texttt{https://PascalKattler.github.io/}\discretionary
+      howpublished =     {\href
+                          {https://AG-Weitze-Schmithusen.github.io/Origami/}
+                          {\texttt{https://AG-Weitze-Schmithusen.github.io/}\discretionary
                           {}{}{}\texttt{Origami/}}},
-      printedkey =       {EJKRTW20}
+      printedkey =       {EJKRTW21}
     }
 

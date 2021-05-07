@@ -29,6 +29,23 @@
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B8CDCFE7C11BD41">4.2-1 ConnectToOrigamiDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FE61D4A7E39CF51">4.2-2 InsertVeechGroupIntoDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80E8D1DD7958FA34">4.2-3 GetVeechGroupDBEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79829DFB7F4A1221">4.2-4 GetVeechGroupsFromDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81DA290D80544030">4.2-5 UpdateVeechGroupDBEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B57924D7D4D2BB3">4.2-6 RemoveVeechGroupFromDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C78DC6A7E115471">4.2-7 InsertOrigamiRepresentativeIntoDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F9496DE7A62D177">4.2-8 GetOrigamiOrbitRepresentativeDBEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FA545F582EA06F9">4.2-9 GetOrigamiOrbitRepresentativesFromDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82723A398620DD8B">4.2-10 GetAllOrigamiOrbitRepresentativesFromDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X786858A084AEDA3B">4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X860A3AEA7CD62968">4.2-12 RemoveOrigamiOrbitRepresentativeFromDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E9CD7E779C39A44">4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80700BF48426DF99">4.2-14 InsertOrigamiIntoDB</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BA36A0E839C06F7">4.2-15 GetOrigamiDBEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8135E13C827916A1">4.2-16 GetOrigamiOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86B4895E821E9B7F">4.2-17 UpdateRepresentativeOfOrigami</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85BA3C607B69F1B0">4.2-18 RemoveOrigamiFromDB</a></span>
 </div></div>
 </div>
 
@@ -52,7 +69,7 @@
 
 </li>
 </ul>
-<p>In this database, create three collections called <em>origami_representatives</em>, <em>origamis</em> and <em>veechgroups</em>. Please download the data from <span class="URL"><a href="https://www.math.uni-sb.de/ag/weitze/CMS/index.php/de/forschung">https://www.math.uni-sb.de/ag/weitze/CMS/index.php/de/forschung</a></span> and import the <em>json</em>-files into the corresponding collections. All of this can be done in the web interface of ArangoDB, which you can reach under <span class="URL"><a href="http://127.0.0.1:8529">http://127.0.0.1:8529</a></span>.</p>
+<p>In this database, create three collections called <em>origami_representatives</em>, <em>origamis</em> and <em>veechgroups</em>. Please download the data from <span class="URL"><a href="https://www.math.uni-sb.de/origami/">https://www.math.uni-sb.de/origami/</a></span> and import the <em>json</em>-files into the corresponding collections. All of this can be done in the web interface of ArangoDB, which you can reach under <span class="URL"><a href="http://127.0.0.1:8529">http://127.0.0.1:8529</a></span> (unless you have specified a different endpoint for your local ArangoDB-Server).</p>
 
 <p><a id="X80E761E27F525830" name="X80E761E27F525830"></a></p>
 
@@ -65,17 +82,29 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConnectToOrigamiDB</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDatabase</code> object</p>
 
-<p>Connects to the arango database 'origami' at the endpoint 'http+tcp://127.0.0.1:8529' with the user 'origami' and password 'secret'.</p>
+<p>Connects to the arango database 'origami' at the endpoint 'http+tcp://127.0.0.1:8529' with the user 'origami'.</p>
+
+<p><a id="X7FE61D4A7E39CF51" name="X7FE61D4A7E39CF51"></a></p>
+
+<h5>4.2-2 InsertVeechGroupIntoDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertVeechGroupIntoDB</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Takes a <code class="code">ModularSubgroup</code> <var class="Arg">G</var> and inserts it into the Veech group table. Only precomputed attributes are inserted. This function does not compute anything new from the group. No test is performed to check whether <var class="Arg">G</var> already exists in the database. The resulting <code class="code">ArangoDocument</code> corresponding to the new database entry is returned.</p>
 
+<p><a id="X80E8D1DD7958FA34" name="X80E8D1DD7958FA34"></a></p>
+
+<h5>4.2-3 GetVeechGroupDBEntry</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetVeechGroupDBEntry</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Takes a <code class="code">ModularSubgroup</code> <var class="Arg">G</var> and returns the corresponding database entry or <code class="code">fail</code> if <var class="Arg">G</var> is not in the database.</p>
+
+<p><a id="X79829DFB7F4A1221" name="X79829DFB7F4A1221"></a></p>
+
+<h5>4.2-4 GetVeechGroupsFromDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetVeechGroupsFromDB</code>( <var class="Arg">constraints</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: A list of <code class="code">ModularSubgroup</code>s</p>
@@ -94,25 +123,45 @@
       
     </pre></div>
 
+<p><a id="X81DA290D80544030" name="X81DA290D80544030"></a></p>
+
+<h5>4.2-5 UpdateVeechGroupDBEntry</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UpdateVeechGroupDBEntry</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Updates the Veech group entry in the database with newly computed data and returns the corresponding <code class="code">ArangoDocument</code>.</p>
+
+<p><a id="X7B57924D7D4D2BB3" name="X7B57924D7D4D2BB3"></a></p>
+
+<h5>4.2-6 RemoveVeechGroupFromDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemoveVeechGroupFromDB</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: Nothing.</p>
 
 <p>Removes the Veech group <var class="Arg">G</var> from the database (if present). NOT YET IMPLEMENTED</p>
 
+<p><a id="X7C78DC6A7E115471" name="X7C78DC6A7E115471"></a></p>
+
+<h5>4.2-7 InsertOrigamiRepresentativeIntoDB</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertOrigamiRepresentativeIntoDB</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Inserts the normal form of the origami <var class="Arg">O</var> into the origami representative list. Inserts only precomputed data. If the Veech group of <var class="Arg">O</var> does not already exist in the database, it is also inserted. This function assumes that no other element of the <span class="SimpleMath">SL_2(Z)</span> orbit of <var class="Arg">O</var> exists in the representative list, no test is performed to check this.</p>
 
+<p><a id="X7F9496DE7A62D177" name="X7F9496DE7A62D177"></a></p>
+
+<h5>4.2-8 GetOrigamiOrbitRepresentativeDBEntry</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetOrigamiOrbitRepresentativeDBEntry</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Takes an Origami <var class="Arg">O</var> and returns the corresponding database entry or <code class="code">fail</code> if <var class="Arg">O</var> is not in the database.</p>
+
+<p><a id="X7FA545F582EA06F9" name="X7FA545F582EA06F9"></a></p>
+
+<h5>4.2-9 GetOrigamiOrbitRepresentativesFromDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetOrigamiOrbitRepresentativesFromDB</code>( <var class="Arg">constraints</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: A list of <code class="code">Origami</code>s</p>
@@ -129,45 +178,81 @@
       
     </pre></div>
 
+<p><a id="X82723A398620DD8B" name="X82723A398620DD8B"></a></p>
+
+<h5>4.2-10 GetAllOrigamiOrbitRepresentativesFromDB</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetAllOrigamiOrbitRepresentativesFromDB</code>(  )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: A list of <code class="code">Origami</code>s</p>
 
 <p>Returns all origami orbit representatives in the database. Shorthand for <code class="code">GetOrigamiOrbitRepresentativesFromDB(rec());</code></p>
+
+<p><a id="X786858A084AEDA3B" name="X786858A084AEDA3B"></a></p>
+
+<h5>4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UpdateOrigamiOrbitRepresentativeDBEntry</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Updates the origami orbit representative entry in the database with newly computed data and returns the corresponding <code class="code">ArangoDocument</code>. If the origami orbit representative <var class="Arg">O</var> does not exist in the database, it is inserted.</p>
 
+<p><a id="X860A3AEA7CD62968" name="X860A3AEA7CD62968"></a></p>
+
+<h5>4.2-12 RemoveOrigamiOrbitRepresentativeFromDB</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemoveOrigamiOrbitRepresentativeFromDB</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: Nothing.</p>
 
 <p>Removes the origami orbit representative <var class="Arg">O</var> from the database if present. NOT YET IMPLEMENTED!</p>
+
+<p><a id="X7E9CD7E779C39A44" name="X7E9CD7E779C39A44"></a></p>
+
+<h5>4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertOrigamiWithOrbitRepresentativeIntoDB</code>( <var class="Arg">O</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Inserts the origami <var class="Arg">O</var> into the origami list with orbit representative <var class="Arg">R</var> which is inserted into the origami orbit representative list if it is not already in there. Returns the <code class="code">ArangoDocument</code> corresponding to <var class="Arg">O</var>.</p>
 
+<p><a id="X80700BF48426DF99" name="X80700BF48426DF99"></a></p>
+
+<h5>4.2-14 InsertOrigamiIntoDB</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertOrigamiIntoDB</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Inserts an origami <var class="Arg">O</var> into the database. If the Veech group and the orbit of <var class="Arg">O</var> is known, this function checks if there is already a representative of the orbit of <var class="Arg">O</var> in the database. If not, <var class="Arg">O</var> is inserted as the representative of its orbit, if yes, <var class="Arg">O</var> is only inserted into the origami list with a reference to the representative. If the Veech group of <var class="Arg">O</var> is not known, it is inserted as its own representative. This might result in entries in the origami orbit representative list which are in the same orbit.</p>
+
+<p><a id="X7BA36A0E839C06F7" name="X7BA36A0E839C06F7"></a></p>
+
+<h5>4.2-15 GetOrigamiDBEntry</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetOrigamiDBEntry</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: An <code class="code">ArangoDocument</code></p>
 
 <p>Returns the <code class="code">ArangoDocument</code> in the origami list corresponding to the origami <var class="Arg">O</var> or fail if does not exist in the database.</p>
 
+<p><a id="X8135E13C827916A1" name="X8135E13C827916A1"></a></p>
+
+<h5>4.2-16 GetOrigamiOrbit</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetOrigamiOrbit</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: A list of <code class="code">Origami</code>s</p>
 
 <p>Returns all origamis in the database which are in the orbit of <var class="Arg">O</var>.</p>
 
+<p><a id="X86B4895E821E9B7F" name="X86B4895E821E9B7F"></a></p>
+
+<h5>4.2-17 UpdateRepresentativeOfOrigami</h5>
+
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UpdateRepresentativeOfOrigami</code>( <var class="Arg">O</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: Nothing.</p>
 
 <p>Updates the orbit representative of <var class="Arg">O</var> to be <var class="Arg">R</var>.</p>
+
+<p><a id="X85BA3C607B69F1B0" name="X85BA3C607B69F1B0"></a></p>
+
+<h5>4.2-18 RemoveOrigamiFromDB</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemoveOrigamiFromDB</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: Nothing.</p>
