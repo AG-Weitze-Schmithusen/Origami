@@ -10,8 +10,17 @@
 <TitlePage>
   <Title>The <Package>Origami</Package> Package</Title>
   <Subtitle>Computing Veech groups of origamis</Subtitle>
-  <Date>09.03.2020</Date>
+  <Date>07.05.2021</Date>
   <Version>Version 1.0.0</Version>
+  <Author>Simon Ertl
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+  </Author>
   <Author>Luca Junk
     <Email>junk@math.uni-sb.de</Email>
     <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
@@ -31,7 +40,15 @@
       Universität des Saarlandes<Br/>
       D-66041 Saarbrücken<Br/>
     </Address>
-
+  </Author>
+  <Author>Alexander Rogovskyy
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
   </Author>
   <Author>Andrea Thevis
     <Email>thevis@math.uni-sb.de</Email>
@@ -43,8 +60,18 @@
       D-66041 Saarbrücken<Br/>
     </Address>
   </Author>
+  <Author>Gabriela Weitze-Schmithüsen
+    <Email>weitze@math.uni-sb.de</Email>
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+  </Author>
 
-    <Copyright>&copyright; 2018-2020 by Luca Junk, Pascal Kattler and Andrea Thevis
+    <Copyright>&copyright; 2018-2021 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Andrea Thevis and Gabriela Weitze-Schmithüsen
     </Copyright>
 
     <Acknowledgements>

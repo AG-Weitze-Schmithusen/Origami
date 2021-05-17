@@ -24,7 +24,7 @@ end);
 
 InstallOtherMethod(OrigamiNC, [IsPerm, IsPerm, IsPosInt], function(sigma_x, sigma_y, d)
 	local Obj, ori;
-	ori:= rec(d := d, x := sigma_x, y := sigma_y);
+	ori:= rec(d := d, x := sigma_x, y := sigma_y);  
 	Obj:= rec();
 
 	ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsOrigami and IsAttributeStoringRep) , HorizontalPerm, ori.x, VerticalPerm, ori.y, DegreeOrigami, d );
@@ -214,54 +214,60 @@ InstallGlobalFunction(ContainsNormalSubgroups, function(G, H)
 end);
 
 InstallGlobalFunction(QROFromGroup, function(G)
-
   local subgroups, j,i,m, origami_list, r, u, F2, f2_epis;
-  #Testing if G has 2 Generators
-if Length(MinimalGeneratingSet(G))>2 then Print("Error: G has not 2 Generators."); return;
-fi;
-F2:=FreeGroup(2);
-f2_epis:=GQuotients(F2, G);
-r:=[]; u:=[];
 
-for i in [1.. Length(f2_epis)] do
- r[i]:=Image(f2_epis[i], F2.1); u[i]:=Image(f2_epis[i],F2.2); od;
+	if Length(SmallGeneratingSet(G)) > 2 then
+		if Length(GQuotients(FreeGroup(2), G)) = 0 then
+			Error("The group <G> is not two-generated.");
+			return;
+		fi;
+	fi;
 
-#the following List contains all the subgroups of G that do not contain another normal, nontrivial subgroup of G
-  subgroups := AllSubgroups(G);
-  subgroups:=Filtered(subgroups, i -> ContainsNormalSubgroups(G,i)=false);
-  #Calculating the Origamis:
-  m:=1;
-  origami_list:=[];
-for j in [1.. Length(f2_epis)] do
+	F2 := FreeGroup(2);
+	f2_epis := GQuotients(F2, G);
+	r:=[]; u:=[];
 
-  for i in subgroups do
-  origami_list[m]:=QuasiRegularOrigami(G,i, r[j], u[j]);
-  origami_list[m+1]:=QuasiRegularOrigami(G, i, u[j], r[j]);
-  m:=m+2;
-  od;
-od;
-  origami_list:=DuplicateFreeList(origami_list);
+	for i in [1.. Length(f2_epis)] do
+		r[i] := Image(f2_epis[i], F2.1);
+	 	u[i] := Image(f2_epis[i], F2.2);
+	od;
+
+	subgroups := AllSubgroups(G);
+	subgroups := Filtered(subgroups, i -> not ContainsNormalSubgroups(G,i));
+
+	m := 1;
+	origami_list := [];
+	for j in [1..Length(f2_epis)] do
+	  for i in subgroups do
+	  	origami_list[m]   := QuasiRegularOrigami(G,i, r[j], u[j]);
+	  	origami_list[m+1] := QuasiRegularOrigami(G, i, u[j], r[j]);
+	  	m := m+2;
+	  od;
+	od;
+	origami_list := DuplicateFreeList(origami_list);
   return origami_list;
-end);
-
-InstallGlobalFunction(TwoGeneratedSmallGroups, function(d)
-  local two_generated_groups;
-  two_generated_groups := [];
-    Append(two_generated_groups, Filtered(AllSmallGroups(d), G -> Length(MinimalGeneratingSet(G))<=2));
-  return two_generated_groups;
 end);
 
 InstallGlobalFunction(QROFromOrder, function(d)
   local i, origami_list, group_list;
 
-  group_list := TwoGeneratedSmallGroups(d);
+  group_list := Filtered(AllSmallGroups(d), function(G)
+		if Length(SmallGeneratingSet(G)) <= 2 then return true; fi;
+		return Length(GQuotients(FreeGroup(2), G)) >= 1;
+	end);
   origami_list := [];
 
-  for i in [1 .. Length(group_list)] do
+  for i in [1..Length(group_list)] do
   	Append(origami_list, QROFromGroup(group_list[i]));
   od;
 
   return origami_list;
+end);
+
+InstallGlobalFunction(DefinesQuasiRegularOrigami, function(G, U, r, u)
+	local N;
+	N := Normalizer(G, U);
+	return IsNormal(G, N) and IsAbelian(G/N);
 end);
 
 InstallGlobalFunction(RandomOrigami, function(d)
@@ -273,6 +279,282 @@ InstallGlobalFunction(RandomOrigami, function(d)
 		sigma_y := Random(GlobalMersenneTwister, S_d);
 	od;
 	return OrigamiNC(sigma_x, sigma_y, d);
+end);
+
+InstallGlobalFunction(CylinderStructure, function(O)
+	local list, i, m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, mat_inv;
+	sigma_h := HorizontalPerm(O);
+	sigma_v := VerticalPerm(O);
+	if sigma_h=() then
+		list := [];
+	else
+		cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
+		#s is list of the cycles in the horizontal permutation of the origami
+		list := [];
+		cycleLength := List(cycles, i->(Length(i))); #Length of the cycles in the permutation
+		for m in [1..Maximum(cycleLength)] do
+			helpcycle := Filtered(cycles, i->Length(i)=m); #Zykel der Länge m
+			helpcycle := AsSet(helpcycle);
+			while helpcycle <> []  do
+				mat := [];
+				mat_inv := [];
+				for i in [1..Length(helpcycle[1])] do #calcutlatin the orbit under sigma_h and sigma_h^{-1} of each tile in the cycle
+					mat[i] := Orbit(Group(sigma_v), helpcycle[1][i]);
+					mat_inv[i] := Orbit(Group(Inverse(sigma_v)), helpcycle[1][i]);
+				od;
+				diff := Intersection(helpcycle, Union(TransposedMat(mat),TransposedMat(mat_inv))); #transposing the matrix to check on whether there are cylinders lying over each other
+				Add(list, [Length(diff), m]); #diff contains the cycles of same lenght which form a cylinder
+				helpcycle := Difference(helpcycle, diff);
+			od;
+		od;
+	fi;
+	return list;
+end);
+
+InstallMethod(SumOfLyapunovExponents, [IsOrigami], function(O)
+  local stratum, orbit,i,j, sum;
+	sum := 0;
+	if not Stratum(O)=[] then
+		if IsNormalOrigami(O) then
+			sum := SumOfLyapunovExponents(AsNormalStoredOrigami(O));
+		else
+  		orbit := VeechGroupAndOrbit(O).orbit;
+			if Length(orbit) > 1 then
+				for i in [1.. Length(orbit)] do
+  				for j in [1.. Length(CylinderStructure(orbit[i]))] do
+    			sum := sum + CylinderStructure(orbit[i])[j][1]/CylinderStructure(orbit[i])[j][2]; #height/width of the cylinders of the orbit
+  				od;
+				od;
+				sum := sum/Length(orbit);
+			fi;
+  		stratum := Stratum(O);
+  		for i in [1..Length(stratum)] do
+    		sum := sum + (1/12)*(stratum[i])*(stratum[i]+2)/(stratum[i]+1);
+			od;
+		fi;
+	fi;
+	return sum;
+end);
+
+InstallOtherMethod(SumOfLyapunovExponents, [IsNormalStoredOrigami], function(O)
+	local  sum, stratum_data, orbit,i;
+	sum := 0;
+	if Stratum(O) <> [] then
+		O := AsPermutationRepresentation(O);
+		orbit := VeechGroupAndOrbit(O).orbit;
+
+		#sum over the orbit (n/#orb)sum_{orb}{1/(ord(x)^2)}
+		for i in [1..Length(orbit)] do
+			sum := sum +(1/Order(HorizontalPerm(orbit[i]))^2);
+		od;
+		sum := sum*(DegreeOrigami(O)/Length(orbit));
+
+		# 1/12*k*a(a+2)/(a+1)
+		stratum_data := [Stratum(O)[1], Length(Stratum(O))];
+		sum := sum + (1/12)*stratum_data[2]*( stratum_data[1])*(stratum_data[1]+2)/(stratum_data[1]+1);
+	fi;
+	return sum;
+end);
+
+InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
+	local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
+				minimizeCycleLengths, cycleLengths, m, l, x, y;
+	x := HorizontalPerm(origami);
+	y := VerticalPerm(origami);
+	n := Maximum(LargestMovedPoint([x,y]), 1);
+
+	# Find points which minimize the lengths of the cycles in which they occur.
+	# In most cases, this greatly reduces the number of breadths-first searches below.
+
+	G := [];
+
+	# Starting from each of the vertices found above, do a breadth-first search
+	# and list the vertices in the order they appear.
+	# This defines a permutation l with which we conjugate x and y.
+	# From the resulting list of pairs of permutations (all of which are by
+	# definition simultaneously conjugated to (x,y)) we choose the lexicographically
+	# smallest one as the canonical form.
+	for i in [1..n] do
+		L := ListWithIdenticalEntries(n, 0);
+		seen := ListWithIdenticalEntries(n, false);
+		Q := [i];
+		seen[i] := true;
+		numSeen := 1;
+		L[i] := 1;
+		while numSeen < n do
+			v := Remove(Q, 1);
+			wx := v^x;
+			wy := v^y;
+			if not seen[wx] then
+				Add(Q, wx);
+				seen[wx] := true;
+				numSeen := numSeen + 1;
+				L[wx] := numSeen;
+			fi;
+			if not seen[wy] then
+				Add(Q, wy);
+				seen[wy] := true;
+				numSeen := numSeen + 1;
+				L[wy] := numSeen;
+			fi;
+		od;
+		Add(G, L);
+	od;
+
+	Apply(G, PermList);
+	return G;
+end);
+
+InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	function(origami)
+ local origami_1, G, G_1, O, O_1, list, i, j;
+	if not VeechGroupIsEven(origami) then # testing if -1 is in the VeechGroup
+			Error("VeechGroup must contain -1");
+	fi;
+	origami_1 := Origami(Inverse(HorizontalPerm(origami)), Inverse(VerticalPerm(origami))); #-1.O
+	G := NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
+	G_1 := NormalformConjugators(origami_1);
+	O := List(G, i -> Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
+	O_1 := List(G_1, i -> Origami(i^-1*HorizontalPerm(origami_1)*i, i^-1*VerticalPerm(origami_1)*i));#we need to calculate these to test find k s.t. sigma_i *origami *sigma_i^-1=delta_k(i)*origami_1*delta_k(i)^-1
+	#fitting the permuations together
+	list := [];
+	#calculating now
+	for i in [1 .. Length(O)] do
+		list[i] := [G[i], G_1[Position(O_1,O[i])]];
+		list[i] := list[i][1] * Inverse(list[i][2]);
+	od;
+	return DuplicateFreeList(list);
+end);
+
+
+InstallGlobalFunction(AutomorphismsOfOrigami, [IsOrigami], function(O)
+	return Flat([TranslationsOfOrigami(O), ConjugatorsToInverse(O)]);
+end);
+
+
+InstallGlobalFunction(FixedPointsOfConjugatorToInverse, function(o,sigma)
+local x,y, fixedpoints,i,j,tile_rep;
+x:=HorizontalPerm(o);
+y:=VerticalPerm(o);
+#fixed points of (1/2,1/2)
+fixedpoints:=[];
+fixedpoints:=List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma)),i->[i,0.5,0.5]); #fixedpoints at (0.5,0.5)
+Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*x)),i->[i,0,0.5])); #fixedpoints at (0,0.5)
+Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*y)),i->[i,0.5,0])); #fixedpoints at (0.5,0)
+tile_rep:= Difference([1..DegreeOrigami(o)] , Flat(OrigamiSingularities(o))); #taking representatives of lower left corners
+Append(tile_rep, List(OrigamiSingularities(o), i->i[1]));
+for j in tile_rep do                                                      #fixedpoints at (0,0)
+if  j^(Inverse(y)*Inverse(x)*sigma) in Orbit(Group(Comm(x,y)),j) then  #i and sigma*x^-1*y^-1 are in the same cykel of [x,y]
+	 Add(fixedpoints,[j,0,0]);                                           # so if V(i)=V(sigma*x^-1*y^-1)
+fi;
+od;
+return fixedpoints;
+end);
+
+InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
+  local x, y, fixedpoints, j, singularities;
+  x := HorizontalPerm(o);
+  y := VerticalPerm(o);
+	fixedpoints := [];
+	singularities := OrigamiSingularities(o);
+  for j in singularities do
+    if j = OnSets(j,sigma) then  
+       Add(fixedpoints,j);
+    fi;
+  od;
+	return fixedpoints;
+end);
+
+InstallGlobalFunction(FixedPointsOfAutomorphism, function(o, sigma)
+local fixedpoints, x, y;
+x:=HorizontalPerm(o);
+y:=VerticalPerm(o);
+if Inverse(sigma)*x*sigma=x and Inverse(sigma)*y*sigma=y
+	then  fixedpoints:=[FixedPointsOfTranslation(o,sigma),1];
+elif
+Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y)
+ then
+fixedpoints:=[FixedPointsOfConjugatorToInverse(o,sigma),-1];
+else
+Error("the given permutation is not an automorphism of the origami.");
+fi;
+return fixedpoints;
+end);
+
+InstallGlobalFunction(Quotientengeschlecht, function(O)
+  local g, x, y, trans, n, fixedpoints, singularities, ram_index, j, i, sum;
+  g := Genus(O); #genus of the origami
+  x := HorizontalPerm(O);
+  y := VerticalPerm(O);
+
+  trans := TranslationsOfOrigami(O);
+  n := Length(trans);  # #Trans(X)
+  trans := Filtered(trans, i -> i <> ()); #Removing the trivial translation under which all points are fixed
+	fixedpoints := List(trans, i->FixedPointsOfTranslation(O,i));
+	fixedpoints := DuplicateFreeList(fixedpoints);
+	fixedpoints := Concatenation(fixedpoints);
+	fixedpoints := List(fixedpoints, i -> Minimum(i)); #choosing a representative tile for each fixedpoint
+  if n=1 then return g; fi; #if n=1, then all ramification indices are 1 thus, the sum over e-1=0
+  singularities := OrigamiSingularities(O); #returns the points [[a,..,b],..,[c,..,d]] where the bottom left corners of a,b form the singularity
+  ram_index := List(singularities, i -> Size(Stabilizer(Group(trans), i, OnSets))); #calculating #Stab(S_i)
+  sum := 0;
+  for i in fixedpoints do
+    j := Position(singularities, Representative(Filtered(singularities, j-> i in j))); #in which singularity S_k is i
+    sum := sum + ram_index[j]-1;
+  od;
+  sum := (2*g-2-sum)/(2*n)+1;
+  return sum;
+end);
+
+InstallGlobalFunction(OrigamiQuotient, function(O)
+  local g, orbits, x, y, sigma_x, sigma_y, i, j;
+  x := HorizontalPerm(O);
+  y := VerticalPerm(O);
+  g := Group(TranslationsOfOrigami(O));
+  sigma_x := [];
+  sigma_y := [];
+  orbits := Orbits(g, [1..DegreeOrigami(O)]);
+  orbits := List(orbits, i -> AsSet(i));
+  
+	for i in [1..Length(orbits)] do
+    sigma_x[i] := []; #permutation is a list and cycles are the sublists
+    if not i in Flat(sigma_x) then
+    	Add(sigma_x[i],i); #first position
+    	j := 1;
+    	while(OnSets(orbits[sigma_x[i][1]], x^j) <> orbits[sigma_x[i][1]]) do #checking if full cycle
+    		Add(sigma_x[i], Position(orbits, OnSets(orbits[ sigma_x[i][1] ], x^j)));
+    		j := j+1;
+    	od;
+    fi;
+
+    j := 1;
+
+    sigma_y[i] := [];
+    if not i in Flat(sigma_y) then
+    	Add(sigma_y[i],i); #first position
+    	while(OnSets(orbits[sigma_y[i][1]],y^j)<>orbits[ sigma_y[i][1] ]) do
+    		Add(sigma_y[i], Position(orbits, OnSets(orbits[ sigma_y[i][1] ], y^j)));
+    		j := j+1;
+    	od;
+    fi;
+  od;
+  
+	sigma_x := List(sigma_x, i-> CycleFromList(i));
+  sigma_y := List(sigma_y, i-> CycleFromList(i));
+  sigma_x := Product(sigma_x);
+  sigma_y := Product(sigma_y);
+  return Origami(sigma_x,sigma_y);
+end);
+
+InstallGlobalFunction(OrigamiSingularities, function(O)
+  local x, y, singularities;
+  x := HorizontalPerm(O);
+  y := VerticalPerm(O);
+  singularities := [];
+  if Comm(x,y) <> () then
+    singularities := Cycles(Comm(x,y), MovedPoints(Comm(x,y))); #returns the points [[a,..,b],..,[c,..,d]] where the bottom left corners of a,b form the singularity
+  fi;
+  singularities := List(singularities, i -> AsSet(i));
+  return singularities;
 end);
 
 #####
@@ -317,7 +599,7 @@ InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
 end);
 
 InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
-	local new_origami_list, new_origamis, sigma, ExpandTree, P, canonical_origami_list, i, j, counter;
+	local sigma, ExpandTree, canonical_origami_list, counter;
 
 	counter := 1;
 	sigma := [[],[]];
@@ -327,6 +609,7 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 	Set_IndexOrigami(O, 1);
 
 	ExpandTree := function(new_leaves)
+		local new_origami_list, new_origamis, i, j, P;
 		new_origami_list := [];
 		for P in new_leaves do
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
@@ -402,7 +685,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree([O]);
 
 	return rec(
-		VeechGroup := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
+		veech_group := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
 		orbit := orbit,
 		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
@@ -410,6 +693,12 @@ end);
 
 InstallMethod(VeechGroup, [IsOrigami], function(O)
 	return ComputeVeechGroupWithHashTables(O);
+end);
+
+InstallGlobalFunction(VeechGroupIsEven, function(O)
+	local Q;
+	Q := ActionOfS(ActionOfS(O));
+	return OrigamiNormalForm(Q) = OrigamiNormalForm(O);
 end);
 
 #####
@@ -451,6 +740,51 @@ InstallMethod(Stratum, "for an origami", [IsOrigami], function(O)
 	return AsSortedList(stratum);
 end);
 
+InstallMethod(TranslationsOfOrigami, [IsOrigami],function(origami)
+	local G, O, list, i, j;
+	G := NormalformConjugators(origami); #permutations to a normalform. for each of the tiles one
+	O := List(G, i -> Origami(i^-1*HorizontalPerm(origami)*i, i^-1*VerticalPerm(origami)*i)); #origamis derived from the permutations above
+	list := [()];
+	for i in [1 .. Length(O)] do
+	 	if Length(Positions(O,O[i])) = 1 then;
+	 	else
+	 		for j in Positions(O, O[i]) do
+				Add(list, G[i]*Inverse(G[j]));
+			od;
+		fi;
+	od;
+	return DuplicateFreeList(list);
+end);
+
+InstallMethod(IsHyperelliptic, [IsOrigami], function(origami)
+	local g, n, b, L, bool, x, y, i, sigma;
+	n := 2; #degree of th covering
+	x := HorizontalPerm(origami);
+	y := VerticalPerm(origami);
+	g := Genus(origami);
+	if not VeechGroupIsEven(origami) then return false; fi; # check whether -1 is in the veech group
+	L := ConjugatorsToInverse(origami);
+	L := Filtered(L, i -> Order(i) = 2);
+	if L = [] then return false;
+	else
+		for sigma in L do
+			b := 0; #fixpoints
+			b := b + Length(Difference([1..DegreeOrigami(origami)], MovedPoints(sigma)));
+			b := b + Length(Difference([1..DegreeOrigami(origami)], MovedPoints(sigma*x)));
+			b := b + Length(Difference([1..DegreeOrigami(origami)], MovedPoints(sigma*y)));
+			for i in [1..DegreeOrigami(origami)] do
+				if  i^(sigma*Inverse(x)*Inverse(y))=i^(y*x*Inverse(x*y)) then
+					b := b+1;
+				fi;
+			od;
+
+			if (1/n)*(g-1-(b/2))+1 = 0 then
+				return true;
+			fi;
+		od;
+	fi;
+	return false;
+end);
 #####
 
 

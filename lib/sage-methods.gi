@@ -166,7 +166,7 @@ InstallGlobalFunction(SumOfLyapunovExponentsBySage, function(origami)
 
 	O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 		String(VerticalPerm(origami))	, "\")"],streamForSage);
-	return EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) );
+	return Rat(EvalString( homalgSendBlocking([O, ".sum_of_lyapunov_exponents()"], "need_output", streamForSage) ));
 end);
 
 InstallGlobalFunction(LyapunovExponentsApproxBySage, function(origami)
@@ -190,4 +190,16 @@ fi;
 O := homalgSendBlocking( ["Origami(\"", String(HorizontalPerm(origami)), "\",\"",
 	String(VerticalPerm(origami))	, "\")"],streamForSage);
 	Error("Not implemented");
+end);
+
+
+InstallGlobalFunction(SpinParityBySage, function(origami)
+	local O;
+
+	if streamForSage = false then
+		PrepareSage();
+	fi;
+
+	O := homalgSendBlocking(["Origami(\"", String(HorizontalPerm(origami)), "\",\"", String(VerticalPerm(origami)), "\")"], streamForSage);
+	return EvalString(homalgSendBlocking([O, ".cylinder_diagram().spin_parity()"], "need_display", streamForSage));
 end);

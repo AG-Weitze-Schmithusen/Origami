@@ -3,9 +3,9 @@
 
 <Section Label="BasicOrigamiConstr">
 <Heading>Basic contruction of origamis</Heading>
-  
+
 <ManSection>
-  
+
   <Oper Name="Origami" Arg="sigma_x, sigma_y"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -17,7 +17,7 @@
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="OrigamiNC" Arg="sigma_x, sigma_y"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -29,7 +29,7 @@
     ]]>
     </Example>
   </Description>
-  
+
   <Attr Name="HorizontalPerm" Arg="O"/>
   <Returns>A permutation.</Returns>
   <Description>
@@ -43,7 +43,7 @@
       ]]>
     </Example>
   </Description>
-  
+
   <Attr Name="VerticalPerm" Arg="O"/>
   <Returns>A permutation.</Returns>
   <Description>
@@ -57,7 +57,7 @@
       ]]>
     </Example>
   </Description>
-  
+
   <Attr Name="DegreeOrigami" Arg="O"/>
   <Returns>A positive integer.</Returns>
   <Description>
@@ -71,7 +71,7 @@
       ]]>
     </Example>
   </Description>
-  
+
 </ManSection>
 
 </Section>
@@ -114,7 +114,7 @@ where <M>S</M> and <M>T</M> denote the standard generators
 of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
 
 <ManSection>
-  
+
   <Oper Name="ActionOfS" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -128,7 +128,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
       ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="ActionOfT" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -142,7 +142,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
       ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="ActionOfSInv" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -156,7 +156,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
       ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="ActionOfTInv" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -170,7 +170,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
       ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="ActionOfSL2" Arg="w, O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -184,7 +184,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
       ]]>
     </Example>
   </Description>
-  
+
 </ManSection>
 
 </Section>
@@ -195,7 +195,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
 We consider two origamis to be equivalent (or isomorphic), if they are the same up to relabeling the squares. In terms of pairs of permutations, this corresponds to simultaneous conjugation. Equivalence can be checked by computing a certain normal form for origamis.
 
 <ManSection>
-  
+
   <Oper Name="OrigamiNormalForm" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -210,13 +210,13 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
       ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="CopyOrigamiInNormalForm" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
     This method does the same as <C>OrigamiNormalForm</C> but <E>does copy</E> previously computed attributes.
   </Description>
-    
+
   <Oper Name="OrigamisEquivalent" Arg="O1, O2"/>
   <Returns>Two origamis.</Returns>
   <Description>
@@ -232,7 +232,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
       ]]>
     </Example>
   </Description>
-  
+
 </ManSection>
 
 </Section>
@@ -243,7 +243,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
 <Heading>Computing attributes of origamis</Heading>
 
 <ManSection>
-  
+
   <Attr Name="Stratum" Arg="O"/>
   <Returns>A (possibly empty) list of positive integers.</Returns>
   <Description>
@@ -256,7 +256,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
       ]]>
     </Example>
   </Description>
-    
+
   <Attr Name="Genus" Arg="O"/>
   <Returns>A non-negative integer.</Returns>
   <Description>
@@ -268,7 +268,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     ]]>
     </Example>
   </Description>
-    
+
   <Attr Name="IndexOfMonodromyGroup" Arg="O"/>
   <Returns>A positive integer.</Returns>
   <Description>
@@ -280,7 +280,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     ]]>
     </Example>
   </Description>
-  
+
   <Attr Name="VeechGroup" Arg="O"/>
   <Returns>A subgroup of <M>SL_2(\mathbb Z)</M>.</Returns>
   <Description>
@@ -302,12 +302,12 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="VeechGroupAndOrbit" Arg="O"/>
   <Returns>A record.</Returns>
   <Description>
     Computes both the Veech group and the orbit under the <M>SL_2(\mathbb Z)</M> action of a given origami <A>O</A>. Also returns the matrices with map the origami <A>O</A> to the corresponding orbit elements.
-    
+
     The returned record has the following format:
     <List>
       <Item><E>VeechGroup</E> : the Veech group as a <C>ModularSubgroup</C></Item>
@@ -315,7 +315,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
       <Item><E>matrices</E> : a list of matrices mapping <A>O</A> to the corresponding orbit elements</Item>
     </List>
   </Description>
-  
+
   <Attr Name="DeckGroup" Arg="O"/>
   <Returns>A group.</Returns>
   <Description>
@@ -329,13 +329,13 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="IsElementOfDeckGroup" Arg="p, O"/>
   <Returns>A boolean.</Returns>
   <Description>
     Checks whether or not the permutation <A>p</A> defines a deck transformation of the origami <A>O</A>.
   </Description>
-  
+
   <Attr Name="IsNormalOrigami" Arg="O"/>
   <Returns>A boolean.</Returns>
   <Description>
@@ -349,7 +349,49 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
     ]]>
     </Example>
   </Description>
-  
+
+  <Oper Name="SymplecticBasisOfHomology" Arg="O"/>
+  <Returns>A list of words.</Returns>
+  <Description>
+    Computes a basis of the homology <M>H_1(O;\mathbb{Z})</M> that is symplectic with respect to the intersection form. The basis elements are represented as words in <M>x</M> and <M>y</M> which define closed paths starting from the square <M>1</M>.
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2),(2,3));
+    Origami((1,2), (2,3), 3)
+    gap> SymplecticBasisOfHomology(O);
+    [ x*y^2*x^-1, x*y^-2*x^-2*y^2*x^-1, x*y^-2*x^-1*y^-1*x*y^4*x^-1, x*y^-3*x^-1*y*x^-1 ]
+    ]]>
+    </Example>
+  </Description>
+
+  <Attr Name="SpinStructure" Arg="O"/>
+  <Returns><M>0</M> or <M>1</M></Returns>
+  <Description>
+    Computes the parity of the spin structure of <M>O</M>.
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2,3,4,5), (), 5);
+    Origami((1,2,3,4,5), (), 5)
+    gap> SpinStructure(O);
+    1
+    ]]>
+    </Example>
+  </Description>
+
+  <Func Name="SumOfLyapunovExponents" Arg="O"/>
+  <Returns> A positiv Integer. </Returns>
+  <Description>
+    This function calculates the sum of the positive Lyapunov exponents of the Origami <A>O</A>.
+    <Example>
+      <![CDATA[
+      gap> O:=Origami((1,2,3,4,5,6,7,8,9),(1,3)(2,4,8)(5,7));
+      Origami((1,2,3,4,5,6,7,8,9), (1,3)(2,4,8)(5,7), 9)
+      gap> SumOfLyapunovExponents(O);
+      32/15
+      ]]>
+    </Example>
+  </Description>
+
 </ManSection>
 
 </Section>
@@ -364,7 +406,7 @@ We introduce a new GAP-category called <C>IsNormalStoredOrigami</C> which is a s
 Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method implemented for <C>Origami</C>s is also available for <C>NormalStoredOrigami</C>s.
 
 <ManSection>
-  
+
   <Oper Name="NormalStoredOrigami" Arg="x, y, G"/>
   <Returns>A normal origami.</Returns>
   <Description>
@@ -382,25 +424,25 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
     ]]>
     </Example>
   </Description>
-    
+
   <Oper Name="NormalStoredOrigamiNC" Arg="x, y, G"/>
   <Returns>A normal origami.</Returns>
   <Description>
     Does the same as the <C>NormalStoredOrigami</C> constructor above but does not check whether or not <A>G</A> is generated by <A>x</A> and <A>y</A>.
   </Description>
-    
+
   <Attr Name="HorizontalElement" Arg="O"/>
   <Returns>A group element.</Returns>
   <Description>
     For a <C>NormalStoredOrigami</C>, this method returns the <M>x</M>-element which describes the glueing in the horizontal direction.
   </Description>
-    
+
   <Attr Name="VerticalElement" Arg="O"/>
   <Returns>A group element.</Returns>
   <Description>
     For a <C>NormalStoredOrigami</C>, this method returns the <M>y</M>-element which describes the glueing in the vertical direction.
   </Description>
-  
+
   <Oper Name="AsPermutationRepresentation" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -419,7 +461,13 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
     ]]>
     </Example>
   </Description>
-  
+
+  <Oper Name="AsPermutationRepresentation" Arg="O"/>
+  <Returns>An origami.</Returns>
+  <Description>
+    Converts a normal <C>Origami</C> into a <C>NormalStoredOrigami</C>.
+  </Description>
+
   <Oper Name="AllNormalOrigamisFromGroup" Arg="G"/>
   <Returns>A list of normal origamis.</Returns>
   <Description>
@@ -436,7 +484,7 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="AllNormalOrigamisByDegree" Arg="d"/>
   <Returns>A list of normal origamis.</Returns>
   <Description>
@@ -453,7 +501,7 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
     ]]>
     </Example>
   </Description>
-  
+
 </ManSection>
 
 </Section>
@@ -465,13 +513,13 @@ In this section we describe some methods for constructing explicit examples and 
 
 
 <ManSection>
-  
+
   <Oper Name="AllOrigamisByDegree" Arg="d"/>
   <Returns>A list of origamis.</Returns>
   <Description>
     Returns a list of all origamis of degree <A>d</A> up to equivalence.
   </Description>
-  
+
   <Oper Name="AllOrigamisInStratum" Arg="d, stratum"/>
   <Returns>A list of origamis.</Returns>
   <Description>
@@ -487,7 +535,7 @@ In this section we describe some methods for constructing explicit examples and 
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="RandomOrigami" Arg="d"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -499,7 +547,7 @@ In this section we describe some methods for constructing explicit examples and 
     ]]>
     </Example>
   </Description>
-  
+
   <Oper Name="XOrigami" Arg="d"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -510,7 +558,7 @@ In this section we describe some methods for constructing explicit examples and 
       Origami((1,2,3,4), (1,2)(3,4), 4)
     </Example>
   </Description>
-  
+
   <Oper Name="ElevatorOrigami" Arg="l, h, s"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -525,7 +573,7 @@ In this section we describe some methods for constructing explicit examples and 
       Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
     </Example>
   </Description>
-  
+
   <Oper Name="StaircaseOrigami" Arg="l, h, s"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -540,7 +588,7 @@ In this section we describe some methods for constructing explicit examples and 
       Origami((1,2)(3,4)(5,6), (2,3)(4,5), 6)
     </Example>
   </Description>
-  
+
   <Oper Name="QuasiRegularOrigami" Arg="G, H, r, u"/>
   <Returns>An origami.</Returns>
   <Description>
@@ -558,19 +606,174 @@ In this section we describe some methods for constructing explicit examples and 
       Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
     </Example>
   </Description>
-  
+
   <Oper Name="QROFromGroup" Arg="G"/>
   <Returns>A list of origamis.</Returns>
   <Description>
     Returns a list of all quasi-regular origamis which can be build from the group <A>G</A>.
   </Description>
-  
+
   <Oper Name="QROFromOrder" Arg="d"/>
   <Returns>A list of origamis.</Returns>
   <Description>
     Returns a list of all quasi-regular origamis of order <A>d</A>.
   </Description>
-  
+
+  <Oper Name="NormalformConjugators" Arg="O"/>
+  <Returns>A list of permutations.</Returns>
+  <Description>
+    Calculates all permutations which yield a normal form when conjugated to the <Arg>O</Arg>.
+    <Example>
+  gap>origami:=Origami((1,2,3,4), (1,2)(3,4));
+  Origami((1,2,3,4), (1,2)(3,4), 4)
+  gap>NormalformConjugators(origami);
+  [ (), (1,3,2), (1,3)(2,4), (1,2,4) ]
+    </Example>
+  </Description>
+
+  <Oper Name="TranslationsOfOrigami" Arg="O"/>
+  <Returns>A list of permutations.</Returns>
+  <Description>
+    Calculates all permutations which yield the origami when conjugated to the <Arg>O</Arg>.
+    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y</M> and <M>t*x*t^-1=x</M>, where <M>x,y</M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
+    <Example>
+      gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
+    Origami((1,2,3,4), (1,2)(3,4), 4)
+    gap> TranslationsOfOrigami(origami);
+    [ (), (1,3)(2,4) ]
+    </Example>
+  </Description>
+
+  <Oper Name="IsHyperelliptic" Arg="O"/>
+  <Returns>A boolean.</Returns>
+  <Description>
+    Tests whether an origami is hyperelliptic.
+      <Example>
+  gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
+  Origami((1,2,3,4), (1,2)(3,4), 4)
+  gap> IsHyperelliptic(origami);
+  true
+  gap> origami:=Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6));
+  Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6), 6)
+  gap> IsHyperelliptic(origami);
+  false
+    </Example>
+  </Description>
+
+  <Oper Name="ConjugatorsToInverse" Arg="O"/>
+  <Returns>A list.</Returns>
+  <Description>
+    Calculates all permutations which yield the inverse Origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
+    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y^-1</M> and <M>t*x*t^-1=x^-1</M>, where <M>x,y</M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
+        <Example>
+          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
+          Origami((1,2,3,4), (1,2)(3,4), 4)
+          gap> ConjugatorsToInverse(o);
+          [ (1,2)(3,4), (1,4)(2,3) ]
+    </Example>
+  </Description>
+
+  <Oper Name="AutomorphismsOfOrigami" Arg="O"/>
+  <Returns>A list.</Returns>
+  <Description>
+    Calculates all automorphisms of the origami, i.e the translations and conjugators to the inverse.
+        <Example>
+          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
+          Origami((1,2,3,4), (1,2)(3,4), 4)
+          gap> AutomorphismsOfOrigami(o);
+          [ (), (1,3)(2,4), (1,2)(3,4), (1,4)(2,3) ]
+    </Example>
+  </Description>
+
+  <Oper Name="FixedPointsOfConjugatorToInverse" Arg="O, sigma"/>
+  <Returns>Two lists.</Returns>
+  <Description>
+  This function calculates the fixed points of a conjugator to inverse <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the inverse origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
+  The funtion does not check whether <Arg>sigma</Arg> is a conjugator to inverse.
+  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
+    <Example>
+      <![CDATA[
+      gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> sigma:=ConjugatorsToInverse(origami)[1];
+      (1,2)(3,4)
+      gap> FixedPointsOfConjugatorToInverse(origami, sigma);
+      [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ]
+      ]]>
+    </Example>
+  </Description>
+
+  <Oper Name="FixedPointsOfTranslation" Arg="O, sigma"/>
+  <Returns>A list.</Returns>
+  <Description>
+  This function calculates the fixed points of a translation <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the origami <M>O</M> when conjugated to <Arg>O</Arg>..
+  The function does not check whether <Arg>sigma</Arg> is a translation.
+  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square <M>a</M>.
+    <Example>
+      <![CDATA[
+            gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> TranslationsOfOrigami(origami);
+      [ (), (1,3)(2,4) ]
+      gap> sigma:=TranslationsOfOrigami(origami)[2];
+      (1,3)(2,4)
+      gap> FixedPointsOfTranslation(origami, sigma);
+      [ 1, 2, 3, 4 ]
+    ]]>
+    </Example>
+  </Description>
+
+
+  <Oper Name="FixedPointsOfAutomorphism" Arg="O, sigma"/>
+  <Returns>A list.</Returns>
+  <Description>
+  This function calculates the fixed points of an automorphism <Arg>sigma</Arg> of the origami <Arg>O</Arg>.
+  The fixed points are returned in a list with entries <M>[[a,b,c],d]</M>, where <M>a</M> is the square in which the fixed point occurs
+  and <M>(b,c)</M> are the local coordinates in the square and <M>d</M> is <M>1</M> if <Arg>sigma</Arg> is a translation and <M>-1</M> if it is a conjugator to inverse.
+    <Example>
+      <![CDATA[
+      gap> O:=Origami((1,2,3,4),(1,2)(3,4));
+      Origami((1,2,3,4), (1,2)(3,4), 4)
+      gap> sigma:=(1,3)(2,4);
+      (1,3)(2,4)
+      gap> FixedPointsOfAutomorphism(O,sigma);
+      [ [ 1, 0, 0 ], [ 2, 0, 0 ], [ 3, 0, 0 ], [ 4, 0, 0 ] ]
+  ]]>
+    </Example>
+  </Description>
+
+
+  <Oper Name="Quotientengeschlecht" Arg="O"/>
+  <Returns>An integer.</Returns>
+  <Description>
+   For a given origami this function calculates the genus of the quotient <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
+   translation group.
+    <Example>
+      <![CDATA[
+      gap> O:=Origami((1,2,3)(4,5,6),(3,4));
+      Origami((1,2,3)(4,5,6), (3,4), 6)
+      gap> Quotientengeschlecht(O);
+      1
+      ]]>
+    </Example>
+  </Description>
+
+  <Oper Name="OrigamiQuotient" Arg="O"/>
+  <Returns>An origami</Returns>
+  <Description>
+   For a given origami this function calculates the quotient origami <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
+   translation group.
+    <Example>
+      <![CDATA[
+      gap> O:=Origami((1,2,3)(4,5,6),(3,4));
+      Origami((1,2,3)(4,5,6), (3,4), 6)
+      gap> OrigamiQuotient(O);
+      Origami((1,2,3), (), 3)
+      ]]>
+    </Example>
+  </Description>
 </ManSection>
 
 </Section>

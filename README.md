@@ -13,7 +13,7 @@ Copy the package in the pkg directory of your GAP directory. Then start GAP and 
 
 You need the following GAP packages, to use this package:
 
-- ModularGroup Version 0.0.1 (https://le-on.github.io/ModularGroup/)
+- ModularGroup Version 0.0.1 (https://AG-Weitze-Schmithusen.github.io/ModularGroup/)
 
 - Orb Version 4.7.6 (this is a standard package)
 

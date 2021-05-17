@@ -18,14 +18,25 @@ InstallMethod(InsertVeechGroupIntoDB, [IsModularSubgroup], function(VG)
     index := index,
     sigma_s := sigma_s,
     sigma_t := sigma_t,
-    congruence := IsCongruence(VG),
-    level := GeneralizedLevel(VG)
-    );
+    wohlfahrt_level := WohlfahrtLevel(VG)
+  );
+  if HasIsCongruence(VG) then
+    vg_entry.congruence := IsCongruence(VG);
+  fi;
+  if HasGeneralizedLevel(VG) then
+    vg_entry.level := GeneralizedLevel(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    vg_entry.congruence_level := CongruenceLevel(VG);
+  fi;
   if HasDeficiency(VG) then
     vg_entry.deficiency := Deficiency(VG);
   fi;
   if HasGenus(VG) then
     vg_entry.genus := Genus(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    vg_entry.congruence_level := CongruenceLevel(VG);
   fi;
 
   return InsertIntoDatabase(vg_entry, ORIGAMI_DB.veechgroups);
@@ -39,7 +50,10 @@ InstallMethod(GetVeechGroupDBEntry, [IsModularSubgroup], function(VG)
   index := Index(VG);
   sigma_s := ListPerm(SAction(VG), index);
   sigma_t := ListPerm(TAction(VG), index);
-  result := QueryDatabase(rec(sigma_s := ["==", sigma_s], sigma_t := ["==", sigma_t]), ORIGAMI_DB.veechgroups);
+  result := ORIGAMI_DB._createStatement(rec(
+    query := Concatenation("FOR v IN veechgroups FILTER v.sigma_s == ", GapToJsonStringForArangoDB(sigma_s), " AND v.sigma_t == ", GapToJsonStringForArangoDB(sigma_t), " RETURN v"),
+    count := true
+  )).execute();
 
   if result.count() = 0 then
     return fail;
@@ -56,10 +70,20 @@ InstallMethod(GetVeechGroupsFromDB, [IsRecord], function(constraints)
   Apply(result, function(doc)
     local VG;
     VG := ModularSubgroup(PermList(doc.sigma_s), PermList(doc.sigma_t));
-    SetGeneralizedLevel(VG, doc.level);
-    SetIsCongruence(VG, doc.congruence);
+    if IsBound(doc.wohlfahrt_level) then
+      SetWohlfahrtLevel(VG, doc.wohlfahrt_level);
+    fi;
     if IsBound(doc.genus) then
       SetGenus(VG, doc.genus);
+    fi;
+    if IsBound(doc.congruence) then
+      SetIsCongruence(VG, doc.congruence);
+    fi;
+    if IsBound(doc.congruence_level) then
+      SetCongruenceLevel(VG, doc.congruence_level);
+    fi;
+    if IsBound(doc.level) then
+      SetGeneralizedLevel(VG, doc.level);
     fi;
     if IsBound(doc.deficiency) then
       SetDeficiency(VG, doc.deficiency);
@@ -84,6 +108,21 @@ InstallMethod(UpdateVeechGroupDBEntry, [IsModularSubgroup], function(VG)
   if HasGenus(VG) then
     doc.genus := Genus(VG);
   fi;
+  if HasGeneralizedLevel(VG) then
+    doc.level := GeneralizedLevel(VG);
+  fi;
+  if HasWohlfahrtLevel(VG) then
+    doc.wohlfahrt_level := WohlfahrtLevel(VG);
+  fi;
+  if HasCongruenceLevel(VG) then
+    doc.congruence_level := CongruenceLevel(VG);
+  fi;
+  if HasIsCongruence(VG) then
+    doc.congruence := IsCongruence(VG);
+  fi;
+  if HasDeficiency(VG) then
+    doc.deficiency := Deficiency(VG);
+  fi;
   UpdateDatabase(doc._key, doc, ORIGAMI_DB.veechgroups);
 end);
 
@@ -96,8 +135,8 @@ InstallMethod(RemoveVeechGroupFromDB, [IsModularSubgroup], function(VG)
   sigma_t := ListPerm(TAction(VG), index);
   stmt := ORIGAMI_DB._createStatement(rec(
     query := Concatenation(
-      "FOR vg IN veechgroups FILTER vg.sigma_s == ", String(sigma_s),
-      " AND vg.sigma_t == ", String(sigma_t), " REMOVE vg IN veechgroups"
+      "FOR vg IN veechgroups FILTER vg.sigma_s == ", GapToJsonString(sigma_s),
+      " AND vg.sigma_t == ", GapToJsonString(sigma_t), " REMOVE vg IN veechgroups"
     )
   ));
   result := stmt.execute();
@@ -107,7 +146,7 @@ end);
 # inserts the normal form of an origami into the origami representative database
 # and returns the resulting arangodb document (only inserts precomputed data)
 InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
-  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG, rels, index_monodromy;
+  local VG, vg_entry, degree, sigma_x, sigma_y, origami_entry, DG, rels, index_monodromy, sum_of_lyapunov_exponents;
 
   O := CopyOrigamiInNormalForm(O);
   degree := DegreeOrigami(O);
@@ -124,7 +163,6 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
   else
     origami_entry.index_monodromy_group := 0;
   fi;
-    
 
   if HasDeckGroup(O) then
     DG := DeckGroup(O);
@@ -168,6 +206,16 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
     fi;
     origami_entry.veechgroup := vg_entry._id;
   fi;
+  if HasSumOfLyapunovExponents(O) then
+    sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
+  fi;
+  if HasSpinParity(O) then
+    origami_entry.spin_parity := SpinParity(O);
+  fi;
+  if HasIsHyperelliptic(O) then
+    origami_entry.is_hyperelliptic := IsHyperelliptic(O);
+  fi;
 
   return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origami_representatives);
 end);
@@ -179,8 +227,11 @@ InstallMethod(GetOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   O := CopyOrigamiInNormalForm(O);
   sigma_x := ListPerm(HorizontalPerm(O), DegreeOrigami(O));
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
-  result := QueryDatabase(rec(sigma_x := ["==", sigma_x], sigma_y := ["==", sigma_y]), ORIGAMI_DB.origami_representatives);
-
+  result := ORIGAMI_DB._createStatement(rec(
+    query := Concatenation("FOR o IN origami_representatives FILTER o.sigma_x == ", GapToJsonStringForArangoDB(sigma_x), " AND o.sigma_y == ", GapToJsonStringForArangoDB(sigma_y), " RETURN o"),
+    count := true
+  )).execute();
+  
   if result.count() = 0 then
     return fail;
   fi;
@@ -260,10 +311,23 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
     constraints := ShallowCopy(constraints);
     constraints.stratum := ["==", constraints.stratum];
   fi;
+  
+  if IsBound(constraints.sum_of_lyapunov_exponents) then
+    constraints := ShallowCopy(constraints);
+    constraints.sum_of_lyapunov_exponents := ["==", [NumeratorRat(constraints.sum_of_lyapunov_exponents), DenominatorRat(constraints.sum_of_lyapunov_exponents)]];
+  fi;
 
   if IsBound(constraints.example_series) then
     constraints := ShallowCopy(constraints);
     constraints.example_series := ["==", constraints.example_series];
+  fi;
+
+  if IsBound(constraints.spin_parity) then
+    constraints.spin_parity := ["==", constraints.spin_parity];
+  fi;
+
+  if IsBound(constraints.is_hyperelliptic) then
+    constraints.is_hyperelliptic := ["==", constraints.is_hyperelliptic];
   fi;
 
   result :=  ShallowCopy(ListOp(QueryDatabase(constraints, ORIGAMI_DB.origami_representatives)));
@@ -315,7 +379,7 @@ InstallMethod(GetAllOrigamiOrbitRepresentativesFromDB, [], function()
 end);
 
 InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
-  local new_origami_entry, origami_entry, DG, rels;
+  local new_origami_entry, origami_entry, DG, rels, sum_of_lyapunov_exponents;
 
   new_origami_entry := rec();
   if HasStratum(O) then
@@ -323,6 +387,16 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   fi;
   if HasGenus(O) then
     new_origami_entry.genus := Genus(O);
+  fi;
+  if HasSumOfLyapunovExponents(O) then
+    sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
+    new_origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
+  fi;
+  if HasSpinParity(O) then
+    new_origami_entry.spin_parity := SpinParity(O);
+  fi;
+  if HasIsHyperelliptic(O) then
+    new_origami_entry.is_hyperelliptic := IsHyperelliptic(O);
   fi;
   if HasDeckGroup(O) then
     new_origami_entry.is_normal := IsNormalOrigami(O);
@@ -421,7 +495,7 @@ InstallMethod(InsertOrigamiWithOrbitRepresentativeIntoDB, [IsOrigami, IsOrigami,
     matrix := A
   );
 
-  InsertIntoDatabase(origami_entry, ORIGAMI_DB.origamis);
+  return InsertIntoDatabase(origami_entry, ORIGAMI_DB.origamis);
 end);
 
 
@@ -435,7 +509,16 @@ InstallMethod(AddLabelToOrigamiDBEntry, [IsOrigami, IsString], function(O, label
   fi;
   Add(db_doc.labels, label);
   
-  UpdateDatabase(db_doc.key, db_doc, ORIGAMI_DB.origamis);
+  return UpdateDatabase(db_doc._key, db_doc, ORIGAMI_DB.origamis);
+end);
+InstallOtherMethod(AddLabelToOrigamiDBEntry, [IsDatabaseDocument, IsString], function(doc, label)
+  doc := DatabaseDocumentToRecord(doc);
+  if not IsBound(doc.labels) then
+    doc.labels := [];
+  fi;
+  Add(doc.labels, label);
+
+  return UpdateDatabase(doc._key, doc, ORIGAMI_DB.origamis);
 end);
 
 
@@ -481,8 +564,8 @@ InstallMethod(GetOrigamiDBEntry, [IsOrigami], function(O)
   sigma_y := ListPerm(VerticalPerm(O), DegreeOrigami(O));
   stmt := ORIGAMI_DB._createStatement(rec(
     query := Concatenation(
-      "FOR o IN origamis FILTER o.sigma_x == ", String(sigma_x),
-      " AND o.sigma_y == ", String(sigma_y), " RETURN o"
+      "FOR o IN origamis FILTER o.sigma_x == ", GapToJsonString(sigma_x),
+      " AND o.sigma_y == ", GapToJsonString(sigma_y), " RETURN o"
     ),
     count := true
   ));

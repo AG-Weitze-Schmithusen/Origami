@@ -2,23 +2,23 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "1.0.0",
-	Date := "08/04/2020",
+	Date := "07/05/2021",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
-		HTMLStart := "gapdoc/chap0.html",
-		PDFFile   := "gapdoc/Origami.pdf",
-		SixFile   := "gapdoc/manual.six",
+		HTMLStart := "doc/chap0.html",
+		PDFFile   := "doc/Origami.pdf",
+		SixFile   := "doc/manual.six",
 		LongTitle := ~.Subtitle,
 ),
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "1.0.0">
-##  <!ENTITY RELEASEDATE "08 April 2020">
-##  <!ENTITY RELEASEYEAR "2020">
+##  <!ENTITY RELEASEDATE "07 May 2021">
+##  <!ENTITY RELEASEYEAR "2021">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
@@ -40,6 +40,21 @@ Dependencies := rec(
 
 Persons := [
 	rec(
+		LastName      := "Ertl",
+		FirstNames    := "Simon",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
 		LastName      := "Junk",
 		FirstNames    := "Luca",
 		IsAuthor      := true,
@@ -53,7 +68,7 @@ Persons := [
 										 	"D-66041 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-),
+	),
   rec(
     LastName      := "Kattler",
     FirstNames    := "Pascal",
@@ -69,7 +84,21 @@ Persons := [
     Place         := "Saarbrücken",
     Institution   := "Universität des Saarlandes"
   ),
-
+	rec(
+		LastName      := "Rogovskyy",
+		FirstNames    := "Alexander",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
 	rec(
 		LastName      := "Thevis",
 		FirstNames    := "Andrea",
@@ -85,17 +114,32 @@ Persons := [
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
   ),
+	rec(
+		LastName      := "Weitze-Schmithüsen",
+		FirstNames    := "Gabriela",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "weitze@math.uni-sb.de",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+                       "AG Weitze-Schmithüsen\n",
+                       "FR 6.1 Mathematik\n",
+                       "Universität des Saarlandes\n",
+                       "D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+  ),
 ],
 
 
 
-GithubUser := "PascalKattler",
+GithubUser := "AG-Weitze-Schmithusen",
 GithubRepository := ~.PackageName,
 GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
 PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
 
-ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/releases/download/Origami-", ~.Version, "/Origami-", ~.Version ),
+ArchiveURL     := Concatenation( "https://github.com/", ~.GithubUser, "/", ~.GithubRepository, "/releases/download/Origami-", ~.Version, "/", ~.GithubRepository, "-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
