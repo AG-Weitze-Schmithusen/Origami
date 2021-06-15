@@ -103,6 +103,7 @@
   <#Include SYSTEM "functionality.xml">
   <#Include SYSTEM "sage.xml">
   <#Include SYSTEM "database.xml">
+  <#Include SYSTEM "_AutoDocMainFile.xml">
 
 </Body>
 
