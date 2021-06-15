@@ -7,6 +7,7 @@ ReadPackage("Origami/lib/deckGroup.gi");
 ReadPackage("Origami/lib/normalorigami.gi");
 ReadPackage("Origami/lib/sage-methods.gi");
 ReadPackage("Origami/lib/homology.gi");
+ReadPackage("Origami/lib/special_origamis.gi");
 
 if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then
   Info(InfoWarning, 1, "The package 'ArangoDBInterface' is currently not installed. Without this package, the origami database is not available.");
