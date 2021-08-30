@@ -31,14 +31,14 @@ InstallGlobalFunction(StaircaseOrigami, function(length, height, steps)
 end);
 
 InstallGlobalFunction(XOrigami, function(d)
-	#degree of this origami is 2*tiles
+	#degree of this origami is 2*d
     local sigma_h, sigma_v, tile;
 
-    sigma_h:=CycleFromList([1..2*tiles]);
-    sigma_v:=();
+    sigma_h := CycleFromList([1..2*d]);
+    sigma_v := ();
 
-    for tile in [1 .. tiles] do
-        sigma_v:=sigma_v*(2*tile-1, 2*tile);
+    for tile in [1 .. d] do
+        sigma_v := sigma_v * (2*tile-1, 2*tile);
     od;
 
     return OrigamiNormalForm(Origami(sigma_h,sigma_v));
