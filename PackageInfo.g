@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "1.0.0",
-	Date := "07/05/2021",
+	Date := "27/09/2021",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
