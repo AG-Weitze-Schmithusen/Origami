@@ -143,3 +143,34 @@ ActionOfTOnHomologyOfTn := function(n)
 
     return TransposedMat(mat);
 end;
+
+unit_vector := function(n, i)
+    local v;
+    v := List([1..n], x->0);
+    v[i] := 1;
+    return v;
+end;
+
+apply_S_to_loop := function(n, k)
+    local x,y,x2, y2;
+    y := QuoInt(k-1, n);
+    x := ((k-1) mod n);
+    # now rotate and wrap
+    y2 := x mod n;
+    x2 := -y mod n;
+    return n * y2 + x2 + 1;
+end;
+
+ActionOfSOnHomologyOfTn := function(n)
+    local mat, N, i, j, v, k, l;
+    N := n * n + 1;
+    mat := [];
+    mat[1] := Inverse(BaseChangeSToB(n)) * unit_vector(N, n);
+    mat[2] := -unit_vector(N,1);
+
+    for k in [1..n*n-1] do
+        mat[2+k] := vec_of_loop(n, apply_S_to_loop(n, k));
+    od;
+
+    return TransposedMat(mat);
+end;
