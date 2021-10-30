@@ -96,3 +96,50 @@ od;
 
 return TransposedMat(mat);
 end;
+
+
+vec_of_loop := function(n, loop)
+    local N, v;
+    if loop < 1 or loop > n*n then
+        Error("loop must be between 1 and n^2");
+    fi;
+    N := n*n+1;
+    if loop = n*n then
+        v := List([1..N], i->-1);
+        v[1] := 0;
+        v[2] := 0;
+        return v;
+    fi;
+    v := List([1..N], i->0);
+    v[loop+2] := 1;
+    return v;
+end;
+
+ActionOfTOnHomologyOfTn := function(n)
+    local mat, N, i, j, k, l, img_of_b_wrong_base;
+    N := n * n + 1;
+    mat := [];
+    # the horizontal path is a fixpoint: T(a) = a
+    mat[1] := List([1..N], i->0);
+    mat[1][1] := 1;
+
+    # the vertical path is done via the other base
+    img_of_b_wrong_base := List([1..N], i->0);
+    img_of_b_wrong_base[1] := 1;
+    img_of_b_wrong_base[2*n] := 1;
+    for i in [2..n-1] do
+        img_of_b_wrong_base[n*i+2] := 1;
+    od;
+    mat[2] := Inverse(BaseChangeSToB(n)) * img_of_b_wrong_base;
+
+    for k in [1..n*n-1] do
+        # loop l_k
+        # caluclate (0-based) (x,y)-coordinates of the loop
+        i := QuoInt(k-1, n);
+        j := ((k-1) mod n);
+        l := n * i + ((i + j) mod n) + 1;
+        mat[2+k] := vec_of_loop(n, l);
+    od;
+
+    return TransposedMat(mat);
+end;
