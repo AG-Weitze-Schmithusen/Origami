@@ -1,8 +1,8 @@
-hcycle := function(n, i)
+transl_matr_hcycle := function(n, i)
     if i mod n = 0 then return i - n + 1; fi;
     return i + 1;
 end;
-vcycle := function(n, i)
+transl_matr_vcycle := function(n, i)
     if QuoInt(i-1, n) = n-1 then return i - n * (n-1); fi;
     return i + n;
 end;
@@ -22,9 +22,11 @@ TranslationMatrix := function(n, is_right)
     if n = 2 then
         # n = 2 is a special case, the only loop on the 2nd row/column is the 2nd/3rd one
         if is_right then
-            mat[cross_axis][2 + 2] := 1;
+            mat[cross_axis][2 + 1] := -1;
+            mat[cross_axis][2 + 2] := 0;
+            mat[cross_axis][2 + 3] := -1;
         else
-            mat[cross_axis][2 + 3] := 1;
+            mat[cross_axis] := [1,0,-1,-1,0];
         fi;
     else
         for i in [0..n-1] do
@@ -39,7 +41,7 @@ TranslationMatrix := function(n, is_right)
     for i in [1..n*n-1] do
         if i = extra_point then continue; fi;
         mat[2+i] := List([1..N], i->0);
-        if is_right then j := hcycle(n, i); else j := vcycle(n, i); fi;
+        if is_right then j := transl_matr_hcycle(n, i); else j := transl_matr_vcycle(n, i); fi;
         mat[2+i][2+j] := 1;
     od;
     mat[2 + extra_point] := List([1..N], i->-1);
