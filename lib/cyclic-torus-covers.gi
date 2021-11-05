@@ -149,17 +149,21 @@ InstallGlobalFunction(CombOrigami, function (n, x, y)
     return CyclicTorusCover(n, 2, vslits, hslits);
 end);
 
+# constructs an origami from a vector w.r.t basis B
 OrigamiFromVector := function(n, d, v)
-    local i, j, c hslits, vslits;
-    hslits := [];
-    vslits := [];
+    local i, j, c, hslits, vslits;
+    if not Length(v) = n*n+1 then
+        Error("Length of v must be n^2+1");
+    fi;
+    hslits := List([1..n*n], i->0);
+    vslits := List([1..n*n], i->0);
     # first fill the upper row
     for i in [1..n] do
-        hslits[n*(n-1) + i] = v[i];
+        hslits[n*(n-1) + i] := v[i];
     od;
     # fill the right column
     for i in [1..n] do
-        vslits[n*i] = v[n + i];
+        vslits[n*i] := v[n + i];
     od;
     # fill in the rest
     c := 2 * n;
@@ -168,179 +172,63 @@ OrigamiFromVector := function(n, d, v)
             c := c + 1;
             # i is the row, j the column
             # the number of the tile is then n * (row - 1) + column
-            hslits[n * (i - 1) + j] = v[c];
+            hslits[n * (i - 1) + j] := v[c];
         od;
     od;
     return CyclicTorusCover(n, d, vslits, hslits);
 end;
 
-InstallMethod(CyclCovByB, [IsPosInt, IsPosInt, IsList], function(n, d, v)
-	local N, vb, BS, o, Obj, G, a;
+InstallGlobalFunction(CyclicCoverByS, function(n, d, v)
+	local N, vs, DBS, G, a, J, i, w;
     N  := n * n + 1;
-    vb := [];
+    vs := []; # the vectors w.r.t. S
     G  := TranslationGroup(n);
-    BToS := Invert(BaseChangeBS(n));
+    DBS := BaseChangeSToB(n);
 
     for a in [0..(d-1)] do
         if GcdInt(a, d) = 1 then
-            Add(vb, Orbit(G, a*v));
+            w := (a * v) mod d;
+            J := AsSSortedList(List(G, g->g*w) mod d);
+            # save [vector in S, vector in B, origami]
+            J := List(J, i->[i, (DBS*i) mod d, OrigamiFromVector(n, d, (DBS*i) mod d)]);
+            AddSet(vs, J);
         fi;
-    od;
-    vs := List[vb, q -> BToS * q];
-    o  := OrigamiFromVector(n, d, v);
-
-    Obj := rec();
-    ObjectifyWithAttributes( Obj, NewType(CyclCovFamily, IsCyclCov and IsAttributeStoringRep), TorsionDegree, n, Degre, d, HomologyDimension, N, BCoefficients, vb, SCoefficients, vs, Origami, o);
+    od; 
+    return vs;
 end);
-
-InstallMethod(CyclCovByS, [IsPosInt, IsPosInt, IsList], function(n, d, w)
-	return CyclCovByS(n, d, BaseChangeBS() * w);
-end);
-
-TxOnHomology := function(s)
-    local N, A, M, i, vnull, vq;
-    N := s^2+1;
-    # generate the null vector vnull:
-    vnull := [];
-    for i  in [1..N] do Add(vnull,0); od;
-    # M will be the transpose of desired matrix;
-    # we start by setting it to the 0-matrix:
-    M := [];
-    for i in [1..N] do Add(M,vnull); od;
-    # the first row of M is a = the immage a:
-    vq := ShallowCopy(vnull);
-    vq[1] := 1;
-    M[1] := vq;
-    # the second row of M = imag of b;
-    vq := ShallowCopy(vnull);
-    vq[2] := 1;
-    for i in [0..s-1] do vq[2+i*s+2] := 1  ; od;
-    M[2] := vq;
-    # the 3rd rows ... Nth row
-    # = images of the 1st loos ... (n^2-1)the loop
-    # with wrong vectors for the rows = 2 mod s
-    # this will be corrected afterwards
-    for i in [3..N] do
-       vq := ShallowCopy(vnull);
-       vq[i+1] := 1;
-       M[i] := vq;
-    od;
-    # give the correct vectors fot the rows i*s + 2
-    # with i in [1..s-1]
-    for i in [1..s-1] do
-        vq := ShallowCopy(vnull);
-        #vq[i*s+2-4] := 1;
-        vq[2+(i-1)*s+1] := 1;
-        M[i*s+2] := vq;
-    od;
-    # give the correct vector for the row s^2+1
-    # which describes the image of the (s^2-1)th loop:
-    vq := ShallowCopy(vnull);
-    for i in [3..N] do vq[i] := -1; od;
-    M[N] := vq;
-    return(TransposedMat(M));
-end;
-
-
-
-TyOnHomology := function(s)
-    local N, A, M, i, vnull, vq;
-    N := s^2+1;
-    # generate the null vector vnull:
-    vnull := [];
-    for i  in [1..N] do Add(vnull,0); od;
-    # M will be the transpose of desired matrix;
-    # we start by setting it to the 0-matrix:
-    M := [];
-    for i in [1..N] do Add(M,vnull); od;
-    # the first row of M is a = the immage a:
-    vq := ShallowCopy(vnull);
-    vq[1] := 1;
-    for i in [s+3..2*s+2] do vq[i] := -1; od;
-    M[1] := vq;
-    # the second row of M = imag of b;
-    vq := ShallowCopy(vnull);
-    vq[2] := 1;
-    M[2] := vq;
-    # the 3rd rows ... (s*(s-1)+1)th row
-    # = images of the 1st loop ... (s*(s-1)-1)the loop
-    for i in [3..s*(s-1)+1] do
-       vq := ShallowCopy(vnull);
-       vq[i+s] := 1;
-       M[i] := vq;
-    od;
-    # the (s*(s-1)+2)th row which gives the image of the s*(s-1)th loop:
-    vq := ShallowCopy(vnull);
-    for i in [3..N] do vq[i] := -1; od;
-    M[s*(s-1)+2] := vq;  
-    # the last s rows:
-    for i in [s*(s-1)+3..s^2+1] do
-        vq := ShallowCopy(vnull);
-        vq[i-s*(s-1)] := 1;
-        M[i] := vq;
-    od;
-    return(TransposedMat(M));
-end;
-
-InstallMethod(TranslationGroup, [IsPosInt], function(n)
-    return Group(TxOnHomology(n), TyOnHomology(n));
-end);
-
-InstallMethod(BaseChangeBS, [IsPosInt], function(n)
-    local M, v, N, vnull, i, j;
-    N := n^2 + 1;
-    vnull := [];
-    for i  in [1..N] do Add(vnull,0); od;
-    
-    M := [];
-    for i in [1..N] do Add(M,vnull); od;
-    # Define a = n as first column vector of M:
-    v := ShallowCopy(vnull);
-    v[n+1] := 1;
-    M[1] := v;
-    # Define b as second column vector of M:
-    v := ShallowCopy(vnull);
-    v[1] := 1;
-    for i in [1..(n-1)] do
-        v[2*n+(i-1)*(n-1) + 1] := 1;
-    od;
-    M[2] := v;
-    # Define l1 as third column vector of M;
-    v := ShallowCopy(vnull);
-    v[1] := 1;
-    v[n] := -1;
-    v[n+1] := -1;
-    v[2*n] := 1;
-    M[3] := v;
-    # Define l2.. ln:
-    for j in [2..n] do
-        v := ShallowCopy(vnull);
-        v[j-1] := -1;
-        v[j] := 1;
-        M[j+2] := v;
-    od;
-    # Define the loops l_{n(i-1)+1} with i in [2..n]:
-    for i in [2..n] do
-        v := ShallowCopy(vnull);
-        v[n+i] := -1;
-        v[n+i-1] := 1;
-        v[2*n + (n-1)*(i-2) + 1] := 1;
-        M[(i-1)*n+3] := v   ;
-    od;
-    # Define the loops l_{i*n} with i in [2..n]:
-    for i in [2..(n-1)] do
-        v := ShallowCopy(vnull);
-        v[2*n + (i-1)*(n-1)] := -1;
-        M[i*n+2] := v;
-    od;
-    # Define all other loops:
-    for i in [2..n] do
-        for j in [2..(n-1)] do
-            v := ShallowCopy(vnull);
-            v[2*n+(n-1)*(i-2)+(j-1)] := -1;
-            v[2*n+(n-1)*(i-2)+ j] := 1;
-            M[(i-1)*n + j+2] :=  v;
+CyclicCoverOrigamisByS := function(n, d, v)
+    local C, o, a, b;
+    o := [];
+    C := CyclicCoverByS(n, d, v);
+    for a in C do
+        for b in a do
+            Add(o, b[3]);
         od;
     od;
-    return(TransposedMat(M));
+    return o;
+end;
+
+InstallGlobalFunction(TranslationGroup, function(n) # w.r.t. S
+    return GroupByGenerators([TranslationMatrix(n, true), TranslationMatrix(n, false)]);
 end);
+
+genStringsBaseBHelper := function(n, b, L, v, i)
+    local x, cpy;
+    if i > n then
+        Add(L, v);
+        return;
+    fi;
+    for x in [0..(b-1)] do
+        cpy := ShallowCopy(v);
+        cpy[i] := x;
+        genStringsBaseBHelper(n, b, L, cpy, i+1);
+    od;
+end;
+
+GenerateAllStringsWithBase := function(n, b)
+    local L, v, i;
+    v := List([1..n], i->0);
+    L := [];
+    genStringsBaseBHelper(n, b, L, v, 1);
+    return L;
+end;

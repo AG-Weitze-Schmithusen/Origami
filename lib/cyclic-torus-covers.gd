@@ -7,7 +7,7 @@
 #! @Returns a cyclic torus cover origami
 #! @Description
 #!  A cyclic torus cover consists of d copies of the trivial origami E[n]. Each of the n^2 fields of E[n]
-#!  gets assigned a label from 1 to n^2 row-wise from left to right and top down. Let f be a field with the label
+#!  gets assigned a label from 1 to n^2 row-wise from left to right and bottom up. Let f be a field with the label
 #!  k in the i-th copy of the cyclic torus cover. Then f's right neighbour's label is determined by determining the
 #!  usual right neighbour in E[n] and its copy is ((i+vslits[k]) mod d). The same goes for the upper neighbour and
 #!  hslits.
@@ -38,18 +38,18 @@ DeclareGlobalFunction("RamificationIndices");
 #!  (0,0), (n/2, n/2), (n/2,0) or (0,n/2). The coordinates are considered modulo n.
 DeclareGlobalFunction("CombOrigami");
 
-DeclareCategory("IsCyclCov", IsObject);
-BindGlobal("CyclCovFamily",NewFamily("CyclCov"));
+#DeclareCategory("IsCyclCov", IsObject);
+#BindGlobal("CyclCovFamily",NewFamily("CyclCov"));
 
-DeclareAttribute("TorsionDegree", IsCyclCov);
-DeclareAttribute("Degree", IsCyclCov);
-DeclareAttribute("HomologyDimension", IsCyclCov);
-DeclareAttribute("BCoefficients", IsCyclCov);
-DeclareAttribute("SCoefficients", IsCyclCov);
-DeclareAttribute("Origami", IsCyclCov);
+#DeclareAttribute("TorsionDegree", IsCyclCov);
+#DeclareAttribute("Degree", IsCyclCov);
+#DeclareAttribute("HomologyDimension", IsCyclCov);
+#DeclareAttribute("BCoefficients", IsCyclCov);
+#DeclareAttribute("SCoefficients", IsCyclCov);
+#DeclareAttribute("Origami", IsCyclCov);
 
-DeclareOperation("CyclCovByB", [IsPosInt, IsPosInt, IsList]);
-DeclareOperation("CyclCovByS", [IsPosInt, IsPosInt, IsList]);
+#DeclareOperation("CyclCoverByB", [IsPosInt, IsPosInt, IsList]);
+DeclareGlobalFunction("CyclicCoverByS", [IsPosInt, IsPosInt, IsList]);
 
 DeclareGlobalFunction("TranslationGroup", [IsPosInt]);
-DeclareGlobalFunction("BaseChangeBS", [IsPosInt]);
+# DeclareGlobalFunction("BaseChangeSToB", [IsPosInt]);
