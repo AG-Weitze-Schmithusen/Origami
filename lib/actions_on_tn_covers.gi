@@ -174,3 +174,18 @@ ActionOfSOnHomologyOfTn := function(n)
 
     return TransposedMat(mat);
 end;
+
+ActionOfMatrixOnHomologyOfTn := function(n, A)
+    local itm, S, T, mat;
+    S := ActionOfSOnHomologyOfTn(n);
+    T := ActionOfTOnHomologyOfTn(n);
+    mat := IdentityMat(n*n+1);
+    for itm in STDecompositionAsList(A) do
+        if itm[1] = "S" then
+            mat := mat * (S^itm[2]);
+        else
+            mat := mat * (T^itm[2]);
+        fi;
+    od;
+    return mat;
+end;
