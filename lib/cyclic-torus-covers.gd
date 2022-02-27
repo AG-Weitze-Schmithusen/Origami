@@ -52,4 +52,4 @@ DeclareGlobalFunction("CombOrigami");
 DeclareGlobalFunction("CyclicCoverByS", [IsPosInt, IsPosInt, IsList]);
 
 DeclareGlobalFunction("TranslationGroup", [IsPosInt]);
-# DeclareGlobalFunction("BaseChangeSToB", [IsPosInt]);
+DeclareGlobalFunction("BaseChangeSToB", [IsPosInt]);

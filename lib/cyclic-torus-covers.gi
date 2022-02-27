@@ -34,9 +34,6 @@ vcycle := function(n, k)
     return k;
 end;
 
-# TODO hslits vslits verwechselt?
-# TODO upper oder bottom neighbour
-
 InstallGlobalFunction(CyclicTorusCover, function(n, d, hslits, vslits)
     return Origami(SlitsToPerm(n, d, hcycle, hslits), SlitsToPerm(n, d, vcycle, vslits));
 end);
@@ -178,57 +175,6 @@ OrigamiFromVector := function(n, d, v)
     return CyclicTorusCover(n, d, vslits, hslits);
 end;
 
-InstallGlobalFunction(CyclicCoverByS, function(n, d, v)
-	local N, vs, DBS, G, a, J, i, w;
-    N  := n * n + 1;
-    vs := []; # the vectors w.r.t. S
-    G  := TranslationGroup(n);
-    DBS := BaseChangeSToB(n);
-
-    for a in [0..(d-1)] do
-        if GcdInt(a, d) = 1 then
-            w := (a * v) mod d;
-            J := AsSSortedList(List(G, g->g*w) mod d);
-            # save [vector in S, vector in B, origami]
-            J := List(J, i->[i, (DBS*i) mod d, OrigamiFromVector(n, d, (DBS*i) mod d)]);
-            AddSet(vs, J);
-        fi;
-    od; 
-    return vs;
-end);
-CyclicCoverOrigamisByS := function(n, d, v)
-    local C, o, a, b;
-    o := [];
-    C := CyclicCoverByS(n, d, v);
-    for a in C do
-        for b in a do
-            Add(o, b[3]);
-        od;
-    od;
-    return o;
-end;
-
 InstallGlobalFunction(TranslationGroup, function(n) # w.r.t. S
     return GroupByGenerators([TranslationMatrix(n, true), TranslationMatrix(n, false)]);
 end);
-
-genStringsBaseBHelper := function(n, b, L, v, i)
-    local x, cpy;
-    if i > n then
-        Add(L, v);
-        return;
-    fi;
-    for x in [0..(b-1)] do
-        cpy := ShallowCopy(v);
-        cpy[i] := x;
-        genStringsBaseBHelper(n, b, L, cpy, i+1);
-    od;
-end;
-
-GenerateAllStringsWithBase := function(n, b)
-    local L, v, i;
-    v := List([1..n], i->0);
-    L := [];
-    genStringsBaseBHelper(n, b, L, v, 1);
-    return L;
-end;
