@@ -59,8 +59,10 @@ BaseChangeSToB := function(n)
 local N, mat, i, j, k, loopIndex;
 N := n * n + 1;
 mat := [];
+# "a" crosses s_n+1
 mat[1] := List([1..N], i->0);
 mat[1][n+1] := 1;
+# "b" crosses the leftmost horizontal slits
 mat[2] := List([1..N], i->0);
 mat[2][1] := 1;
 for i in [0..n-2] do
@@ -76,9 +78,12 @@ mat[3][2*n] := 1;
 for i in [1..n-1] do
     loopIndex := 1 + i * n;
     mat[2 + loopIndex] := List([1..N], i->0);
-    mat[2 + loopIndex][2 * n + 1 + (i-1) * (n-1)] := 1; # the horizontal slit is crossed bottom up
-    mat[2 + loopIndex][i + n] := 1; # lower vertical slit crossed left to right
-    mat[2 + loopIndex][i + n + 1] := -1; # upper vertical slit crossed right to left
+    # the horizontal slit is crossed bottom up
+    mat[2 + loopIndex][2 * n + 1 + (i-1) * (n-1)] := 1;
+    # lower vertical slit crossed left to right
+    mat[2 + loopIndex][i + n] := 1;
+    # upper vertical slit crossed right to left
+    mat[2 + loopIndex][i + n + 1] := -1;
 od;
 # the loops at the bottom edge
 for i in [2..n] do
@@ -100,6 +105,7 @@ for i in [1..n-1] do
     od;
 od;
 
+# since we used the first index as the column, transpose
 return TransposedMat(mat);
 end;
 
