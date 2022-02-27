@@ -56,57 +56,57 @@ TranslationMatrix := function(n, is_right) # n > 1
 end;
 
 BaseChangeSToB := function(n)
-local N, mat, i, j, k, loopIndex;
-N := n * n + 1;
-mat := [];
-# "a" crosses s_n+1
-mat[1] := List([1..N], i->0);
-mat[1][n+1] := 1;
-# "b" crosses the leftmost horizontal slits
-mat[2] := List([1..N], i->0);
-mat[2][1] := 1;
-for i in [0..n-2] do
-    mat[2][2 * n + 1 + i * (n - 1)] := 1;
-od;
-# the origin loop crosses 4 slits
-mat[3] := List([1..N], i->0);
-mat[3][1] := 1;
-mat[3][n+1] := -1;
-mat[3][n] := -1;
-mat[3][2*n] := 1;
-# the loops at the left edge cross 3 slits
-for i in [1..n-1] do
-    loopIndex := 1 + i * n;
-    mat[2 + loopIndex] := List([1..N], i->0);
-    # the horizontal slit is crossed bottom up
-    mat[2 + loopIndex][2 * n + 1 + (i-1) * (n-1)] := 1;
-    # lower vertical slit crossed left to right
-    mat[2 + loopIndex][i + n] := 1;
-    # upper vertical slit crossed right to left
-    mat[2 + loopIndex][i + n + 1] := -1;
-od;
-# the loops at the bottom edge
-for i in [2..n] do
-    mat[2 + i] := List([1..N], i->0);
-    mat[2 + i][i] := 1;
-    mat[2 + i][i-1] := -1;
-od;
-# the loops in the middle cross one or two slits
-for i in [1..n-1] do
-    for j in [1..n-1] do
-        if i = n-1 and j = n-1 then continue; fi;
-        loopIndex := i * n + j + 1;
-        mat[2 + loopIndex] := List([1..N], i->0);
-        k := 2 * n + (i-1) * (n-1) + j ;
-        mat[2 + loopIndex][k] := -1;
-        if j < n-1 then
-            mat[2 + loopIndex][k+1] := 1;
-        fi;
+    local N, mat, i, j, k, loopIndex;
+    N := n * n + 1;
+    mat := [];
+    # "a" crosses s_n+1
+    mat[1] := List([1..N], i->0);
+    mat[1][n+1] := 1;
+    # "b" crosses the leftmost horizontal slits
+    mat[2] := List([1..N], i->0);
+    mat[2][1] := 1;
+    for i in [0..n-2] do
+        mat[2][2 * n + 1 + i * (n - 1)] := 1;
     od;
-od;
+    # the origin loop crosses 4 slits
+    mat[3] := List([1..N], i->0);
+    mat[3][1] := 1;
+    mat[3][n+1] := -1;
+    mat[3][n] := -1;
+    mat[3][2*n] := 1;
+    # the loops at the left edge cross 3 slits
+    for i in [1..n-1] do
+        loopIndex := 1 + i * n;
+        mat[2 + loopIndex] := List([1..N], i->0);
+        # the horizontal slit is crossed bottom up
+        mat[2 + loopIndex][2 * n + 1 + (i-1) * (n-1)] := 1;
+        # lower vertical slit crossed left to right
+        mat[2 + loopIndex][i + n] := 1;
+        # upper vertical slit crossed right to left
+        mat[2 + loopIndex][i + n + 1] := -1;
+    od;
+    # the loops at the bottom edge
+    for i in [2..n] do
+        mat[2 + i] := List([1..N], i->0);
+        mat[2 + i][i] := 1;
+        mat[2 + i][i-1] := -1;
+    od;
+    # the loops in the middle cross one or two slits
+    for i in [1..n-1] do
+        for j in [1..n-1] do
+            if i = n-1 and j = n-1 then continue; fi;
+            loopIndex := i * n + j + 1;
+            mat[2 + loopIndex] := List([1..N], i->0);
+            k := 2 * n + (i-1) * (n-1) + j ;
+            mat[2 + loopIndex][k] := -1;
+            if j < n-1 then
+                mat[2 + loopIndex][k+1] := 1;
+            fi;
+        od;
+    od;
 
-# since we used the first index as the column, transpose
-return TransposedMat(mat);
+    # since we used the first index as the column, transpose
+    return TransposedMat(mat);
 end;
 
 vec_of_loop := function(n, loop)
