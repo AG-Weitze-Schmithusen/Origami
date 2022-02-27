@@ -55,7 +55,7 @@ TranslationMatrix := function(n, is_right) # n > 1
     return TransposedMat(mat);
 end;
 
-BaseChangeSToB := function(n)
+InstallGlobalFunction(BaseChangeSToB, function(n)
     local N, mat, i, j, k, loopIndex;
     N := n * n + 1;
     mat := [];
@@ -107,7 +107,7 @@ BaseChangeSToB := function(n)
 
     # since we used the first index as the column, transpose
     return TransposedMat(mat);
-end;
+end);
 
 vec_of_loop := function(n, loop)
     local N, v;
@@ -126,7 +126,7 @@ vec_of_loop := function(n, loop)
     return v;
 end;
 
-ActionOfTOnHomologyOfTn := function(n)
+InstallGlobalFunction(ActionOfTOnHomologyOfTn, function(n)
     local mat, N, i, j, k, l, img_of_b_wrong_base;
     N := n * n + 1;
     mat := [];
@@ -153,7 +153,7 @@ ActionOfTOnHomologyOfTn := function(n)
     od;
 
     return TransposedMat(mat);
-end;
+end);
 
 unit_vector := function(n, i)
     local v;
@@ -172,7 +172,7 @@ apply_S_to_loop := function(n, k)
     return n * y2 + x2 + 1;
 end;
 
-ActionOfSOnHomologyOfTn := function(n)
+InstallGlobalFunction(ActionOfSOnHomologyOfTn, function(n)
     local mat, N, i, j, v, k, l;
     N := n * n + 1;
     mat := [];
@@ -184,9 +184,9 @@ ActionOfSOnHomologyOfTn := function(n)
     od;
 
     return TransposedMat(mat);
-end;
+end);
 
-ActionOfMatrixOnHomologyOfTn := function(n, A)
+InstallGlobalFunction(ActionOfMatrixOnHomologyOfTn, function(n, A)
     local itm, S, T, mat;
     S := ActionOfSOnHomologyOfTn(n);
     T := ActionOfTOnHomologyOfTn(n);
@@ -199,4 +199,4 @@ ActionOfMatrixOnHomologyOfTn := function(n, A)
         fi;
     od;
     return mat;
-end;
+end);

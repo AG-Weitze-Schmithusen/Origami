@@ -8,6 +8,7 @@ ReadPackage("Origami/lib/normalorigami.gi");
 ReadPackage("Origami/lib/sage-methods.gi");
 ReadPackage("Origami/lib/actions_on_tn_covers.gi");
 ReadPackage("Origami/lib/cyclic-torus-covers.gi");
+ReadPackage("Origami/lib/search-for-cyclic-torus-origamis-with-veech-group.gi");
 ReadPackage("Origami/lib/homology.gi");
 
 if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then
