@@ -1,3 +1,20 @@
+vec_of_loop := function(n, loop)
+    local N, v;
+    if loop < 1 or loop > n*n then
+        Error("loop must be between 1 and n^2");
+    fi;
+    N := n*n+1;
+    if loop = n*n then
+        v := List([1..N], i->-1);
+        v[1] := 0;
+        v[2] := 0;
+        return v;
+    fi;
+    v := List([1..N], i->0);
+    v[loop+2] := 1;
+    return v;
+end;
+
 TranslationMatrix := function(n, is_right) # n > 1
     local N, mat, i, j, in_axis, cross_axis, x, y, newx, newy;
 
@@ -108,23 +125,6 @@ InstallGlobalFunction(BaseChangeSToB, function(n)
     # since we used the first index as the column, transpose
     return TransposedMat(mat);
 end);
-
-vec_of_loop := function(n, loop)
-    local N, v;
-    if loop < 1 or loop > n*n then
-        Error("loop must be between 1 and n^2");
-    fi;
-    N := n*n+1;
-    if loop = n*n then
-        v := List([1..N], i->-1);
-        v[1] := 0;
-        v[2] := 0;
-        return v;
-    fi;
-    v := List([1..N], i->0);
-    v[loop+2] := 1;
-    return v;
-end;
 
 InstallGlobalFunction(ActionOfTOnHomologyOfTn, function(n)
     local mat, N, i, j, k, l, img_of_b_wrong_base;

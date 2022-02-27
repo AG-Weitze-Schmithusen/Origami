@@ -50,7 +50,7 @@ IsStabilizedBy := function(d, mat, translation_mats, v)
     return false;
 end;
 
-SearchForOrigamiWithVeechGroup := function(n, p, H)
+InstallGlobalFunction(SearchForOrigamiWithVeechGroup, function(n, p, H)
     local d,mats_sl2z, matrices, sim_vec, o, sim_vecs, veech_ind, DBSTransposeInverse, 
     eigSpaces, esp, sim_vec_int, translations, S, T;
 
@@ -84,4 +84,4 @@ SearchForOrigamiWithVeechGroup := function(n, p, H)
     od;
 
     return false;
-end;
+end);
