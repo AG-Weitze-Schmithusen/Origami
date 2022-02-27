@@ -1,20 +1,18 @@
-transl_matr_hcycle := function(n, i)
-    if i mod n = 0 then return i - n + 1; fi;
-    return i + 1;
-end;
-transl_matr_vcycle := function(n, i)
-    if QuoInt(i-1, n) = n-1 then return i - n * (n-1); fi;
-    return i + n;
-end;
-TranslationMatrix := function(n, is_right)
-    local N, mat, i, j, in_axis, cross_axis, extra_point;
+TranslationMatrix := function(n, is_right) # n > 1
+    local N, mat, i, j, in_axis, cross_axis, x, y, newx, newy;
+
+    if not n > 1 then
+        Error("n must be larger than 1");
+    fi;
     N := n * n + 1;
     if is_right then 
-        in_axis := 1; cross_axis := 2; extra_point := n * n - 1;
+        in_axis := 1; cross_axis := 2;
     else 
-        in_axis := 2; cross_axis := 1; extra_point := n * n - n;
+        in_axis := 2; cross_axis := 1;
     fi;
     mat := [];
+    # one loops ("a" or "b") stays fixed, the image of the other one has to be
+    # calculated
     mat[in_axis] := List([1..N], i->0);
     mat[in_axis][in_axis] := 1;
     mat[cross_axis] := List([1..N], i->0);
@@ -38,17 +36,25 @@ TranslationMatrix := function(n, is_right)
             mat[cross_axis][j] := 1; 
         od;
     fi;
-    for i in [1..n*n-1] do
-        if i = extra_point then continue; fi;
-        mat[2+i] := List([1..N], i->0);
-        if is_right then j := transl_matr_hcycle(n, i); else j := transl_matr_vcycle(n, i); fi;
-        mat[2+i][2+j] := 1;
+    # loop through all loops and move them to the right/up
+    for y in [0..n-1] do
+        for x in [0..n-1] do
+            if x=n-1 and y=n-1 then continue; fi;
+            if is_right then
+                newx := (x+1) mod n;
+                newy := y;
+            else
+                newx := x;
+                newy := (y+1) mod n;
+            fi;
+            # convert (x,y) to 1-based number
+            mat[2 + n*y+x + 1] := vec_of_loop(n, n*newy+newx + 1);
+        od;
     od;
-    mat[2 + extra_point] := List([1..N], i->-1);
-    mat[2 + extra_point][1] := 0;
-    mat[2 + extra_point][2] := 0;
+
     return TransposedMat(mat);
 end;
+
 BaseChangeSToB := function(n)
 local N, mat, i, j, k, loopIndex;
 N := n * n + 1;
@@ -96,7 +102,6 @@ od;
 
 return TransposedMat(mat);
 end;
-
 
 vec_of_loop := function(n, loop)
     local N, v;
