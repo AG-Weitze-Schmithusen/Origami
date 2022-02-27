@@ -13,6 +13,7 @@ ReadPackage("Origami/lib/origami-list.gd");
 ReadPackage("Origami/lib/sage-methods.gd");
 ReadPackage("Origami/lib/deckGroup.gd");
 ReadPackage("Origami/lib/normalorigami.gd");
+ReadPackage("Origami/lib/cyclic-torus-covers.gd");
 ReadPackage("Origami/lib/homology.gd");
 ReadPackage("Origami/lib/special_origamis.gd");
 
