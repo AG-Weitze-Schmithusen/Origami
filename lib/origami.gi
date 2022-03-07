@@ -148,18 +148,19 @@ InstallGlobalFunction(QuasiRegularOrigami, function(G,H,r,u)
 end);
 
 InstallGlobalFunction(ContainsNormalSubgroups, function(G, H)
-  local N, i;
-
-	N:= NormalSubgroups(G);
-	N:=Filtered(N, i->Size(i)<=Size(H));
+  local N, K;
 
   if not IsSubgroup(G,H) then
 		Error("H is not a subgroup of G.");
 	fi;
 
-	if IsTrivial(H) then return false; # we only look for non-trivial normal subgroups
-  elif IsNormal(G, H) then return true;
-  else return Length(Filtered(N, K -> IsSubgroup(H, K))) <> 1;
+	N := NormalSubgroups(G);
+	N := Filtered(N, K -> Size(K) <= Size(H));
+
+	if IsNormal(G, H) then
+		return true;
+  else
+		return Length(Filtered(N, K -> IsSubgroup(H, K))) <> 1;
   fi;
 end);
 
@@ -371,22 +372,22 @@ end);
 
 
 InstallGlobalFunction(FixedPointsOfConjugatorToInverse, function(o,sigma)
-local x,y, fixedpoints,i,j,tile_rep;
-x:=HorizontalPerm(o);
-y:=VerticalPerm(o);
-#fixed points of (1/2,1/2)
-fixedpoints:=[];
-fixedpoints:=List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma)),i->[i,0.5,0.5]); #fixedpoints at (0.5,0.5)
-Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*x)),i->[i,0,0.5])); #fixedpoints at (0,0.5)
-Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*y)),i->[i,0.5,0])); #fixedpoints at (0.5,0)
-tile_rep:= Difference([1..DegreeOrigami(o)] , Flat(OrigamiSingularities(o))); #taking representatives of lower left corners
-Append(tile_rep, List(OrigamiSingularities(o), i->i[1]));
-for j in tile_rep do                                                      #fixedpoints at (0,0)
-if  j^(Inverse(y)*Inverse(x)*sigma) in Orbit(Group(Comm(x,y)),j) then  #i and sigma*x^-1*y^-1 are in the same cykel of [x,y]
-	 Add(fixedpoints,[j,0,0]);                                           # so if V(i)=V(sigma*x^-1*y^-1)
-fi;
-od;
-return fixedpoints;
+	local x, y, fixedpoints, i, j, tile_rep;
+	x := HorizontalPerm(o);
+	y := VerticalPerm(o);
+	#fixed points of (1/2,1/2)
+	fixedpoints := [];
+	fixedpoints := List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma)),i->[i,0.5,0.5]); #fixedpoints at (0.5,0.5)
+	Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*x)),i->[i,0,0.5])); #fixedpoints at (0,0.5)
+	Append(fixedpoints, List(Difference([1..DegreeOrigami(o)],MovedPoints(sigma*y)),i->[i,0.5,0])); #fixedpoints at (0.5,0)
+	tile_rep := Difference([1..DegreeOrigami(o)] , Flat(OrigamiSingularities(o))); #taking representatives of lower left corners
+	Append(tile_rep, List(OrigamiSingularities(o), i->i[1]));
+	for j in tile_rep do                                                      #fixedpoints at (0,0)
+		if j^(Inverse(y)*Inverse(x)*sigma) in Orbit(Group(Comm(x,y)),j) then  #i and sigma*x^-1*y^-1 are in the same cykel of [x,y]
+	 		Add(fixedpoints,[j,0,0]);                                           # so if V(i)=V(sigma*x^-1*y^-1)
+		fi;
+	od;
+	return fixedpoints;
 end);
 
 InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
@@ -404,19 +405,17 @@ InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
 end);
 
 InstallGlobalFunction(FixedPointsOfAutomorphism, function(o, sigma)
-local fixedpoints, x, y;
-x:=HorizontalPerm(o);
-y:=VerticalPerm(o);
-if Inverse(sigma)*x*sigma=x and Inverse(sigma)*y*sigma=y
-	then  fixedpoints:=[FixedPointsOfTranslation(o,sigma),1];
-elif
-Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y)
- then
-fixedpoints:=[FixedPointsOfConjugatorToInverse(o,sigma),-1];
-else
-Error("the given permutation is not an automorphism of the origami.");
-fi;
-return fixedpoints;
+	local fixedpoints, x, y;
+	x := HorizontalPerm(o);
+	y := VerticalPerm(o);
+	if Inverse(sigma)*x*sigma=x and Inverse(sigma)*y*sigma=y then
+		fixedpoints := [FixedPointsOfTranslation(o,sigma),1];
+	elif Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y) then
+		fixedpoints := [FixedPointsOfConjugatorToInverse(o,sigma),-1];
+	else
+		Error("the given permutation is not an automorphism of the origami.");
+	fi;
+	return fixedpoints;
 end);
 
 InstallGlobalFunction(Quotientengeschlecht, function(O)
