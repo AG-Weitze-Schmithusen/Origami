@@ -13,7 +13,7 @@ InstallMethod(ActionOfTInv, [IsOrigami], function(O)
 	return OrigamiNC(HorizontalPerm(O), HorizontalPerm(O) * VerticalPerm(O), DegreeOrigami(O));
 end);
 
-InstallMethod(ActionOfSInv, [IsOrigami] ,function(O)
+InstallMethod(ActionOfSInv, [IsOrigami], function(O)
 	return OrigamiNC(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
 end);
 
@@ -21,7 +21,7 @@ InstallMethod(ActionOfSL2, [IsString, IsOrigami], function(wordString, O)
 	local letter, F, word;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
-	for letter in LetterRepAssocWord(word) do
+	for letter in Reversed(LetterRepAssocWord(word)) do
 		if letter = 1 then
 			O := ActionOfS(O);
 		elif letter = 2 then
@@ -44,7 +44,7 @@ end);
 InstallOtherMethod(ActionOfSL2, [IsAssocWord, IsOrigami], function(word, O)
 	local letter;
 	# 'word' is assumed to be a word in S and T
-	for letter in LetterRepAssocWord(word) do
+	for letter in Reversed(LetterRepAssocWord(word)) do
 		if letter = 1 then
 			O := ActionOfS(O);
 		elif letter = 2 then
