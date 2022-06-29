@@ -5,7 +5,8 @@ MakeGAPDocDoc(
   "doc",
   "manual.xml",
   ["../PackageInfo.g"],
-  "Origami"
+  "Origami",
+  "MathJax"
 );;
 CopyHTMLStyleFiles("doc");
 QUIT;
