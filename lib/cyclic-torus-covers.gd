@@ -15,7 +15,7 @@
 #! 
 #! Convertion between these two bases is performed with <Ref Func="BaseChangeLToS" />
 
-#! @Section Cyclic Torus Covers functions
+#! @Section General Cyclic Torus Cover functions
 
 #! @Arguments n d hslits vslits
 #! @Returns a cyclic torus cover origami
@@ -42,8 +42,6 @@ DeclareGlobalFunction("CyclicMonodromy");
 #! @Returns the ramification indices for each of the n^2 fields
 DeclareGlobalFunction("RamificationIndices");
 
-#! @Section Comb Origami functions
-
 #! @Arguments n x y
 #! @Returns a comb origami, which is a cyclic torus cover of degree 2 specified by a single point $P=(x,y)$
 #! @Description A comb origami is a special cyclic torus cover of degree 2, specified by a single point $P$
@@ -51,6 +49,19 @@ DeclareGlobalFunction("RamificationIndices");
 #!  point $(0,0)$ is located in the lower left corner. $P$ must not be a 2-torsion point, that is, it must not be
 #!  $(0,0)$, $(n/2, n/2)$, $(n/2,0)$ or $(0,n/2)$. The coordinates are considered modulo $n$.
 DeclareGlobalFunction("CombOrigami");
+
+#! @Arguments n p H
+#! @Returns a monodromy vector in $(\mathbb{Z}/p\mathbb{Z})^{n^2+1}$ representing an origami with respect to $L$
+#!  that has $H$ as a veech group or $\texttt{false}$ if no such vector is found.
+#! @Description $p$ must be prime. $H$ must be a congruence subgroup of level $p$ and $n$ must be $\geq 2$.
+DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, IsPosInt, IsMatrixGroup]);
+
+#! @Arguments n d v
+#! @Returns an origami whose monodromy vector representation with respect to $S$ is $v$.
+#! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$.
+DeclareGlobalFunction("CyclicTorusOrigamiFromMonodromyVector", [IsPosInt, IsPosInt, IsRowVector]);
+
+#! @Section Matrices acting on the homology of the n-Torus
 
 #! @Arguments n
 #! @Returns a matrix $M = D_{SL}$ representing a change of base between the bases $L$ and $S$.
@@ -76,14 +87,3 @@ DeclareGlobalFunction("ActionOfSOnHomologyOfTn", [IsPosInt]);
 #! @Description A must be in $\mathrm{Sl}_2(\mathbb{Z})$. It is written as a word in the generators $S$ and $T$ of $\mathrm{Sl}_2(\mathbb{Z})$, then the corresponding
 #!  word with the matrices calculated by <Ref Func="ActionOfTOnHomologyOfTn" /> and <Ref Func="ActionOfSOnHomologyOfTn" /> is taken and returned.
 DeclareGlobalFunction("ActionOfMatrixOnHomologyOfTn", [IsPosInt, IsMatrix]);
-
-#! @Arguments n p H
-#! @Returns a monodromy vector in $(\mathbb{Z}/p\mathbb{Z})^{n^2+1}$ representing an origami with respect to $L$
-#!  that has $H$ as a veech group or $\texttt{false}$ if no such vector is found.
-#! @Description $p$ must be prime. $H$ must be a congruence subgroup of level $p$ and $n$ must be $\geq 2$.
-DeclareGlobalFunction("SearchForOrigamiWithVeechGroup", [IsPosInt, IsPosInt, IsMatrixGroup]);
-
-#! @Arguments n d v
-#! @Returns an origami whose monodromy vector representation with respect to $S$ is $v$.
-#! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$.
-DeclareGlobalFunction("CyclicTorusOrigamiFromMonodromyVector", [IsPosInt, IsPosInt, IsRowVector]);
