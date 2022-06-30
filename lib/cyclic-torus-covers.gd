@@ -58,7 +58,7 @@ DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, Is
 
 #! @Arguments n d v
 #! @Returns an origami whose monodromy vector representation with respect to $S$ is $v$.
-#! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$.
+#! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$ a vector such that its elements generate $\mathbb{Z}/d\mathbb{Z}$.
 DeclareGlobalFunction("CyclicTorusOrigamiFromMonodromyVector", [IsPosInt, IsPosInt, IsRowVector]);
 
 #! @Section Matrices acting on the homology of the n-Torus
