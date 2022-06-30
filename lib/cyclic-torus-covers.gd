@@ -42,7 +42,7 @@ DeclareGlobalFunction("CombOrigami");
 #! @Returns a matrix M representing a change of base between the bases S and B.
 #! @Description The matrix M has the following property: For any origami, let v be the monodromy vector representation of
 #!  that origami with respect to B and w be the representation with respect to S. Then we have w = v*M.
-DeclareGlobalFunction("BaseChangeSToB", [IsPosInt]);
+DeclareGlobalFunction("BaseChangeLToS", [IsPosInt]);
 
 #! @Arguments n
 #! @Returns the group of translations (as matrices) acting on monodromy vectors.

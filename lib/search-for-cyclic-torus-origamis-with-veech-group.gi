@@ -58,7 +58,7 @@ InstallGlobalFunction(SearchForOrigamiWithVeechGroup, function(n, p, H)
         Error("p must be prime and n a natural number > 1");
     fi;
 
-    DBSTransposeInverse := TransposedMat(Inverse(BaseChangeSToB(n)));
+    DBSTransposeInverse := TransposedMat(Inverse(BaseChangeLToS(n)));
     d := p;
     mats_sl2z := MatrixGeneratorsOfGroup(H);
     matrices := List(mats_sl2z, m->Inverse(ActionOfMatrixOnHomologyOfTn(n, m)));
