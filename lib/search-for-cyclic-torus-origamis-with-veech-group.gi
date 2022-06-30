@@ -62,7 +62,7 @@ InstallGlobalFunction(SearchForOrigamiWithVeechGroup, function(n, p, H)
     d := p;
     mats_sl2z := MatrixGeneratorsOfGroup(H);
     matrices := List(mats_sl2z, m->Inverse(ActionOfMatrixOnHomologyOfTn(n, m)));
-    translations := TranslationGroup(n);
+    translations := TranslationGroupOnHomologyOfTn(n);
     eigSpaces := FindSimultaneousEigenvectorsRecursively(p, matrices, translations);
     S := Inverse(ActionOfSOnHomologyOfTn(n));
     T := Inverse(ActionOfTOnHomologyOfTn(n));

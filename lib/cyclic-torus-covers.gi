@@ -146,8 +146,7 @@ InstallGlobalFunction(CombOrigami, function (n, x, y)
     return CyclicTorusCover(n, 2, vslits, hslits);
 end);
 
-# constructs an origami from a vector w.r.t basis B
-OrigamiFromVector := function(n, d, v)
+InstallGlobalFunction(CyclicTorusOrigamiFromMonodromyVector, function(n, d, v)
     local i, j, c, hslits, vslits;
     if not Length(v) = n*n+1 then
         Error("Length of v must be n^2+1");
@@ -173,8 +172,8 @@ OrigamiFromVector := function(n, d, v)
         od;
     od;
     return CyclicTorusCover(n, d, vslits, hslits);
-end;
+end);
 
-InstallGlobalFunction(TranslationGroup, function(n) # w.r.t. S
-    return GroupByGenerators([TranslationMatrix(n, true), TranslationMatrix(n, false)]);
+InstallGlobalFunction(TranslationGroupOnHomologyOfTn, function(n)
+    return GroupByGenerators([TranslationMatrixOnHomologyOfTn(n, true), TranslationMatrixOnHomologyOfTn(n, false)]);
 end);

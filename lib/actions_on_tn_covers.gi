@@ -15,7 +15,7 @@ vec_of_loop := function(n, loop)
     return v;
 end;
 
-TranslationMatrix := function(n, is_right) # n > 1
+TranslationMatrixOnHomologyOfTn := function(n, is_right) # n > 1
     local N, mat, i, j, in_axis, cross_axis, x, y, newx, newy;
 
     if not n > 1 then
