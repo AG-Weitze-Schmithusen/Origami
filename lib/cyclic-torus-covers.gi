@@ -38,7 +38,7 @@ InstallGlobalFunction(GeneralizedCyclicTorusCover, function(n, d, hslits, vslits
     return Origami(SlitsToPerm(n, d, hcycle, hslits), SlitsToPerm(n, d, vcycle, vslits));
 end);
 
-InstallGlobalFunction(CyclicMonodromy, function (n, d, vslits, hslits)
+InstallGlobalFunction(GeneralizedCyclicTorusMonodromy, function (n, d, vslits, hslits)
     local lst, i;
     lst := [];
     lst[1] := Sum(vslits{[1..n]}) mod d;   # sicher dass nur die Teilliste von 1 bis n aufsummiert werden soll?
@@ -52,7 +52,7 @@ end);
 
 InstallGlobalFunction(RamificationIndices, function (n, d, vslits, hslits)
     local R, i, m;
-    m := CyclicMonodromy(n, d, vslits, hslits);
+    m := GeneralizedCyclicTorusMonodromy(n, d, vslits, hslits);
     R := [];
     for i in [1..(n^2)] do
         R[i] := Lcm(m[2 + i], d) / m[2 + i];
