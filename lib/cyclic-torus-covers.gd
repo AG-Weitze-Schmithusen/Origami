@@ -20,12 +20,12 @@
 #! @Arguments n d hslits vslits
 #! @Returns a cyclic torus cover origami
 #! @Description
-#!  A cyclic torus cover consists of $d$ copies of the trivial origami $E[n]$. Each of the $n^2$ fields of $E[n]$
+#!  A cyclic torus cover consists of $d$ copies of the trivial origami $T_n$. Each of the $n^2$ fields of $T_n$
 #!  gets assigned a label from $1$ to $n^2$ row-wise from left to right and bottom up. Let $f$ be a field with the label
 #!  $k$ in the $i$-th copy of the cyclic torus cover. Then $f$'s right neighbour's label is determined by determining the
-#!  usual right neighbour in $E[n]$ and its copy is $((i+\texttt{vslits[k]}) \bmod d)$. The same goes for the upper neighbour and
-#!  hslits.
-DeclareGlobalFunction("CyclicTorusCover");
+#!  usual right neighbour in $T_n$ and its copy is $((i+\texttt{vslits[k]}) \bmod d)$. The same goes for the upper neighbour and
+#!  $\texttt{hslits}$.
+DeclareGlobalFunction("GeneralizedCyclicTorusCover");
 
 #! @Arguments n d vslits hslits
 #! @Returns the monodromy of the cyclic torus cover described by the given arguments

@@ -34,7 +34,7 @@ vcycle := function(n, k)
     return k;
 end;
 
-InstallGlobalFunction(CyclicTorusCover, function(n, d, hslits, vslits)
+InstallGlobalFunction(GeneralizedCyclicTorusCover, function(n, d, hslits, vslits)
     return Origami(SlitsToPerm(n, d, hcycle, hslits), SlitsToPerm(n, d, vcycle, vslits));
 end);
 
@@ -143,7 +143,7 @@ InstallGlobalFunction(CombOrigami, function (n, x, y)
     vslits := List([1..n^2], i -> s(i, vseams));
     hslits := List([1..n^2], i -> s(i, hseams));
 
-    return CyclicTorusCover(n, 2, vslits, hslits);
+    return GeneralizedCyclicTorusCover(n, 2, vslits, hslits);
 end);
 
 InstallGlobalFunction(CyclicTorusOrigamiFromMonodromyVector, function(n, d, v)
@@ -171,7 +171,7 @@ InstallGlobalFunction(CyclicTorusOrigamiFromMonodromyVector, function(n, d, v)
             hslits[n * (i - 1) + j] := v[c];
         od;
     od;
-    return CyclicTorusCover(n, d, vslits, hslits);
+    return GeneralizedCyclicTorusCover(n, d, vslits, hslits);
 end);
 
 InstallGlobalFunction(TranslationGroupOnHomologyOfTn, function(n)
