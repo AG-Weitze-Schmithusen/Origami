@@ -660,7 +660,7 @@ In this section we describe some methods for constructing explicit examples and 
     </Example>
   </Description>
 
-  <Oper Name="ConjugatorsToInverse" Arg="O"/>
+  <Oper Name="PointReflectionsOfOrigami" Arg="O"/>
   <Returns>A list.</Returns>
   <Description>
     Calculates all permutations which yield the inverse Origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
@@ -668,7 +668,7 @@ In this section we describe some methods for constructing explicit examples and 
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
-          gap> ConjugatorsToInverse(o);
+          gap> PointReflectionsOfOrigami(o);
           [ (1,2)(3,4), (1,4)(2,3) ]
     </Example>
   </Description>
@@ -696,7 +696,7 @@ In this section we describe some methods for constructing explicit examples and 
       <![CDATA[
       gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
       Origami((1,2,3,4), (1,2)(3,4), 4)
-      gap> sigma:=ConjugatorsToInverse(origami)[1];
+      gap> sigma:=PointReflectionsOfOrigami(origami)[1];
       (1,2)(3,4)
       gap> FixedPointsOfConjugatorToInverse(origami, sigma);
       [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ]

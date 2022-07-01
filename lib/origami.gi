@@ -24,7 +24,7 @@ end);
 
 InstallOtherMethod(OrigamiNC, [IsPerm, IsPerm, IsPosInt], function(sigma_x, sigma_y, d)
 	local Obj, ori;
-	ori:= rec(d := d, x := sigma_x, y := sigma_y);  
+	ori:= rec(d := d, x := sigma_x, y := sigma_y);
 	Obj:= rec();
 
 	ObjectifyWithAttributes( Obj, NewType(OrigamiFamily, IsOrigami and IsAttributeStoringRep) , HorizontalPerm, ori.x, VerticalPerm, ori.y, DegreeOrigami, d );
@@ -345,7 +345,7 @@ InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
 	return G;
 end);
 
-InstallGlobalFunction(ConjugatorsToInverse, [IsOrigami],	function(origami)
+InstallGlobalFunction(PointReflectionsOfOrigami, [IsOrigami],	function(origami)
  local origami_1, G, G_1, O, O_1, list, i, j;
 	if not VeechGroupIsEven(origami) then # testing if -1 is in the VeechGroup
 			Error("VeechGroup must contain -1");
@@ -367,7 +367,7 @@ end);
 
 
 InstallGlobalFunction(AutomorphismsOfOrigami, [IsOrigami], function(O)
-	return Flat([TranslationsOfOrigami(O), ConjugatorsToInverse(O)]);
+	return Flat([TranslationsOfOrigami(O), PointReflectionsOfOrigami(O)]);
 end);
 
 
@@ -397,7 +397,7 @@ InstallGlobalFunction(FixedPointsOfTranslation, function(o, sigma)
 	fixedpoints := [];
 	singularities := OrigamiSingularities(o);
   for j in singularities do
-    if j = OnSets(j,sigma) then  
+    if j = OnSets(j,sigma) then
        Add(fixedpoints,j);
     fi;
   od;
@@ -452,7 +452,7 @@ InstallGlobalFunction(OrigamiQuotient, function(O)
   sigma_y := [];
   orbits := Orbits(g, [1..DegreeOrigami(O)]);
   orbits := List(orbits, i -> AsSet(i));
-  
+
 	for i in [1..Length(orbits)] do
     sigma_x[i] := []; #permutation is a list and cycles are the sublists
     if not i in Flat(sigma_x) then
@@ -475,7 +475,7 @@ InstallGlobalFunction(OrigamiQuotient, function(O)
     	od;
     fi;
   od;
-  
+
 	sigma_x := List(sigma_x, i-> CycleFromList(i));
   sigma_y := List(sigma_y, i-> CycleFromList(i));
   sigma_x := Product(sigma_x);
@@ -701,7 +701,7 @@ InstallMethod(IsHyperelliptic, [IsOrigami], function(origami)
 	y := VerticalPerm(origami);
 	g := Genus(origami);
 	if not VeechGroupIsEven(origami) then return false; fi; # check whether -1 is in the veech group
-	L := ConjugatorsToInverse(origami);
+	L := PointReflectionsOfOrigami(origami);
 	L := Filtered(L, i -> Order(i) = 2);
 	if L = [] then return false;
 	else
