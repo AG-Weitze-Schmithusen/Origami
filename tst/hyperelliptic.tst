@@ -5,7 +5,7 @@ gap> NormalformConjugators(origami);
 gap> ConjugatorsToInverse(origami);
 [ (1,2)(4,6) ]
 gap> TranslationsOfOrigami(origami);
-[  ]
+[ () ]
 gap> IsHyperelliptic(origami);
 false
 gap> origami:=Origami((1,2,3,4),(1,2)(3,4));

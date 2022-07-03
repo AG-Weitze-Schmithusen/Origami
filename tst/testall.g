@@ -1,6 +1,6 @@
 LoadPackage("origami");
 
-TestDirectory(DirectoriesPackageLibrary( "origami", "testfiles" ),
+TestDirectory(DirectoriesPackageLibrary( "origami", "tst" ),
   rec(exitGAP     := true,
       testOptions := rec(compareFunction := "uptowhitespace") ) );
 
