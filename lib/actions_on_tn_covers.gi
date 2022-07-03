@@ -15,7 +15,7 @@ vec_of_loop := function(n, loop)
     return v;
 end;
 
-TranslationMatrix := function(n, is_right) # n > 1
+TranslationMatrixOnHomologyOfTn := function(n, is_right) # n > 1
     local N, mat, i, j, in_axis, cross_axis, x, y, newx, newy;
 
     if not n > 1 then
@@ -72,7 +72,7 @@ TranslationMatrix := function(n, is_right) # n > 1
     return TransposedMat(mat);
 end;
 
-InstallGlobalFunction(BaseChangeSToB, function(n)
+InstallGlobalFunction(BaseChangeLToS, function(n)
     local N, mat, i, j, k, loopIndex;
     N := n * n + 1;
     mat := [];
@@ -141,7 +141,7 @@ InstallGlobalFunction(ActionOfTOnHomologyOfTn, function(n)
     for i in [2..n-1] do
         img_of_b_wrong_base[n*i+2] := 1;
     od;
-    mat[2] := Inverse(BaseChangeSToB(n)) * img_of_b_wrong_base;
+    mat[2] := Inverse(BaseChangeLToS(n)) * img_of_b_wrong_base;
 
     for k in [1..n*n-1] do
         # loop l_k
@@ -176,7 +176,7 @@ InstallGlobalFunction(ActionOfSOnHomologyOfTn, function(n)
     local mat, N, i, j, v, k, l;
     N := n * n + 1;
     mat := [];
-    mat[1] := Inverse(BaseChangeSToB(n)) * unit_vector(N, n);
+    mat[1] := Inverse(BaseChangeLToS(n)) * unit_vector(N, n);
     mat[2] := -unit_vector(N,1);
 
     for k in [1..n*n-1] do

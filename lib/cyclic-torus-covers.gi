@@ -22,7 +22,7 @@ SlitsToPerm := function(n, d, cycleFunc, slits)
     return PermList(lst);
 end;
 
-# define the two functions that give the (cycled) right/bottom neighbour
+# define the two functions that give the (cycled) right/top neighbour
 # important: these are all 0 based, that is, the input must be in [0..n^2-1]
 hcycle := {n, k} -> QuoInt(k, n) * n + (((k mod n) + 1) mod n);
 
@@ -34,31 +34,10 @@ vcycle := function(n, k)
     return k;
 end;
 
-InstallGlobalFunction(CyclicTorusCover, function(n, d, hslits, vslits)
-    return Origami(SlitsToPerm(n, d, hcycle, hslits), SlitsToPerm(n, d, vcycle, vslits));
+InstallGlobalFunction(GeneralizedCyclicTorusCover, function(n, d, vslits, hslits)
+    return Origami(SlitsToPerm(n, d, hcycle, vslits), SlitsToPerm(n, d, vcycle, hslits));
 end);
 
-InstallGlobalFunction(CyclicMonodromy, function (n, d, vslits, hslits)
-    local lst, i;
-    lst := [];
-    lst[1] := Sum(vslits{[1..n]}) mod d;   # sicher dass nur die Teilliste von 1 bis n aufsummiert werden soll?
-    lst[2] := Sum(List([0..(n-1)], k -> hslits[1 + k*n])) mod d;
-    for i in [1..(n^2)] do
-        # we need to pay special attention to 0 or 1 based indices
-        lst[2 + i] := (hslits[i] + vslits[i] + hslits[hcycle(n, i-1) + 1] + vslits[vcycle(n, i-1) + 1]) mod d;
-    od;
-    return lst;
-end);
-
-InstallGlobalFunction(RamificationIndices, function (n, d, vslits, hslits)
-    local R, i, m;
-    m := CyclicMonodromy(n, d, vslits, hslits);
-    R := [];
-    for i in [1..(n^2)] do
-        R[i] := Lcm(m[2 + i], d) / m[2 + i];
-    od;
-    return R;
-end);
 
 InstallGlobalFunction(CombOrigami, function (n, x, y)
     local coord_to_index, vseams, hseams, vslits, hslits, s, half, connect, rcycle, ucycle, rotate90, 
@@ -143,11 +122,10 @@ InstallGlobalFunction(CombOrigami, function (n, x, y)
     vslits := List([1..n^2], i -> s(i, vseams));
     hslits := List([1..n^2], i -> s(i, hseams));
 
-    return CyclicTorusCover(n, 2, vslits, hslits);
+    return GeneralizedCyclicTorusCover(n, 2, vslits, hslits);
 end);
 
-# constructs an origami from a vector w.r.t basis B
-OrigamiFromVector := function(n, d, v)
+InstallGlobalFunction(CyclicTorusCoverOrigami, function(n, d, v)
     local i, j, c, hslits, vslits;
     if not Length(v) = n*n+1 then
         Error("Length of v must be n^2+1");
@@ -172,9 +150,9 @@ OrigamiFromVector := function(n, d, v)
             hslits[n * (i - 1) + j] := v[c];
         od;
     od;
-    return CyclicTorusCover(n, d, vslits, hslits);
-end;
+    return GeneralizedCyclicTorusCover(n, d, vslits, hslits);
+end);
 
-InstallGlobalFunction(TranslationGroup, function(n) # w.r.t. S
-    return GroupByGenerators([TranslationMatrix(n, true), TranslationMatrix(n, false)]);
+InstallGlobalFunction(TranslationGroupOnHomologyOfTn, function(n)
+    return GroupByGenerators([TranslationMatrixOnHomologyOfTn(n, true), TranslationMatrixOnHomologyOfTn(n, false)]);
 end);
