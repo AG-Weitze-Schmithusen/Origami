@@ -27,14 +27,6 @@
 #!  $\texttt{hslits}$.
 DeclareGlobalFunction("GeneralizedCyclicTorusCover");
 
-#! @Arguments n d vslits hslits
-#! @Returns the monodromy of the generalized cyclic torus cover as a $n^2+1$ vector with respect to the basis $L$.
-DeclareGlobalFunction("GeneralizedCyclicTorusMonodromy");
-
-#! @Arguments n d vslits hslits
-#! @Returns the ramification indices for each of the n^2 fields
-DeclareGlobalFunction("RamificationIndices");
-
 #! @Arguments n x y
 #! @Returns a comb origami, which is a cyclic torus cover of degree 2 specified by a single point $P=(x,y)$
 #! @Description A comb origami is a special cyclic torus cover of degree 2, specified by a single point $P$
@@ -52,7 +44,7 @@ DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, Is
 #! @Arguments n d v
 #! @Returns an origami whose monodromy vector representation with respect to $S$ is $v$.
 #! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$ a vector such that its elements generate $\mathbb{Z}/d\mathbb{Z}$.
-DeclareGlobalFunction("CyclicTorusOrigamiFromMonodromyVector", [IsPosInt, IsPosInt, IsRowVector]);
+DeclareGlobalFunction("CyclicTorusCoverOrigami", [IsPosInt, IsPosInt, IsRowVector]);
 
 #! @Section Matrices acting on the homology of the n-Torus
 
