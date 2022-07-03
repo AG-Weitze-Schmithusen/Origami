@@ -510,6 +510,7 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
 <Section Label="OrigamiExamples">
 <Heading>Constructing examples of origamis</Heading>
 In this section we describe some methods for constructing explicit examples and families of origamis.
+More examples of some special constructions of families of orgamis are given in Chapter <Ref Chap="Chapter_Special-origamis" />.
 
 
 <ManSection>

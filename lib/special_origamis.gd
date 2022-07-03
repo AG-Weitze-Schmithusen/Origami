@@ -1,7 +1,8 @@
-#! @Chapter Special Origamis
+#! @Chapter More special Origamis
 #! @ChapterLabel Special-origamis
+#! This section lists some additional functions for the construction of some special families of orgamis.
 
-#! @Section special oriagamis
+#! @Section Functions for constructing special origamis
 
 #! @Arguments d
 #! @Returns An Origami
