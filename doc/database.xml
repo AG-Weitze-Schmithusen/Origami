@@ -11,7 +11,7 @@ After installing ArangoDB, you need to set up a database as follows:
   <Item>database: 'origami'</Item>
 </List>
 In this database, create three collections called <E>origami_representatives</E>, <E>origamis</E> and <E>veechgroups</E>.
-Please download the data from <URL>https://www.math.uni-sb.de/origami/</URL> and import the <E>json</E>-files into the corresponding collections.
+Please download the data from <URL>https://origami.math.uni-sb.de/</URL> and import the <E>json</E>-files into the corresponding collections.
 All of this can be done in the web interface of ArangoDB, which you can reach under <URL>http://127.0.0.1:8529</URL> (unless you have specified a different endpoint
 for your local ArangoDB-Server).
 

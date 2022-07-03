@@ -10,7 +10,7 @@
 <TitlePage>
   <Title>The <Package>Origami</Package> Package</Title>
   <Subtitle>Computing Veech groups of origamis</Subtitle>
-  <Date>07.05.2021</Date>
+  <Date>03.07.2022</Date>
   <Version>Version 1.0.0</Version>
   <Author>Simon Ertl
     <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
@@ -71,7 +71,7 @@
     </Address>
   </Author>
 
-    <Copyright>&copyright; 2018-2021 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Andrea Thevis and Gabriela Weitze-Schmithüsen
+    <Copyright>&copyright; 2018-2022 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Andrea Thevis and Gabriela Weitze-Schmithüsen
     </Copyright>
 
     <Acknowledgements>

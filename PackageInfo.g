@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "1.0.0",
-	Date := "27/09/2021",
+	Version := "2.0.0",
+	Date := "03/07/2022",
 	AvailabilityTest := ReturnTrue,
 	Status := "dev",
 
@@ -16,9 +16,9 @@ SetPackageInfo( rec(
 ),
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "1.0.0">
-##  <!ENTITY RELEASEDATE "07 May 2021">
-##  <!ENTITY RELEASEYEAR "2021">
+##  <!ENTITY VERSION "2.0.0">
+##  <!ENTITY RELEASEDATE "03 July 2022">
+##  <!ENTITY RELEASEYEAR "2022">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
