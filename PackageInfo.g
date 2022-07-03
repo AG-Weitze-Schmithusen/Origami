@@ -150,4 +150,20 @@ ArchiveURL     := Concatenation(~.GithubWWW,
                     "/releases/download/v", ~.Version, "/",
 ~.GithubRepository, "-", ~.Version),
 
+BannerString := """
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+      ┌──┐
+      │  │        Loading  Origami 2.0.0 (Computing Veech groups of origamis)
+   ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
+   │  │  │  │        Luca Junk (http://www.math.uni-sb.de/ag/weitze/),
+┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
+│  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
+└──┼──┼──┼──┼──┘     Andrea Thevis (http://www.math.uni-sb.de/ag/weitze/), and
+   │  │  │  │        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
+   └──┼──┼──┘     Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
+      │  │
+      └──┘
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+""",
+
 ) );
