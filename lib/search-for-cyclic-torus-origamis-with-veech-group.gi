@@ -51,14 +51,13 @@ IsStabilizedBy := function(d, mat, translation_mats, v)
 end;
 
 InstallGlobalFunction(SearchForCyclicTorusOrigamiWithVeechGroup, function(n, p, H)
-    local d,mats_sl2z, matrices, sim_vec, o, sim_vecs, veech_ind, DBSTransposeInverse, 
+    local d,mats_sl2z, matrices, sim_vec, o, sim_vecs, veech_ind, 
     eigSpaces, esp, sim_vec_int, translations, S, T;
 
     if not IsPrimeInt(p) or n <= 1 then
         Error("p must be prime and n a natural number > 1");
     fi;
 
-    DBSTransposeInverse := TransposedMat(Inverse(BaseChangeLToS(n)));
     d := p;
     mats_sl2z := MatrixGeneratorsOfGroup(H);
     matrices := List(mats_sl2z, m->Inverse(ActionOfMatrixOnHomologyOfTn(n, m)));
