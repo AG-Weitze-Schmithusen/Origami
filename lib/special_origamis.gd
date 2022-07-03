@@ -7,7 +7,7 @@
 #! @Returns An Origami
 #! @Description
 #! This function returns a random origami of degree d. It is usually used for testing.
-#! As it is randomized over its permutations the propability distribution is not uniform on the orbits.
+#! As it is randomized over its permutations the propability distribution is not guaranteed to be uniform on the orbits.
 DeclareGlobalFunction("RandomOrigami");
 #! @Arguments n
 #! @Returns A special origami
