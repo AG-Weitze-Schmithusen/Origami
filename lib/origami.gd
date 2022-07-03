@@ -27,7 +27,7 @@ DeclareAttribute("_IndexOrigami", IsOrigami);
 DeclareOperation("OrigamisEquivalent", [IsOrigami, IsOrigami]);
 
 DeclareGlobalFunction("NormalformConjugators");
-DeclareGlobalFunction("ConjugatorsToInverse");
+DeclareGlobalFunction("PointReflectionsOfOrigami");
 DeclareGlobalFunction("AutomorphismsOfOrigami");
 DeclareGlobalFunction("QuasiRegularOrigami");
 DeclareGlobalFunction("ContainsNormalSubgroups");
@@ -40,5 +40,3 @@ DeclareGlobalFunction("FixedPointsOfAutomorphism");
 DeclareGlobalFunction("OrigamiQuotient");
 DeclareGlobalFunction("Quotientengeschlecht");
 DeclareGlobalFunction("OrigamiSingularities");
-
-

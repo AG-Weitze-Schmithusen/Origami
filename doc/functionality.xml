@@ -510,6 +510,7 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
 <Section Label="OrigamiExamples">
 <Heading>Constructing examples of origamis</Heading>
 In this section we describe some methods for constructing explicit examples and families of origamis.
+More examples of some special constructions of families of orgamis are given in Chapter <Ref Chap="Chapter_Special-origamis" />.
 
 
 <ManSection>
@@ -533,59 +534,6 @@ In this section we describe some methods for constructing explicit examples and 
       Origami((1,2,3), (2,4,3), 4), Origami((1,2,3), (1,2)(3,4), 4),
       Origami((1,2,3,4), (2,4), 4), Origami((1,2,3,4), (1,2)(3,4), 4) ]
     ]]>
-    </Example>
-  </Description>
-
-  <Oper Name="RandomOrigami" Arg="d"/>
-  <Returns>An origami.</Returns>
-  <Description>
-    Returns random origami of degree <A>d</A>.
-    <Example>
-    <![CDATA[
-    gap> RandomOrigami(6);
-    Origami((1,3,5,6,4), (2,3,4,5,6), 6)
-    ]]>
-    </Example>
-  </Description>
-
-  <Oper Name="XOrigami" Arg="d"/>
-  <Returns>An origami.</Returns>
-  <Description>
-    This function calculates an origami of degree <M>2d</M>. The permutations are given by
-    <M> /sigma_h = (1,...,2k) </M> and <M> /sigma_v=(1,2)(3,4)...(2k, 2k-1)</M>.
-    <Example>
-      gap> XOrigami(2);
-      Origami((1,2,3,4), (1,2)(3,4), 4)
-    </Example>
-  </Description>
-
-  <Oper Name="ElevatorOrigami" Arg="l, h, s"/>
-  <Returns>An origami.</Returns>
-  <Description>
-    The function calculates an Origami similar to the staircase origami, but the first tile of the first
-    step and the last tile of the last tile are connected. The permutations are given by
-    <M> /sigma_h= (1,..., a)/circ(a + b + 1,...,2a + b)/circ(2a + 2b + 1,...,3a + 2b)/circ...
- /circ((d - 1)(a + b) + 1,...,da + (d - 1)b)</M> and
-    <M> /sigma_v = (a, a + 1,...,a + b + 1)/circ(2a + b, 2a + b + 1,...,2a + 2b + 1)/circ...
-/circ (da + (d - 1)b, da + (d - 1)b + 1,..., d(a + b),1)</M>
-    <Example>
-      gap>  Elevator(2,0,3);
-      Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
-    </Example>
-  </Description>
-
-  <Oper Name="StaircaseOrigami" Arg="l, h, s"/>
-  <Returns>An origami.</Returns>
-  <Description>
-    This function calculates a "staircase" origami of <Arg>steps</Arg> steps.
-    Each step has length <Arg>length</Arg> and height <Arg>height</Arg>. The permutations are given by
-    <M> /sigma_h= (1,..., a)/circ(a + b + 1,...,2a + b)/circ(2a + 2b + 1,...,3a + 2b)/circ...
- /circ((d - 1)(a + b) + 1,...,da + (d - 1)b)</M> and
-    <M> /sigma_v = (a, a + 1,...,a + b + 1)/circ(2a + b, 2a + b + 1,...,2a + 2b + 1)/circ...
-/circ (da + (d - 1)b, da + (d - 1)b + 1,..., d(a + b))</M>
-    <Example>
-      gap> Staircase(2,0,3);
-      Origami((1,2)(3,4)(5,6), (2,3)(4,5), 6)
     </Example>
   </Description>
 
@@ -660,7 +608,7 @@ In this section we describe some methods for constructing explicit examples and 
     </Example>
   </Description>
 
-  <Oper Name="ConjugatorsToInverse" Arg="O"/>
+  <Oper Name="PointReflectionsOfOrigami" Arg="O"/>
   <Returns>A list.</Returns>
   <Description>
     Calculates all permutations which yield the inverse Origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
@@ -668,7 +616,7 @@ In this section we describe some methods for constructing explicit examples and 
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
-          gap> ConjugatorsToInverse(o);
+          gap> PointReflectionsOfOrigami(o);
           [ (1,2)(3,4), (1,4)(2,3) ]
     </Example>
   </Description>
@@ -696,7 +644,7 @@ In this section we describe some methods for constructing explicit examples and 
       <![CDATA[
       gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
       Origami((1,2,3,4), (1,2)(3,4), 4)
-      gap> sigma:=ConjugatorsToInverse(origami)[1];
+      gap> sigma:=PointReflectionsOfOrigami(origami)[1];
       (1,2)(3,4)
       gap> FixedPointsOfConjugatorToInverse(origami, sigma);
       [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ]
