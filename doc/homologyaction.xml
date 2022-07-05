@@ -1,0 +1,222 @@
+<Section Label = "HomAction">
+<Heading>The homology of origamis and the action of the Veech group on it.</Heading>
+We assume in this section, that origamis have no nontrivial translations (or deck transformations of the corresponding covering space).
+This section contains functions, which compute a basis of the homology <M> H = H_1( \mathcal{O}, \mathbb{Z}) </M> of an origami <M>\mathcal{O} </M> and the action of an affine transformation <M>f</M> of <M> \mathcal{O}</M> on <M> H </M>. The later is the map   <M>f_\ast\colon H \to H </M>. We consider the cellular homology with the squares of the Origami as 2-cell. We call <M> \sigma_i </M> the bottom edge of the square <M>Q_1</M> and  <M> \xi_i</M> the left edge of the square <M> Q_i </M>. Then we can represent an element of <M>H </M> as a formal linear combination of the <M>\sigma 's </M> and the <M>\xi 's </M>. In &GAP; we represent elements of <M> H </M> as  elements of <M> \mathbb{Z}^{2d} </M> in the following way <M>\sigma_i </M> is represented by <M> e_i </M> and <M>  \xi_i </M> is represented by <M> e_{i + d} </M>, where <M> e_i </M> is the i-th. standard basis vector of <M> \mathbb{Z}^{2d}</M> (And formal sums of elements in <M> H </M> are represented by the appropriate sums i <M> \mathcal{Z}^{2d}</M>). 
+
+Furthermore  the action of the affine group respects the decompoition of the subspace <M> H^{NT} </M> of <M> H </M> of dimension <M> 2g-2</M> and its orthogonal complement w.r.t the intersection form. We call this subspace of dimension <M> 2g-2</M> the nontautological part of the homology. We are mostly interested in the restriction of the action to <M> H^{NT} </M>.
+
+<ManSection>
+
+<Oper Name="HomologyOrigami" Arg="O" />
+  <Returns> A list of vectors in <M>\mathbb{Z}^{2d}</M> </Returns>
+  <Description>
+    This function computes a basis of the homology of <A>O</A> 
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> HomologyOrigami(O);
+	[ [ 0, 0, 1, 1, 1, -1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, -2, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+<Oper Name="NonTautPartOfHomologyOrigami" Arg="O, H" />
+  <Returns> A list of vectors in <M>\mathbb{Z}^{2d}</M> </Returns>
+  <Description>
+    This function computes a basis of the nontautological part of the  homology <A> H</A> of  <A>O</A>. 
+    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> NonTautPartOfHomologyOrigami(O, HomologyOrigami( O ));
+	[ [ 0, 0, 1, 1, 1, -1, 0, -2, 1, 0, 2, -1, 0, 0, -1, -1 ], 
+	[ 0, 0, 0, 0, 0, 0, 1, -1, 0, -1, 1, 0, 0, 0, -2, 2 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, -1 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, -1 ] ]	
+    ]]>
+    </Example>
+  </Description>
+
+
+<Func Name="HomologyToString" Arg="H1"/>
+	<Returns> a string </Returns>
+	<Description>
+		This function gives a string representation of the homology vector <A> H1 </A> in the Homology of  an origami as a formal linear combination of the <M> \sigma_i 's</M> (resp. s) and the <M> \xi_i 's</M> (resp. z). 
+	    <Example>
+    <![CDATA[
+    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> H1 := HomologyOrigami(O)[1];
+	[ 0, 0, 1, 1, 1, -1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0 ]
+	gap> HomologyToString( H1 );
+	"1s_3 + 1s_4 + 1s_5 - 1s_6 + 1z_1 - 1z_4 - 1z_7"
+	    ]]>
+    </Example>
+		
+	</Description>
+
+<Oper Name="ActionOfMatrixOnHom" Arg="O,A "/>
+  <Returns> a matrix in <M> Sp_{2g}(\mathbb{Z}) </M> </Returns>
+  <Description>
+    This function computes the action of an affine transformation with derivative <A> A </A> on the Homology of <A> O </A> w.r.t the Baisis of the homology computed with <Ref Oper="HomologyOrigami"/>.
+    <Example>
+    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> ActionOfMatrixOnHom(O, [[1,10],[0,1]]);
+	[ [ 1, -2, -2, 2, 0, 0 ], [ -5, -11, -2, 2, 5, 0 ], 
+	[ -5, -14, -3, 4, 5, 10 ], [ -10, -26, -6, 7, 10, 10 ], 
+	[ -10, -26, -6, 6, 11, 0 ], [ 0, 0, 0, 0, 0, 1 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+<Oper Name="ActionOfMatrixOnHom" Arg="O,A, H "/>
+  <Returns> a matrix in <M> Sp_{2g}(\mathbb{Z}) </M> </Returns>
+  <Description>
+	In this Method you can choose a Basis <A> H </A> of the Homology. 
+	    <Example>
+    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+		gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];
+	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	
+	gap> ActionOfMatrixOnHom(O, [[1,10],[0,1]], H);
+	[ [ 1, 0, 0, 2, 2, 2 ], [ 0, 1, 0, 5, 5, 0 ], [ 0, 0, 1, 10, 0, 0 ], 
+	[ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+
+<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A "/>
+  <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
+  <Description>
+    This function computes the action of an affine transformation with derivative <A> A </A> on the nontautological part of the homology of <A> O </A> w.r.t the basis of the homology computed with <Ref Oper="HomologyOrigami"/> and the basis of the nontautological part of the homology is computed with <Ref Oper= "NonTautPartOfHomologyOrigami"/> .
+    <Example>
+    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]]);
+	[ [ 5, 0, 2, 0 ], [ -1, -9, 2, 5 ], [ -8, 0, -3, 0 ], [ 2, -20, 6, 11 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,H "/>
+  <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
+  <Description>
+	In this method you can choose in addition a basis <A> H </A> of the homology. 
+		    <Example>
+    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];
+	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	
+	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]], H);
+	[ [ 1, 0, -4, -2 ], [ 0, 1, 5, 5 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,NT,H "/>
+  <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
+  <Description>
+	In this Method you can choose in addition a basis <A> H </A> of the homology as well as a basis <A> NT</A> of the nontautological part of the homology.  
+<Example>
+	    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];
+	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]
+	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]],  
+	>NonTautPartOfHomologyOrigami(O, H), H);
+	[ [ 1, 0, -4, -2 ], [ 0, 1, 5, 5 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ]
+    ]]>
+    </Example>
+  </Description>
+
+
+<Oper Name="ShadowVeechGroup" Arg="O"/>
+  <Returns> a matrix group  <M> S \subseteq Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
+  <Description>
+	This function computes the image of the action of the Veech group on the nontautological part of the homology of <A> O </A>. If <M> A </M> is in the Veech group of <A> O </A> and  <M> f</M> is an affine transformation with derivative <M> A </M> then <M> {f_\ast}_{|H^{NT}} \colon {H^{NT} \to {H^{NT} </M> is in the Shadow Veech group of <A> O </A>, encoded as matrix. The basis of the  homology is computed with  <Ref Oper="HomologyOrigami"/> and the basis of the nontautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.
+    <Example>
+    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> ShadowVeechGroup(O);
+	#I  RRS defined 152 primary and 196 secondary subgroup generators
+	<matrix group with 152 generators>
+    ]]>
+    </Example>
+  </Description>
+
+<Oper Name="ShadowVeechGroup" Arg="O, H "/>
+  <Returns> a matrix group  <M> S \subseteq Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
+  <Description>
+	In this Method you can choose in addition a Basis <A> H </A> of the homology, where the basis of the nontautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.  
+  <Example>
+	    <![CDATA[
+	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
+	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
+	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
+	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];
+	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	
+	gap> ShadowVeechGroup(O, H);
+	#I  RRS defined 152 primary and 196 secondary subgroup generators
+	<matrix group with 152 generators>
+    ]]>
+    </Example>
+
+  </Description>
+
+
+</ManSection>
+
+</Section>

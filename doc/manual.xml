@@ -51,13 +51,13 @@
     </Address>
   </Author>
   <Author>Andrea Thevis
-    <Email>thevis@math.uni-sb.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Email>thevis@math.uni-frankfurt.de</Email>
+    <Homepage>https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis</Homepage>
     <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
+      FB 12 - Institut für Mathematik<Br/>
+      Johann Wolfgang Goethe-Universität<Br/>
+      Robert-Mayer-Str. 6-8<Br/>
+      D-60325 Frankfurt am Main<Br/>
     </Address>
   </Author>
   <Author>Gabriela Weitze-Schmithüsen
@@ -101,6 +101,7 @@
   
   <#Include SYSTEM "intro.xml">
   <#Include SYSTEM "functionality.xml">
+  <#Include SYSTEM "homologyaction.xml">
   <#Include SYSTEM "sage.xml">
   <#Include SYSTEM "database.xml">
   <#Include SYSTEM "_AutoDocMainFile.xml">
