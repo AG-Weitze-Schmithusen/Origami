@@ -1,10 +1,16 @@
 #! @Chapter Cyclic Torus Covers
 #! @ChapterLabel cyclic-torus-covers
-#! Let $T_n$ be the $n \times n$-Torus. A **cyclic $n$-torus cover of degree $d$** is a normal covering $X \to T_n$ whose Deck-group is cyclic with $d$ elements.
+#! Let $T_n$ be the $n \times n$-Torus. Hence topolgically it is torus with $n^2$ punctures.
+#! A **cyclic $n$-torus cover of degree $d$** is a normal covering $X \to T_n$ whose Deck-group is cyclic with $d$ elements.
 #! We can obtain an origami from each cyclic $n$-torus cover by appending the map $p_n: T_n \to T_1$, which sends each square to the singular square of the
-#! trivial torus. We call such origamis **cyclic torus cover origamis**. There are several functions that help working with these.
-#! 
-#! @Section Bases of the fundamental group
+#! trivial torus. We call such origamis **cyclic torus cover origamis**. The functions described in this chapter provide tools to work with them.
+
+#! @Section Monodromy vectors and bases of the fundamental group
+#! A **cyclic $n$-torus cover of degree $d$** is determined by its monodromy map $m: \pi_1(T_n) \to \mathbb{Z}/d\mathbb{Z}$.
+#! Recall that the fundametal group $\pi_1(T_n)$ is a free
+#! group in $N = n^2 + 1$ generators. If we choose a basis of $\pi_1(T_n)$, every cyclic torus cover origami can be
+#! described as vector in $(\ZZ/d\ZZ)^N$. We call this vector ** monodromy vector with respect to this basis**.
+
 #! There are two bases of the fundamental group of $T_n$ which we will use. The base point is chosen as the midpoint of the lower
 #! left square. The basis $L$ consists of the full horizontal path to the right, the full vertical path upwards and
 #! loops around each of the $n^2 - 1$ corner points of the squares (numbered left to right and bottom up; the loop on the most upper right corner excluded)
