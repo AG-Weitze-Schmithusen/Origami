@@ -8,13 +8,13 @@
 #! @Returns An Origami
 #! @Description
 #! This function returns a random origami of degree $d$. It is usually used for testing.
-#! As it is randomized over its permutations the propability distribution is not guaranteed to be uniform on the orbits.
+#! As it is randomized over its permutations, the propability distribution is not guaranteed to be uniform on the orbits.
 DeclareGlobalFunction("RandomOrigami");
 #! @Arguments n
 #! @Returns A special origami
 #! @Description
-#! This function returns special origamis, so calles Xorigamis. Xorigamis have degree $2d$.
-#! The horizontal permutations are trivial and the vertical permutations are of the form:
+#! This function returns special origamis, so called Xorigamis. Xorigamis have degree $2n$.
+#! The horizontal permutation is the $2n$-cylce $(1,\ldots, n)$  and the vertical permutation ist of the form:
 #! $$(1,2)(3,4)..(2n-1,2n)$$
 #! @BeginExampleSession
 #! gap> XOrigami(2);
