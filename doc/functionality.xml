@@ -582,8 +582,8 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="TranslationsOfOrigami" Arg="O"/>
   <Returns>A list of permutations.</Returns>
   <Description>
-    Calculates all permutations which yield the origami when conjugated to the <Arg>O</Arg>.
-    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y</M> and <M>t*x*t^-1=x</M>, where <M>x,y</M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
+    Computes all translations of the origami as permutations of the squares of <Arg>O</Arg>.
+    This is equivalent to the permutations <M>t</M> which satisfy  <M>t\circ \sigma_x\circ t^{-1} = \sigma_x</M> and <M>t\circ\sigma_y\circ t^{-1} = \sigma_y </M>, where <M>\sigma_x, \sigma_y</M> are the permutations describing the horizontal and the vertical glueing of the origami, respectively.
     <Example>
       gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
     Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -609,10 +609,10 @@ More examples of some special constructions of families of orgamis are given in 
   </Description>
 
   <Oper Name="PointReflectionsOfOrigami" Arg="O"/>
-  <Returns>A list.</Returns>
+  <Returns>A list of permutations.</Returns>
   <Description>
-    Calculates all permutations which yield the inverse Origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
-    That is to say the permutation <M>t</M>, <M>t*y*t^-1=y^-1</M> and <M>t*x*t^-1=x^-1</M>, where <M>x,y</M> are the permutations describing the horizontal and vertical glueing of the origami, respectively.
+    Computes all point reflections of <M>O</M>, i.e. all affine homeomorphisms with derivatie  <M>-I </M>, where  <M>I</M> is the identity matrix.
+    This is equivalent to the permutations  <M> t </M> which satisfy <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>, where <M>\sigma_x,\sigma_y</M> are the permutations describing the horizontal and the vertical glueing of the origami, respectively.
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -622,9 +622,9 @@ More examples of some special constructions of families of orgamis are given in 
   </Description>
 
   <Oper Name="AutomorphismsOfOrigami" Arg="O"/>
-  <Returns>A list.</Returns>
+  <Returns>A list of permutations.</Returns>
   <Description>
-    Calculates all automorphisms of the origami, i.e the translations and conjugators to the inverse.
+    Computes all automorphisms of the origami, i.e the translations and the point reflections.
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -636,10 +636,10 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="FixedPointsOfConjugatorToInverse" Arg="O, sigma"/>
   <Returns>Two lists.</Returns>
   <Description>
-  This function calculates the fixed points of a conjugator to inverse <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the inverse origami <M>-1.O</M> when conjugated to the <Arg>O</Arg>.
-  The funtion does not check whether <Arg>sigma</Arg> is a conjugator to inverse.
-  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
-  and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
+    This function computes the fixed points of a point reflection <Arg>sigma</Arg> given as permutation of the squares of the origami <Arg>O</Arg>.
+    The funtion does not check whether <Arg>sigma</Arg> is a point reflection, i.e. whether it satisfies  <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>.
+    The fixed points are returned in a list with entries <M>[a,b,c]</M>, where <M>a</M> is the square in which the fixed point occurs
+    and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
     <Example>
       <![CDATA[
       gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
