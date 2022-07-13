@@ -21,6 +21,8 @@
 #! slit bottom up (for horizontal slits) and left to right (for vertical slits) is then an element of the basis.
 #! 
 #! Convertion between these two bases is performed with <Ref Func="BaseChangeLToS" />
+#!
+#! See <Cite Key="ba_rogovskyy" /> for more information regarding the construction of cyclic torus covers and the bases $L$ and $S$.
 
 #! @Section General Cyclic Torus Cover functions
 
@@ -72,6 +74,7 @@ DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, Is
 DeclareGlobalFunction("CyclicTorusCoverOrigami", [IsPosInt, IsPosInt, IsRowVector]);
 
 #! @Section Matrices acting on the homology of the n-Torus
+#! Given a homeomorphism $f: T_n \to T_n$, one can consider the induced linear map on the homology of $T_n$. If we furthermore choose two bases of the homology, we can consider this linear map as a matrix. This section computes some of these matrices.
 
 #! @Arguments n
 #! @Returns a matrix $M = D_{SL}$ representing a change of basis between the bases $L$ and $S$.
