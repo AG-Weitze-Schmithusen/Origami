@@ -7,7 +7,7 @@
   
 This section contains functions, which compute a basis of the homology <M> H = H_1( \mathcal{O}, \mathbb{Z}) </M> of an origami <M>\mathcal{O} </M> and the action of an affine transformation <M>f</M> of <M> \mathcal{O}</M> on <M> H </M>. The later is the map   <M>f_\ast\colon H \to H </M>. We consider the cellular homology with the squares of the origami as 2-cells. We call <M> \sigma_i </M> the bottom edge of the square <M>Q_i</M> and  <M> \xi_i</M> the left edge of the square <M> Q_i </M>. Then we can represent an element of <M>H </M> as a formal linear combination of the <M>\sigma 's </M> and the <M>\xi 's </M>. In &GAP; we represent elements of <M> H </M> as  elements of <M> \mathbb{Z}^{2d} </M> in the following way: <M>\sigma_i </M> is represented by <M> e_i </M> and <M>  \xi_i </M> is represented by <M> e_{i + d} </M>, where <M> e_i </M> is the i-th. standard basis vector of <M> \mathbb{Z}^{2d}</M>. Formal sums of elements in <M> H </M> are represented by the appropriate sums in <M> \mathbb{Z}^{2d}</M>. One has to keep in mind that this description is not unique. More precisely the homology  <M> H </M>  is a subquotient of this space  <M>\mathbb{Z}^{2d}</M>. <P/>
 
-Furthermore  the action of the affine group respects the decompoition of the subspace <M> H^{NT} </M> of <M> H </M> of dimension <M> 2g-2</M> and its orthogonal complement w.r.t the intersection form. We call this subspace of dimension <M> 2g-2</M> the nontautological part of the homology. We are mostly interested in the restriction of the action to <M> H^{NT} </M>.
+The homology has a splitting as sum of the  <Emph>tautological part</Emph> <M> H^{T} </M>  and the <Emph>non-tautological part </Emph> <M> H^{NT} </M> which is equivalet under the action of the affine group Aff<M>(O)</M>  of the origami <M> \mathcal{O}</M>. I.e. <M> H = H^{T} \oplus H^{NT} </M> with <M> H^{T} </M>  and <M> H^{NT} </M> both invariant under the action of Aff<M>(O)</M>.  The sum is orthogonal with respect to the intersection form, the dimension of <M> H^{T} </M> is 2 and the dimension of <M>H^{NT}</M> is <M> 2g-2</M>.  In the part of the package described in this chapter we provide functions which compute the action of the affine group on the homology <M>H</M> and on the non-tautological part <M> H^{NT}</M>.
 
 <ManSection>
 
@@ -33,7 +33,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="NonTautPartOfHomologyOrigami" Arg="O, H" />
   <Returns> A list of vectors in <M>\mathbb{Z}^{2d}</M> </Returns>
   <Description>
-    This function computes a basis of the nontautological part of the  homology <A> H</A> of  <A>O</A>. 
+    This function computes a basis of the non-tautological part of the  homology <A> H</A> of  <A>O</A>. 
     <Example>
     <![CDATA[
     gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -51,7 +51,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Func Name="HomologyToString" Arg="H1"/>
 	<Returns> a string </Returns>
 	<Description>
-		This function gives a string representation of the homology vector <A> H1 </A> in the Homology of  an origami as a formal linear combination of the <M> \sigma_i 's</M> (resp. s) and the <M> \xi_i 's</M> (resp. z). 
+		This function gives a string representation of the homology vector <A> H1 </A> in the homology of  an origami as a formal linear combination of the <M> \sigma_i 's</M> (resp. s) and the <M> \xi_i 's</M> (resp. z). 
 	    <Example>
     <![CDATA[
     gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -68,7 +68,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ActionOfMatrixOnHom" Arg="O,A "/>
   <Returns> a matrix in <M> Sp_{2g}(\mathbb{Z}) </M> </Returns>
   <Description>
-    This function computes the action of an affine transformation with derivative <A> A </A> on the Homology of <A> O </A> w.r.t the Baisis of the homology computed with <Ref Oper="HomologyOrigami"/>.
+    This function computes the action of an affine homeomorphism with derivative <A> A </A> on the homology of <A> O </A> w.r.t the basis of the homology computed with <Ref Oper="HomologyOrigami"/>.
     <Example>
     <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -84,7 +84,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ActionOfMatrixOnHom" Arg="O,A, H "/>
   <Returns> a matrix in <M> Sp_{2g}(\mathbb{Z}) </M> </Returns>
   <Description>
-	In this Method you can choose a Basis <A> H </A> of the Homology. 
+	In this method you can choose a basis <A> H </A> of the homology. 
 	    <Example>
     <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -112,7 +112,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A "/>
   <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
-    This function computes the action of an affine transformation with derivative <A> A </A> on the nontautological part of the homology of <A> O </A> w.r.t the basis of the homology computed with <Ref Oper="HomologyOrigami"/> and the basis of the nontautological part of the homology is computed with <Ref Oper= "NonTautPartOfHomologyOrigami"/> .
+    This function computes the action of an affine homeomorphism with derivative <A> A </A> on the non-tautological part of the homology of <A> O </A> w.r.t the basis of the homology computed with <Ref Oper="HomologyOrigami"/> and the basis of the non-tautological part of the homology is computed with <Ref Oper= "NonTautPartOfHomologyOrigami"/> .
     <Example>
     <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -152,7 +152,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,NT,H "/>
   <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
-	In this Method you can choose in addition a basis <A> H </A> of the homology as well as a basis <A> NT</A> of the nontautological part of the homology.  
+	In this method you can choose in addition a basis <A> H </A> of the homology as well as a basis <A> NT</A> of the non-tautological part of the homology.  
 <Example>
 	    <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -180,7 +180,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ShadowVeechGroup" Arg="O"/>
   <Returns> a matrix group  <M> S \subseteq Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
-	This function computes the image of the action of the Veech group on the nontautological part of the homology of <A> O </A>. If <M> A </M> is in the Veech group of <A> O </A> and  <M> f</M> is an affine transformation with derivative <M> A </M> then <M> {f_\ast}_{|H^{NT}} \colon {H^{NT} \to {H^{NT} </M> is in the Shadow Veech group of <A> O </A>, encoded as matrix. The basis of the  homology is computed with  <Ref Oper="HomologyOrigami"/> and the basis of the nontautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.
+	This function computes the image of the action of the Veech group on the non-tautological part of the homology of <A> O </A>. If <M> A </M> is in the Veech group of <A> O </A> and  <M> f</M> is an affine transformation with derivative <M> A </M> then <M> {f_\ast}_{|H^{NT}} \colon {H^{NT} \to {H^{NT} </M> is in the Shadow Veech group of <A> O </A>, encoded as matrix. The basis of the  homology is computed with  <Ref Oper="HomologyOrigami"/> and the basis of the non-tautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.
     <Example>
     <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
@@ -195,7 +195,7 @@ Furthermore  the action of the affine group respects the decompoition of the sub
 <Oper Name="ShadowVeechGroup" Arg="O, H "/>
   <Returns> a matrix group  <M> S \subseteq Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
-	In this Method you can choose in addition a Basis <A> H </A> of the homology, where the basis of the nontautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.  
+	In this method you can choose in addition a basis <A> H </A> of the homology, where the basis of the non-tautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.  
   <Example>
 	    <![CDATA[
 	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
