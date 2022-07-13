@@ -3,7 +3,8 @@
 #! Let $T_n$ be the $n \times n$-Torus. Hence topolgically it is torus with $n^2$ punctures.
 #! A **cyclic $n$-torus cover of degree $d$** is a normal covering $X \to T_n$ whose Deck-group is cyclic with $d$ elements.
 #! We can obtain an origami from each cyclic $n$-torus cover by appending the map $p_n: T_n \to T_1$, which sends each square to the singular square of the
-#! trivial torus. We call such origamis **cyclic torus cover origamis**. The functions described in this chapter provide tools to work with them.
+#! trivial torus. We call such origamis **cyclic torus cover origamis**.
+#! The functions described in this chapter were programed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with these special class of origamis.
 
 #! @Section Monodromy vectors and bases of the fundamental group
 #! A **cyclic $n$-torus cover of degree $d$** is determined by its monodromy map $m: \pi_1(T_n) \to \mathbb{Z}/d\mathbb{Z}$.
@@ -71,7 +72,7 @@ DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, Is
 DeclareGlobalFunction("CyclicTorusCoverOrigamiS", [IsPosInt, IsPosInt, IsRowVector]);
 
 #! @Arguments n d v
-#! @Returns a cyclic torus cover origami whose monodromy vector representation with respect to the basis $S$ (respectively $L$) is $v$.
+#! @Returns a cyclic torus cover origami whose monodromy vector with respect to the basis $S$ (respectively $L$) is $v$.
 #! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$ a vector such that its elements generate $\mathbb{Z}/d\mathbb{Z}$.
 #! @BeginExampleSession
 #! gap> CyclicTorusCoverOrigamiS(2,2,[1,0,1,0,0]);
