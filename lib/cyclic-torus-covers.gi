@@ -125,7 +125,7 @@ InstallGlobalFunction(CombOrigami, function (n, x, y)
     return GeneralizedCyclicTorusCover(n, 2, vslits, hslits);
 end);
 
-InstallGlobalFunction(CyclicTorusCoverOrigami, function(n, d, v)
+InstallGlobalFunction(CyclicTorusCoverOrigamiS, function(n, d, v)
     local i, j, c, hslits, vslits;
     if not Length(v) = n*n+1 then
         Error("Length of v must be n^2+1");
@@ -151,6 +151,10 @@ InstallGlobalFunction(CyclicTorusCoverOrigami, function(n, d, v)
         od;
     od;
     return GeneralizedCyclicTorusCover(n, d, vslits, hslits);
+end);
+
+InstallGlobalFunction(CyclicTorusCoverOrigamiL, function(n, d, v)
+    return CyclicTorusCoverOrigamiS(n, d, v * Inverse(BaseChangeLToS(n)));
 end);
 
 InstallGlobalFunction(TranslationGroupOnHomologyOfTn, function(n)

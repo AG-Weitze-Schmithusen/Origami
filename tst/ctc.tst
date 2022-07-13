@@ -8,17 +8,25 @@ Origami((1,27,28,29,30,26,2,3,4,5)(6,7,8,9,10)(11,12,13,14,15)(16,17,18,19,20)\
 0), (1,31,36,41,46,26,6,11,16,21)(2,7,12,17,22)(3,8,13,18,23)(4,9,14,19,24)(5,\
 10,15,20,25)(27,32,37,42,47)(28,33,38,43,48)(29,34,39,44,49)(30,35,40,45,50), \
 50)
-gap> Stratum(CyclicTorusCoverOrigami(2, 2, [1,0,0,0,0] * Inverse(BaseChangeLToS(2))));
+gap> Stratum(CyclicTorusCoverOrigamiS(2, 2, [1,0,0,0,0] * Inverse(BaseChangeLToS(2))));
 [  ]
-gap> Stratum(CyclicTorusCoverOrigami(2, 2, [1,0,1,0,0] * Inverse(BaseChangeLToS(2))));
+gap> Stratum(CyclicTorusCoverOrigamiL(2, 2, [1,0,0,0,0]));
+[  ]
+gap> Stratum(CyclicTorusCoverOrigamiS(2, 2, [1,0,1,0,0] * Inverse(BaseChangeLToS(2))));
 [ 1, 1 ]
-gap> Stratum(CyclicTorusCoverOrigami(2, 2, [1,0,1,1,0] * Inverse(BaseChangeLToS(2))));
+gap> Stratum(CyclicTorusCoverOrigamiL(2, 2, [1,0,1,0,0]));
 [ 1, 1 ]
-gap> Stratum(CyclicTorusCoverOrigami(2, 2, [1,0,1,1,1] * Inverse(BaseChangeLToS(2))));
+gap> Stratum(CyclicTorusCoverOrigamiS(2, 2, [1,0,1,1,0] * Inverse(BaseChangeLToS(2))));
+[ 1, 1 ]
+gap> Stratum(CyclicTorusCoverOrigamiL(2, 2, [1,0,1,1,0] ));
+[ 1, 1 ]
+gap> Stratum(CyclicTorusCoverOrigamiS(2, 2, [1,0,1,1,1] * Inverse(BaseChangeLToS(2))));
 [ 1, 1, 1, 1 ]
-gap> DegreeOrigami(CyclicTorusCoverOrigami(2, 7, [3, 2, 1, 0, 1]));
+gap> Stratum(CyclicTorusCoverOrigamiL(2, 2, [1,0,1,1,1]));
+[ 1, 1, 1, 1 ]
+gap> DegreeOrigami(CyclicTorusCoverOrigamiS(2, 7, [3, 2, 1, 0, 1]));
 28
-gap> CyclicTorusCoverOrigami(2, 2, [1, 1, 1, 0, 1]);
+gap> CyclicTorusCoverOrigamiS(2, 2, [1, 1, 1, 0, 1]);
 Origami((1,2,5,6)(3,4)(7,8), (1,7)(2,4,6,8)(3,5), 8)
 gap> List([2..10], i->AbsInt(Determinant(BaseChangeLToS(i)))=1);
 [ true, true, true, true, true, true, true, true, true ]

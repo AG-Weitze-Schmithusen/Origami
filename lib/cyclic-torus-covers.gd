@@ -64,14 +64,22 @@ DeclareGlobalFunction("CombOrigami");
 #! @EndExampleSession
 DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, IsPosInt, IsMatrixGroup]);
 
+#! @BeginGroup
+#! @GroupTitle Cyclic torus cover origamis from monodromy vectors
 #! @Arguments n d v
-#! @Returns a cyclic torus cover origami whose monodromy vector representation with respect to the basis $S$ is $v$.
+DeclareGlobalFunction("CyclicTorusCoverOrigamiS", [IsPosInt, IsPosInt, IsRowVector]);
+
+#! @Arguments n d v
+#! @Returns a cyclic torus cover origami whose monodromy vector representation with respect to the basis $S$ (respectively $L$) is $v$.
 #! @Description $n$ must be $\geq 2$, $d\geq 1$ and $v \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}$ a vector such that its elements generate $\mathbb{Z}/d\mathbb{Z}$.
 #! @BeginExampleSession
-#! gap> CyclicTorusCoverOrigami(2,2,[1,0,1,0,0]);
+#! gap> CyclicTorusCoverOrigamiS(2,2,[1,0,1,0,0]);
 #! Origami((1,2,5,6)(3,4)(7,8), (1,3,5,7)(2,4)(6,8), 8)
 #! @EndExampleSession
-DeclareGlobalFunction("CyclicTorusCoverOrigami", [IsPosInt, IsPosInt, IsRowVector]);
+DeclareGlobalFunction("CyclicTorusCoverOrigamiL", [IsPosInt, IsPosInt, IsRowVector]);
+
+#! @EndGroup
+
 
 #! @Section Matrices acting on the homology of the n-Torus
 #! Given a homeomorphism $f: T_n \to T_n$, one can consider the induced linear map on the homology of $T_n$. If we furthermore choose two bases of the homology, we can consider this linear map as a matrix. This section computes some of these matrices.
