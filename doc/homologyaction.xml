@@ -1,6 +1,6 @@
 <Chapter Label="HomAction">
   <Heading>The homology of origamis and the action of the Veech group on it.</Heading>  
-  <Emph> Important premise: We assume in this section, that all considered origamis have no nontrivial translations. This is equivalent to that the corresponding torus cover has no deck transformations.</Emph>
+  <Emph> Important premise: We assume in this section, that all considered origamis have no nontrivial translations. This is equivalent to that the corresponding torus cover has no nontrivial deck transformations.</Emph>
   <P/>
 <Section Label="Chapter_Cyclic_Torus_Covers_Section_Bases_of_the_fundamental_group">
   <Heading>Bases of the fundamental group</Heading>
