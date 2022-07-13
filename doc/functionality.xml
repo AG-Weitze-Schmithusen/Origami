@@ -624,7 +624,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="AutomorphismsOfOrigami" Arg="O"/>
   <Returns>A list of permutations.</Returns>
   <Description>
-    Computes all automorphisms of the origami, i.e the translations and the point reflections.
+    Computes all automorphisms of the origami, i.e. the translations and the point reflections.
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -634,10 +634,10 @@ More examples of some special constructions of families of orgamis are given in 
   </Description>
 
   <Oper Name="FixedPointsOfConjugatorToInverse" Arg="O, sigma"/>
-  <Returns>Two lists.</Returns>
+  <Returns>A list of fixed points. The fixed points are given as lists with three entries.</Returns>
   <Description>
-    This function computes the fixed points of a point reflection <Arg>sigma</Arg> given as permutation of the squares of the origami <Arg>O</Arg>.
-    The funtion does not check whether <Arg>sigma</Arg> is a point reflection, i.e. whether it satisfies  <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>.
+    This function computes the fixed points of a point reflection <M>\sigma</M>  of the origami <M>O</M> given as permutation of its squares.
+    The funtion does not check whether <M>\sigma</M> is a point reflection, i.e. whether it satisfies  <M>\sigma\circ\sigma_x\circ \sigma^{-1}=\sigma_x^{-1}</M> and <M>\sigma\circ \sigma_y\circ \sigma^{-1}=\sigma_y^{-1}</M>.
     The fixed points are returned in a list with entries <M>[a,b,c]</M>, where <M>a</M> is the square in which the fixed point occurs
     and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
     <Example>
@@ -653,11 +653,11 @@ More examples of some special constructions of families of orgamis are given in 
   </Description>
 
   <Oper Name="FixedPointsOfTranslation" Arg="O, sigma"/>
-  <Returns>A list.</Returns>
+  <Returns>A list of fixed points. The fixed points are given as lists with three entries.</Returns>
   <Description>
-  This function calculates the fixed points of a translation <Arg>sigma</Arg> of the origami <Arg>O</Arg>, i.e., <Arg>sigma</Arg> is a permutation which yields the origami <M>O</M> when conjugated to <Arg>O</Arg>..
-  The function does not check whether <Arg>sigma</Arg> is a translation.
-  The fixed points are returned in a list with entries <M>[[a,b,c]]</M>, where <M>a</M> is the square in which the fixed point occurs
+  This function computes the fixed points of a translation <M>\sigma</M> of the origami <M>O</M> given as permutations of its squares.
+  The function does not check whether <M>\sigma</M> is a translation, i.e.  whether it satisfies  <M>\sigma\circ\sigma_x\circ \sigma^{-1}=\sigma_x</M> and <M>\sigma\circ \sigma_y\circ \sigma^{-1}=\sigma_y</M>.
+  The fixed points are returned in a list with entries <M>[a,b,c]</M>, where <M>a</M> is the square in which the fixed point occurs
   and <M>(b,c)</M> are the local coordinates in the square <M>a</M>.
     <Example>
       <![CDATA[
@@ -675,11 +675,11 @@ More examples of some special constructions of families of orgamis are given in 
 
 
   <Oper Name="FixedPointsOfAutomorphism" Arg="O, sigma"/>
-  <Returns>A list.</Returns>
+  <Returns>A list of fixed points. The fixed points are given as lists with three entries.</Returns>
   <Description>
-  This function calculates the fixed points of an automorphism <Arg>sigma</Arg> of the origami <Arg>O</Arg>.
-  The fixed points are returned in a list with entries <M>[[a,b,c],d]</M>, where <M>a</M> is the square in which the fixed point occurs
-  and <M>(b,c)</M> are the local coordinates in the square and <M>d</M> is <M>1</M> if <Arg>sigma</Arg> is a translation and <M>-1</M> if it is a conjugator to inverse.
+  This function computes the fixed points of an automorphism <M>\sigma</M> of the origami <M>O</M>.
+  The fixed points are returned in a list with entries <M>[[a,b,c],d]</M>, where <M>a</M> is the square in which the fixed point occurs,
+  <M>(b,c)</M> are the local coordinates in the square and <M>d</M> is <M>1</M> if <M>\sigma</M> is a translation and <M>-1</M> if it is a point reflection.
     <Example>
       <![CDATA[
       gap> O:=Origami((1,2,3,4),(1,2)(3,4));
@@ -696,7 +696,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="Quotientengeschlecht" Arg="O"/>
   <Returns>An integer.</Returns>
   <Description>
-   For a given origami this function calculates the genus of the quotient <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
+   For a given origami this function computes the genus of the quotient <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
    translation group.
     <Example>
       <![CDATA[
@@ -711,7 +711,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="OrigamiQuotient" Arg="O"/>
   <Returns>An origami</Returns>
   <Description>
-   For a given origami this function calculates the quotient origami <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
+   For a given origami this function computes the quotient origami <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
    translation group.
     <Example>
       <![CDATA[
