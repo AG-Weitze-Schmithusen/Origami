@@ -10,8 +10,8 @@
 #! Recall that the fundametal group $\pi_1(T_n)$ is a free
 #! group in $N = n^2 + 1$ generators. If we choose a basis of $\pi_1(T_n)$, every cyclic torus cover origami can be
 #! described as vector in $(\mathbb{Z}/d\mathbb{Z})^N$. We call this vector ** monodromy vector with respect to this basis**.
-#! There are two bases $B$ and $S$ of the fundamental group of $T_n$ which we will use.
-#! The base point is chosen as the midpoint of the lower  left square.
+#! There are two bases (which we will call $L$ and $S$) of the fundamental group of $T_n$ which we will use.
+#! The base point is chosen as the midpoint of the lower left square.
 #! 
 #! The basis $L$ consists of the full horizontal path to the right, the full vertical path upwards and
 #! loops around each of the $n^2 - 1$ corner points of the squares (numbered left to right and bottom up; the loop on the most upper right corner excluded)
@@ -43,7 +43,7 @@ DeclareGlobalFunction("GeneralizedCyclicTorusCover");
 #! @Description A comb origami is a special cyclic torus cover of degree 2, specified by a single point $P$
 #!  on $T_n$. The coordinates are given in the range ${0,..,n-1}^2$, where the
 #!  point $(0,0)$ is located in the lower left corner. $P$ must not be a 2-torsion point, that is, it must not be
-#!  $(0,0)$, $(n/2, n/2)$, $(n/2,0)$ or $(0,n/2)$. The coordinates are considered modulo $n$. See \cite{comb} for more details.
+#!  $(0,0)$, $(n/2, n/2)$, $(n/2,0)$ or $(0,n/2)$. The coordinates are considered modulo $n$. See <Cite Key="comb" /> for more details.
 #! @BeginExampleSession
 #! gap> CombOrigami(3, 1, 0);
 #! Origami((1,2,3)(4,5,6,13,14,15)(7,8,9)(10,11,12)(16,17,18), (1,4,7)(2,5,8,11,14,17)(3,6,9)(10,13,16)(12,15,18), 18)
@@ -74,8 +74,8 @@ DeclareGlobalFunction("CyclicTorusCoverOrigami", [IsPosInt, IsPosInt, IsRowVecto
 #! @Section Matrices acting on the homology of the n-Torus
 
 #! @Arguments n
-#! @Returns a matrix $M = D_{SL}$ representing a change of base between the bases $L$ and $S$.
-#! @Description Returns a matrix corresponding to the change of base from $L$ to $S$ on the homology of $T_n$. The matrix has the following property: given any cyclic torus cover origami as a monodromy vector $v$ with respect to the base $S$, you may obtain the corresponding monodromy vector with respect to base $L$ using $v \cdot D_{SL}$.
+#! @Returns a matrix $M = D_{SL}$ representing a change of basis between the bases $L$ and $S$.
+#! @Description Returns a matrix corresponding to the change of basis from $L$ to $S$ on the homology of $T_n$. The matrix has the following property: given any cyclic torus cover origami as a monodromy vector $v$ with respect to the basis $S$, you may obtain the corresponding monodromy vector with respect to basis $L$ using $v \cdot D_{SL}$.
 #! @BeginExampleSession
 #! gap> Display(BaseChangeLToS(2));
 #! [ [   0,   1,   1,  -1,   0 ],
