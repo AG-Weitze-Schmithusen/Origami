@@ -109,7 +109,7 @@ DeclareGlobalFunction("TranslationGroupOnHomologyOfTn", [IsPosInt]);
 
 #! @Arguments n
 #! @Returns a matrix representing the action of the generator $T$ of $\mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
-#! @Description
+#! @Description The generator $T$ (shearing to the right) of $\mathrm{Sl}_2(\mathbb{Z})$ can be viewed as an affine map on $T_n$ if we assume that the lower left corner is fixed. This function returns the corresponding map on the homology as a matrix with respect to $L$.
 #! @BeginExampleSession
 #! gap> Display(ActionOfTOnHomologyOfTn(2));
 #! [ [   1,   1,   0,   0,   0 ],
@@ -122,7 +122,7 @@ DeclareGlobalFunction("ActionOfTOnHomologyOfTn", [IsPosInt]);
 
 #! @Arguments n
 #! @Returns a matrix representing the action of the generator $S$ of $\mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
-#! @Description
+#! @Description The generator $S$ (rotation by $\pi/2$ counterclockwise) of $\mathrm{Sl}_2(\mathbb{Z})$ can be viewed as an affine map on $T_n$ if we assume that the lower left corner is fixed. This function returns the corresponding map on the homology as a matrix with respect to $L$.
 #! @BeginExampleSession
 #! gap> Display(ActionOfSOnHomologyOfTn(2));
 #! [ [   0,  -1,   0,   0,   0 ],
@@ -135,7 +135,7 @@ DeclareGlobalFunction("ActionOfSOnHomologyOfTn", [IsPosInt]);
 
 #! @Arguments n A
 #! @Returns a matrix representing the action of $A \in \mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
-#! @Description A must be in $\mathrm{Sl}_2(\mathbb{Z})$. It is written as a word in the generators $S$ and $T$ of $\mathrm{Sl}_2(\mathbb{Z})$, then the corresponding
+#! @Description Any matrix $A\in\mathrm{Sl}_2(\mathbb{Z})$ can be viewed as an affine map on $T_n$ if we assume that the lower left corner is fixed. $A$ must be in $\mathrm{Sl}_2(\mathbb{Z})$. It is written as a word in the generators $S$ and $T$ of $\mathrm{Sl}_2(\mathbb{Z})$, then the corresponding
 #!  word with the matrices calculated by <Ref Func="ActionOfTOnHomologyOfTn" /> and <Ref Func="ActionOfSOnHomologyOfTn" /> is taken and returned.
 #! @BeginExampleSession
 #! gap> M := [ [ 0, -1 ], [ 1, 1 ] ];; # = S * T
