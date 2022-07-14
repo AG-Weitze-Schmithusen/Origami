@@ -158,7 +158,7 @@ BannerString := """
    │  │  │  │        Luca Junk (http://www.math.uni-sb.de/ag/weitze/),
 ┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
 │  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
-└──┼──┼──┼──┼──┘     Andrea Thevis (http://www.math.uni-sb.de/ag/weitze/), and
+└──┼──┼──┼──┼──┘     Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and
    │  │  │  │        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
    └──┼──┼──┘     Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
       │  │
