@@ -2,7 +2,7 @@
 <Heading>The functionality of this package</Heading>
 
 <Section Label="BasicOrigamiConstr">
-<Heading>Basic contruction of origamis</Heading>
+<Heading>Basic construction of origamis</Heading>
 
 <ManSection>
 
@@ -33,7 +33,7 @@
   <Attr Name="HorizontalPerm" Arg="O"/>
   <Returns>A permutation.</Returns>
   <Description>
-    Returns the permutation <M>\sigma_x</M> describing the horizontal glueing of the unit squares.
+    Returns the permutation <M>\sigma_x</M> describing the horizontal gluing of the unit squares.
     <Example>
       <![CDATA[
       gap> O := Origami((1,2,3,4,5),(5,6));
@@ -47,7 +47,7 @@
   <Attr Name="VerticalPerm" Arg="O"/>
   <Returns>A permutation.</Returns>
   <Description>
-    Returns the permutation <M>\sigma_y</M> describing the vertical glueing of the unit squares.
+    Returns the permutation <M>\sigma_y</M> describing the vertical gluing of the unit squares.
     <Example>
       <![CDATA[
       gap> O := Origami((1,2,3,4,5),(5,6));
@@ -192,7 +192,7 @@ of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
 
 <Section Label="OriNormalForm">
 <Heading>Equivalence of origamis and normal forms</Heading>
-We consider two origamis to be equivalent (or isomorphic), if they are the same up to relabeling the squares. In terms of pairs of permutations, this corresponds to simultaneous conjugation. Equivalence can be checked by computing a certain normal form for origamis.
+We consider two origamis to be equivalent (or isomorphic), if they are the same up to relabelling the squares. In terms of pairs of permutations, this corresponds to simultaneous conjugation. Equivalence can be checked by computing a certain normal form for origamis.
 
 <ManSection>
 
@@ -339,7 +339,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
   <Attr Name="IsNormalOrigami" Arg="O"/>
   <Returns>A boolean.</Returns>
   <Description>
-    Checks whether or not a given origami is normal. An origami is called normal if its deck group acts transitively on the fibers of the covering.
+    Checks whether or not a given origami is normal. An origami is called normal if its deck group acts transitively on the fibres of the covering.
     <Example>
     <![CDATA[
     gap> O := Origami((1,2,3,4,5), (), 5);
@@ -379,7 +379,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
   </Description>
 
   <Func Name="SumOfLyapunovExponents" Arg="O"/>
-  <Returns> A positiv Integer. </Returns>
+  <Returns> A positive Integer. </Returns>
   <Description>
     This function calculates the sum of the positive Lyapunov exponents of the Origami <A>O</A>.
     <Example>
@@ -399,7 +399,7 @@ We consider two origamis to be equivalent (or isomorphic), if they are the same 
 
 <Section Label="NormalOrigamis">
 <Heading>Normal Origamis</Heading>
-Normal origamis can equivalently be described by a finite group <M>G</M> and a pair <M>x, y</M> of generators of <M>G</M>. The elements of <M>G</M> correspond to squares and the horizontal (resp. vertical) glueing is determined by left multiplication with <M>x</M> (resp. <M>y</M>), i.e. if <M>g,h \in G</M> then <M>g</M> is glued to <M>h</M> in the <M>x</M>-direction if <M>xg = h</M> and analogously for the <M>y</M>-direction.
+Normal origamis can equivalently be described by a finite group <M>G</M> and a pair <M>x, y</M> of generators of <M>G</M>. The elements of <M>G</M> correspond to squares and the horizontal (resp. vertical) gluing is determined by left multiplication with <M>x</M> (resp. <M>y</M>), i.e. if <M>g,h \in G</M> then <M>g</M> is glued to <M>h</M> in the <M>x</M>-direction if <M>xg = h</M> and analogously for the <M>y</M>-direction.
 The group <M>G</M> is then evidently the deck group of the described origami. Furthermore, every normal origami is of this form where <M>G</M> is its deck group.
 Two normal origamis <M>(x, y, G)</M>, <M>(x',y',G)</M> given in such a form are equivalent if and only if there is an automorphism <M>\varphi \in \textrm{Aut}(G)</M> of <M>G</M> such that <M>\varphi(x) = x'</M> and <M>\varphi(y) = y'</M>.
 We introduce a new GAP-category called <C>IsNormalStoredOrigami</C> which is a subcategory of the <C>Origami</C>-category for representing normal origamis which are given in terms of the above data.
@@ -434,19 +434,19 @@ Since every <C>NormalStoredOrigami</C> is also an <C>Origami</C>, every method i
   <Attr Name="HorizontalElement" Arg="O"/>
   <Returns>A group element.</Returns>
   <Description>
-    For a <C>NormalStoredOrigami</C>, this method returns the <M>x</M>-element which describes the glueing in the horizontal direction.
+    For a <C>NormalStoredOrigami</C>, this method returns the <M>x</M>-element which describes the gluing in the horizontal direction.
   </Description>
 
   <Attr Name="VerticalElement" Arg="O"/>
   <Returns>A group element.</Returns>
   <Description>
-    For a <C>NormalStoredOrigami</C>, this method returns the <M>y</M>-element which describes the glueing in the vertical direction.
+    For a <C>NormalStoredOrigami</C>, this method returns the <M>y</M>-element which describes the gluing in the vertical direction.
   </Description>
 
   <Oper Name="AsPermutationRepresentation" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
-    Converts a <C>NormalStoredOrigami</C> into an <C>Origami</C>, i.e. computes the <M>x</M>- and <M>y</M>-permutations describing the glueing of the squares.
+    Converts a <C>NormalStoredOrigami</C> into an <C>Origami</C>, i.e. computes the <M>x</M>- and <M>y</M>-permutations describing the gluing of the squares.
     <Example>
     <![CDATA[
     gap> G := AlternatingGroup(4);
@@ -583,7 +583,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Returns>A list of permutations.</Returns>
   <Description>
     Computes all translations of the origami as permutations of the squares of <Arg>O</Arg>.
-    This is equivalent to the permutations <M>t</M> which satisfy  <M>t\circ \sigma_x\circ t^{-1} = \sigma_x</M> and <M>t\circ\sigma_y\circ t^{-1} = \sigma_y </M>, where <M>\sigma_x, \sigma_y</M> are the permutations describing the horizontal and the vertical glueing of the origami, respectively.
+    This is equivalent to the permutations <M>t</M> which satisfy  <M>t\circ \sigma_x\circ t^{-1} = \sigma_x</M> and <M>t\circ\sigma_y\circ t^{-1} = \sigma_y </M>, where <M>\sigma_x, \sigma_y</M> are the permutations describing the horizontal and the vertical gluing of the origami, respectively.
     <Example>
       gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
     Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -611,8 +611,8 @@ More examples of some special constructions of families of orgamis are given in 
   <Oper Name="PointReflectionsOfOrigami" Arg="O"/>
   <Returns>A list of permutations.</Returns>
   <Description>
-    Computes all point reflections of <M>O</M>, i.e. all affine homeomorphisms with derivatie  <M>-I </M>, where  <M>I</M> is the identity matrix.
-    This is equivalent to the permutations  <M> t </M> which satisfy <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>, where <M>\sigma_x,\sigma_y</M> are the permutations describing the horizontal and the vertical glueing of the origami, respectively.
+    Computes all point reflections of <M>O</M>, i.e. all affine homeomorphisms with derivative  <M>-I </M>, where  <M>I</M> is the identity matrix.
+    This is equivalent to the permutations  <M> t </M> which satisfy <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>, where <M>\sigma_x,\sigma_y</M> are the permutations describing the horizontal and the vertical gluing of the origami, respectively.
         <Example>
           gap> o:=Origami((1,2,3,4),(1,2)(3,4));
           Origami((1,2,3,4), (1,2)(3,4), 4)
@@ -637,7 +637,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Returns>A list of fixed points. The fixed points are given as lists with three entries.</Returns>
   <Description>
     This function computes the fixed points of a point reflection <M>\sigma</M>  of the origami <M>O</M> given as permutation of its squares.
-    The funtion does not check whether <M>\sigma</M> is a point reflection, i.e. whether it satisfies  <M>\sigma\circ\sigma_x\circ \sigma^{-1}=\sigma_x^{-1}</M> and <M>\sigma\circ \sigma_y\circ \sigma^{-1}=\sigma_y^{-1}</M>.
+    The function does not check whether <M>\sigma</M> is a point reflection, i.e. whether it satisfies  <M>\sigma\circ\sigma_x\circ \sigma^{-1}=\sigma_x^{-1}</M> and <M>\sigma\circ \sigma_y\circ \sigma^{-1}=\sigma_y^{-1}</M>.
     The fixed points are returned in a list with entries <M>[a,b,c]</M>, where <M>a</M> is the square in which the fixed point occurs
     and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
     <Example>
