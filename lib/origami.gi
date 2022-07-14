@@ -367,11 +367,11 @@ end);
 
 
 InstallGlobalFunction(AutomorphismsOfOrigami, [IsOrigami], function(O)
-	return Flat([TranslationsOfOrigami(O), PointReflectionsOfOrigami(O)]);
+	return [[TranslationsOfOrigami(O),1], [PointReflectionsOfOrigami(O),-1]];
 end);
 
 
-InstallGlobalFunction(FixedPointsOfConjugatorToInverse, function(o,sigma)
+InstallGlobalFunction(FixedPointsOfPointReflections, function(o,sigma)
 	local x, y, fixedpoints, i, j, tile_rep;
 	x := HorizontalPerm(o);
 	y := VerticalPerm(o);
@@ -411,14 +411,14 @@ InstallGlobalFunction(FixedPointsOfAutomorphism, function(o, sigma)
 	if Inverse(sigma)*x*sigma=x and Inverse(sigma)*y*sigma=y then
 		fixedpoints := [FixedPointsOfTranslation(o,sigma),1];
 	elif Inverse(sigma)*x*sigma=Inverse(x) and Inverse(sigma)*y*sigma=Inverse(y) then
-		fixedpoints := [FixedPointsOfConjugatorToInverse(o,sigma),-1];
+		fixedpoints := [FixedPointsOfPointReflections(o,sigma),-1];
 	else
 		Error("the given permutation is not an automorphism of the origami.");
 	fi;
 	return fixedpoints;
 end);
 
-InstallGlobalFunction(Quotientengeschlecht, function(O)
+InstallGlobalFunction(GenusOfQuotient, function(O)
   local g, x, y, trans, n, fixedpoints, singularities, ram_index, j, i, sum;
   g := Genus(O); #genus of the origami
   x := HorizontalPerm(O);
