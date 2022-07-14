@@ -1,14 +1,14 @@
 #! @Chapter Cyclic Torus Covers
 #! @ChapterLabel cyclic-torus-covers
-#! Let $T_n$ be the $n \times n$-Torus. Hence topolgically it is torus with $n^2$ punctures.
+#! Let $T_n$ be the $n \times n$-Torus. Hence topologically it is torus with $n^2$ punctures.
 #! A **cyclic $n$-torus cover of degree $d$** is a normal covering $X \to T_n$ whose Deck-group is cyclic with $d$ elements.
 #! We can obtain an origami from each cyclic $n$-torus cover by appending the map $p_n: T_n \to T_1$, which sends each square to the singular square of the
 #! trivial torus. We call such origamis **cyclic torus cover origamis**.
-#! The functions described in this chapter were programed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with these special class of origamis.
+#! The functions described in this chapter were programmed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with these special class of origamis.
 
 #! @Section Monodromy vectors and bases of the fundamental group
 #! A **cyclic $n$-torus cover of degree $d$** is determined by its monodromy map $m: \pi_1(T_n) \to \mathbb{Z}/d\mathbb{Z}$.
-#! Recall that the fundametal group $\pi_1(T_n)$ is a free
+#! Recall that the fundamental group $\pi_1(T_n)$ is a free
 #! group in $N = n^2 + 1$ generators. If we choose a basis of $\pi_1(T_n)$, every cyclic torus cover origami can be
 #! described as vector in $(\mathbb{Z}/d\mathbb{Z})^N$. We call this vector ** monodromy vector with respect to this basis**.
 #! There are two bases (which we will call $L$ and $S$) of the fundamental group of $T_n$ which we will use.
