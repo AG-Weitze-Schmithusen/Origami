@@ -1,34 +1,34 @@
 name: Origami
-version: 1.0.0
-date: 2021-05-07
+version: 2.0.0
+date: 2022-07-15
 description: |
     Computing Veech groups of origamis
 
 authors:
     - name: Simon Ertl
       url: http://www.math.uni-sb.de/ag/weitze/
-    - name: Luca Junk
-      url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Luca Leon Junk
+      url: https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html
     - name: Pascal Kattler
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Alexander Rogovskyy
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Andrea Thevis
-      url: http://www.math.uni-sb.de/ag/weitze/
+      url: https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/
     - name: Gabriela Weitze-Schmithüsen
       url: http://www.math.uni-sb.de/ag/weitze/
 
 maintainers:
     - name: Simon Ertl
       url: http://www.math.uni-sb.de/ag/weitze/
-    - name: Luca Junk
-      url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Luca Leon Junk
+      url: https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html
     - name: Pascal Kattler
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Alexander Rogovskyy
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Andrea Thevis
-      url: http://www.math.uni-sb.de/ag/weitze/
+      url: https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/
     - name: Gabriela Weitze-Schmithüsen
       url: http://www.math.uni-sb.de/ag/weitze/
 
@@ -36,8 +36,8 @@ GAP: "4.5.3"
 
 needed-pkgs:
     - name: "ModularGroup"
-      version: "1.0.0"
-      url: "https://le-on.github.io/ModularGroup"
+      version: "2.0.0"
+      url: "https://ag-weitze-schmithusen.github.io/ModularGroup"
     - name: "Orb"
       version: "4.7.6"
       url: "https://gap-packages.github.io/orb"
@@ -45,19 +45,18 @@ needed-pkgs:
 suggested-pkgs:
     - name: "HomalgToCAS"
       version: "2018.06.15"
-      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS/"
+      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS"
     - name: "IO_ForHomalg"
       version: "2017.09.02"
-      url: "https://homalg-project.github.io/homalg_project/IO_ForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/IO_ForHomalg"
     - name: "IO"
       version: "4.5.1"
       url: "https://gap-packages.github.io/io"
     - name: "RingsForHomalg"
       version: "2018.04.04"
-      url: "https://homalg-project.github.io/homalg_project/RingsForHomalg/"
+      url: "https://homalg-project.github.io/pkg/RingsForHomalg"
     - name: "ArangoDBInterface"
       version: "2019.07.30"
-      url: "https://github.com/homalg-project/ArangoDBInterface/"
 
 www: https://AG-Weitze-Schmithusen.github.io/Origami/
 readme: README.md
@@ -66,40 +65,36 @@ github: https://github.com/AG-Weitze-Schmithusen/Origami
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v1.0.0/Origami-1.0.0.tar.gz
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.0/Origami-2.0.0.tar.gz
     - name: .zip
-      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v1.0.0/Origami-1.0.0.zip
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.0/Origami-2.0.0.zip
 
 abstract: |
     <span class="pkgname">Origami</span> is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.
 
-status: dev
+status: other
 doc-html: doc/chap0.html
-doc-pdf: doc/Origami.pdf
+doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>EJKRTW21</span>]   <b class='BibAuthor'>Ertl, S., Junk, L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
+    [<span class='BibKey'>EJKRTW22</span>]   <b class='BibAuthor'>Ertl, S., Junk, L. L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
      <i class='BibTitle'>Origami, Computing Veech groups of origamis,
-             Version 1.0.0</i>
-     (<span class='BibYear'>2021</span>)<br />
+             Version 2.0.0</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://AG-Weitze-Schmithusen.github.io/Origami/">https://AG-Weitze-Schmithusen.github.io/Origami/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ Origami1.0.0,
-      author =           {Ertl,  S.  and Junk, L. and Kattler, P. and Rogovskyy,
-                          A. and Thevis, A. and Weitze-Schmith{\"u}sen, G.},
-      title =            {{Origami},   Computing   Veech   groups  of  origamis,
-                          {V}ersion 1.0.0},
-      month =            {May},
-      year =             {2021},
+    @misc{ Origami2.0.0,
+      author =           {Ertl, S. and Junk, L. L. and Kattler, P. and Rogovskyy, A. and Thevis, A. and Weitze-Schmith{\"u}sen, G.},
+      title =            {{Origami}, Computing Veech groups of origamis, {V}ersion 2.0.0},
+      month =            {Jul},
+      year =             {2022},
       note =             {GAP package},
-      howpublished =     {\href
-                          {https://AG-Weitze-Schmithusen.github.io/Origami/}
-                          {\texttt{https://AG-Weitze-Schmithusen.github.io/}\discretionary
+      howpublished =     {\href        {https://AG-Weitze-Schmithusen.github.io/Origami/}        {\texttt{https://AG-Weitze-Schmithusen.github.io/}\discretionary
                           {}{}{}\texttt{Origami/}}},
-      printedkey =       {EJKRTW21}
+      printedkey =       {EJKRTW22}
     }
 

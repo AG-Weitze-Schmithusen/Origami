@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (Origami) - Chapter 3: The homology of origamis and the action of the Veech group.</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -15,20 +18,20 @@
 <body class="chap3"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
 <p><a id="X8396F0757AC780D6" name="X8396F0757AC780D6"></a></p>
-<div class="ChapSects"><a href="chap3.html#X8396F0757AC780D6">3 <span class="Heading">The homology of origamis and the action of the Veech group.</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X80C1AE2C7DBC743E">3.1 <span class="Heading">The non tautological part of homology</span></a>
+<div class="ChapSects"><a href="chap3_mj.html#X8396F0757AC780D6">3 <span class="Heading">The homology of origamis and the action of the Veech group.</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X80C1AE2C7DBC743E">3.1 <span class="Heading">The non tautological part of homology</span></a>
 </span>
 </div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X825BB40F85DA9E18">3.2 <span class="Heading">Functions for the action on homology</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X825BB40F85DA9E18">3.2 <span class="Heading">Functions for the action on homology</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X820C883A831EC042">3.2-1 HomologyOrigami</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X820C883A831EC042">3.2-1 HomologyOrigami</a></span>
 </div></div>
 </div>
 
@@ -40,9 +43,9 @@
 
 <h4>3.1 <span class="Heading">The non tautological part of homology</span></h4>
 
-<p>This section contains functions, which compute a basis of the homology <span class="SimpleMath">H = H_1( mathcalO, Z)</span> of an origami <span class="SimpleMath">mathcalO</span> with <span class="SimpleMath">d</span> squares and the action of an affine transformation <span class="SimpleMath">f</span> of <span class="SimpleMath">mathcalO</span> on <span class="SimpleMath">H</span>. The later is the map <span class="SimpleMath">f_∗: H -&gt; H</span>. We consider the cellular homology with the squares <span class="SimpleMath">Q_1, dots Q_d</span> of the origami as 2-cells. We call <span class="SimpleMath">σ_i</span> the bottom edge of the square <span class="SimpleMath">Q_i</span> and <span class="SimpleMath">ξ_i</span> the left edge of the square <span class="SimpleMath">Q_i</span>. Then we can represent an element of <span class="SimpleMath">H</span> as a formal linear combination of the <span class="SimpleMath">σ 's</span> and the <span class="SimpleMath">ξ 's</span>. In <strong class="pkg">GAP</strong> we represent elements of <span class="SimpleMath">H</span> as elements of <span class="SimpleMath">Z^2d</span> in the following way: <span class="SimpleMath">σ_i</span> is represented by <span class="SimpleMath">e_i</span> and <span class="SimpleMath">ξ_i</span> is represented by <span class="SimpleMath">e_i + d</span>, where <span class="SimpleMath">e_i</span> is the i-th. standard basis vector of <span class="SimpleMath">Z^2d</span>. Formal sums of elements in <span class="SimpleMath">H</span> are represented by the appropriate sums in <span class="SimpleMath">Z^2d</span>. One has to keep in mind that this description is not unique. More precisely the homology <span class="SimpleMath">H</span> is isomorphic to a subquotient of <span class="SimpleMath">Z^2d</span>.</p>
+<p>This section contains functions, which compute a basis of the homology <span class="SimpleMath">\( H = H_1( \mathcal{O}, \mathbb{Z}) \)</span> of an origami <span class="SimpleMath">\(\mathcal{O} \)</span> with <span class="SimpleMath">\(d\)</span> squares and the action of an affine transformation <span class="SimpleMath">\(f\)</span> of <span class="SimpleMath">\( \mathcal{O}\)</span> on <span class="SimpleMath">\( H \)</span>. The later is the map <span class="SimpleMath">\(f_\ast\colon H \to H \)</span>. We consider the cellular homology with the squares <span class="SimpleMath">\( Q_1, \dots Q_d \)</span> of the origami as 2-cells. We call <span class="SimpleMath">\( \sigma_i \)</span> the bottom edge of the square <span class="SimpleMath">\(Q_i\)</span> and <span class="SimpleMath">\( \xi_i\)</span> the left edge of the square <span class="SimpleMath">\( Q_i \)</span>. Then we can represent an element of <span class="SimpleMath">\(H \)</span> as a formal linear combination of the <span class="SimpleMath">\(\sigma 's \)</span> and the <span class="SimpleMath">\(\xi 's \)</span>. In <strong class="pkg">GAP</strong> we represent elements of <span class="SimpleMath">\( H \)</span> as elements of <span class="SimpleMath">\( \mathbb{Z}^{2d} \)</span> in the following way: <span class="SimpleMath">\(\sigma_i \)</span> is represented by <span class="SimpleMath">\( e_i \)</span> and <span class="SimpleMath">\( \xi_i \)</span> is represented by <span class="SimpleMath">\( e_{i + d} \)</span>, where <span class="SimpleMath">\( e_i \)</span> is the i-th. standard basis vector of <span class="SimpleMath">\( \mathbb{Z}^{2d}\)</span>. Formal sums of elements in <span class="SimpleMath">\( H \)</span> are represented by the appropriate sums in <span class="SimpleMath">\( \mathbb{Z}^{2d}\)</span>. One has to keep in mind that this description is not unique. More precisely the homology <span class="SimpleMath">\( H \)</span> is isomorphic to a subquotient of <span class="SimpleMath">\(\mathbb{Z}^{2d}\)</span>.</p>
 
-<p>The homology has a splitting as sum of the <em>tautological part</em> <span class="SimpleMath">H^T</span> and the <em>non-tautological part </em> <span class="SimpleMath">H^NT</span> which is equivalent under the action of the affine group Aff<span class="SimpleMath">(mathcalO)</span> of the origami <span class="SimpleMath">mathcalO</span>. I.e. <span class="SimpleMath">H = H^T ⊕ H^NT</span> with <span class="SimpleMath">H^T</span> and <span class="SimpleMath">H^NT</span> both invariant under the action of Aff<span class="SimpleMath">(mathcalO)</span>. The sum is orthogonal with respect to the intersection form, the dimension of <span class="SimpleMath">H^T</span> is 2 and the dimension of <span class="SimpleMath">H^NT</span> is <span class="SimpleMath">2g-2</span>. In the part of the package described in this chapter we provide functions which compute the action of the affine group on the homology <span class="SimpleMath">H</span> and on the non-tautological part <span class="SimpleMath">H^NT</span> and thus obtain the <em> shadow Veech group</em>. For more information on this topic see for example <a href="chapBib.html#biBShadowVeechGroup">[BKK+22]</a>.</p>
+<p>The homology has a splitting as sum of the <em>tautological part</em> <span class="SimpleMath">\( H^{T} \)</span> and the <em>non-tautological part </em> <span class="SimpleMath">\( H^{NT} \)</span> which is equivalent under the action of the affine group Aff<span class="SimpleMath">\((\mathcal{O})\)</span> of the origami <span class="SimpleMath">\( \mathcal{O}\)</span>. I.e. <span class="SimpleMath">\( H = H^{T} \oplus H^{NT} \)</span> with <span class="SimpleMath">\( H^{T} \)</span> and <span class="SimpleMath">\( H^{NT} \)</span> both invariant under the action of Aff<span class="SimpleMath">\((\mathcal{O})\)</span>. The sum is orthogonal with respect to the intersection form, the dimension of <span class="SimpleMath">\( H^{T} \)</span> is 2 and the dimension of <span class="SimpleMath">\(H^{NT}\)</span> is <span class="SimpleMath">\( 2g-2\)</span>. In the part of the package described in this chapter we provide functions which compute the action of the affine group on the homology <span class="SimpleMath">\(H\)</span> and on the non-tautological part <span class="SimpleMath">\( H^{NT}\)</span> and thus obtain the <em> shadow Veech group</em>. For more information on this topic see for example <a href="chapBib_mj.html#biBShadowVeechGroup">[BKK+22]</a>.</p>
 
 <p><a id="X825BB40F85DA9E18" name="X825BB40F85DA9E18"></a></p>
 
@@ -53,7 +56,7 @@
 <h5>3.2-1 HomologyOrigami</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomologyOrigami</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: A list of vectors in <span class="SimpleMath">Z^2d</span></p>
+<p>Returns: A list of vectors in <span class="SimpleMath">\(\mathbb{Z}^{2d}\)</span></p>
 
 <p>This function computes a basis of the homology of <var class="Arg">O</var></p>
 
@@ -73,7 +76,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonTautPartOfHomologyOrigami</code>( <var class="Arg">O</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: A list of vectors in <span class="SimpleMath">Z^2d</span></p>
+<p>Returns: A list of vectors in <span class="SimpleMath">\(\mathbb{Z}^{2d}\)</span></p>
 
 <p>This function computes a basis of the non-tautological part of the homology <var class="Arg"> H</var> of <var class="Arg">O</var>.</p>
 
@@ -93,7 +96,7 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomologyToString</code>( <var class="Arg">H1</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a string</p>
 
-<p>This function gives a string representation of the homology vector <var class="Arg"> H1 </var> in the homology of an origami as a formal linear combination of the <span class="SimpleMath">σ_i 's</span> (resp. s) and the <span class="SimpleMath">ξ_i 's</span> (resp. z).</p>
+<p>This function gives a string representation of the homology vector <var class="Arg"> H1 </var> in the homology of an origami as a formal linear combination of the <span class="SimpleMath">\( \sigma_i 's\)</span> (resp. s) and the <span class="SimpleMath">\( \xi_i 's\)</span> (resp. z).</p>
 
 
 <div class="example"><pre>
@@ -108,7 +111,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOfMatrixOnHom</code>( <var class="Arg">O</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix in <span class="SimpleMath">Sp_2g(Z)</span></p>
+<p>Returns: a matrix in <span class="SimpleMath">\( Sp_{2g}(\mathbb{Z}) \)</span></p>
 
 <p>This function computes the action of an affine homeomorphism with derivative <var class="Arg"> A </var> on the homology of <var class="Arg"> O </var> w.r.t the basis of the homology computed with <code class="func">HomologyOrigami</code>.</p>
 
@@ -125,7 +128,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOfMatrixOnHom</code>( <var class="Arg">O</var>, <var class="Arg">A</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix in <span class="SimpleMath">Sp_2g(Z)</span></p>
+<p>Returns: a matrix in <span class="SimpleMath">\( Sp_{2g}(\mathbb{Z}) \)</span></p>
 
 <p>In this method you can choose a basis <var class="Arg"> H </var> of the homology.</p>
 
@@ -153,7 +156,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOfMatrixOnNonTaut</code>( <var class="Arg">O</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix in <span class="SimpleMath">Sp_2g-2(Z)</span></p>
+<p>Returns: a matrix in <span class="SimpleMath">\( Sp_{2g-2}(\mathbb{Z}) \)</span></p>
 
 <p>This function computes the action of an affine homeomorphism with derivative <var class="Arg"> A </var> on the non-tautological part of the homology of <var class="Arg"> O </var> w.r.t the basis of the homology computed with <code class="func">HomologyOrigami</code> and the basis of the non-tautological part of the homology is computed with <code class="func">NonTautPartOfHomologyOrigami</code> .</p>
 
@@ -168,7 +171,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOfMatrixOnNonTaut</code>( <var class="Arg">O</var>, <var class="Arg">A</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix in <span class="SimpleMath">Sp_2g-2(Z)</span></p>
+<p>Returns: a matrix in <span class="SimpleMath">\( Sp_{2g-2}(\mathbb{Z}) \)</span></p>
 
 <p>In this method you can choose in addition a basis <var class="Arg"> H </var> of the homology.</p>
 
@@ -195,7 +198,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOfMatrixOnNonTaut</code>( <var class="Arg">O</var>, <var class="Arg">A</var>, <var class="Arg">NT</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix in <span class="SimpleMath">Sp_2g-2(Z)</span></p>
+<p>Returns: a matrix in <span class="SimpleMath">\( Sp_{2g-2}(\mathbb{Z}) \)</span></p>
 
 <p>In this method you can choose in addition a basis <var class="Arg"> H </var> of the homology as well as a basis <var class="Arg"> NT</var> of the non-tautological part of the homology.</p>
 
@@ -223,9 +226,9 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowVeechGroup</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix group <span class="SimpleMath">S ⊆ Sp_2g-2(Z)</span></p>
+<p>Returns: a matrix group <span class="SimpleMath">\( S \subseteq Sp_{2g-2}(\mathbb{Z}) \)</span></p>
 
-<p>This function computes the image of the action of the Veech group on the non-tautological part of the homology of <var class="Arg"> O </var>. If <span class="SimpleMath">A</span> is in the Veech group of <var class="Arg"> O </var> and <span class="SimpleMath">f</span> is an affine transformation with derivative <span class="SimpleMath">A</span> then <span class="SimpleMath">f_∗_|H^NT} : H^NT -&gt; H^NT</span> is in the Shadow Veech group of <var class="Arg"> O </var>, encoded as matrix. The basis of the homology is computed with <code class="func">HomologyOrigami</code> and the basis of the non-tautological part is computed with <code class="func">NonTautPartOfHomologyOrigami</code>.</p>
+<p>This function computes the image of the action of the Veech group on the non-tautological part of the homology of <var class="Arg"> O </var>. If <span class="SimpleMath">\( A \)</span> is in the Veech group of <var class="Arg"> O </var> and <span class="SimpleMath">\( f\)</span> is an affine transformation with derivative <span class="SimpleMath">\( A \)</span> then <span class="SimpleMath">\( {f_\ast}_{|H^{NT}} \colon {H^{NT} \to {H^{NT} \)</span> is in the Shadow Veech group of <var class="Arg"> O </var>, encoded as matrix. The basis of the homology is computed with <code class="func">HomologyOrigami</code> and the basis of the non-tautological part is computed with <code class="func">NonTautPartOfHomologyOrigami</code>.</p>
 
 
 <div class="example"><pre>
@@ -239,7 +242,7 @@
     </pre></div>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowVeechGroup</code>( <var class="Arg">O</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: a matrix group <span class="SimpleMath">S ⊆ Sp_2g-2(Z)</span></p>
+<p>Returns: a matrix group <span class="SimpleMath">\( S \subseteq Sp_{2g-2}(\mathbb{Z}) \)</span></p>
 
 <p>In this method you can choose in addition a basis <var class="Arg"> H </var> of the homology, where the basis of the non-tautological part is computed with <code class="func">NonTautPartOfHomologyOrigami</code>.</p>
 
@@ -267,10 +270,10 @@
     </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

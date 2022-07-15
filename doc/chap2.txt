@@ -2,7 +2,7 @@
   [1X2 [33X[0;0YThe functionality of this package[133X[101X
   
   
-  [1X2.1 [33X[0;0YBasic contruction of origamis[133X[101X
+  [1X2.1 [33X[0;0YBasic construction of origamis[133X[101X
   
   [1X2.1-1 Origami[101X
   
@@ -39,7 +39,7 @@
   [33X[1;0Y[29X[2XHorizontalPerm[102X( [3XO[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10YA permutation.[133X
   
-  [33X[0;0YReturns  the  permutation  [22Xσ_x[122X describing the horizontal glueing of the unit
+  [33X[0;0YReturns  the  permutation  [22Xσ_x[122X  describing the horizontal gluing of the unit
   squares.[133X
   
   [4X[32X  Example  [32X[104X
@@ -55,7 +55,7 @@
   [33X[1;0Y[29X[2XVerticalPerm[102X( [3XO[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10YA permutation.[133X
   
-  [33X[0;0YReturns  the  permutation  [22Xσ_y[122X  describing  the vertical glueing of the unit
+  [33X[0;0YReturns  the  permutation  [22Xσ_y[122X  describing  the  vertical gluing of the unit
   squares.[133X
   
   [4X[32X  Example  [32X[104X
@@ -189,7 +189,7 @@
   [1X2.3 [33X[0;0YEquivalence of origamis and normal forms[133X[101X
   
   [33X[0;0YWe  consider  two origamis to be equivalent (or isomorphic), if they are the
-  same  up  to relabeling the squares. In terms of pairs of permutations, this
+  same  up to relabelling the squares. In terms of pairs of permutations, this
   corresponds  to  simultaneous  conjugation.  Equivalence  can  be checked by
   computing a certain normal form for origamis.[133X
   
@@ -351,7 +351,7 @@
   [6XReturns:[106X  [33X[0;10YA boolean.[133X
   
   [33X[0;0YChecks whether or not a given origami is normal. An origami is called normal
-  if its deck group acts transitively on the fibers of the covering.[133X
+  if its deck group acts transitively on the fibres of the covering.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X    [128X[104X
@@ -396,7 +396,7 @@
   [4X[32X[104X
   
   [33X[1;0Y[29X[2XSumOfLyapunovExponents[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA positiv Integer.[133X
+  [6XReturns:[106X  [33X[0;10YA positive Integer.[133X
   
   [33X[0;0YThis  function  calculates the sum of the positive Lyapunov exponents of the
   Origami [3XO[103X.[133X
@@ -416,11 +416,11 @@
   
   [33X[0;0YNormal origamis can equivalently be described by a finite group [22XG[122X and a pair
   [22Xx,  y[122X  of  generators  of [22XG[122X. The elements of [22XG[122X correspond to squares and the
-  horizontal  (resp.  vertical)  glueing  is determined by left multiplication
-  with [22Xx[122X (resp. [22Xy[122X), i.e. if [22Xg,h ∈ G[122X then [22Xg[122X is glued to [22Xh[122X in the [22Xx[122X-direction if
-  [22Xxg  =  h[122X  and analogously for the [22Xy[122X-direction. The group [22XG[122X is then evidently
-  the  deck  group of the described origami. Furthermore, every normal origami
-  is  of  this  form where [22XG[122X is its deck group. Two normal origamis [22X(x, y, G)[122X,
+  horizontal (resp. vertical) gluing is determined by left multiplication with
+  [22Xx[122X (resp. [22Xy[122X), i.e. if [22Xg,h ∈ G[122X then [22Xg[122X is glued to [22Xh[122X in the [22Xx[122X-direction if [22Xxg =
+  h[122X  and  analogously  for  the [22Xy[122X-direction. The group [22XG[122X is then evidently the
+  deck group of the described origami. Furthermore, every normal origami is of
+  this  form  where  [22XG[122X  is  its  deck  group.  Two  normal origamis [22X(x, y, G)[122X,
   [22X(x',y',G)[122X  given  in  such  a form are equivalent if and only if there is an
   automorphism [22Xφ ∈ Aut(G)[122X of [22XG[122X such that [22Xφ(x) = x'[122X and [22Xφ(y) = y'[122X. We introduce
   a  new  GAP-category  called [10XIsNormalStoredOrigami[110X which is a subcategory of
@@ -462,19 +462,19 @@
   [6XReturns:[106X  [33X[0;10YA group element.[133X
   
   [33X[0;0YFor a [10XNormalStoredOrigami[110X, this method returns the [22Xx[122X-element which describes
-  the glueing in the horizontal direction.[133X
+  the gluing in the horizontal direction.[133X
   
   [33X[1;0Y[29X[2XVerticalElement[102X( [3XO[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10YA group element.[133X
   
   [33X[0;0YFor a [10XNormalStoredOrigami[110X, this method returns the [22Xy[122X-element which describes
-  the glueing in the vertical direction.[133X
+  the gluing in the vertical direction.[133X
   
   [33X[1;0Y[29X[2XAsPermutationRepresentation[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn origami.[133X
   
   [33X[0;0YConverts  a  [10XNormalStoredOrigami[110X  into  an [10XOrigami[110X, i.e. computes the [22Xx[122X- and
-  [22Xy[122X-permutations describing the glueing of the squares.[133X
+  [22Xy[122X-permutations describing the gluing of the squares.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X    [128X[104X
@@ -537,7 +537,8 @@
   [1X2.6 [33X[0;0YConstructing examples of origamis[133X[101X
   
   [33X[0;0YIn  this section we describe some methods for constructing explicit examples
-  and families of origamis.[133X
+  and  families  of  origamis.  More examples of some special constructions of
+  families of orgamis are given in Chapter [14X7[114X.[133X
   
   [1X2.6-1 AllOrigamisByDegree[101X
   
@@ -560,64 +561,6 @@
     [4X[28X      Origami((1,2,3), (2,4,3), 4), Origami((1,2,3), (1,2)(3,4), 4),[128X[104X
     [4X[28X      Origami((1,2,3,4), (2,4), 4), Origami((1,2,3,4), (1,2)(3,4), 4) ][128X[104X
     [4X[28X    [128X[104X
-    [4X[28X    [128X[104X
-  [4X[32X[104X
-  
-  [33X[1;0Y[29X[2XRandomOrigami[102X( [3Xd[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn origami.[133X
-  
-  [33X[0;0YReturns random origami of degree [3Xd[103X.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X    [128X[104X
-    [4X[28X    gap> RandomOrigami(6);[128X[104X
-    [4X[28X    Origami((1,3,5,6,4), (2,3,4,5,6), 6)[128X[104X
-    [4X[28X    [128X[104X
-    [4X[28X    [128X[104X
-  [4X[32X[104X
-  
-  [33X[1;0Y[29X[2XXOrigami[102X( [3Xd[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn origami.[133X
-  
-  [33X[0;0YThis function calculates an origami of degree [22X2d[122X. The permutations are given
-  by [22X/sigma_h = (1,...,2k)[122X and [22X/sigma_v=(1,2)(3,4)...(2k, 2k-1)[122X.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X      gap> XOrigami(2);[128X[104X
-    [4X[28X      Origami((1,2,3,4), (1,2)(3,4), 4)[128X[104X
-    [4X[28X    [128X[104X
-  [4X[32X[104X
-  
-  [33X[1;0Y[29X[2XElevatorOrigami[102X( [3Xl[103X, [3Xh[103X, [3Xs[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn origami.[133X
-  
-  [33X[0;0YThe function calculates an Origami similar to the staircase origami, but the
-  first  tile  of  the  first  step  and  the  last  tile of the last tile are
-  connected.  The  permutations are given by [22X/sigma_h= (1,..., a)/circ(a + b +
-  1,...,2a  +  b)/circ(2a + 2b + 1,...,3a + 2b)/circ... /circ((d - 1)(a + b) +
-  1,...,da + (d - 1)b)[122X and [22X/sigma_v = (a, a + 1,...,a + b + 1)/circ(2a + b, 2a
-  +  b  +  1,...,2a  +  2b  + 1)/circ... /circ (da + (d - 1)b, da + (d - 1)b +
-  1,..., d(a + b),1)[122X[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X      gap>  Elevator(2,0,3);[128X[104X
-    [4X[28X      Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)[128X[104X
-    [4X[28X    [128X[104X
-  [4X[32X[104X
-  
-  [33X[1;0Y[29X[2XStaircaseOrigami[102X( [3Xl[103X, [3Xh[103X, [3Xs[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn origami.[133X
-  
-  [33X[0;0YThis function calculates a "staircase" origami of [3Xsteps[103X steps. Each step has
-  length  [3Xlength[103X  and  height  [3Xheight[103X. The permutations are given by [22X/sigma_h=
-  (1,...,  a)/circ(a + b + 1,...,2a + b)/circ(2a + 2b + 1,...,3a + 2b)/circ...
-  /circ((d - 1)(a + b) + 1,...,da + (d - 1)b)[122X and [22X/sigma_v = (a, a + 1,...,a +
-  b  +  1)/circ(2a  +  b, 2a + b + 1,...,2a + 2b + 1)/circ... /circ (da + (d -
-  1)b, da + (d - 1)b + 1,..., d(a + b))[122X[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X      gap> Staircase(2,0,3);[128X[104X
-    [4X[28X      Origami((1,2)(3,4)(5,6), (2,3)(4,5), 6)[128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
@@ -668,10 +611,10 @@
   [33X[1;0Y[29X[2XTranslationsOfOrigami[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA list of permutations.[133X
   
-  [33X[0;0YCalculates  all  permutations which yield the origami when conjugated to the
-  [3XO[103X.  That  is  to say the permutation [22Xt[122X, [22Xt*y*t^-1=y[122X and [22Xt*x*t^-1=x[122X, where [22Xx,y[122X
-  are  the  permutations describing the horizontal and vertical glueing of the
-  origami, respectively.[133X
+  [33X[0;0YComputes  all  translations of the origami as permutations of the squares of
+  [3XO[103X. This is equivalent to the permutations [22Xt[122X which satisfy [22Xt∘ σ_x∘ t^-1 = σ_x[122X
+  and  [22Xt∘σ_y∘  t^-1  = σ_y[122X, where [22Xσ_x, σ_y[122X are the permutations describing the
+  horizontal and the vertical gluing of the origami, respectively.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      gap> origami:=Origami((1,2,3,4), (1,2)(3,4));[128X[104X
@@ -698,68 +641,75 @@
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XConjugatorsToInverse[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list.[133X
+  [33X[1;0Y[29X[2XPointReflectionsOfOrigami[102X( [3XO[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of permutations.[133X
   
-  [33X[0;0YCalculates  all  permutations  which  yield  the  inverse  Origami [22X-1.O[122X when
-  conjugated  to  the  [3XO[103X.  That is to say the permutation [22Xt[122X, [22Xt*y*t^-1=y^-1[122X and
-  [22Xt*x*t^-1=x^-1[122X,  where [22Xx,y[122X are the permutations describing the horizontal and
-  vertical glueing of the origami, respectively.[133X
+  [33X[0;0YComputes  all  point  reflections  of [22XO[122X, i.e. all affine homeomorphisms with
+  derivative  [22X-I[122X,  where  [22XI[122X  is the identity matrix. This is equivalent to the
+  permutations  [22Xt[122X  which  satisfy  [22Xt∘σ_x∘ t^-1=σ_x^-1[122X and [22Xt∘ σ_y∘ t^-1=σ_y^-1[122X,
+  where  [22Xσ_x,σ_y[122X  are  the  permutations  describing  the  horizontal  and the
+  vertical gluing of the origami, respectively.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X          gap> o:=Origami((1,2,3,4),(1,2)(3,4));[128X[104X
     [4X[28X          Origami((1,2,3,4), (1,2)(3,4), 4)[128X[104X
-    [4X[28X          gap> ConjugatorsToInverse(o);[128X[104X
+    [4X[28X          gap> PointReflectionsOfOrigami(o);[128X[104X
     [4X[28X          [ (1,2)(3,4), (1,4)(2,3) ][128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
   [33X[1;0Y[29X[2XAutomorphismsOfOrigami[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list.[133X
+  [6XReturns:[106X  [33X[0;10YTwo  lists consisting of two entries: The first entry is a list of
+            permutations and the second entry is 1 resp. -1.[133X
   
-  [33X[0;0YCalculates  all  automorphisms  of  the  origami,  i.e  the translations and
-  conjugators to the inverse.[133X
+  [33X[0;0YComputes  all  automorphisms  of  the origami, i.e. the translations and the
+  point  reflections.  More  precisely  it  returns  two lists. The first list
+  contains  the  translations  and is labelel with 1. The second list contains
+  the point reflections and is labeled with -1.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X          gap> o:=Origami((1,2,3,4),(1,2)(3,4));[128X[104X
     [4X[28X          Origami((1,2,3,4), (1,2)(3,4), 4)[128X[104X
     [4X[28X          gap> AutomorphismsOfOrigami(o);[128X[104X
-    [4X[28X          [ (), (1,3)(2,4), (1,2)(3,4), (1,4)(2,3) ][128X[104X
+    [4X[28X          [ [ [ (), (1,3)(2,4) ], 1 ], [ [ (1,2)(3,4), (1,4)(2,3) ], -1 ] ][128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XFixedPointsOfConjugatorToInverse[102X( [3XO[103X, [3Xsigma[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YTwo lists.[133X
+  [33X[1;0Y[29X[2XFixedPointsOfPointReflections[102X( [3XO[103X, [3Xsigma[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA  list  of fixed points. The fixed points are given as lists with
+            three entries.[133X
   
-  [33X[0;0YThis  function  calculates the fixed points of a conjugator to inverse [3Xsigma[103X
-  of  the  origami  [3XO[103X,  i.e.,  [3Xsigma[103X is a permutation which yields the inverse
-  origami  [22X-1.O[122X  when  conjugated to the [3XO[103X. The funtion does not check whether
-  [3Xsigma[103X  is  a  conjugator to inverse. The fixed points are returned in a list
-  with  entries  [22X[[a,b,c]][122X,  where  [22Xa[122X  is  the square in which the fixed point
-  occurs and [22X(b,c)[122X are the local coordinates in the square [22Xa[122X and for the lower
-  left corners [22Xa[122X is a representative of the connected lower left corners.[133X
+  [33X[0;0YThis  function  computes  the  fixed  points  of a point reflection [22Xσ[122X of the
+  origami  [22XO[122X  given as permutation of its squares. The function does not check
+  whether   [22Xσ[122X  is  a  point  reflection,  i.e.  whether  it  satisfies  [22Xσ∘σ_x∘
+  σ^-1=σ_x^-1[122X and [22Xσ∘ σ_y∘ σ^-1=σ_y^-1[122X. The fixed points are returned in a list
+  with  entries [22X[a,b,c][122X, where [22Xa[122X is the square in which the fixed point occurs
+  and  [22X(b,c)[122X  are the local coordinates in the square [22Xa[122X and for the lower left
+  corners [22Xa[122X is a representative of the connected lower left corners.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      [128X[104X
     [4X[28X      gap> origami:=Origami((1,2,3,4),(1,2)(3,4));[128X[104X
     [4X[28X      Origami((1,2,3,4), (1,2)(3,4), 4)[128X[104X
-    [4X[28X      gap> sigma:=ConjugatorsToInverse(origami)[1];[128X[104X
+    [4X[28X      gap> sigma:=PointReflectionsOfOrigami(origami)[1];[128X[104X
     [4X[28X      (1,2)(3,4)[128X[104X
-    [4X[28X      gap> FixedPointsOfConjugatorToInverse(origami, sigma);[128X[104X
+    [4X[28X      gap> FixedPointsOfPointReflections(origami, sigma);[128X[104X
     [4X[28X      [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ][128X[104X
     [4X[28X      [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
   [33X[1;0Y[29X[2XFixedPointsOfTranslation[102X( [3XO[103X, [3Xsigma[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list.[133X
+  [6XReturns:[106X  [33X[0;10YA  list  of  fixed  points. The fixed points are given as lists of
+            vertices.[133X
   
-  [33X[0;0YThis  function  calculates  the  fixed  points of a translation [3Xsigma[103X of the
-  origami  [3XO[103X,  i.e.,  [3Xsigma[103X  is  a permutation which yields the origami [22XO[122X when
-  conjugated   to  [3XO[103X..  The  function  does  not  check  whether  [3Xsigma[103X  is  a
-  translation. The fixed points are returned in a list with entries [22X[[a,b,c]][122X,
-  where  [22Xa[122X  is  the  square  in which the fixed point occurs and [22X(b,c)[122X are the
-  local coordinates in the square [22Xa[122X.[133X
+  [33X[0;0YThis  function computes the fixed points of a translation [22Xσ[122X of the origami [22XO[122X
+  given  as permutations of its squares. The function does not check whether [22Xσ[122X
+  is  a  translation,  i.e.  whether  it satisfies [22Xσ∘σ_x∘ σ^-1=σ_x[122X and [22Xσ∘ σ_y∘
+  σ^-1=σ_y[122X.  The  fixed  points  of  a  translation are always vertices of the
+  squares. Each fixed point is returned as list of vertices, more precisely as
+  the  labels  of  all squares such that the corresponding vertex is the fixed
+  point.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      [128X[104X
@@ -770,19 +720,21 @@
     [4X[28X      gap> sigma:=TranslationsOfOrigami(origami)[2];[128X[104X
     [4X[28X      (1,3)(2,4)[128X[104X
     [4X[28X      gap> FixedPointsOfTranslation(origami, sigma);[128X[104X
-    [4X[28X      [ 1, 2, 3, 4 ][128X[104X
+    [4X[28X      [ [ 1, 3 ], [ 2, 4 ] ][128X[104X
     [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
   [33X[1;0Y[29X[2XFixedPointsOfAutomorphism[102X( [3XO[103X, [3Xsigma[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list.[133X
+  [6XReturns:[106X  [33X[0;10YA  list  of  fixed  points.  The  fixed points are presened in the
+            format  corresponding  of  the  type,  i.e.  the format depends on
+            whether the automorphism is a translation or a point reflection.[133X
   
-  [33X[0;0YThis  function  calculates  the fixed points of an automorphism [3Xsigma[103X of the
-  origami [3XO[103X. The fixed points are returned in a list with entries [22X[[a,b,c],d][122X,
-  where  [22Xa[122X  is  the  square  in which the fixed point occurs and [22X(b,c)[122X are the
-  local  coordinates in the square and [22Xd[122X is [22X1[122X if [3Xsigma[103X is a translation and [22X-1[122X
-  if it is a conjugator to inverse.[133X
+  [33X[0;0YThis  function computes the fixed points of an automorphism [22Xσ[122X of the origami
+  [22XO[122X.  If  sigma is a point reflection, the fixed points are returned in a list
+  with  entries  [22X[[a,b,c],d][122X,  where  [22Xa[122X is the square in which the fixed point
+  occurs, [22X(b,c)[122X are the local coordinates in the square and [22Xd[122X is [22X-1[122X. If [22Xσ[122X is a
+  translation it is returned as list of vertices labeled with 1.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      [128X[104X
@@ -791,22 +743,22 @@
     [4X[28X      gap> sigma:=(1,3)(2,4);[128X[104X
     [4X[28X      (1,3)(2,4)[128X[104X
     [4X[28X      gap> FixedPointsOfAutomorphism(O,sigma);[128X[104X
-    [4X[28X      [ [ 1, 0, 0 ], [ 2, 0, 0 ], [ 3, 0, 0 ], [ 4, 0, 0 ] ][128X[104X
+    [4X[28X      [ [ [ 1, 3 ], [ 2, 4 ] ], 1 ][128X[104X
     [4X[28X  [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XQuotientengeschlecht[102X( [3XO[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XGenusOfQuotient[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn integer.[133X
   
-  [33X[0;0YFor  a  given  origami  this  function  calculates the genus of the quotient
+  [33X[0;0YFor  a  given  origami  this  function  computes  the  genus of the quotient
   [22XO/Trans(O)[122X, where [22XTrans(O)[122X is the translation group.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      [128X[104X
     [4X[28X      gap> O:=Origami((1,2,3)(4,5,6),(3,4));[128X[104X
     [4X[28X      Origami((1,2,3)(4,5,6), (3,4), 6)[128X[104X
-    [4X[28X      gap> Quotientengeschlecht(O);[128X[104X
+    [4X[28X      gap> GenusOfQuotient(O);[128X[104X
     [4X[28X      1[128X[104X
     [4X[28X      [128X[104X
     [4X[28X    [128X[104X
@@ -815,8 +767,8 @@
   [33X[1;0Y[29X[2XOrigamiQuotient[102X( [3XO[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YAn origami[133X
   
-  [33X[0;0YFor   a   given  origami  this  function  calculates  the  quotient  origami
-  [22XO/Trans(O)[122X, where [22XTrans(O)[122X is the translation group.[133X
+  [33X[0;0YFor  a given origami this function computes the quotient origami [22XO/Trans(O)[122X,
+  where [22XTrans(O)[122X is the translation group.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X      [128X[104X

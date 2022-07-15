@@ -2,26 +2,27 @@
   
   [1XReferences[101X
   
-  [[20XHL06[120X]  [16XHubert,  P. and Leli\`evre, S.[116X, [17XPrime arithmetic Teichm\"uller discs
-  in mathcal H(2)[117X, [18XIsrael J. Math.[118X (2006).
+  [[20XBKK+22[120X]  [16XBonnafoux,  E., Kany, M., Kattler, P., Matheus, C., Ni{\~{n}}o, R., Sedano-Mendoza, M., Valdez, F. and Weitze-Schmith{\"u}sen, G.[116X, [17XArithmeticity of
+  the Kontsevich--Zorich monodromies of certain families of square-tiled surfaces[117X, arXiv (arXiv:2206.06595 [math.DS], 2022).
   
-  [[20XRan17[120X]    [16XRandecker,    A.[116X,    [17XSkript    zur    Vortragsreihe    Unendliche
-  Translationsfl\"achen[117X (2017).
+  [[20XHL06[120X] [16XHubert, P. and Leli\`evre, S.[116X, [17XPrime arithmetic Teichm\"uller discs in mathcal H(2)[117X, [18XIsrael J. Math.[118X (2006).
   
-  [[20XSch04[120X]  [16XSchmith\"{u}sen, G.[116X, [17XAn algorithm for finding the Veech group of an
-  origami[117X, [18XExperiment. Math.[118X (2004).
+  [[20XHS07[120X]  [16XHerrlich,  F.  and  Schmith\"{u}sen, G.[116X, [17XA comb of origami curves in the moduli space M_3 with three dimensional closure[117X, [18XGeom. Dedicata[118X, [19X124[119X (2007),
+  69--94.
   
-  [[20XSch05[120X]  [16XSchmith\"{u}sen,  G.[116X,  [17XVeech  Groups  of  Origamis[117X,  Ph.D.  thesis,
-  University of Karlsruhe (2005).
+  [[20XRan17[120X] [16XRandecker, A.[116X, [17XSkript zur Vortragsreihe Unendliche Translationsfl\"achen[117X (2017).
   
-  [[20XVDCF[120X] [16XVincent Delecroix Charles Fougeron, S. L.[116X, [17Xsurface\_dynamics SageMath
-  package version 0.4.0[117X, \url{https://pypi.org/project/surface_dynamics/}.
+  [[20XRog21[120X] [16XRogovskyy, A.[116X, [17XOrigamis, die zyklisch \"uber dem NxN-Torus faktorisieren[117X, Bachelor's Thesis, Universit\"{a}t des Saarlandes (2021).
   
-  [[20XZmi11[120X]  [16XZmiaikou,  D.[116X,  [17XOrigamis  and  permutation  groups[117X,  Ph.D.  thesis,
-  University Paris-Sud (2011).
+  [[20XSch04[120X] [16XSchmith\"{u}sen, G.[116X, [17XAn algorithm for finding the Veech group of an origami[117X, [18XExperiment. Math.[118X (2004).
   
-  [[20XZor06[120X]  [16XZorich,  A.[116X, [17XFlat surfaces[117X, in Frontiers in number theory, physics,
-  and geometry. I, Springer, Berlin (2006).
+  [[20XSch05[120X] [16XSchmith\"{u}sen, G.[116X, [17XVeech Groups of Origamis[117X, Ph.D. thesis, University of Karlsruhe (2005).
+  
+  [[20XVDCF[120X] [16XVincent Delecroix Charles Fougeron, S. L.[116X, [17Xsurface\_dynamics SageMath package version 0.4.0[117X, \url{https://pypi.org/project/surface_dynamics/}.
+  
+  [[20XZmi11[120X] [16XZmiaikou, D.[116X, [17XOrigamis and permutation groups[117X, Ph.D. thesis, University Paris-Sud (2011).
+  
+  [[20XZor06[120X] [16XZorich, A.[116X, [17XFlat surfaces[117X, in Frontiers in number theory, physics, and geometry. I, Springer, Berlin (2006).
   
   
   

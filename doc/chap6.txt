@@ -1,0 +1,223 @@
+  
+  [1X6 [33X[0;0YCyclic Torus Covers[133X[101X
+  
+  [33X[0;0YLet  [23XT_n[123X  be  the [23Xn \times n[123X-Torus. Hence topologically it is torus with [23Xn^2[123X
+  punctures. A [13Xcyclic [23Xn[123X-torus cover of degree [23Xd[123X[113X is a normal covering [23XX \to T_n[123X
+  whose  Deck-group  is  cyclic with [23Xd[123X elements. We can obtain an origami from
+  each cyclic [23Xn[123X-torus cover by appending the map [23Xp_n: T_n \to T_1[123X, which sends
+  each  square  to  the  singular  square  of  the trivial torus. We call such
+  origamis  [13Xcyclic  torus  cover  origamis[113X.  The  functions  described in this
+  chapter  were  programmed  and  used in the context of [Rog21] and provide a
+  toolkit to work with these special class of origamis.[133X
+  
+  
+  [1X6.1 [33X[0;0YMonodromy vectors and bases of the fundamental group[133X[101X
+  
+  [33X[0;0YA  [13Xcyclic  [23Xn[123X-torus  cover  of degree [23Xd[123X[113X is determined by its monodromy map [23Xm:
+  \pi_1(T_n)  \to  \mathbb{Z}/d\mathbb{Z}[123X.  Recall  that the fundamental group
+  [23X\pi_1(T_n)[123X  is  a free group in [23XN = n^2 + 1[123X generators. If we choose a basis
+  of  [23X\pi_1(T_n)[123X,  every cyclic torus cover origami can be described as vector
+  in  [23X(\mathbb{Z}/d\mathbb{Z})^N[123X.  We  call this vector [13X monodromy vector with
+  respect  to  this basis[113X. There are two bases (which we will call [23XL[123X and [23XS[123X) of
+  the  fundamental group of [23XT_n[123X which we will use. The base point is chosen as
+  the midpoint of the lower left square.[133X
+  
+  [33X[0;0YThe  basis  [23XL[123X  consists  of  the full horizontal path to the right, the full
+  vertical  path upwards and loops around each of the [23Xn^2 - 1[123X corner points of
+  the  squares  (numbered  left  to  right and bottom up; the loop on the most
+  upper right corner excluded) in this order.[133X
+  
+  [33X[0;0YThe  basis [23XS[123X consists of picking a maximal set of slits between squares such
+  that  [23XT_n[123X  without these is still simply connected. The crossing of one such
+  slit bottom up (for horizontal slits) and left to right (for vertical slits)
+  is then an element of the basis.[133X
+  
+  [33X[0;0YConvertion between these two bases is performed with [2XBaseChangeLToS[102X ([14X6.3-1[114X)[133X
+  
+  [33X[0;0YSee  [Rog21] for more information regarding the construction of cyclic torus
+  covers and the bases [23XL[123X and [23XS[123X.[133X
+  
+  
+  [1X6.2 [33X[0;0YGeneral Cyclic Torus Cover functions[133X[101X
+  
+  [1X6.2-1 GeneralizedCyclicTorusCover[101X
+  
+  [33X[1;0Y[29X[2XGeneralizedCyclicTorusCover[102X( [3Xn[103X, [3Xd[103X, [3Xvslits[103X, [3Xhslits[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya cyclic torus cover origami[133X
+  
+  [33X[0;0YA  cyclic  torus cover consists of [23Xd[123X copies of the trivial origami [23XT_n[123X. Each
+  of  the  [23Xn^2[123X fields of [23XT_n[123X gets assigned a label from [23X1[123X to [23Xn^2[123X row-wise from
+  left  to  right and bottom up. Let [23Xf[123X be a field with the label [23Xk[123X in the [23Xi[123X-th
+  copy  of  the  cyclic  torus  cover.  Then  [23Xf[123X's  right  neighbour's label is
+  determined  by  determining the usual right neighbour in [23XT_n[123X and its copy is
+  [23X((i+\texttt{vslits[k]})  \bmod  d)[123X.  It  works in the same way for the upper
+  neighbour and [23X\texttt{hslits}[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XGeneralizedCyclicTorusCover(2, 2, [1,0,0,0], [0,0,0,0]);[127X[104X
+    [4X[28XOrigami((1,6,5,2)(3,4)(7,8), (1,3)(2,4)(5,7)(6,8), 8)[128X[104X
+  [4X[32X[104X
+  
+  [1X6.2-2 CombOrigami[101X
+  
+  [33X[1;0Y[29X[2XCombOrigami[102X( [3Xn[103X, [3Xx[103X, [3Xy[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  comb  origami,  which  is  a  cyclic  torus  cover  of degree 2
+            specified by a single point [23XP=(x,y)[123X[133X
+  
+  [33X[0;0YA  comb  origami is a special cyclic torus cover of degree 2, specified by a
+  single  point [23XP[123X on [23XT_n[123X. The coordinates are given in the range [23X{0,..,n-1}^2[123X,
+  where  the  point [23X(0,0)[123X is located in the lower left corner. [23XP[123X must not be a
+  2-torsion  point,  that  is,  it  must  not be [23X(0,0)[123X, [23X(n/2, n/2)[123X, [23X(n/2,0)[123X or
+  [23X(0,n/2)[123X.  The  coordinates  are  considered  modulo  [23Xn[123X.  See [HS07] for more
+  details.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCombOrigami(3, 1, 0);[127X[104X
+    [4X[28XOrigami((1,2,3)(4,5,6,13,14,15)(7,8,9)(10,11,12)(16,17,18), [128X[104X
+    [4X[28X(1,4,7)(2,5,8,11,14,17)(3,6,9)(10,13,16)(12,15,18), 18)[128X[104X
+  [4X[32X[104X
+  
+  [1X6.2-3 SearchForCyclicTorusOrigamiWithVeechGroup[101X
+  
+  [33X[1;0Y[29X[2XSearchForCyclicTorusOrigamiWithVeechGroup[102X( [3Xn[103X, [3Xp[103X, [3XH[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya    monodromy    vector    in    [23X(\mathbb{Z}/p\mathbb{Z})^{n^2+1}[123X
+            representing  a  cyclic  torus  cover  origami with respect to the
+            basis [23XL[123X that has [23XH[123X as its Veech group or [23X\texttt{false}[123X if no such
+            vector is found.[133X
+  
+  [33X[0;0Y[23Xp[123X  must  be  prime. [23XH[123X must be a congruence subgroup of level [23Xp[123X and [23Xn[123X must be
+  [23X\geq 2[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := [ [ 0, -1 ], [ 1, 0 ] ];; T := [ [ 1, 1 ], [ 0, 1 ] ];;[127X[104X
+    [4X[25Xgap>[125X [27XH := ModularSubgroup([S^-2, T*S^-1, T^-1*S^-1]);;[127X[104X
+    [4X[25Xgap>[125X [27XSearchForCyclicTorusOrigamiWithVeechGroup(4, 3, H);[127X[104X
+    [4X[28X[ 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1 ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.2-4 [33X[0;0YCyclic torus cover origamis from monodromy vectors[133X[101X
+  
+  [33X[1;0Y[29X[2XCyclicTorusCoverOrigamiS[102X( [3Xn[103X, [3Xd[103X, [3Xv[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XCyclicTorusCoverOrigamiL[102X( [3Xn[103X, [3Xd[103X, [3Xv[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  cyclic  torus cover origami whose monodromy vector with respect
+            to the basis [23XS[123X (respectively [23XL[123X) is [23Xv[123X.[133X
+  
+  [33X[0;0Y[23Xn[123X  must  be  [23X\geq  2[123X,  [23Xd\geq  1[123X and [23Xv \in (\mathbb{Z}/d\mathbb{Z})^{n^2+1}[123X a
+  vector such that its elements generate [23X\mathbb{Z}/d\mathbb{Z}[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCyclicTorusCoverOrigamiS(2,2,[1,0,1,0,0]);[127X[104X
+    [4X[28XOrigami((1,2,5,6)(3,4)(7,8), (1,3,5,7)(2,4)(6,8), 8)[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.3 [33X[0;0YMatrices acting on the homology of the n-Torus[133X[101X
+  
+  [33X[0;0YGiven  a  homeomorphism  [23Xf: T_n \to T_n[123X, one can consider the induced linear
+  map  on  the  homology  of  [23XT_n[123X.  If  we furthermore choose two bases of the
+  homology, we can consider this linear map as a matrix. This section computes
+  some of these matrices.[133X
+  
+  [1X6.3-1 BaseChangeLToS[101X
+  
+  [33X[1;0Y[29X[2XBaseChangeLToS[102X( [3Xn[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  matrix  [23XM  =  D_{SL}[123X representing a change of basis between the
+            bases [23XL[123X and [23XS[123X.[133X
+  
+  [33X[0;0YReturns  a  matrix  corresponding  to the change of basis from [23XL[123X to [23XS[123X on the
+  homology  of  [23XT_n[123X.  The  matrix has the following property: given any cyclic
+  torus cover origami as a monodromy vector [23Xv[123X with respect to the basis [23XS[123X, you
+  may  obtain the corresponding monodromy vector with respect to basis [23XL[123X using
+  [23Xv \cdot D_{SL}[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay(BaseChangeLToS(2));[127X[104X
+    [4X[28X[ [   0,   1,   1,  -1,   0 ],[128X[104X
+    [4X[28X  [   0,   0,  -1,   1,   0 ],[128X[104X
+    [4X[28X  [   1,   0,  -1,   0,   1 ],[128X[104X
+    [4X[28X  [   0,   0,   1,   0,  -1 ],[128X[104X
+    [4X[28X  [   0,   1,   0,   0,   1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X6.3-2 TranslationGroupOnHomologyOfTn[101X
+  
+  [33X[1;0Y[29X[2XTranslationGroupOnHomologyOfTn[102X( [3Xn[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe  group  of  translations  (as  matrices)  acting  on monodromy
+            vectors with respect to [23XL[123X.[133X
+  
+  [33X[0;0YThis  group  of  order  [23Xn^2[123X  is  generated  by the matrices representing the
+  translation  by one square to the right and the translation by one square up
+  with respect to the basis [23XL[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrder(TranslationGroupOnHomologyOfTn(3));[127X[104X
+    [4X[28X9[128X[104X
+  [4X[32X[104X
+  
+  [1X6.3-3 ActionOfTOnHomologyOfTn[101X
+  
+  [33X[1;0Y[29X[2XActionOfTOnHomologyOfTn[102X( [3Xn[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya   matrix   representing   the  action  of  the  generator  [23XT[123X  of
+            [23X\mathrm{Sl}_2(\mathbb{Z})[123X  on  the homology of [23XT_n[123X with respect to
+            [23XL[123X.[133X
+  
+  [33X[0;0YThe  generator [23XT[123X (shearing to the right) of [23X\mathrm{Sl}_2(\mathbb{Z})[123X can be
+  viewed  as  an  affine map on [23XT_n[123X if we assume that the lower left corner is
+  fixed.  This  function  returns  the  corresponding map on the homology as a
+  matrix with respect to [23XL[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay(ActionOfTOnHomologyOfTn(2));[127X[104X
+    [4X[28X[ [   1,   1,   0,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   1,   0,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   0,   1,   0,  -1 ],[128X[104X
+    [4X[28X  [   0,   0,   0,   1,  -1 ],[128X[104X
+    [4X[28X  [   0,  -1,   0,   0,  -1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X6.3-4 ActionOfSOnHomologyOfTn[101X
+  
+  [33X[1;0Y[29X[2XActionOfSOnHomologyOfTn[102X( [3Xn[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya   matrix   representing   the  action  of  the  generator  [23XS[123X  of
+            [23X\mathrm{Sl}_2(\mathbb{Z})[123X  on  the homology of [23XT_n[123X with respect to
+            [23XL[123X.[133X
+  
+  [33X[0;0YThe    generator    [23XS[123X    (rotation    by    [23X\pi/2[123X    counterclockwise)    of
+  [23X\mathrm{Sl}_2(\mathbb{Z})[123X can be viewed as an affine map on [23XT_n[123X if we assume
+  that the lower left corner is fixed. This function returns the corresponding
+  map on the homology as a matrix with respect to [23XL[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay(ActionOfSOnHomologyOfTn(2));[127X[104X
+    [4X[28X[ [   0,  -1,   0,   0,   0 ],[128X[104X
+    [4X[28X  [   1,   0,   0,   0,   0 ],[128X[104X
+    [4X[28X  [  -1,   0,   1,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   0,   0,   0,   1 ],[128X[104X
+    [4X[28X  [  -1,   0,   0,   1,   0 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X6.3-5 ActionOfMatrixOnHomologyOfTn[101X
+  
+  [33X[1;0Y[29X[2XActionOfMatrixOnHomologyOfTn[102X( [3Xn[103X, [3XA[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya     matrix     representing     the     action    of    [23XA    \in
+            \mathrm{Sl}_2(\mathbb{Z})[123X  on  the homology of [23XT_n[123X with respect to
+            [23XL[123X.[133X
+  
+  [33X[0;0YAny  matrix  [23XA\in\mathrm{Sl}_2(\mathbb{Z})[123X can be viewed as an affine map on
+  [23XT_n[123X  if  we  assume  that  the  lower  left  corner  is  fixed. [23XA[123X must be in
+  [23X\mathrm{Sl}_2(\mathbb{Z})[123X. It is written as a word in the generators [23XS[123X and [23XT[123X
+  of  [23X\mathrm{Sl}_2(\mathbb{Z})[123X, then the corresponding word with the matrices
+  calculated  by  [2XActionOfTOnHomologyOfTn[102X  ([14X6.3-3[114X) and [2XActionOfSOnHomologyOfTn[102X
+  ([14X6.3-4[114X) is taken and returned.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [ 0, -1 ], [ 1, 1 ] ];; # = S * T[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(ActionOfMatrixOnHomologyOfTn(2, M));[127X[104X
+    [4X[28X[ [   0,  -1,   0,   0,   0 ],[128X[104X
+    [4X[28X  [   1,   1,   0,   0,   0 ],[128X[104X
+    [4X[28X  [  -1,  -1,   1,   0,  -1 ],[128X[104X
+    [4X[28X  [   0,  -1,   0,   0,  -1 ],[128X[104X
+    [4X[28X  [  -1,  -1,   0,   1,  -1 ] ][128X[104X
+  [4X[32X[104X
+  

@@ -1,202 +1,127 @@
   
-  [1X4 [33X[0;0YThe Origami Database[133X[101X
+  [1X4 [33X[0;0YSageMath and the surface_dynamics package[133X[101X
+  
+  [33X[0;0YThe SageMath package [13Xsurface_dynamics[113X by Vincent Delecroix [VDCF] implements
+  functions  to  study  origamis  in Sage. We provide a small interface to use
+  these   methods  from  [5XGAP[105X.  An  installation  of  Sage  together  with  the
+  [13Xsurface_dynamics[113X  package and the [5XGAP[105X packages [5XHomalgToCAS[105X, [5XIO_ForHomalg[105X, [5XIO[105X
+  and [5XRingsForHomalg[105X are needed.[133X
   
   
-  [1X4.1 [33X[0;0YSetting up the database[133X[101X
+  [1X4.1 [33X[0;0YSageMath functions[133X[101X
   
-  [33X[0;0YTo  use  the  origami  database, you need an instance of ArangoDB running on
-  port  8529.  After  installing  ArangoDB,  you  need to set up a database as
-  follows:[133X
+  [33X[0;0YThe  following descriptions and examples are mainly taken from the manual of
+  [VDCF].[133X
   
-  [30X    [33X[0;6Yuser: 'origami'[133X
+  [1X4.1-1 VeechgroupBySage[101X
   
-  [30X    [33X[0;6Ypassword: none[133X
+  [33X[1;0Y[29X[2XVeechgroupBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA subgroup of [22XSL_2( Z)[122X.[133X
   
-  [30X    [33X[0;6Ydatabase: 'origami'[133X
+  [33X[0;0YThis  function  executes  the  SageMath  method  [10Xveech_group[110X and returns its
+  result as a [5XGAP[105X object.[133X
   
-  [33X[0;0YIn  this  database, create three collections called [13Xorigami_representatives[113X,
-  [13Xorigamis[113X    and    [13Xveechgroups[113X.    Please    download    the    data    from
-  [7Xhttps://www.math.uni-sb.de/origami/[107X  and  import  the  [13Xjson[113X-files  into  the
-  corresponding  collections.  All of this can be done in the web interface of
-  ArangoDB,  which  you can reach under [7Xhttp://127.0.0.1:8529[107X (unless you have
-  specified a different endpoint for your local ArangoDB-Server).[133X
+  [33X[1;0Y[29X[2XIsHyperellipticBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA boolean.[133X
   
+  [33X[0;0YChecks whether or not the origami [3XO[103X is hyperelliptic.[133X
   
-  [1X4.2 [33X[0;0YUsing the origami database[133X[101X
+  [33X[1;0Y[29X[2XIsPrimitiveBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA boolean.[133X
   
-  [1X4.2-1 ConnectToOrigamiDB[101X
+  [33X[0;0YChecks  whether  or  not  the  origami  [3XO[103X is primitive. An origami is called
+  primitive,  if  it  does  not  cover another origami, or equivalently if the
+  action of the monodromy group has no non-trivial block.[133X
   
-  [33X[1;0Y[29X[2XConnectToOrigamiDB[102X(  ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDatabase[110X object[133X
+  [33X[1;0Y[29X[2XReduceBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
   
-  [33X[0;0YConnects    to    the    arango   database   'origami'   at   the   endpoint
-  'http+tcp://127.0.0.1:8529' with the user 'origami'.[133X
-  
-  [1X4.2-2 InsertVeechGroupIntoDB[101X
-  
-  [33X[1;0Y[29X[2XInsertVeechGroupIntoDB[102X( [3XG[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YTakes  a  [10XModularSubgroup[110X  [3XG[103X and inserts it into the Veech group table. Only
-  precomputed attributes are inserted. This function does not compute anything
-  new  from  the group. No test is performed to check whether [3XG[103X already exists
-  in  the  database.  The  resulting  [10XArangoDocument[110X  corresponding to the new
-  database entry is returned.[133X
-  
-  [1X4.2-3 GetVeechGroupDBEntry[101X
-  
-  [33X[1;0Y[29X[2XGetVeechGroupDBEntry[102X( [3XG[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YTakes  a  [10XModularSubgroup[110X  [3XG[103X and returns the corresponding database entry or
-  [10Xfail[110X if [3XG[103X is not in the database.[133X
-  
-  [1X4.2-4 GetVeechGroupsFromDB[101X
-  
-  [33X[1;0Y[29X[2XGetVeechGroupsFromDB[102X( [3Xconstraints[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list of [10XModularSubgroup[110Xs[133X
-  
-  [33X[0;0YReturns all Veech groups in the database subject to the argument [3Xconstraints[103X
-  which is given in the form of a record.[133X
+  [33X[0;0YReturns a reduced origami isomorphic (up to [22XSL(2,Q)[122X action) to [3XO[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      [128X[104X
-    [4X[28X      gap> GetVeechGroupsFromDB(rec(index := 30, genus := 0));[128X[104X
-    [4X[28X      [list of modular subgroups][128X[104X
-    [4X[28X      gap> GetVeechGroupsFromDB(rec(congruence := true, level := 12));[128X[104X
-    [4X[28X      [list of modular subgroups][128X[104X
-    [4X[28X      gap> GetVeechGroupsFromDB(rec(deficiency := 5));[128X[104X
-    [4X[28X      [list of modular subgroups][128X[104X
-    [4X[28X      [128X[104X
+    [4X[28X      gap> ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));[128X[104X
+    [4X[28X      Origami((1,2), (1,3), 6)[128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [1X4.2-5 UpdateVeechGroupDBEntry[101X
+  [33X[1;0Y[29X[2XAbsolutePeriodGeneratorsBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
   
-  [33X[1;0Y[29X[2XUpdateVeechGroupDBEntry[102X( [3XG[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YUpdates  the  Veech group entry in the database with newly computed data and
-  returns the corresponding [10XArangoDocument[110X.[133X
-  
-  [1X4.2-6 RemoveVeechGroupFromDB[101X
-  
-  [33X[1;0Y[29X[2XRemoveVeechGroupFromDB[102X( [3XG[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YNothing.[133X
-  
-  [33X[0;0YRemoves  the  Veech  group  [3XG[103X  from  the  database  (if  present).  NOT  YET
-  IMPLEMENTED[133X
-  
-  [1X4.2-7 InsertOrigamiRepresentativeIntoDB[101X
-  
-  [33X[1;0Y[29X[2XInsertOrigamiRepresentativeIntoDB[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YInserts  the  normal  form  of the origami [3XO[103X into the origami representative
-  list.  Inserts  only  precomputed  data.  If  the  Veech group of [3XO[103X does not
-  already  exist  in  the database, it is also inserted. This function assumes
-  that no other element of the [22XSL_2(Z)[122X orbit of [3XO[103X exists in the representative
-  list, no test is performed to check this.[133X
-  
-  [1X4.2-8 GetOrigamiOrbitRepresentativeDBEntry[101X
-  
-  [33X[1;0Y[29X[2XGetOrigamiOrbitRepresentativeDBEntry[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YTakes an Origami [3XO[103X and returns the corresponding database entry or [10Xfail[110X if [3XO[103X
-  is not in the database.[133X
-  
-  [1X4.2-9 GetOrigamiOrbitRepresentativesFromDB[101X
-  
-  [33X[1;0Y[29X[2XGetOrigamiOrbitRepresentativesFromDB[102X( [3Xconstraints[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
-  
-  [33X[0;0YReturns  all  origami  orbit  representatives in the database subject to the
-  constraints given in the form of the record [3Xconstraints[103X.[133X
+  [33X[0;0YReturns  a  generating set of the absolute periods of [3XO[103X. To each curve on an
+  origami,  we  can associate its holonomy (that is an element of [22XZ × Z[122X). This
+  function  returns  a generating set of the module generated by holonomies of
+  closed curves.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      [128X[104X
-    [4X[28X      gap> GetOrigamiOrbitRepresentativesFromDB(rec(stratum := [4]));[128X[104X
-    [4X[28X      [ Origami((1,4,3)(2,5), (1,5,3,4)(2,6), 6) ][128X[104X
-    [4X[28X      gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));[128X[104X
-    [4X[28X      [ Origami((1,3,5), (1,3)(2,4,5), 5) ][128X[104X
-    [4X[28X      [128X[104X
+    [4X[28X      gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) ));[128X[104X
+    [4X[28X      [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ][128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [1X4.2-10 GetAllOrigamiOrbitRepresentativesFromDB[101X
+  [33X[1;0Y[29X[2XLatticeOfAbsolutePeriodsBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
   
-  [33X[1;0Y[29X[2XGetAllOrigamiOrbitRepresentativesFromDB[102X(  ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
+  [33X[0;0YReturns  [22X(a,t,u)[122X  where [22X((a,0),(t,u))[122X is a standard basis for the lattice of
+  the  absolute  periods  of  [3XO[103X.  The  lattice of periods of an origami is the
+  sublattice   of  [22XZ^2[122X  generated  by  the  holonomy  vectors  of  its  saddle
+  connections.  Any  sublattice  of  [22XZ^2[122X  has a standard basis consisting of a
+  horizontal vector [22X(a,0)[122X and a non horizontal vector [22X(t,u)[122X, where [22Xa, t, u[122X are
+  integers satisfying [22X0 < t < a[122X and [22X0 < t[122X.[133X
   
-  [33X[0;0YReturns  all  origami  orbit  representatives in the database. Shorthand for
-  [10XGetOrigamiOrbitRepresentativesFromDB(rec());[110X[133X
+  [4X[32X  Example  [32X[104X
+    [4X[28X      gap> LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));[128X[104X
+    [4X[28X      [ [ 2, 0 ], [ 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   
-  [1X4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry[101X
+  [33X[1;0Y[29X[2XOptimalDegreeBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YAn integer.[133X
   
-  [33X[1;0Y[29X[2XUpdateOrigamiOrbitRepresentativeDBEntry[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
+  [33X[0;0YComputes  the  optimal  degree of [3XO[103X. The optimal degree of an origami is the
+  degree  of  the  map  to the largest torus. Any origami [22XX → T[122X factors as [22Xi ∘
+  π_opt[122X where i is an isogeny. The optimal degree is the degree of [22Xπ_opt[122X.[133X
   
-  [33X[0;0YUpdates  the  origami  orbit representative entry in the database with newly
-  computed  data  and returns the corresponding [10XArangoDocument[110X. If the origami
-  orbit representative [3XO[103X does not exist in the database, it is inserted.[133X
+  [4X[32X  Example  [32X[104X
+    [4X[28X      gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));[128X[104X
+    [4X[28X      2[128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   
-  [1X4.2-12 RemoveOrigamiOrbitRepresentativeFromDB[101X
+  [33X[1;0Y[29X[2XPeriodGeneratorsBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of lists of integer.[133X
   
-  [33X[1;0Y[29X[2XRemoveOrigamiOrbitRepresentativeFromDB[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YNothing.[133X
+  [33X[0;0YReturn a list of periods that generate the lattice of periods.[133X
   
-  [33X[0;0YRemoves the origami orbit representative [3XO[103X from the database if present. NOT
-  YET IMPLEMENTED![133X
+  [4X[32X  Example  [32X[104X
+    [4X[28X      gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));[128X[104X
+    [4X[28X      [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   
-  [1X4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB[101X
+  [33X[1;0Y[29X[2XWidthsAndHeightsBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
   
-  [33X[1;0Y[29X[2XInsertOrigamiWithOrbitRepresentativeIntoDB[102X( [3XO[103X, [3XR[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
+  [33X[0;0YReturn the list of widths and heights of cylinders in [3XO[103X.[133X
   
-  [33X[0;0YInserts  the  origami  [3XO[103X  into  the origami list with orbit representative [3XR[103X
-  which  is  inserted  into the origami orbit representative list if it is not
-  already in there. Returns the [10XArangoDocument[110X corresponding to [3XO[103X.[133X
+  [4X[32X  Example  [32X[104X
+    [4X[28X      gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));[128X[104X
+    [4X[28X      [ [ 1, 2 ], [ 2, 2 ] ][128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   
-  [1X4.2-14 InsertOrigamiIntoDB[101X
+  [33X[1;0Y[29X[2XSumOfLyapunovExponentsBySage[102X( [3XO[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA rational number.[133X
   
-  [33X[1;0Y[29X[2XInsertOrigamiIntoDB[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
+  [33X[0;0YComputes the sum of Lyapunov exponents for [3XO[103X.[133X
   
-  [33X[0;0YInserts  an origami [3XO[103X into the database. If the Veech group and the orbit of
-  [3XO[103X is known, this function checks if there is already a representative of the
-  orbit  of  [3XO[103X in the database. If not, [3XO[103X is inserted as the representative of
-  its orbit, if yes, [3XO[103X is only inserted into the origami list with a reference
-  to  the representative. If the Veech group of [3XO[103X is not known, it is inserted
-  as its own representative. This might result in entries in the origami orbit
-  representative list which are in the same orbit.[133X
+  [4X[32X  Example  [32X[104X
+    [4X[28X      gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));[128X[104X
+    [4X[28X      3/2[128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   
-  [1X4.2-15 GetOrigamiDBEntry[101X
+  [33X[1;0Y[29X[2XIntermediateCoversBySage[102X( [3XO[103X ) [32X function[133X
   
-  [33X[1;0Y[29X[2XGetOrigamiDBEntry[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YAn [10XArangoDocument[110X[133X
-  
-  [33X[0;0YReturns  the [10XArangoDocument[110X in the origami list corresponding to the origami
-  [3XO[103X or fail if does not exist in the database.[133X
-  
-  [1X4.2-16 GetOrigamiOrbit[101X
-  
-  [33X[1;0Y[29X[2XGetOrigamiOrbit[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YA list of [10XOrigami[110Xs[133X
-  
-  [33X[0;0YReturns all origamis in the database which are in the orbit of [3XO[103X.[133X
-  
-  [1X4.2-17 UpdateRepresentativeOfOrigami[101X
-  
-  [33X[1;0Y[29X[2XUpdateRepresentativeOfOrigami[102X( [3XO[103X, [3XR[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YNothing.[133X
-  
-  [33X[0;0YUpdates the orbit representative of [3XO[103X to be [3XR[103X.[133X
-  
-  [1X4.2-18 RemoveOrigamiFromDB[101X
-  
-  [33X[1;0Y[29X[2XRemoveOrigamiFromDB[102X( [3XO[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YNothing.[133X
-  
-  [33X[0;0YRemoves the origami [3XO[103X from the database.[133X
+  [33X[0;0YReturns   the   list  of  intermediate  covers  of  this  origami.  Not  yet
+  implemented.[133X
   

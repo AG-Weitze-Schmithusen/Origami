@@ -1,127 +1,271 @@
   
-  [1X3 [33X[0;0YSageMath and the surface_dynamics package[133X[101X
+  [1X3 [33X[0;0YThe homology of origamis and the action of the Veech group.[133X[101X
   
-  [33X[0;0YThe SageMath package [13Xsurface_dynamics[113X by Vincent Delecroix [VDCF] implements
-  functions  to  study  origamis  in Sage. We provide a small interface to use
-  these   methods  from  [5XGAP[105X.  An  installation  of  Sage  together  with  the
-  [13Xsurface_dynamics[113X  package and the [5XGAP[105X packages [5XHomalgToCAS[105X, [5XIO_ForHomalg[105X, [5XIO[105X
-  and [5XRingsForHomalg[105X are needed.[133X
+  [33X[0;0Y[13X  Important premise: We assume in this section, that all considered origamis
+  have   no   nontrivial   translations.   This  is  equivalent  to  that  the
+  corresponding torus cover has no nontrivial deck transformations.[113X[133X
   
   
-  [1X3.1 [33X[0;0YSageMath functions[133X[101X
+  [1X3.1 [33X[0;0YThe non tautological part of homology[133X[101X
   
-  [33X[0;0YThe  following descriptions and examples are mainly taken from the manual of
-  [VDCF].[133X
+  [33X[0;0YThis  section  contains functions, which compute a basis of the homology [22XH =
+  H_1( mathcalO, Z)[122X of an origami [22XmathcalO[122X with [22Xd[122X squares and the action of an
+  affine  transformation [22Xf[122X of [22XmathcalO[122X on [22XH[122X. The later is the map [22Xf_∗: H -> H[122X.
+  We  consider  the  cellular  homology  with the squares [22XQ_1, dots Q_d[122X of the
+  origami  as  2-cells.  We call [22Xσ_i[122X the bottom edge of the square [22XQ_i[122X and [22Xξ_i[122X
+  the  left edge of the square [22XQ_i[122X. Then we can represent an element of [22XH[122X as a
+  formal  linear  combination  of  the  [22Xσ 's[122X and the [22Xξ 's[122X. In [5XGAP[105X we represent
+  elements  of  [22XH[122X as elements of [22XZ^2d[122X in the following way: [22Xσ_i[122X is represented
+  by  [22Xe_i[122X  and  [22Xξ_i[122X is represented by [22Xe_i + d[122X, where [22Xe_i[122X is the i-th. standard
+  basis  vector  of  [22XZ^2d[122X. Formal sums of elements in [22XH[122X are represented by the
+  appropriate  sums  in [22XZ^2d[122X. One has to keep in mind that this description is
+  not  unique. More precisely the homology [22XH[122X is isomorphic to a subquotient of
+  [22XZ^2d[122X.[133X
   
-  [1X3.1-1 VeechgroupBySage[101X
+  [33X[0;0YThe  homology  has  a  splitting as sum of the [13Xtautological part[113X [22XH^T[122X and the
+  [13Xnon-tautological  part  [113X  [22XH^NT[122X  which  is equivalent under the action of the
+  affine group Aff[22X(mathcalO)[122X of the origami [22XmathcalO[122X. I.e. [22XH = H^T ⊕ H^NT[122X with
+  [22XH^T[122X  and  [22XH^NT[122X  both invariant under the action of Aff[22X(mathcalO)[122X. The sum is
+  orthogonal  with respect to the intersection form, the dimension of [22XH^T[122X is 2
+  and  the  dimension of [22XH^NT[122X is [22X2g-2[122X. In the part of the package described in
+  this  chapter  we  provide  functions which compute the action of the affine
+  group  on  the  homology  [22XH[122X  and  on the non-tautological part [22XH^NT[122X and thus
+  obtain  the  [13X shadow Veech group[113X. For more information on this topic see for
+  example [BKK+22].[133X
   
-  [33X[1;0Y[29X[2XVeechgroupBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA subgroup of [22XSL_2( Z)[122X.[133X
   
-  [33X[0;0YThis  function  executes  the  SageMath  method  [10Xveech_group[110X and returns its
-  result as a [5XGAP[105X object.[133X
+  [1X3.2 [33X[0;0YFunctions for the action on homology[133X[101X
   
-  [33X[1;0Y[29X[2XIsHyperellipticBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA boolean.[133X
+  [1X3.2-1 HomologyOrigami[101X
   
-  [33X[0;0YChecks whether or not the origami [3XO[103X is hyperelliptic.[133X
+  [33X[1;0Y[29X[2XHomologyOrigami[102X( [3XO[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of vectors in [22XZ^2d[122X[133X
   
-  [33X[1;0Y[29X[2XIsPrimitiveBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA boolean.[133X
-  
-  [33X[0;0YChecks  whether  or  not  the  origami  [3XO[103X is primitive. An origami is called
-  primitive,  if  it  does  not  cover another origami, or equivalently if the
-  action of the monodromy group has no non-trivial block.[133X
-  
-  [33X[1;0Y[29X[2XReduceBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YAn Origami.[133X
-  
-  [33X[0;0YReturns a reduced origami isomorphic (up to [22XSL(2,Q)[122X action) to [3XO[103X.[133X
+  [33X[0;0YThis function computes a basis of the homology of [3XO[103X[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));[128X[104X
-    [4X[28X      Origami((1,2), (1,3), 6)[128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> HomologyOrigami(O);[128X[104X
+    [4X[28X	[ [ 0, 0, 1, 1, 1, -1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, -2, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XAbsolutePeriodGeneratorsBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
+  [33X[1;0Y[29X[2XNonTautPartOfHomologyOrigami[102X( [3XO[103X, [3XH[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of vectors in [22XZ^2d[122X[133X
   
-  [33X[0;0YReturns  a  generating set of the absolute periods of [3XO[103X. To each curve on an
-  origami,  we  can associate its holonomy (that is an element of [22XZ × Z[122X). This
-  function  returns  a generating set of the module generated by holonomies of
-  closed curves.[133X
+  [33X[0;0YThis  function computes a basis of the non-tautological part of the homology
+  [3X H[103X of [3XO[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) ));[128X[104X
-    [4X[28X      [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> NonTautPartOfHomologyOrigami(O, HomologyOrigami( O ));[128X[104X
+    [4X[28X	[ [ 0, 0, 1, 1, 1, -1, 0, -2, 1, 0, 2, -1, 0, 0, -1, -1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 1, -1, 0, -1, 1, 0, 0, 0, -2, 2 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, -1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, -1 ] ]	[128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XLatticeOfAbsolutePeriodsBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
+  [33X[1;0Y[29X[2XHomologyToString[102X( [3XH1[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya string[133X
   
-  [33X[0;0YReturns  [22X(a,t,u)[122X  where [22X((a,0),(t,u))[122X is a standard basis for the lattice of
-  the  absolute  periods  of  [3XO[103X.  The  lattice of periods of an origami is the
-  sublattice   of  [22XZ^2[122X  generated  by  the  holonomy  vectors  of  its  saddle
-  connections.  Any  sublattice  of  [22XZ^2[122X  has a standard basis consisting of a
-  horizontal  vector [22X(a,0)[122X and a nonhorizontal vector [22X(t,u)[122X, where [22Xa, t, u[122X are
-  integers satisfying [22X0 < t < a[122X and [22X0 < t[122X.[133X
+  [33X[0;0YThis  function  gives a string representation of the homology vector [3X H1 [103X in
+  the  homology  of  an  origami  as a formal linear combination of the [22Xσ_i 's[122X
+  (resp. s) and the [22Xξ_i 's[122X (resp. z).[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));[128X[104X
-    [4X[28X      [ [ 2, 0 ], [ 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> H1 := HomologyOrigami(O)[1];[128X[104X
+    [4X[28X	[ 0, 0, 1, 1, 1, -1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0 ][128X[104X
+    [4X[28X	gap> HomologyToString( H1 );[128X[104X
+    [4X[28X	"1s_3 + 1s_4 + 1s_5 - 1s_6 + 1z_1 - 1z_4 - 1z_7"[128X[104X
+    [4X[28X	    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XOptimalDegreeBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YAn integer.[133X
+  [33X[1;0Y[29X[2XActionOfMatrixOnHom[102X( [3XO[103X, [3XA[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix in [22XSp_2g(Z)[122X[133X
   
-  [33X[0;0YComputes  the  optimal  degree of [3XO[103X. The optimal degree of an origami is the
-  degree  of  the  map  to the largest torus. Any origami [22XX → T[122X factors as [22Xi ∘
-  π_opt[122X where i is an isogeny. The optimal degree is the degree of [22Xπ_opt[122X.[133X
+  [33X[0;0YThis function computes the action of an affine homeomorphism with derivative
+  [3X  A  [103X  on  the homology of [3X O [103X w.r.t the basis of the homology computed with
+  [2XHomologyOrigami[102X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));[128X[104X
-    [4X[28X      2[128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> ActionOfMatrixOnHom(O, [[1,10],[0,1]]);[128X[104X
+    [4X[28X	[ [ 1, -2, -2, 2, 0, 0 ], [ -5, -11, -2, 2, 5, 0 ], [128X[104X
+    [4X[28X	[ -5, -14, -3, 4, 5, 10 ], [ -10, -26, -6, 7, 10, 10 ], [128X[104X
+    [4X[28X	[ -10, -26, -6, 6, 11, 0 ], [ 0, 0, 0, 0, 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XPeriodGeneratorsBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA list of lists of integer.[133X
+  [33X[1;0Y[29X[2XActionOfMatrixOnHom[102X( [3XO[103X, [3XA[103X, [3XH[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix in [22XSp_2g(Z)[122X[133X
   
-  [33X[0;0YReturn a list of periods that generate the lattice of periods.[133X
+  [33X[0;0YIn this method you can choose a basis [3X H [103X of the homology.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));[128X[104X
-    [4X[28X      [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X		gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];[128X[104X
+    [4X[28X	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],[128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	[128X[104X
+    [4X[28X	gap> ActionOfMatrixOnHom(O, [[1,10],[0,1]], H);[128X[104X
+    [4X[28X	[ [ 1, 0, 0, 2, 2, 2 ], [ 0, 1, 0, 5, 5, 0 ], [ 0, 0, 1, 10, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XWidthsAndHeightsBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA list of lists of integers.[133X
+  [33X[1;0Y[29X[2XActionOfMatrixOnNonTaut[102X( [3XO[103X, [3XA[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix in [22XSp_2g-2(Z)[122X[133X
   
-  [33X[0;0YReturn the list of widths and heigths of cylinders in [3XO[103X.[133X
+  [33X[0;0YThis function computes the action of an affine homeomorphism with derivative
+  [3X  A  [103X on the non-tautological part of the homology of [3X O [103X w.r.t the basis of
+  the   homology   computed   with   [2XHomologyOrigami[102X  and  the  basis  of  the
+  non-tautological     part    of    the    homology    is    computed    with
+  [2XNonTautPartOfHomologyOrigami[102X .[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));[128X[104X
-    [4X[28X      [ [ 1, 2 ], [ 2, 2 ] ][128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]]);[128X[104X
+    [4X[28X	[ [ 5, 0, 2, 0 ], [ -1, -9, 2, 5 ], [ -8, 0, -3, 0 ], [ 2, -20, 6, 11 ] ][128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XSumOfLyapunovExponentsBySage[102X( [3XO[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10YA rational number.[133X
+  [33X[1;0Y[29X[2XActionOfMatrixOnNonTaut[102X( [3XO[103X, [3XA[103X, [3XH[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix in [22XSp_2g-2(Z)[122X[133X
   
-  [33X[0;0YCopmutes the sum of Lyapunov exponents for [3XO[103X.[133X
+  [33X[0;0YIn this method you can choose in addition a basis [3X H [103X of the homology.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X      gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));[128X[104X
-    [4X[28X      3/2[128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];[128X[104X
+    [4X[28X	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],[128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	[128X[104X
+    [4X[28X	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]], H);[128X[104X
+    [4X[28X	[ [ 1, 0, -4, -2 ], [ 0, 1, 5, 5 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
     [4X[28X    [128X[104X
   [4X[32X[104X
   
-  [33X[1;0Y[29X[2XIntermediateCoversBySage[102X( [3XO[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XActionOfMatrixOnNonTaut[102X( [3XO[103X, [3XA[103X, [3XNT[103X, [3XH[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix in [22XSp_2g-2(Z)[122X[133X
   
-  [33X[0;0YReturns   the   list  of  intermediate  covers  of  this  origami.  Not  yet
-  implemented.[133X
+  [33X[0;0YIn  this  method  you  can choose in addition a basis [3X H [103X of the homology as
+  well as a basis [3X NT[103X of the non-tautological part of the homology.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X	    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];[128X[104X
+    [4X[28X	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],[128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ][128X[104X
+    [4X[28X	gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]],  [128X[104X
+    [4X[28X	>NonTautPartOfHomologyOrigami(O, H), H);[128X[104X
+    [4X[28X	[ [ 1, 0, -4, -2 ], [ 0, 1, 5, 5 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ][128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XShadowVeechGroup[102X( [3XO[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix group [22XS ⊆ Sp_2g-2(Z)[122X[133X
+  
+  [33X[0;0YThis  function  computes  the  image of the action of the Veech group on the
+  non-tautological  part of the homology of [3X O [103X. If [22XA[122X is in the Veech group of
+  [3X  O  [103X  and [22Xf[122X is an affine transformation with derivative [22XA[122X then [22Xf_∗_|H^NT} :
+  H^NT  ->  H^NT[122X  is  in the Shadow Veech group of [3X O [103X, encoded as matrix. The
+  basis  of the homology is computed with [2XHomologyOrigami[102X and the basis of the
+  non-tautological part is computed with [2XNonTautPartOfHomologyOrigami[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> ShadowVeechGroup(O);[128X[104X
+    [4X[28X	#I  RRS defined 152 primary and 196 secondary subgroup generators[128X[104X
+    [4X[28X	<matrix group with 152 generators>[128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
+  
+  [33X[1;0Y[29X[2XShadowVeechGroup[102X( [3XO[103X, [3XH[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix group [22XS ⊆ Sp_2g-2(Z)[122X[133X
+  
+  [33X[0;0YIn this method you can choose in addition a basis [3X H [103X of the homology, where
+  the    basis    of    the    non-tautological    part   is   computed   with
+  [2XNonTautPartOfHomologyOrigami[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X	    [128X[104X
+    [4X[28X	gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));[128X[104X
+    [4X[28X	Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)[128X[104X
+    [4X[28X	gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], [128X[104X
+    [4X[28X	>[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];[128X[104X
+    [4X[28X	[ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], [128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],[128X[104X
+    [4X[28X	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ]	[128X[104X
+    [4X[28X	gap> ShadowVeechGroup(O, H);[128X[104X
+    [4X[28X	#I  RRS defined 152 primary and 196 secondary subgroup generators[128X[104X
+    [4X[28X	<matrix group with 152 generators>[128X[104X
+    [4X[28X    [128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
   

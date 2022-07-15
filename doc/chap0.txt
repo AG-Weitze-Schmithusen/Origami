@@ -6,15 +6,15 @@
                        [1XComputing Veech groups of origamis[101X
   
   
-                                 Version 1.0.0
+                                 Version 2.0.0
   
   
-                                   07.05.2021
+                                   15.07.2022
   
   
                                    Simon Ertl
   
-                                   Luca Junk
+                                  Luca L. Junk
   
                                  Pascal Kattler
   
@@ -27,6 +27,7 @@
   
   
   Simon Ertl
+      Email:    [7Xmailto:s8siertl@stud.uni-saarland.de[107X
       Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
       Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
                 [33X[0;14YFR 6.1 Mathematik[133X
@@ -34,13 +35,14 @@
                 [33X[0;14YD-66041 Saarbrücken[133X
   
   
-  Luca Junk
+  Luca L. Junk
       Email:    [7Xmailto:junk@math.uni-sb.de[107X
-      Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
-      Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
-                [33X[0;14YFR 6.1 Mathematik[133X
-                [33X[0;14YUniversität des Saarlandes[133X
-                [33X[0;14YD-66041 Saarbrücken[133X
+      Homepage: [7Xhttps://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html[107X
+      Address:  [33X[0;14YSaarland University[133X
+                [33X[0;14YDepartment of Mathematics[133X
+                [33X[0;14YPostfach 15 11 50[133X
+                [33X[0;14Y66041 Saarbrücken[133X
+                [33X[0;14YGermany[133X
   
   
   Pascal Kattler
@@ -53,6 +55,7 @@
   
   
   Alexander Rogovskyy
+      Email:    [7Xmailto:s8alrogo@stud.uni-saarland.de[107X
       Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
       Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
                 [33X[0;14YFR 6.1 Mathematik[133X
@@ -61,12 +64,12 @@
   
   
   Andrea Thevis
-      Email:    [7Xmailto:thevis@math.uni-sb.de[107X
-      Homepage: [7Xhttp://www.math.uni-sb.de/ag/weitze/[107X
-      Address:  [33X[0;14YAG Weitze-Schmithüsen[133X
-                [33X[0;14YFR 6.1 Mathematik[133X
-                [33X[0;14YUniversität des Saarlandes[133X
-                [33X[0;14YD-66041 Saarbrücken[133X
+      Email:    [7Xmailto:thevis@math.uni-frankfurt.de[107X
+      Homepage: [7Xhttps://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis[107X
+      Address:  [33X[0;14YFB 12 - Institut für Mathematik[133X
+                [33X[0;14YJohann Wolfgang Goethe-Universität[133X
+                [33X[0;14YRobert-Mayer-Str. 6-8[133X
+                [33X[0;14YD-60325 Frankfurt am Main[133X
   
   
   Gabriela Weitze-Schmithüsen
@@ -81,7 +84,7 @@
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y©  2018-2021  by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy,
+  [33X[0;0Y©  2018-2022  by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy,
   Andrea Thevis and Gabriela Weitze-Schmithüsen[133X
   
   
@@ -112,7 +115,7 @@
     1.1 [33X[0;0YOverview[133X
     1.2 [33X[0;0YNotations[133X
   2 [33X[0;0YThe functionality of this package[133X
-    2.1 [33X[0;0YBasic contruction of origamis[133X
+    2.1 [33X[0;0YBasic construction of origamis[133X
       2.1-1 Origami
     2.2 [33X[0;0YThe [22XSL_2( Z)[122X-action[133X
       2.2-1 ActionOfS
@@ -124,30 +127,53 @@
       2.5-1 NormalStoredOrigami
     2.6 [33X[0;0YConstructing examples of origamis[133X
       2.6-1 AllOrigamisByDegree
-  3 [33X[0;0YSageMath and the surface_dynamics package[133X
-    3.1 [33X[0;0YSageMath functions[133X
-      3.1-1 VeechgroupBySage
-  4 [33X[0;0YThe Origami Database[133X
-    4.1 [33X[0;0YSetting up the database[133X
-    4.2 [33X[0;0YUsing the origami database[133X
-      4.2-1 ConnectToOrigamiDB
-      4.2-2 InsertVeechGroupIntoDB
-      4.2-3 GetVeechGroupDBEntry
-      4.2-4 GetVeechGroupsFromDB
-      4.2-5 UpdateVeechGroupDBEntry
-      4.2-6 RemoveVeechGroupFromDB
-      4.2-7 InsertOrigamiRepresentativeIntoDB
-      4.2-8 GetOrigamiOrbitRepresentativeDBEntry
-      4.2-9 GetOrigamiOrbitRepresentativesFromDB
-      4.2-10 GetAllOrigamiOrbitRepresentativesFromDB
-      4.2-11 UpdateOrigamiOrbitRepresentativeDBEntry
-      4.2-12 RemoveOrigamiOrbitRepresentativeFromDB
-      4.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB
-      4.2-14 InsertOrigamiIntoDB
-      4.2-15 GetOrigamiDBEntry
-      4.2-16 GetOrigamiOrbit
-      4.2-17 UpdateRepresentativeOfOrigami
-      4.2-18 RemoveOrigamiFromDB
+  3 [33X[0;0YThe homology of origamis and the action of the Veech group.[133X
+    3.1 [33X[0;0YThe non tautological part of homology[133X
+    3.2 [33X[0;0YFunctions for the action on homology[133X
+      3.2-1 HomologyOrigami
+  4 [33X[0;0YSageMath and the surface_dynamics package[133X
+    4.1 [33X[0;0YSageMath functions[133X
+      4.1-1 VeechgroupBySage
+  5 [33X[0;0YThe Origami Database[133X
+    5.1 [33X[0;0YSetting up the database[133X
+    5.2 [33X[0;0YUsing the origami database[133X
+      5.2-1 ConnectToOrigamiDB
+      5.2-2 InsertVeechGroupIntoDB
+      5.2-3 GetVeechGroupDBEntry
+      5.2-4 GetVeechGroupsFromDB
+      5.2-5 UpdateVeechGroupDBEntry
+      5.2-6 RemoveVeechGroupFromDB
+      5.2-7 InsertOrigamiRepresentativeIntoDB
+      5.2-8 GetOrigamiOrbitRepresentativeDBEntry
+      5.2-9 GetOrigamiOrbitRepresentativesFromDB
+      5.2-10 GetAllOrigamiOrbitRepresentativesFromDB
+      5.2-11 UpdateOrigamiOrbitRepresentativeDBEntry
+      5.2-12 RemoveOrigamiOrbitRepresentativeFromDB
+      5.2-13 InsertOrigamiWithOrbitRepresentativeIntoDB
+      5.2-14 InsertOrigamiIntoDB
+      5.2-15 GetOrigamiDBEntry
+      5.2-16 GetOrigamiOrbit
+      5.2-17 UpdateRepresentativeOfOrigami
+      5.2-18 RemoveOrigamiFromDB
+  6 [33X[0;0YCyclic Torus Covers[133X
+    6.1 [33X[0;0YMonodromy vectors and bases of the fundamental group[133X
+    6.2 [33X[0;0YGeneral Cyclic Torus Cover functions[133X
+      6.2-1 GeneralizedCyclicTorusCover
+      6.2-2 CombOrigami
+      6.2-3 SearchForCyclicTorusOrigamiWithVeechGroup
+      6.2-4 [33X[0;0YCyclic torus cover origamis from monodromy vectors[133X
+    6.3 [33X[0;0YMatrices acting on the homology of the n-Torus[133X
+      6.3-1 BaseChangeLToS
+      6.3-2 TranslationGroupOnHomologyOfTn
+      6.3-3 ActionOfTOnHomologyOfTn
+      6.3-4 ActionOfSOnHomologyOfTn
+      6.3-5 ActionOfMatrixOnHomologyOfTn
+  7 [33X[0;0YMore special Origamis[133X
+    7.1 [33X[0;0YFunctions for constructing special origamis[133X
+      7.1-1 RandomOrigami
+      7.1-2 XOrigami
+      7.1-3 ElevatorOrigami
+      7.1-4 StaircaseOrigami
   
   
   [32X
