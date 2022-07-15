@@ -2,29 +2,29 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "2.0.0",
-	Date := "03/07/2022",
+	Date := "15/07/2022",
 	AvailabilityTest := ReturnTrue,
-	Status := "dev",
+	Status := "other",
 
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
 		HTMLStart := "doc/chap0.html",
-		PDFFile   := "doc/Origami.pdf",
+		PDFFile   := "doc/manual.pdf",
 		SixFile   := "doc/manual.six",
 		LongTitle := ~.Subtitle,
 ),
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "2.0.0">
-##  <!ENTITY RELEASEDATE "03 July 2022">
+##  <!ENTITY RELEASEDATE "15 July 2022">
 ##  <!ENTITY RELEASEYEAR "2022">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
 		GAP := "4.5.3",
 
-		NeededOtherPackages := [["ModularGroup", "1.0.0"], ["Orb", "4.7.6"]],
+		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
 
 		SuggestedOtherPackages := [
 			["HomalgToCAS" ,"2018.06.15"],
@@ -44,7 +44,7 @@ Persons := [
 		FirstNames    := "Simon",
 		IsAuthor      := true,
 		IsMaintainer  := true,
-		Email         := "",
+		Email         := "s8siertl@stud.uni-saarland.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
@@ -56,16 +56,17 @@ Persons := [
 	),
 	rec(
 		LastName      := "Junk",
-		FirstNames    := "Luca",
+		FirstNames    := "Luca Leon",
 		IsAuthor      := true,
 		IsMaintainer  := true,
 		Email         := "junk@math.uni-sb.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html",
 		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
+						"Saarland University\n",
+						"Department of Mathematics\n",
+						"Postfach 15 11 50\n",
+						"66041 Saarbrücken\n",
+						"Germany" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
 	),
@@ -89,7 +90,7 @@ Persons := [
 		FirstNames    := "Alexander",
 		IsAuthor      := true,
 		IsMaintainer  := true,
-		Email         := "",
+		Email         := "s8alrogo@stud.uni-saarland.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
@@ -155,7 +156,7 @@ BannerString := """
       ┌──┐
       │  │        Loading  Origami 2.0.0 (Computing Veech groups of origamis)
    ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
-   │  │  │  │        Luca Junk (http://www.math.uni-sb.de/ag/weitze/),
+   │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
 ┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
 │  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
 └──┼──┼──┼──┼──┘     Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and

@@ -10,9 +10,10 @@
 <TitlePage>
   <Title>The <Package>Origami</Package> Package</Title>
   <Subtitle>Computing Veech groups of origamis</Subtitle>
-  <Date>03.07.2022</Date>
+  <Date>15.07.2022</Date>
   <Version>Version 2.0.0</Version>
   <Author>Simon Ertl
+    <Email>s8siertl@stud.uni-saarland.de</Email>
     <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
     <Address>
       AG Weitze-Schmithüsen<Br/>
@@ -21,14 +22,15 @@
       D-66041 Saarbrücken<Br/>
     </Address>
   </Author>
-  <Author>Luca Junk
+  <Author>Luca L. Junk
     <Email>junk@math.uni-sb.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html</Homepage>
     <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
+      Saarland University<Br/>
+      Department of Mathematics<Br/>
+      Postfach 15 11 50<Br/>
+      66041 Saarbrücken<Br/>
+      Germany<Br/>
     </Address>
   </Author>
   <Author>Pascal Kattler
@@ -42,6 +44,7 @@
     </Address>
   </Author>
   <Author>Alexander Rogovskyy
+    <Email>s8alrogo@stud.uni-saarland.de</Email>
     <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
     <Address>
       AG Weitze-Schmithüsen<Br/>

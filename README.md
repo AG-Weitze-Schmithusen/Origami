@@ -13,13 +13,13 @@ Copy the package in the pkg directory of your GAP directory. Then start GAP and 
 
 You need the following GAP packages, to use this package:
 
-- ModularGroup Version 0.0.1 (https://AG-Weitze-Schmithusen.github.io/ModularGroup/)
+- ModularGroup Version 2.0.0 (https://AG-Weitze-Schmithusen.github.io/ModularGroup/)
 
 - Orb Version 4.7.6 (this is a standard package)
 
 To use the SageMath functions from the surface_dynamics package you also need the following packages:
 
-- HomalgToCAS Version2018.06.15 
+- HomalgToCAS Version 2018.06.15 
 
 - IO_ForHomalg Version 2017.09.02
 
