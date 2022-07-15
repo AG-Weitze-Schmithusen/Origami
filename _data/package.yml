@@ -88,12 +88,17 @@ citeas: |
 
 bibtex: |
     @misc{ Origami2.0.0,
-      author =           {Ertl, S. and Junk, L. L. and Kattler, P. and Rogovskyy, A. and Thevis, A. and Weitze-Schmith{\"u}sen, G.},
-      title =            {{Origami}, Computing Veech groups of origamis, {V}ersion 2.0.0},
+      author =           {Ertl,   S.  and  Junk,  L.  L.  and  Kattler,  P.  and
+                          Rogovskyy,      A.      and     Thevis,     A.     and
+                          Weitze-Schmith{\"u}sen, G.},
+      title =            {{Origami},   Computing   Veech   groups  of  origamis,
+                          {V}ersion 2.0.0},
       month =            {Jul},
       year =             {2022},
       note =             {GAP package},
-      howpublished =     {\href        {https://AG-Weitze-Schmithusen.github.io/Origami/}        {\texttt{https://AG-Weitze-Schmithusen.github.io/}\discretionary
+      howpublished =     {\href
+                          {https://AG-Weitze-Schmithusen.github.io/Origami/}
+                          {\texttt{https://AG-Weitze-Schmithusen.github.io/}\discretionary
                           {}{}{}\texttt{Origami/}}},
       printedkey =       {EJKRTW22}
     }
