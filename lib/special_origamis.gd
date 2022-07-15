@@ -1,6 +1,6 @@
 #! @Chapter More special Origamis
 #! @ChapterLabel Special-origamis
-#! This section lists some additional functions for the construction of some special families of origamis.
+#! This section lists functions for the construction of some special families of origamis.
 
 #! @Section Functions for constructing special origamis
 
@@ -14,7 +14,7 @@ DeclareGlobalFunction("RandomOrigami");
 #! @Returns A special origami
 #! @Description
 #! This function returns special origamis, so called Xorigamis. Xorigamis have degree $2n$.
-#! The horizontal permutation is the $2n$-cylce $(1,\ldots, n)$  and the vertical permutation is of the form:
+#! The horizontal permutation is the $2n$-cycle $(1,\ldots, 2n)$  and the vertical permutation is of the form:
 #! $$(1,2)(3,4)..(2n-1,2n)$$
 #! @BeginExampleSession
 #! gap> XOrigami(2);
