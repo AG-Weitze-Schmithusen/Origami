@@ -414,19 +414,3 @@ GenerateOrigamiByFpGroup := function(G, r, s)
 
     return Origami(PermList(horizontalPerm), PermList(verticalPerm));
 end;
-
-FindFirstOcc := function(sys, limit)
-    local G, i, j, O;
-    for i in [sys + 1..limit] do
-        for j in [2..2] do
-            G := GetFpGroup(sys, i, j);
-            O := GenerateOrigamiByFpGroup(G, G.1, G.2);
-            if Length(Stratum(O)) > 0 then
-                if Int(SystoleLength(O).systole) = Int(sys) then
-                    return O;
-                fi;
-            fi;
-        od;
-    od;
-    Error("did not work");
-end;
