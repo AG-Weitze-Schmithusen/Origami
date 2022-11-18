@@ -378,23 +378,6 @@ InstallGlobalFunction(MaximalSystolicRatioOfList, function(origamis)
                 count := count, three_occured := three_occured);
 end);
 
-Foo := function(deg)
-    local list, O, a, b, i, j;
-
-    list := AllOrigamisByDegree(deg);
-    for O in list do
-        a := OrigamiSingularities(O);
-        b := CyclesToList(VerticalPerm(O)^-1 * HorizontalPerm(O)^-1 * VerticalPerm(O) * HorizontalPerm(O));
-        for i in [1..Length(a)] do
-            for j in [1..Length(a[i])] do
-                if not(a[i][j] in b[i]) then
-                    return O;
-                fi;
-            od;
-        od;
-    od;
-end;
-
 GenerateOrigamiByFpGroup := function(G, r, s)
     local horizontalPerm, verticalPerm, i, j, elemTimes_r, elemTimes_s, elements, elem;
     
