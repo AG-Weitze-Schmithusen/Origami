@@ -208,10 +208,15 @@ LookupIndex := function(a, c)
     Error("No index found!");
 end;
 
-InstallGlobalFunction(SystoleLength, [IsOrigami], function(O)
+InstallGlobalFunction(SystoleLength, function(O, equilateral...)
     local min_cycle_length_horizontal, min_cycle_length_vertical, min_cycle_length,
             S, x, y, v, g, A, A_O, w, L, i, perm, k, j, graph, cycle_list, cycle_list_mapped, edges,
-            min_cycle_length_squared, length, index_i, index_j, mapping_result;
+            min_cycle_length_squared, length, index_i, index_j, mapping_result, equilateral_length,
+            equilateral_basis_vector1, equilateral_basis_vector2, equilateral_vector;
+
+    equilateral_length := (2^0.5)/(3^0.25);
+    equilateral_basis_vector1 := [equilateral_length, 0];
+    equilateral_basis_vector2 := equilateral_length * [0.5, (3^0.5)/2];
 
     min_cycle_length_horizontal := Minimum(List(MovedPoints(HorizontalPerm(O)), x -> CycleLength(HorizontalPerm(O), x)));
     min_cycle_length_vertical := Minimum(List(MovedPoints(VerticalPerm(O)), x -> CycleLength(VerticalPerm(O), x)));
@@ -283,7 +288,13 @@ InstallGlobalFunction(SystoleLength, [IsOrigami], function(O)
                 j := i^perm;
             od;
             
-            length := k * (x^2 + y^2)^0.5;
+            # check if we want to consider origamis consisting of equilateral triangles
+            if Length(equilateral) > 0 and IsBool(equilateral[1]) and (equilateral[1] = true) then
+                equilateral_vector := x * equilateral_basis_vector1 + y * equilateral_basis_vector2;
+                length := k * (equilateral_vector[1]^2 + equilateral_vector[2]^2)^0.5;
+            else
+                length := k * (x^2 + y^2)^0.5;
+            fi;
             # if i is contained in the nth cycle then LookUpIndex returns n, same for j
             index_i := LookupIndex(i, cycle_list_mapped);
             index_j := LookupIndex(j, cycle_list_mapped);
@@ -296,10 +307,13 @@ InstallGlobalFunction(SystoleLength, [IsOrigami], function(O)
     return MinimalCycle(graph, edges);
 end);
 
-InstallGlobalFunction(SystolicRatio, [IsOrigami], function(O)
+InstallGlobalFunction(SystolicRatio, function(O, equilateral...)
     local systole_info;
-    
-    systole_info := SystoleLength(O);
+    if Length(equilateral) > 0 then
+        systole_info := SystoleLength(O, equilateral[1]);
+    else
+        systole_info := SystoleLength(O);
+    fi;
     return rec(systolic_ratio := (systole_info.systole)^2 / DegreeOrigami(O), combinatorial_length := systole_info.combinatorial_length);
 end);
 
@@ -379,15 +393,6 @@ Foo := function(deg)
             od;
         od;
     od;
-end;
-
-GetFpGroup := function(sys, a, b)
-    local G, r, s;
-    G := FreeGroup("r", "s");
-    r := G.1;
-    s := G.2;
-    G := G / [s^-1*r^-1*s*r/r^sys, r^a, s^b];
-    return G;
 end;
 
 GenerateOrigamiByFpGroup := function(G, r, s)
