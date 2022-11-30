@@ -402,3 +402,22 @@ GenerateOrigamiByFpGroup := function(G, r, s)
 
     return Origami(PermList(horizontalPerm), PermList(verticalPerm));
 end;
+
+CompareOrigamis := function(degree, stratum)
+    local L, equilateral_wins, square_wins, square_posmax, equilateral_posmax, square_max, equilateral_max;
+
+    L := AllOrigamisInStratum(degree, stratum);
+    Apply(L, o -> [o, SystolicRatio(o), SystolicRatio(o, true)]);
+    Apply(L, x -> [x[1], x[2], x[3], x[2] < x[3], x[3] < x[2]]);
+    equilateral_wins := Length(Filtered(L, x -> x[4] = true));
+    square_wins := Length(Filtered(L, x -> x[5] = true));
+    square_posmax := PositionMaximum(List(L, x -> x[2]));
+    square_max := [L[square_posmax][1], L[square_posmax][2]];
+    equilateral_posmax := PositionMaximum(List(L, x -> x[3]));
+    equilateral_max := [L[equilateral_posmax][1], L[equilateral_posmax][3]];
+    Print("There was a total of ", Length(L)," origamis.\n");
+    Print("Square max: ", square_max, "\n");
+    Print("Equilateral max: ", equilateral_max, "\n");
+    Print("Square wins ", square_wins, "\n");
+    Print("Equilateral wins ", equilateral_wins, "\n");
+end;
