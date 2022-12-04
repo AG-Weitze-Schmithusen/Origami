@@ -421,3 +421,35 @@ CompareOrigamis := function(degree, stratum)
     Print("Square wins ", square_wins, "\n");
     Print("Equilateral wins ", equilateral_wins, "\n");
 end;
+
+SystolicRatioOfNormalOrigamis := function(degree)
+    local L, StratumCompare, MapOrigami;
+
+    L := AllNormalOrigamisByDegree(degree);
+    Apply(L, o -> AsPermutationRepresentation(o));
+    L := Filtered(L, o -> Genus(o) >= 2);
+    
+    StratumCompare := function(o1, o2)
+        if Length(Stratum(o1)) < Length(Stratum(o2)) then
+            return true;
+        else
+            return Stratum(o1)[1] < Stratum(o2)[1];
+        fi;
+    end;
+
+    Sort(L, StratumCompare);
+
+    MapOrigami := function(o)
+        local result1, result2;
+
+        result1 := SystolicRatio(o);
+        result2 := SystolicRatio(o, true);
+        if result1.combinatorial_length = true or result2.combinatorial_length = true then
+            return [OrigamiNormalForm(o), Stratum(o), result1.systolic_ratio, result2.systolic_ratio, true];
+        fi;
+        return [OrigamiNormalForm(o), Stratum(o), result1.systolic_ratio, result2.systolic_ratio];
+    end;
+
+    Apply(L, o -> MapOrigami(o));
+    return L;
+end;
