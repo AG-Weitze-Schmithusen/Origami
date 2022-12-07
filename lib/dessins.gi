@@ -117,7 +117,7 @@ fi;
 orbits:=Orbits(Group(PermX(dessin), PermY(dessin)), [1.. DegreeDessin(dessin)]);
 conn_comp:=[];
 for o in orbits do #for each orbit Mi we receive a sigmax_i=sigmax|Mi and sigmay_i=sigmay|Mi which are again a dessin
-	Add(conn_comp,Dessin(Permutation(sigmax, o), Permutation(sigmay, o)));
+	Add(conn_comp,Dessin(RestrictedPermNC(sigmax, o), RestrictedPermNC(sigmay, o)));
 od;
 return conn_comp;
 end);
