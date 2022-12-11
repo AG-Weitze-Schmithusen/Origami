@@ -403,7 +403,7 @@ GenerateOrigamiByFpGroup := function(G, r, s)
     return Origami(PermList(horizontalPerm), PermList(verticalPerm));
 end;
 
-CompareOrigamis := function(degree, stratum)
+CompareOrigamisInStratum := function(degree, stratum)
     local L, equilateral_wins, square_wins, square_posmax, equilateral_posmax, square_max, equilateral_max;
 
     L := AllOrigamisInStratum(degree, stratum);
@@ -422,18 +422,22 @@ CompareOrigamis := function(degree, stratum)
     Print("Equilateral wins ", equilateral_wins, "\n");
 end;
 
-SystolicRatioOfNormalOrigamis := function(degree)
-    local L, StratumCompare, MapOrigami;
+SystolicRatioOfNormalOrigamis := function(from, to)
+    local L, StratumCompare, MapOrigami, i;
 
-    L := AllNormalOrigamisByDegree(degree);
+    L := [];
+    for i in [from..to] do
+        Append(L, AllNormalOrigamisByDegree(i));
+    od;
+
     Apply(L, o -> AsPermutationRepresentation(o));
     L := Filtered(L, o -> Genus(o) >= 2);
     
     StratumCompare := function(o1, o2)
-        if Length(Stratum(o1)) < Length(Stratum(o2)) then
-            return true;
-        else
+        if Length(Stratum(o1)) = Length(Stratum(o2)) then
             return Stratum(o1)[1] < Stratum(o2)[1];
+        else
+            return Length(Stratum(o1)) < Length(Stratum(o2));
         fi;
     end;
 
@@ -445,11 +449,18 @@ SystolicRatioOfNormalOrigamis := function(degree)
         result1 := SystolicRatio(o);
         result2 := SystolicRatio(o, true);
         if result1.combinatorial_length = true or result2.combinatorial_length = true then
-            return [OrigamiNormalForm(o), Stratum(o), result1.systolic_ratio, result2.systolic_ratio, true];
+            return [o, Stratum(o), result1.systolic_ratio, result2.systolic_ratio, true];
         fi;
-        return [OrigamiNormalForm(o), Stratum(o), result1.systolic_ratio, result2.systolic_ratio];
+        return [o, Stratum(o), result1.systolic_ratio, result2.systolic_ratio, false];
     end;
 
     Apply(L, o -> MapOrigami(o));
     return L;
+end;
+
+RoundToDigit := function(number, digits)
+    local factor;
+
+    factor := 10^(digits - 1);
+    return Round(number * factor) / factor;
 end;
