@@ -107,4 +107,16 @@ DeclareAttribute("IsConnectedDessin", IsDessin);
 #! @EndExampleSession
 DeclareGlobalFunction("ConnectedComponentsDessin");
 
+#! @Description
+#! This function returns the stable graph of an origami. It returns a list of lists.
+#! The first entry is a list of the geni (?) of the connected components of the dessin of the origami.
+#! The  second entry is the adjacency matrix of the origami graph.
+#! @Returns A list
+#! @Arguments An Origami
+#! @BeginExampleSession
+#! gap>  O:=Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8), 12);
+#! Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8), 12)
+#!gap> OrigamiGraph(O);
+#! [ [ 0, 1 ], [ [ 0, 1 ], [ 3, 0 ] ] ]
+#! @EndExampleSession
 DeclareGlobalFunction("OrigamiGraph");

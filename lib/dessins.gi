@@ -68,25 +68,18 @@ InstallMethod(ValencyList, [ IsDessin ], function( dessin )
 	return rec( white := whiteValency, black := blackValency);
 end);
 
-InstallMethod( Genus, [ IsDessin ], function( dessin )
-	local h, i, j, counter;
-	h := 0;
-	for i in ValencyList( dessin ).white do
-		h := h + (i - 1);
-	od;
-
-	for i in ValencyList( dessin ).black do
-		h := h + (i - 1);
-	od;
-	 counter := 1;
-	for i in [1..Length(CycleStructurePerm( ( PermX( dessin ) * PermY( dessin ) )^(-1) ))] do
-		counter := counter + 1;
-		if IsBound( CycleStructurePerm( ( PermX( dessin ) * PermY( dessin ) )^(-1) )[i] )	= false then continue;	fi;
-		for j in [1..i] do h := h + (counter -1); od;
-
-	od;
-	h := h - 2 * DegreeDessin( dessin );
-	return (h + 2) / 2;
+InstallMethod( Genus, [ IsDessin ], function( D )
+local s1, s2, f, d, xi;
+d:=Union(AsSet(MovedPoints(PermX(D))), AsSet(MovedPoints(PermY(D)))); #the degree of the dessin
+d:=Length(d);
+s1:= Sum(Flat(CycleStructurePerm(PermX(D)))); #all Cycles where points are MovedPoints
+s1:= s1+ d- Length(MovedPoints(PermX(D))); #all the points that are not moved are 1- cycles
+s2:= Sum(Flat(CycleStructurePerm(PermY(D))));
+s2:= s2+ d- Length(MovedPoints(PermY(D)));
+f:= Sum(Flat(CycleStructurePerm(PermY(D)*PermX(D))));
+f:= f+ d-Length(MovedPoints(PermY(D)*PermX(D)));
+xi:=s1+s2+f-d;
+return ((2-xi)/2);
 end);
 
 InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
@@ -130,7 +123,7 @@ cycle_list:=Orbits(Group(x), MovedPoints(x)); # mit trivialen Zykeln
 D:=Dessin(x, y*x*Inverse(y));
 conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
-if Length(conn_comp)>1 then # so nicht, Es kann Kanten auf sich selbst geben
+if Length(conn_comp)>1 then #?
 for c in cycle_list do
 	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1] in j)[1]);
 	j:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^y in j)[1]);
