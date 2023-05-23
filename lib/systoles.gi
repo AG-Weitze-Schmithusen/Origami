@@ -317,19 +317,20 @@ InstallGlobalFunction(SystolicRatio, function(O, equilateral...)
     return rec(systolic_ratio := (systole_info.systole)^2 / DegreeOrigami(O), combinatorial_length := systole_info.combinatorial_length);
 end);
 
-InstallGlobalFunction(MaximalSystolicRatioInStratum, function(deg1, deg2, stratum)
-    local max_sr, combinatorial_length, deg, origamis, result, max_origami, count, three_occured;
+InstallGlobalFunction(MaximalSystolicRatioInStratum, function(from, to, stratum, equilateral...)
+    local max_sr, deg, origamis, result, max_origami, three_occured;
 
     max_sr := -1.;
-    combinatorial_length := -1;
     max_origami := Origami((),());
-    count := 0;
     three_occured := false;
 
-    for deg in [deg1..deg2] do
+    for deg in [from..to] do
         origamis := AllOrigamisInStratum(deg, stratum);
-        result := MaximalSystolicRatioOfList(origamis);
-        count := count + result.count;
+        if Length(equilateral) > 0 then
+            result := MaximalSystolicRatioOfList(origamis, equilateral[1]);
+        else
+            result := MaximalSystolicRatioOfList(origamis);
+        fi;
 
         if result.three_occured then
             three_occured := true;
@@ -337,45 +338,47 @@ InstallGlobalFunction(MaximalSystolicRatioInStratum, function(deg1, deg2, stratu
 
         if result.systolic_ratio > max_sr then
             max_sr := result.systolic_ratio;
-            combinatorial_length := result.combinatorial_length;
             max_origami := result.origami;
         fi;
     od;
 
-    return rec(systolic_ratio := max_sr, combinatorial_length := combinatorial_length, origami := max_origami, count := count, three_occured := three_occured);
+    return rec(systolic_ratio := max_sr, origami := max_origami, three_occured := three_occured);
 end);
 
-InstallGlobalFunction(MaximalSystolicRatioByDegree, function(d)
+InstallGlobalFunction(MaximalSystolicRatioByDegree, function(d, equilateral...)
     local origamis;
 
     origamis := Filtered(AllOrigamisByDegree(d), o -> Genus(o) >= 2);
-    return MaximalSystolicRatioOfList(origamis);
+    if Length(equilateral) > 0 then
+        return MaximalSystolicRatioOfList(origamis, equilateral[1]);
+    else
+        return MaximalSystolicRatioOfList(origamis);
+    fi;
 end);
 
-InstallGlobalFunction(MaximalSystolicRatioOfList, function(origamis)
-    local max_sr, combinatorial_length, O, result, count, three_occured, max_origami;
+InstallGlobalFunction(MaximalSystolicRatioOfList, function(origamis, equilateral...)
+    local max_sr, O, result, three_occured, max_origami;
 
     max_sr := -1.;
-    combinatorial_length := -1;
     max_origami := Origami((),());
-    count := 0;
     three_occured := false;
 
     for O in origamis do
-        result := SystolicRatio(O);
-        count := count + 1;
-        if combinatorial_length = 3 then
+        if Length(equilateral) > 0 then
+            result := SystolicRatio(O, equilateral[1]);
+        else
+            result := SystolicRatio(O);
+        fi;
+        if result.combinatorial_length = 3 then
             three_occured := true;
         fi;
         if(result.systolic_ratio > max_sr) then
             max_sr := result.systolic_ratio;
-            combinatorial_length := result.combinatorial_length;
             max_origami := O;
         fi;   
     od;
 
-    return rec(systolic_ratio := max_sr, combinatorial_length := combinatorial_length, origami := max_origami,
-                count := count, three_occured := three_occured);
+    return rec(systolic_ratio := max_sr, origami := max_origami, three_occured := three_occured);
 end);
 
 GenerateOrigamiByFpGroup := function(G, r, s)
