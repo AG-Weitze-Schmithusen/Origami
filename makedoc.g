@@ -1,4 +1,12 @@
-if fail = LoadPackage("AutoDoc", "2016.02.16") then
-	Error("AutoDoc version 2016.02.16 or newer is required.");
-fi;
-AutoDoc();
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( autodoc := true, gapdoc := false ) );
+
+MakeGAPDocDoc(
+  "doc",
+  "manual.xml",
+  ["../PackageInfo.g"],
+  "Origami",
+  "MathJax"
+);;
+CopyHTMLStyleFiles("doc");
+QUIT;
