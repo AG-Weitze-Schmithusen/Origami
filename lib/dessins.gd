@@ -45,7 +45,7 @@ DeclareOperation("Dessin", [IsPerm, IsPerm]);
 #! @Arguments A Dessin
 #! @Description
 #! This function returns the valency list of a Dessin.
-#! It returns a record with [TODO]
+#! It returns a record.
 #! @BeginExampleSession
 #! gap> D:=Dessin((1,2,3),(2,3));
 #! Dessin((1,2,3), (2,3))
@@ -109,7 +109,7 @@ DeclareGlobalFunction("ConnectedComponentsDessin");
 
 #! @Description
 #! This function returns the stable graph of an origami. It returns a list of lists.
-#! The first entry is a list of the geni (?) of the connected components of the dessin of the origami.
+#! The first entry is a list of the genus of the connected components of the dessin of the origami.
 #! The  second entry is the adjacency matrix of the origami graph.
 #! @Returns A list
 #! @Arguments An Origami

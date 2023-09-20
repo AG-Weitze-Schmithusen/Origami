@@ -119,18 +119,31 @@ InstallGlobalFunction(OrigamiGraph, function(O)
 local x, y, cycle_list, D, conn_comp, adjacency_matrix, c, i, j;
 x:=HorizontalPerm(O);
 y:=VerticalPerm(O);
-cycle_list:=Orbits(Group(x), MovedPoints(x)); # mit trivialen Zykeln
+cycle_list:=[];
+for i in [1..DegreeOrigami(O)] do
+	if not i in MovedPoints(HorizontalPerm(O)) then Add(cycle_list, [i]); fi;
+od;
+Append(cycle_list,(Orbits(Group(x), MovedPoints(x)))); # mit trivialen Zykeln
 D:=Dessin(x, y*x*Inverse(y));
 conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
-if Length(conn_comp)>1 then #?
 for c in cycle_list do
-	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1] in j)[1]);
+	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1] in j)[1]); #finding the component with the first entry of the cycle
 	j:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^y in j)[1]);
 	adjacency_matrix[i][j]:=adjacency_matrix[i][j]+1; #there is a edge between the i-th and j-th connected component
 od;
-fi;
 conn_comp:=ConnectedComponentsDessin(D);
-conn_comp:=List(conn_comp,i->Genus(i)); #maybe better to return rec?
+conn_comp:=List(conn_comp,i->Genus(i));
 return [conn_comp, adjacency_matrix]; #returning the weigths of the vertices in the same ordering of the matrix
 end);
+
+RandomDessin:=function(d) #analog to random Origami. Useful for testing, probably not a great distribution - use with caution
+local sigma_x, sigma_y, S_d;
+	S_d := SymmetricGroup(d);
+	sigma_x := Random(GlobalMersenneTwister, S_d);
+	sigma_y := Random(GlobalMersenneTwister, S_d);
+	while not IsTransitive(Group(sigma_x, sigma_y), [1..d]) do
+		sigma_y := Random(GlobalMersenneTwister, S_d);
+	od;
+return Dessin(sigma_x, sigma_y);
+end;
