@@ -1,7 +1,4 @@
+DeclareGlobalFunction("OrigamiNormalForm");
+DeclareGlobalFunction("CopyOrigamiInNormalForm");
 DeclareGlobalFunction("CycleStructureFromPartition");
 DeclareGlobalFunction("CanonicalPermFromCycleStructure");
-DeclareGlobalFunction("CanonicalPermFromPartition");
-DeclareGlobalFunction("CanonicalPerm");
-
-
-DeclareGlobalFunction("OrigamiNormalForm");

@@ -1,5 +1,4 @@
 DeclareGlobalFunction("VeechgroupBySage");
-DeclareGlobalFunction("NormalFormBySage");
 DeclareGlobalFunction("IsHyperellipticBySage");
 DeclareGlobalFunction("IsPrimitiveBySage");
 DeclareGlobalFunction("ReduceBySage");
@@ -12,3 +11,4 @@ DeclareGlobalFunction("WidthsAndHeightsBySage");
 DeclareGlobalFunction("SumOfLyapunovExponentsBySage");
 DeclareGlobalFunction("LyapunovExponentsApproxBySage");
 DeclareGlobalFunction("IntermediateCoversBySage");
+DeclareGlobalFunction("SpinParityBySage");

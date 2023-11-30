@@ -86,7 +86,7 @@ InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
 	local VeechAndOrbit, TAct, orbit, current, DessinList, dessin;
 	dessin := DessinOfOrigami( origami );
 	DessinList := [];
-	VeechAndOrbit := CalcVeechGroupAndOrbit( origami );
+	VeechAndOrbit := VeechGroupAndOrbit( origami );
 	TAct := TAction( VeechAndOrbit.VeechGroup );
 	orbit := VeechAndOrbit.Orbit;
 	for current in Cycles(TAct, [1..Index( VeechAndOrbit.VeechGroup )]) do

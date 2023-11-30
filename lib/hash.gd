@@ -1,4 +1,8 @@
+#####
+# implements a hash table for origamis
+#####
+
 DeclareGlobalFunction("AddHash");
-DeclareGlobalFunction("ContainHash");
-DeclareGlobalFunction("hashForPermutations");
-DeclareGlobalFunction("hashForOrigamis");
+DeclareGlobalFunction("ContainsHash");
+DeclareGlobalFunction("HashForPermutations");
+DeclareGlobalFunction("HashForOrigamis");

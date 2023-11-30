@@ -1,81 +1,61 @@
-
-#This function let act S on an Origami (sigma_x, sigma_y)
-#input An Origami O
-#output the Origmi S.O
-InstallMethod(ActionOfS, [IsOrigami] ,function(O)
-	local NewOrigami;
-	NewOrigami := OrigamiNC( VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
-	return NewOrigami;
+InstallMethod(ActionOfS, [IsOrigami], function(O)
+	# we have: S.(sigma_x, sigma_y) = (sigma_y^-1, sigma_x)
+	return OrigamiNC(VerticalPerm(O)^(-1), HorizontalPerm(O), DegreeOrigami(O));
 end);
 
-#This function let act T on an Origami (sigma_x, sigma_y)
-#input An Origami O
-#output the Origmi T.O
-
-InstallMethod(ActionOfT, [IsOrigami] ,function(O)
-	local NewOrigami;
-	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O)^-1, DegreeOrigami(O));
-	return NewOrigami;
+InstallMethod(ActionOfT, [IsOrigami], function(O)
+	# we have: T.(sigma_x, sigma_y) = (sigma_x, sigma_y * sigma_x^-1)
+	# but note, that GAP multiplies permutations the other way around
+	return OrigamiNC(HorizontalPerm(O), HorizontalPerm(O)^-1 * VerticalPerm(O), DegreeOrigami(O));
 end);
 
-#This function let act T⁻¹ on an Origami (sigma_x, sigma_y)
-#input An Origami O
-#output the Origmi T⁻¹.O
-InstallMethod(ActionOfInvT, [IsOrigami], function(O)
-	local NewOrigami;
-	NewOrigami := OrigamiNC( HorizontalPerm(O), VerticalPerm(O) * HorizontalPerm(O), DegreeOrigami(O));
-	return NewOrigami;
+InstallMethod(ActionOfTInv, [IsOrigami], function(O)
+	return OrigamiNC(HorizontalPerm(O), HorizontalPerm(O) * VerticalPerm(O), DegreeOrigami(O));
 end);
 
-#This function let act S⁻¹ on an Origami (sigma_x, sigma_y)
-#input An Origami O
-#output the Origmi S⁻¹.O
-InstallMethod(ActionOfInvS, [IsOrigami] ,function(O)
-	local NewOrigami;
-	NewOrigami := OrigamiNC(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
-	return NewOrigami;
+InstallMethod(ActionOfSInv, [IsOrigami], function(O)
+	return OrigamiNC(VerticalPerm(O), HorizontalPerm(O)^-1,  DegreeOrigami(O));
 end);
 
-#This Function let act A in Sl_2(Z) on an Origami O
-#INPUT: A Word word in S and T as string and an Origami O
-#OUTPUT: The Origami word.O
-InstallMethod(ActionOfSpecialLinearGroup,[IsString, IsOrigami], function(wordString, O)
+InstallMethod(ActionOfSL2, [IsString, IsOrigami], function(wordString, O)
 	local letter, F, word;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
-	for letter in LetterRepAssocWord(word) do
+	for letter in Reversed(LetterRepAssocWord(word)) do
 		if letter = 1 then
 			O := ActionOfS(O);
 		elif letter = 2 then
 			O := ActionOfT(O);
 		elif letter = -1 then
-			O := ActionOfInvS(O);
+			O := ActionOfSInv(O);
+		elif letter = -2 then
+			O := ActionOfTInv(O);
 		else
-			O := ActionOfInvT(O);
+			Error("<word> must be a word in two generators");
 		fi;
 	od;
 	return O;
 end);
 
-InstallMethod(ActionOfSpecialLinearGroup ,[IsMatrix, IsOrigami], function(A, origami)
-	 return ActionOfSpecialLinearGroup(String(STDecomposition(A)), origami);
+InstallOtherMethod(ActionOfSL2, [IsMatrix, IsOrigami], function(A, O)
+	 return ActionOfSL2(String(STDecomposition(A)), O);
 end);
 
-
-#This Function let act A in Sl_2(Z) on an Origami O represented as canonical Image
-#INPUT  A Word word in S and T and an Origami O in any representation
-#OUTPUT The origami word.O as represented as canonical Image
-InstallGlobalFunction(ActionOfF2ViaCanonical, function(o, g)
-	return OrigamiNormalForm(ActionOfSpecialLinearGroup(g,o));
+InstallOtherMethod(ActionOfSL2, [IsAssocWord, IsOrigami], function(word, O)
+	local letter;
+	# 'word' is assumed to be a word in S and T
+	for letter in Reversed(LetterRepAssocWord(word)) do
+		if letter = 1 then
+			O := ActionOfS(O);
+		elif letter = 2 then
+			O := ActionOfT(O);
+		elif letter = -1 then
+			O := ActionOfSInv(O);
+		elif letter = -2 then
+			O := ActionOfTInv(O);
+		else
+			Error("<word> must be a word in two generators");
+		fi;
+	od;
+	return O;
 end);
-
-# This function convertes the action of ActionOfF2ViaCanonical in a right action, that has the same orbits and stabilizer.
-#INPUT  A Word word in S and T and an Origami O in any representation
-#OUTPUT The origami O.word as represented as canonical Image
-InstallGlobalFunction(RightActionOfF2ViaCanonical, function(o, g);
-	return OrigamiNormalForm(ActionOfSpecialLinearGroup(String( g^-1 ) ,o));
-end);
-
-
-
-

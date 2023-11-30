@@ -1,0 +1,219 @@
+<Chapter Label="Database">
+<Heading>The Origami Database</Heading>
+
+<Section>
+<Heading>Setting up the database</Heading>
+To use the origami database, you need an instance of ArangoDB running on port 8529.
+After installing ArangoDB, you need to set up a database as follows:
+<List>
+  <Item>user: 'origami'</Item>
+  <Item>password: none</Item>
+  <Item>database: 'origami'</Item>
+</List>
+In this database, create three collections called <E>origami_representatives</E>, <E>origamis</E> and <E>veechgroups</E>.
+Please download the data from <URL>https://origami.math.uni-sb.de/</URL> and import the <E>json</E>-files into the corresponding collections.
+All of this can be done in the web interface of ArangoDB, which you can reach under <URL>http://127.0.0.1:8529</URL> (unless you have specified a different endpoint
+for your local ArangoDB-Server).
+
+</Section>
+
+<Section>
+<Heading>Using the origami database</Heading>
+
+
+<ManSection>
+  <Func Name="ConnectToOrigamiDB" Label="ConnectToOrigamiDB" Arg=""/>
+  <Returns>An <C>ArangoDatabase</C> object</Returns>
+  <Description>
+    Connects to the arango database 'origami' at the endpoint 'http+tcp://127.0.0.1:8529'
+    with the user 'origami'.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="InsertVeechGroupIntoDB" Label="InsertVeechGroupIntoDB" Arg="G"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Takes a <C>ModularSubgroup</C> <A>G</A> and inserts it into the Veech group table.
+    Only precomputed attributes are inserted. This function does not compute anything
+    new from the group.
+    No test is performed to check whether <A>G</A> already exists in the database.
+    The resulting <C>ArangoDocument</C> corresponding to the new database entry is returned.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetVeechGroupDBEntry" Label="GetVeechGroupDBEntry" Arg="G"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Takes a <C>ModularSubgroup</C> <A>G</A> and returns the corresponding
+    database entry or <C>fail</C> if <A>G</A> is not in the database.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetVeechGroupsFromDB" Label="GetVeechGroupsFromDB" Arg="constraints"/>
+  <Returns>A list of <C>ModularSubgroup</C>s</Returns>
+  <Description>
+    Returns all Veech groups in the database subject to the argument <A>constraints</A>
+    which is given in the form of a record.
+    <Example>
+      <![CDATA[
+      gap> GetVeechGroupsFromDB(rec(index := 30, genus := 0));
+      [list of modular subgroups]
+      gap> GetVeechGroupsFromDB(rec(congruence := true, level := 12));
+      [list of modular subgroups]
+      gap> GetVeechGroupsFromDB(rec(deficiency := 5));
+      [list of modular subgroups]
+      ]]>
+    </Example>
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="UpdateVeechGroupDBEntry" Label="UpdateVeechGroupDBEntry" Arg="G"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Updates the Veech group entry in the database with newly computed data and
+    returns the corresponding <C>ArangoDocument</C>.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="RemoveVeechGroupFromDB" Label="RemoveVeechGroupFromDB" Arg="G"/>
+  <Returns>Nothing.</Returns>
+  <Description>
+    Removes the Veech group <A>G</A> from the database (if present).
+    NOT YET IMPLEMENTED
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="InsertOrigamiRepresentativeIntoDB" Label="InsertOrigamiRepresentativeIntoDB" Arg="O"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Inserts the normal form of the origami <A>O</A> into the origami representative
+    list.
+    Inserts only precomputed data. If the Veech group of <A>O</A> does not already
+    exist in the database, it is also inserted.
+    This function assumes that no other element of the <M>SL_2(\mathbb{Z})</M> orbit
+    of <A>O</A> exists in the representative list, no test is performed to check this.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetOrigamiOrbitRepresentativeDBEntry" Label="GetOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Takes an Origami <A>O</A> and returns the corresponding database entry or
+    <C>fail</C> if <A>O</A> is not in the database.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetOrigamiOrbitRepresentativesFromDB" Label="GetOrigamiOrbitRepresentativesFromDB" Arg="constraints"/>
+  <Returns>A list of <C>Origami</C>s</Returns>
+  <Description>
+    Returns all origami orbit representatives in the database subject to the
+    constraints given in the form of the record <A>constraints</A>.
+    <Example>
+      <![CDATA[
+      gap> GetOrigamiOrbitRepresentativesFromDB(rec(stratum := [4]));
+      [ Origami((1,4,3)(2,5), (1,5,3,4)(2,6), 6) ]
+      gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
+      [ Origami((1,3,5), (1,3)(2,4,5), 5) ]
+      ]]>
+    </Example>
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetAllOrigamiOrbitRepresentativesFromDB" Label="GetAllOrigamiOrbitRepresentativesFromDB" Arg=""/>
+  <Returns>A list of <C>Origami</C>s</Returns>
+  <Description>
+    Returns all origami orbit representatives in the database.
+    Shorthand for <C>GetOrigamiOrbitRepresentativesFromDB(rec());</C>
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="UpdateOrigamiOrbitRepresentativeDBEntry" Label="UpdateOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Updates the origami orbit representative entry in the database with newly
+    computed data and returns the corresponding <C>ArangoDocument</C>.
+    If the origami orbit representative <A>O</A> does not exist in the database,
+    it is inserted.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="RemoveOrigamiOrbitRepresentativeFromDB" Label="RemoveOrigamiOrbitRepresentativeFromDB" Arg="O"/>
+  <Returns>Nothing.</Returns>
+  <Description>
+    Removes the origami orbit representative <A>O</A> from the database if present.
+    NOT YET IMPLEMENTED!
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="InsertOrigamiWithOrbitRepresentativeIntoDB" Label="InsertOrigamiWithOrbitRepresentativeIntoDB" Arg="O, R"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Inserts the origami <A>O</A> into the origami list with orbit representative
+    <A>R</A> which is inserted into the origami orbit representative list if it is
+    not already in there. Returns the <C>ArangoDocument</C> corresponding to <A>O</A>.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="InsertOrigamiIntoDB" Label="InsertOrigamiIntoDB" Arg="O"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Inserts an origami <A>O</A> into the database.
+    If the Veech group and the orbit of <A>O</A> is known, this function checks if there is already a
+    representative of the orbit of <A>O</A> in the database. If not, <A>O</A> is inserted as the
+    representative of its orbit, if yes, <A>O</A> is only inserted into the origami
+    list with a reference to the representative.
+    If the Veech group of <A>O</A> is not known, it is inserted as its own representative.
+    This might result in entries in the origami orbit representative list which are in the same
+    orbit.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetOrigamiDBEntry" Label="GetOrigamiDBEntry" Arg="O"/>
+  <Returns>An <C>ArangoDocument</C></Returns>
+  <Description>
+    Returns the <C>ArangoDocument</C> in the origami list corresponding to the
+    origami <A>O</A> or fail if does not exist in the database.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="GetOrigamiOrbit" Label="GetOrigamiOrbit" Arg="O"/>
+  <Returns>A list of <C>Origami</C>s</Returns>
+  <Description>
+    Returns all origamis in the database which are in the orbit of <A>O</A>.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="UpdateRepresentativeOfOrigami" Label="UpdateRepresentativeOfOrigami" Arg="O, R"/>
+  <Returns>Nothing.</Returns>
+  <Description>
+    Updates the orbit representative of <A>O</A> to be <A>R</A>.
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Oper Name="RemoveOrigamiFromDB" Label="RemoveOrigamiFromDB" Arg="O"/>
+  <Returns>Nothing.</Returns>
+  <Description>
+    Removes the origami <A>O</A> from the database.
+  </Description>
+
+</ManSection>
+</Section>
+
+</Chapter>
