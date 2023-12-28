@@ -64,12 +64,12 @@ DeclareGlobalFunction("CombOrigami");
 #! gap> SearchForCyclicTorusOrigamiWithVeechGroup(4, 3, H);
 #! [ 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1 ]
 #! @EndExampleSession
-DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup", [IsPosInt, IsPosInt, IsMatrixGroup]);
+DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup");
 
 #! @BeginGroup
 #! @GroupTitle Cyclic torus cover origamis from monodromy vectors
 #! @Arguments n d v
-DeclareGlobalFunction("CyclicTorusCoverOrigamiS", [IsPosInt, IsPosInt, IsRowVector]);
+DeclareGlobalFunction("CyclicTorusCoverOrigamiS");
 
 #! @Arguments n d v
 #! @Returns a cyclic torus cover origami whose monodromy vector with respect to the basis $S$ (respectively $L$) is $v$.
@@ -78,7 +78,7 @@ DeclareGlobalFunction("CyclicTorusCoverOrigamiS", [IsPosInt, IsPosInt, IsRowVect
 #! gap> CyclicTorusCoverOrigamiS(2,2,[1,0,1,0,0]);
 #! Origami((1,2,5,6)(3,4)(7,8), (1,3,5,7)(2,4)(6,8), 8)
 #! @EndExampleSession
-DeclareGlobalFunction("CyclicTorusCoverOrigamiL", [IsPosInt, IsPosInt, IsRowVector]);
+DeclareGlobalFunction("CyclicTorusCoverOrigamiL");
 
 #! @EndGroup
 
@@ -97,7 +97,7 @@ DeclareGlobalFunction("CyclicTorusCoverOrigamiL", [IsPosInt, IsPosInt, IsRowVect
 #!   [   0,   0,   1,   0,  -1 ],
 #!   [   0,   1,   0,   0,   1 ] ]
 #! @EndExampleSession
-DeclareGlobalFunction("BaseChangeLToS", [IsPosInt]);
+DeclareGlobalFunction("BaseChangeLToS");
 
 #! @Arguments n
 #! @Returns the group of translations (as matrices) acting on monodromy vectors with respect to $L$.
@@ -107,7 +107,7 @@ DeclareGlobalFunction("BaseChangeLToS", [IsPosInt]);
 #! gap> Order(TranslationGroupOnHomologyOfTn(3));
 #! 9
 #! @EndExampleSession
-DeclareGlobalFunction("TranslationGroupOnHomologyOfTn", [IsPosInt]);
+DeclareGlobalFunction("TranslationGroupOnHomologyOfTn");
 
 #! @Arguments n
 #! @Returns a matrix representing the action of the generator $T$ of $\mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
@@ -120,7 +120,7 @@ DeclareGlobalFunction("TranslationGroupOnHomologyOfTn", [IsPosInt]);
 #!   [   0,   0,   0,   1,  -1 ],
 #!   [   0,  -1,   0,   0,  -1 ] ]
 #! @EndExampleSession
-DeclareGlobalFunction("ActionOfTOnHomologyOfTn", [IsPosInt]);
+DeclareGlobalFunction("ActionOfTOnHomologyOfTn");
 
 #! @Arguments n
 #! @Returns a matrix representing the action of the generator $S$ of $\mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
@@ -133,7 +133,7 @@ DeclareGlobalFunction("ActionOfTOnHomologyOfTn", [IsPosInt]);
 #!   [   0,   0,   0,   0,   1 ],
 #!   [  -1,   0,   0,   1,   0 ] ]
 #! @EndExampleSession
-DeclareGlobalFunction("ActionOfSOnHomologyOfTn", [IsPosInt]);
+DeclareGlobalFunction("ActionOfSOnHomologyOfTn");
 
 #! @Arguments n A
 #! @Returns a matrix representing the action of $A \in \mathrm{Sl}_2(\mathbb{Z})$ on the homology of $T_n$ with respect to $L$.
@@ -148,4 +148,4 @@ DeclareGlobalFunction("ActionOfSOnHomologyOfTn", [IsPosInt]);
 #!   [   0,  -1,   0,   0,  -1 ],
 #!   [  -1,  -1,   0,   1,  -1 ] ]
 #! @EndExampleSession
-DeclareGlobalFunction("ActionOfMatrixOnHomologyOfTn", [IsPosInt, IsMatrix]);
+DeclareGlobalFunction("ActionOfMatrixOnHomologyOfTn");

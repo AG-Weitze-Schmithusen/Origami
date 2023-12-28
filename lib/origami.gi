@@ -296,7 +296,7 @@ InstallOtherMethod(SumOfLyapunovExponents, [IsNormalStoredOrigami], function(O)
 	return sum;
 end);
 
-InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
+InstallGlobalFunction(NormalformConjugators, function(origami)
 	local n, i, j, L, Q, seen, numSeen, v, wx, wy, G, minimalCycleLengths,
 				minimizeCycleLengths, cycleLengths, m, l, x, y;
 	x := HorizontalPerm(origami);
@@ -345,7 +345,7 @@ InstallGlobalFunction(NormalformConjugators, [IsOrigami],function(origami)
 	return G;
 end);
 
-InstallGlobalFunction(PointReflectionsOfOrigami, [IsOrigami],	function(origami)
+InstallGlobalFunction(PointReflectionsOfOrigami, function(origami)
  local origami_1, G, G_1, O, O_1, list, i, j;
 	if not VeechGroupIsEven(origami) then # testing if -1 is in the VeechGroup
 			Error("VeechGroup must contain -1");
@@ -366,7 +366,7 @@ InstallGlobalFunction(PointReflectionsOfOrigami, [IsOrigami],	function(origami)
 end);
 
 
-InstallGlobalFunction(AutomorphismsOfOrigami, [IsOrigami], function(O)
+InstallGlobalFunction(AutomorphismsOfOrigami, function(O)
 	return [[TranslationsOfOrigami(O),1], [PointReflectionsOfOrigami(O),-1]];
 end);
 
