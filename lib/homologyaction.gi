@@ -337,14 +337,14 @@ end
 
 
 # This function computes the Action of A on the  Homology of an Origami O with the  Homology Basis HomologyOrigami(O).
-InstallMethod( ActionOfMatrixOnHom, [IsOrigami, IsMatrixObj], function( O, A)
+InstallMethod( ActionOfMatrixOnHom, [IsOrigami, IsMatrix], function( O, A)
 	return ActionOfMatrixOnHom( O, A, HomologyOrigami(O) );
 	end
 );
 
 # This function computes the Action of A on the  Homology of an Origami O with a given Homology Basis H 
 
-InstallOtherMethod( ActionOfMatrixOnHom, [IsOrigami, IsMatrixObj, IsList], function( O, A, H)
+InstallOtherMethod( ActionOfMatrixOnHom, [IsOrigami, IsMatrix, IsList], function( O, A, H)
 	local dim, T, M;
 	T := TransposedMat( NiceBasisForHomology( O, H ) );
 	dim := Length( H);
@@ -355,13 +355,13 @@ end );
 
 
 # This function computes the Action of A on the nontautological part of the  Homology of an Origami O with the Homlogy Basis HomologyOrigami(O)
-InstallMethod(ActionOfMatrixOnNonTaut , [IsOrigami, IsMatrixObj], function( O, A )
+InstallMethod(ActionOfMatrixOnNonTaut, [IsOrigami, IsMatrix], function( O, A )
 	return ActionOfMatrixOnNonTaut( O, A, HomologyOrigami( O ));
 end
 );
 
 # This function computes the Action of A on the nontautological part of the Homology of an Origami O with a given HomologyBasis 
-InstallOtherMethod( ActionOfMatrixOnNonTaut ,[IsOrigami, IsMatrixObj, IsList ], function( O, A, HomologyBasis )
+InstallOtherMethod( ActionOfMatrixOnNonTaut, [IsOrigami, IsMatrix, IsList], function( O, A, HomologyBasis )
 	local dim, T, M;
 	T := TransposedMat( NiceBasisForCurves( O, HomologyBasis ) );
 	dim := Length( HomologyBasis ) - 2;
@@ -374,7 +374,7 @@ end );
 
 
 # This function computes the Action of A on the nontautological part of the Homology of an Origami O with a given Homology Basis H and a basis of the Nontau. part H
-InstallOtherMethod( ActionOfMatrixOnNonTaut, [IsOrigami, IsMatrixObj, IsList, IsList ] , function( O, A, HomBase, H )
+InstallOtherMethod( ActionOfMatrixOnNonTaut, [IsOrigami, IsMatrix, IsList, IsList], function( O, A, HomBase, H )
 	local NiceBasis, dim, T, M;
 	NiceBasis := ShallowCopy( HomBase );
 	Append( NiceBasis, CompleteBasisToVS(NiceBasis, VectorSpace( Rationals, H )));
