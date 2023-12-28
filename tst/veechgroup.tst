@@ -1,4 +1,5 @@
-gap> Read("tst/simultanconjugated.g");
+gap> ReadPackage("origami", "tst/simultanconjugated.g");
+true
 gap> O := Origami((1,2,4,3), (), 4);
 Origami((1,2,4,3), (), 4)
 gap> IsSameVeechGroupForTestfile(SAction(VeechGroup(O)), TAction(VeechGroup(O)), (1,3)(2,5)(4,6), (1,2,4,5));
