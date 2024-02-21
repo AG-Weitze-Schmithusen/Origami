@@ -71,7 +71,9 @@ end);
 InstallMethod( Genus, [ IsDessin ], function( D )
 local s1, s2, f, d, xi;
 d:=Union(AsSet(MovedPoints(PermX(D))), AsSet(MovedPoints(PermY(D)))); #the degree of the dessin
+if d=[] then d:=1; else  #TODO fix Degreefunction
 d:=Length(d);
+fi;
 s1:= Sum(Flat(CycleStructurePerm(PermX(D)))); #all Cycles where points are MovedPoints
 s1:= s1+ d- Length(MovedPoints(PermX(D))); #all the points that are not moved are 1- cycles
 s2:= Sum(Flat(CycleStructurePerm(PermY(D))));
@@ -87,9 +89,9 @@ InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
 	dessin := DessinOfOrigami( origami );
 	DessinList := [];
 	VeechAndOrbit := VeechGroupAndOrbit( origami );
-	TAct := TAction( VeechAndOrbit.VeechGroup );
-	orbit := VeechAndOrbit.Orbit;
-	for current in Cycles(TAct, [1..Index( VeechAndOrbit.VeechGroup )]) do
+	TAct := TAction( VeechAndOrbit.veech_group );
+	orbit := VeechAndOrbit.orbit;
+	for current in Cycles(TAct, [1..Index( VeechAndOrbit.veech_group )]) do
 		Add( DessinList, DessinOfOrigami( orbit[ current[1] ] ) );
 	od;
 	return DessinList;
@@ -104,9 +106,15 @@ local sigmax, sigmay, orbits, conn_comp, o;
 sigmax:=PermX(dessin);
 sigmay:=PermY(dessin);
 
+if sigmax=() and sigmay=()
+	then return [dessin];
+fi;
+
 if IsConnectedDessin(dessin)
 	then return [dessin]; #if the dessin is connected we return the dessin
 fi;
+
+
 orbits:=Orbits(Group(PermX(dessin), PermY(dessin)), [1.. DegreeDessin(dessin)]);
 conn_comp:=[];
 for o in orbits do #for each orbit Mi we receive a sigmax_i=sigmax|Mi and sigmay_i=sigmay|Mi which are again a dessin
@@ -124,7 +132,7 @@ for i in [1..DegreeOrigami(O)] do
 	if not i in MovedPoints(HorizontalPerm(O)) then Add(cycle_list, [i]); fi;
 od;
 Append(cycle_list,(Orbits(Group(x), MovedPoints(x)))); # mit trivialen Zykeln
-D:=Dessin(x, y*x*Inverse(y));
+D:=Dessin(Inverse(x), y*x*Inverse(y));
 conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
 for c in cycle_list do
