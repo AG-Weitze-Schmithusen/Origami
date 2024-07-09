@@ -58,7 +58,7 @@ Persons := [
 		LastName      := "Junk",
 		FirstNames    := "Luca Leon",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "junk@math.uni-sb.de",
 		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html",
 		PostalAddress := Concatenation( [
@@ -89,7 +89,7 @@ Persons := [
 		LastName      := "Rogovskyy",
 		FirstNames    := "Alexander",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "s8alrogo@stud.uni-saarland.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
@@ -101,26 +101,26 @@ Persons := [
 		Institution   := "Universität des Saarlandes"
 	),
 	rec(
-		LastName      := "Thevis",
-		FirstNames    := "Andrea",
-		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "thevis@math.uni-frankfurt.de",
-		WWWHome       := "https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/",
-		PostalAddress := Concatenation( [
-                       "FB 12 - Institut für Mathematik\n",
-                       "Johann Wolfgang Goethe-Universität\n",
-                       "Robert-Mayer-Str. 6-8\n",
-                       " D-60325 Frankfurt am Main"] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
-  ),
-	rec(
 		LastName      := "Weitze-Schmithüsen",
 		FirstNames    := "Gabriela",
 		IsAuthor      := true,
 		IsMaintainer  := true,
 		Email         := "weitze@math.uni-sb.de",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+                       "AG Weitze-Schmithüsen\n",
+                       "FR 6.1 Mathematik\n",
+                       "Universität des Saarlandes\n",
+                       "D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+  ),
+	rec(
+		LastName      := "Schuhmann",
+		FirstNames    := "Pascal",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "s8pcschu@stud.uni-saarland.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
                        "AG Weitze-Schmithüsen\n",
