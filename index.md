@@ -65,3 +65,6 @@ You can get more info by typing `Cite("{{ site.data.package.name }}");` in the g
 For bug reports, feature requests and suggestions, please use the
 [issue tracker]({{site.github.issues_url}}).
 {% endif %}
+
+## License  
+This software is distributed under the terms of the GNU General Public License as published by the Free Software Foundation.

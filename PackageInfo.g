@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.0",
-	Date := "15/07/2022",
+	Version := "2.0.1",
+	Date := "09/07/2024",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 
@@ -154,7 +154,7 @@ ArchiveURL     := Concatenation(~.GithubWWW,
 BannerString := """
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
       ┌──┐
-      │  │        Loading  Origami 2.0.0 (Computing Veech groups of origamis)
+      │  │        Loading  Origami 2.0.1 (Computing Veech groups of origamis)
    ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
    │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
 ┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),

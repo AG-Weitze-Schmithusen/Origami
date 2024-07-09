@@ -1,6 +1,6 @@
 name: Origami
-version: 2.0.0
-date: 2022-07-15
+version: 2.0.1
+date: 2024-07-09
 description: |
     Computing Veech groups of origamis
 
@@ -79,22 +79,22 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>EJKRTW22</span>]   <b class='BibAuthor'>Ertl, S., Junk, L. L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
      <i class='BibTitle'>Origami, Computing Veech groups of origamis,
-             Version 2.0.0</i>
+             Version 2.0.1</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://AG-Weitze-Schmithusen.github.io/Origami/">https://AG-Weitze-Schmithusen.github.io/Origami/</a></span>.
     </p>
-    
+
 
 bibtex: |
-    @misc{ Origami2.0.0,
+    @misc{ Origami2.0.1,
       author =           {Ertl,   S.  and  Junk,  L.  L.  and  Kattler,  P.  and
                           Rogovskyy,      A.      and     Thevis,     A.     and
                           Weitze-Schmith{\"u}sen, G.},
       title =            {{Origami},   Computing   Veech   groups  of  origamis,
-                          {V}ersion 2.0.0},
+                          {V}ersion 2.0.1},
       month =            {Jul},
-      year =             {2022},
+      year =             {2024},
       note =             {GAP package},
       howpublished =     {\href
                           {https://AG-Weitze-Schmithusen.github.io/Origami/}
@@ -102,4 +102,3 @@ bibtex: |
                           {}{}{}\texttt{Origami/}}},
       printedkey =       {EJKRTW22}
     }
-
