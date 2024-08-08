@@ -13,19 +13,19 @@ authors:
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Alexander Rogovskyy
       url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Pascal Schumann
+      url: http://www.math.uni-sb.de/ag/weitze/
     - name: Andrea Thevis
       url: https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/
     - name: Gabriela Weitze-Schmithüsen
-      url: http://www.math.uni-sb.de/ag/weitze/
-    - name: Pascal Schuhmann
       url: http://www.math.uni-sb.de/ag/weitze/
 
 maintainers:
     - name: Simon Ertl
       url: http://www.math.uni-sb.de/ag/weitze/
-    - name: Pascal Schuhmann
-      url: http://www.math.uni-sb.de/ag/weitze/
     - name: Pascal Kattler
+      url: http://www.math.uni-sb.de/ag/weitze/
+    - name: Pascal Schumann
       url: http://www.math.uni-sb.de/ag/weitze/
     - name: Gabriela Weitze-Schmithüsen
       url: http://www.math.uni-sb.de/ag/weitze/
@@ -63,9 +63,9 @@ github: https://github.com/AG-Weitze-Schmithusen/Origami
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.0/Origami-2.0.0.tar.gz
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.1/Origami-2.0.1.tar.gz
     - name: .zip
-      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.0/Origami-2.0.0.zip
+      url: https://github.com/AG-Weitze-Schmithusen/Origami/releases/download/v2.0.1/Origami-2.0.1.zip
 
 abstract: |
     <span class="pkgname">Origami</span> is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.
@@ -75,10 +75,10 @@ doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>EJKRTW22</span>]   <b class='BibAuthor'>Ertl, S., Junk, L. L., Kattler, P., Rogovskyy, A., Thevis, A. and Weitze-Schmithüsen, G.</b>,
+    [<span class='BibKey'>EJKRTW22</span>]   <b class='BibAuthor'>Ertl, S., Junk, L. L., Kattler, P., Rogovskyy, A., Schumann, P., Thevis, A. and Weitze-Schmithüsen, G.</b>,
      <i class='BibTitle'>Origami, Computing Veech groups of origamis,
              Version 2.0.1</i>
-     (<span class='BibYear'>2022</span>)<br />
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://AG-Weitze-Schmithusen.github.io/Origami/">https://AG-Weitze-Schmithusen.github.io/Origami/</a></span>.
     </p>
@@ -87,8 +87,8 @@ citeas: |
 bibtex: |
     @misc{ Origami2.0.1,
       author =           {Ertl,   S.  and  Junk,  L.  L.  and  Kattler,  P.  and
-                          Rogovskyy,      A.      and     Thevis,     A.     and
-                          Weitze-Schmith{\"u}sen, G.},
+                          Rogovskyy,  A.     and      Schumann, P. 	and
+                          Thevis,     A.     and	Weitze-Schmith{\"u}sen, G.},
       title =            {{Origami},   Computing   Veech   groups  of  origamis,
                           {V}ersion 2.0.1},
       month =            {Jul},
