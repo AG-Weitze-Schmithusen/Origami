@@ -33,7 +33,8 @@ DeclareAttribute("PermY", IsDessin);
 #! @Returns A Dessin.
 #! @Arguments A pair of permutions.
 #! @Description
-#! This function constructs a Dessin object given by monodromy actions.
+#! This function constructs a Dessin object given by monodromy actions. We expect the Dessin to be connected,
+#! the permutations should act transitive on {1,.., d}.
 #! @BeginExampleSession
 #! gap> D:=Dessin((1,2,3),(2,3));
 #! Dessin((1,2,3), (2,3))
