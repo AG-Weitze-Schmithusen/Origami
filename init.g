@@ -1,6 +1,3 @@
-LoadPackage("orb");
-LoadPackage("ModularGroup");
-
 ReadPackage("Origami", "lib/origami.gd");
 ReadPackage("Origami", "lib/action.gd");
 ReadPackage("Origami", "lib/canonical.gd");
