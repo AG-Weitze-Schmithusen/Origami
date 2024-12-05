@@ -10,25 +10,30 @@ The following descriptions and examples
 are mainly taken from the manual of <Cite Key="surface_dynamics"/>.
 
 <ManSection>
-  
   <Func Name="VeechgroupBySage" Arg="O"/>
   <Returns>A subgroup of <M>SL_2(\mathbb Z)</M>.</Returns>
   <Description>
   	This function executes the SageMath method <C>veech_group</C> and returns its result as a &GAP; object.
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="IsHyperellipticBySage" Arg="O"/>
   <Returns>A boolean.</Returns>
   <Description>
   	Checks whether or not the origami <A>O</A> is hyperelliptic.
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="IsPrimitiveBySage" Arg="O"/>
   <Returns>A boolean.</Returns>
   <Description>
   	Checks whether or not the origami <A>O</A> is primitive. An origami is called primitive, if it does not cover another origami, or equivalently if the action of the monodromy group has no non-trivial block.
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="ReduceBySage" Arg="O"/>
   <Returns>An Origami.</Returns>
   <Description>
@@ -38,7 +43,9 @@ gap> ReduceBySage(Origami((1,2)(3,4), (1,3,5,6)(2,4) ));
 Origami((1,2), (1,3), 6)
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="AbsolutePeriodGeneratorsBySage" Arg="O"/>
   <Returns>A list of lists of integers.</Returns>
   <Description>
@@ -48,7 +55,9 @@ gap> AbsolutePeriodGeneratorsBySage(Origami((1,2,3,4)(5,6), (1,5)(2,6) ));
 [ [ 2, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 1 ] ]
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="LatticeOfAbsolutePeriodsBySage" Arg="O"/>
   <Returns>A list of lists of integers.</Returns>
   <Description>
@@ -58,7 +67,9 @@ gap> LatticeOfAbsolutePeriodsBySage(Origami((1,2)(3,4), (2,3) ));
 [ [ 2, 0 ], [ 0, 1 ] ]
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="OptimalDegreeBySage" Arg="O"/>
   <Returns>An integer.</Returns>
   <Description>
@@ -68,7 +79,9 @@ gap> OptimalDegreeBySage(Origami((1,2)(3,4), (2,3) ));
 2
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="PeriodGeneratorsBySage" Arg="O"/>
   <Returns>A list of lists of integer.</Returns>
   <Description>
@@ -78,9 +91,11 @@ gap> PeriodGeneratorsBySage(Origami((1,3,6)(2,5,7)(4),(1,2,4,3,5,6,7) ));
 [ [ 2, 0 ], [ 1, 0 ], [ 1, 0 ], [ 0, 2 ], [ -1, 2 ], [ 0, 1 ] ]
 ]]></Example>
   </Description>
+</ManSection>
   
   
 
+<ManSection>
   <Func Name="WidthsAndHeightsBySage" Arg="O"/>
   <Returns>A list of lists of integers.</Returns>
   <Description>
@@ -90,7 +105,9 @@ gap> WidthsAndHeightsBySage(Origami((1,2)(3,4),(1,3,5,6)(2,4) ));
 [ [ 1, 2 ], [ 2, 2 ] ]
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="SumOfLyapunovExponentsBySage" Arg="O"/>
   <Returns>A rational number.</Returns>
   <Description>
@@ -100,12 +117,13 @@ gap> SumOfLyapunovExponentsBySage(Origami((1,2)(3,4),(2,3) ));
 3/2
 ]]></Example>
   </Description>
+</ManSection>
   
+<ManSection>
   <Func Name="IntermediateCoversBySage" Arg="O"/>
   <Description>
   	Returns the list of intermediate covers of this origami. Not yet implemented.
   </Description>
-  
 </ManSection>
 
 </Section>
