@@ -57,16 +57,14 @@ for your local ArangoDB-Server).
   <Description>
     Returns all Veech groups in the database subject to the argument <A>constraints</A>
     which is given in the form of a record.
-    <Example>
-      <![CDATA[
-      gap> GetVeechGroupsFromDB(rec(index := 30, genus := 0));
-      [list of modular subgroups]
-      gap> GetVeechGroupsFromDB(rec(congruence := true, level := 12));
-      [list of modular subgroups]
-      gap> GetVeechGroupsFromDB(rec(deficiency := 5));
-      [list of modular subgroups]
-      ]]>
-    </Example>
+<Example><![CDATA[
+gap> GetVeechGroupsFromDB(rec(index := 30, genus := 0));
+[list of modular subgroups]
+gap> GetVeechGroupsFromDB(rec(congruence := true, level := 12));
+[list of modular subgroups]
+gap> GetVeechGroupsFromDB(rec(deficiency := 5));
+[list of modular subgroups]
+]]></Example>
   </Description>
 </ManSection>
 
@@ -116,14 +114,12 @@ for your local ArangoDB-Server).
   <Description>
     Returns all origami orbit representatives in the database subject to the
     constraints given in the form of the record <A>constraints</A>.
-    <Example>
-      <![CDATA[
-      gap> GetOrigamiOrbitRepresentativesFromDB(rec(stratum := [4]));
-      [ Origami((1,4,3)(2,5), (1,5,3,4)(2,6), 6) ]
-      gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
-      [ Origami((1,3,5), (1,3)(2,4,5), 5) ]
-      ]]>
-    </Example>
+<Example><![CDATA[
+gap> GetOrigamiOrbitRepresentativesFromDB(rec(stratum := [4]));
+[ Origami((1,4,3)(2,5), (1,5,3,4)(2,6), 6) ]
+gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
+[ Origami((1,3,5), (1,3)(2,4,5), 5) ]
+]]></Example>
   </Description>
 </ManSection>
 
