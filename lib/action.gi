@@ -37,7 +37,7 @@ InstallMethod(ActionOfSL2, [IsString, IsOrigami], function(wordString, O)
 	return O;
 end);
 
-InstallOtherMethod(ActionOfSL2, [IsMatrixObj, IsOrigami], function(A, O)
+InstallOtherMethod(ActionOfSL2, [IsMatrix, IsOrigami], function(A, O)
 	 return ActionOfSL2(String(STDecomposition(A)), O);
 end);
 
