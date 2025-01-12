@@ -166,10 +166,10 @@ ArchiveURL     := Concatenation(~.GithubWWW,
                     "/releases/download/v", ~.Version, "/",
 ~.GithubRepository, "-", ~.Version),
 
-BannerString := """
+BannerString := Concatenation("""
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
       ┌──┐
-      │  │        Loading  Origami 2.0.1 (Computing Veech groups of origamis)
+      │  │        Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
    ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
    │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
 ┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
@@ -180,6 +180,6 @@ BannerString := """
       │  │	   Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
       └──┘
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-""",
+"""),
 
 ) );
