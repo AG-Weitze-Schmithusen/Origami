@@ -5,6 +5,7 @@ SetPackageInfo( rec(
 	Date := "09/07/2024",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
+	License := "GPL-3.0-or-later",
 
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
