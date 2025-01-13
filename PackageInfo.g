@@ -23,7 +23,7 @@ SetPackageInfo( rec(
 ##  <#/GAPDoc>
 
 Dependencies := rec(
-		GAP := "4.5.3",
+		GAP := "4.10",
 
 		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
 
