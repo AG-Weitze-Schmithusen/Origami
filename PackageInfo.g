@@ -5,7 +5,7 @@ SetPackageInfo( rec(
 	Date := "15/07/2022",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
-
+	License := "GPL-3.0-or-later",
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
