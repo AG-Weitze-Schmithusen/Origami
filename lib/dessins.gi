@@ -18,7 +18,7 @@ InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY)
 end);
 
 InstallGlobalFunction( DessinOfOrigami, function( origami )
-	return NormalDessinsForm( Inverse(HorizontalPerm( origami )), VerticalPerm( origami ) * HorizontalPerm( origami ) * VerticalPerm( origami ) ^(-1) );
+	return NormalDessinsForm( Inverse(HorizontalPerm( origami )), VerticalPerm( origami ) ^(-1) * HorizontalPerm( origami ) * VerticalPerm( origami ) );
 end);
 
 InstallMethod(Dessin, [IsPerm, IsPerm] , function(horizontal, vertical)
@@ -132,7 +132,7 @@ for i in [1..DegreeOrigami(O)] do
 	if not i in MovedPoints(HorizontalPerm(O)) then Add(cycle_list, [i]); fi;
 od;
 Append(cycle_list,(Orbits(Group(x), MovedPoints(x)))); # mit trivialen Zykeln
-D:=Dessin(Inverse(x), y*x*Inverse(y));#counterclockwise pathwise around the singularity
+D:=Dessin(Inverse(x), Inverse(y)*x*y); #counterclockwise pathwise around the singularity
 conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
 for c in cycle_list do
@@ -160,5 +160,5 @@ HorizontalDessinOfOrigami:=function(O)
 	local sigma_x, sigma_y;
 	sigma_x:=HorizontalPerm(O);
 	sigma_y:=VerticalPerm(O);
-	return Dessin(Inverse(x), y*x*Inverse(y));
+	return Dessin(Inverse(x), Inverse(y)*x*y);
 end;
