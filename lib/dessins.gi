@@ -136,7 +136,7 @@ D:=Dessin(Inverse(x), Inverse(y)*x*y); #counterclockwise pathwise around the sin
 conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
 for c in cycle_list do
-	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^Inverse(y) in j)[1]); #finding the component with the first entry of the cycle, choice of the basepoint above singularity
+	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^y in j)[1]); #finding the component with the first entry of the cycle, choice of the basepoint above singularity
 	j:=Position(conn_comp, Filtered(conn_comp, j-> c[1] in j)[1]);
 	adjacency_matrix[i][j]:=adjacency_matrix[i][j]+1; #there is a edge between the i-th and j-th connected component
 od;
