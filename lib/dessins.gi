@@ -1,8 +1,8 @@
-InstallMethod(String, [IsDessin], function(Origami)
-	return Concatenation("Dessin(", String(PermX(Origami)), ", ", String(PermY(Origami)), ")");
+InstallMethod(String, [IsDessin], function(dessin)
+	return Concatenation("Dessin(", String(PermX(dessin)), ", ", String(PermY(dessin)), ", ", String(DegreeDessin(dessin)),  ")");
 end);
 
-InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY)
+InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY, d)
 	local orbitElem, ergx, ergy, i, DessinList;
 	DessinList := [];
 	ergx := [];
@@ -12,21 +12,21 @@ InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY)
  		Add(ergy, RestrictedPermNC(sigmaY, orbitElem));
 	od;
 	for i in [1..Length(ergx)] do
-		Add(DessinList, Dessin(ergx[i], ergy[i]));
+		Add(DessinList, Dessin(ergx[i], ergy[i], d));
 	od;
 	return DessinList;
 end);
 
 InstallGlobalFunction( DessinOfOrigami, function( origami )
-	return NormalDessinsForm( Inverse(HorizontalPerm( origami )), VerticalPerm( origami ) ^(-1) * HorizontalPerm( origami ) * VerticalPerm( origami ) );
+	return NormalDessinsForm( Inverse(HorizontalPerm( origami )), VerticalPerm( origami ) ^(-1) * HorizontalPerm( origami ) * VerticalPerm( origami ), DegreeOrigami(origami) );
 end);
 
-InstallMethod(Dessin, [IsPerm, IsPerm] , function(horizontal, vertical)
+InstallMethod(Dessin, [IsPerm, IsPerm, IsPosInt] , function(horizontal, vertical, d)
 		local Obj, kind;
-		kind:= rec( x := horizontal, y := vertical);
+		kind:= rec( x := horizontal, y := vertical, d := d);
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y );
+		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y, DegreeDessin, kind.d);
 		return Obj;
 	end);
 
@@ -40,9 +40,9 @@ InstallMethod(Dessin, [IsPerm, IsPerm] , function(horizontal, vertical)
 #	end
 #	);
 
-InstallMethod(DegreeDessin, [IsDessin], function( dessin )
-	return  Maximum(LargestMovedPoint( PermX( dessin ) ), LargestMovedPoint( PermY( dessin ) )) - Minimum(SmallestMovedPoint( PermX( dessin ) ), SmallestMovedPoint( PermY( dessin ) ) ) + 1;
-end);
+# InstallMethod(DegreeDessin, [IsDessin], function( dessin )
+# 	return  Maximum(LargestMovedPoint( PermX( dessin ) ), LargestMovedPoint( PermY( dessin ) )) - Minimum(SmallestMovedPoint( PermX( dessin ) ), SmallestMovedPoint( PermY( dessin ) ) ) + 1;
+# end);
 
 InstallMethod(ValencyList, [ IsDessin ], function( dessin )
 	local whiteValency, blackValency, i, j, counter, current;
@@ -118,7 +118,7 @@ fi;
 orbits:=Orbits(Group(PermX(dessin), PermY(dessin)), [1.. DegreeDessin(dessin)]);
 conn_comp:=[];
 for o in orbits do #for each orbit Mi we receive a sigmax_i=sigmax|Mi and sigmay_i=sigmay|Mi which are again a dessin
-	Add(conn_comp,Dessin(RestrictedPermNC(sigmax, o), RestrictedPermNC(sigmay, o)));
+	Add(conn_comp, Dessin(RestrictedPermNC(sigmax, o), RestrictedPermNC(sigmay, o), Length(o)));
 od;
 return conn_comp;
 end);
@@ -132,8 +132,8 @@ for i in [1..DegreeOrigami(O)] do
 	if not i in MovedPoints(HorizontalPerm(O)) then Add(cycle_list, [i]); fi;
 od;
 Append(cycle_list,(Orbits(Group(x), MovedPoints(x)))); # mit trivialen Zykeln
-D:=Dessin(Inverse(x), Inverse(y)*x*y); #counterclockwise pathwise around the singularity
-conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1.. DegreeDessin(D)]); #decomposing D in connected Components
+D:=Dessin(Inverse(x), Inverse(y)*x*y, DegreeOrigami(O));#counterclockwise pathwise around the singularity
+conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1..DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
 for c in cycle_list do
 	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^y in j)[1]); #finding the component with the first entry of the cycle, choice of the basepoint above singularity
@@ -160,5 +160,5 @@ HorizontalDessinOfOrigami:=function(O)
 	local sigma_x, sigma_y;
 	sigma_x:=HorizontalPerm(O);
 	sigma_y:=VerticalPerm(O);
-	return Dessin(Inverse(x), Inverse(y)*x*y);
+	return Dessin(Inverse(x), Inverse(y)*y*x);
 end;
