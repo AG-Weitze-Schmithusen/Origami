@@ -70,10 +70,7 @@ end);
 
 InstallMethod( Genus, [ IsDessin ], function( D )
 local s1, s2, f, d, xi;
-d:=Union(AsSet(MovedPoints(PermX(D))), AsSet(MovedPoints(PermY(D)))); #the degree of the dessin
-if d=[] then d:=1; else  #TODO fix Degreefunction
-d:=Length(d);
-fi;
+d:=DegreeDessin(D);
 s1:= Sum(Flat(CycleStructurePerm(PermX(D)))); #all Cycles where points are MovedPoints
 s1:= s1+ d- Length(MovedPoints(PermX(D))); #all the points that are not moved are 1- cycles
 s2:= Sum(Flat(CycleStructurePerm(PermY(D))));
@@ -153,12 +150,12 @@ local sigma_x, sigma_y, S_d;
 	while not IsTransitive(Group(sigma_x, sigma_y), [1..d]) do
 		sigma_y := Random(GlobalMersenneTwister, S_d);
 	od;
-return Dessin(sigma_x, sigma_y);
+return Dessin(sigma_x, sigma_y, d);
 end;
 
 HorizontalDessinOfOrigami:=function(O)
 	local sigma_x, sigma_y;
 	sigma_x:=HorizontalPerm(O);
 	sigma_y:=VerticalPerm(O);
-	return Dessin(Inverse(x), Inverse(y)*y*x);
+	return Dessin(Inverse(sigma_x), Inverse(sigma_y)*sigma_x*sigma_y, DegreeOrigami(O));
 end;
