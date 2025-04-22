@@ -52,7 +52,7 @@ DeclareAttribute("DegreeDessin", IsDessin);
 #! gap> D:=Dessin((1,2,3),(2,3), 3);
 #! Dessin((1,2,3), (2,3), 3)
 #! @EndExampleSession
-DeclareOperation("Dessin", [IsPerm, IsPerm, IsInt]);
+DeclareOperation("Dessin", [IsPerm, IsPerm, IsPosInt]);
 
 
 #! @Arguments A Dessin
