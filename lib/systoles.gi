@@ -17,7 +17,6 @@ PQueue_push := function(q, elem)
     Add(q, elem, low);
 end;
 
-# test
 PQueue_top := function(q)
     return q[1];
 end;
