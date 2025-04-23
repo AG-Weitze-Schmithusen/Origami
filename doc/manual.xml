@@ -10,8 +10,8 @@
 <TitlePage>
   <Title>The <Package>Origami</Package> Package</Title>
   <Subtitle>Computing Veech groups of origamis</Subtitle>
-  <Date>15.07.2022</Date>
-  <Version>Version 2.0.0</Version>
+  <Date>&RELEASEDATE;</Date>
+  <Version>Version &VERSION;</Version>
   <Author>Simon Ertl
     <Email>s8siertl@stud.uni-saarland.de</Email>
     <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
@@ -53,6 +53,16 @@
       D-66041 Saarbrücken<Br/>
     </Address>
   </Author>
+  <Author>Pascal Schumann
+    <Email>s8pcschu@stud.uni-saarland.de</Email>
+    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Address>
+      AG Weitze-Schmithüsen<Br/>
+      FR 6.1 Mathematik<Br/>
+      Universität des Saarlandes<Br/>
+      D-66041 Saarbrücken<Br/>
+    </Address>
+  </Author>
   <Author>Andrea Thevis
     <Email>thevis@math.uni-frankfurt.de</Email>
     <Homepage>https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis</Homepage>
@@ -74,7 +84,8 @@
     </Address>
   </Author>
 
-    <Copyright>&copyright; 2018-2022 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Andrea Thevis and Gabriela Weitze-Schmithüsen
+    <Copyright>&copyright; 2018-2024 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Pascal Schumann, 
+    Andrea Thevis and Gabriela Weitze-Schmithüsen
     </Copyright>
 
     <Acknowledgements>

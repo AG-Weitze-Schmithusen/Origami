@@ -1,11 +1,12 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.0",
-	Date := "15/07/2022",
+	Version := "2.0.1",
+	Date := "09/07/2024",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
+
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
@@ -16,13 +17,13 @@ SetPackageInfo( rec(
 ),
 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "2.0.0">
-##  <!ENTITY RELEASEDATE "15 July 2022">
-##  <!ENTITY RELEASEYEAR "2022">
+##  <!ENTITY VERSION "2.0.1">
+##  <!ENTITY RELEASEDATE "09 July 2024">
+##  <!ENTITY RELEASEYEAR "2024">
 ##  <#/GAPDoc>
 
 Dependencies := rec(
-		GAP := "4.5.3",
+		GAP := "4.10",
 
 		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
 
@@ -58,7 +59,7 @@ Persons := [
 		LastName      := "Junk",
 		FirstNames    := "Luca Leon",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "junk@math.uni-sb.de",
 		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html",
 		PostalAddress := Concatenation( [
@@ -89,8 +90,23 @@ Persons := [
 		LastName      := "Rogovskyy",
 		FirstNames    := "Alexander",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "s8alrogo@stud.uni-saarland.de",
+		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Schumann",
+		FirstNames    := "Pascal",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "s8pcschu@stud.uni-saarland.de",
 		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
@@ -104,7 +120,7 @@ Persons := [
 		LastName      := "Thevis",
 		FirstNames    := "Andrea",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "thevis@math.uni-frankfurt.de",
 		WWWHome       := "https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/",
 		PostalAddress := Concatenation( [
@@ -151,20 +167,22 @@ ArchiveURL     := Concatenation(~.GithubWWW,
                     "/releases/download/v", ~.Version, "/",
 ~.GithubRepository, "-", ~.Version),
 
-BannerString := """
+BannerString := Concatenation("""
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
       ┌──┐
-      │  │        Loading  Origami 2.0.0 (Computing Veech groups of origamis)
+      │  │        Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
    ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
    │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
 ┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
 │  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
-└──┼──┼──┼──┼──┘     Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and
-   │  │  │  │        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
-   └──┼──┼──┘     Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
-      │  │
+└──┼──┼──┼──┼──┘     Pascal Schumann (http://www.math.uni-sb.de/ag/weitze/),
+   │  │  │  │        Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and
+   └──┼──┼──┘        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
+      │  │	   Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
       └──┘
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-""",
+"""),
+
+TestFile := "tst/testall.g",
 
 ) );
