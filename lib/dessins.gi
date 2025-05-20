@@ -3,16 +3,23 @@ InstallMethod(String, [IsDessin], function(dessin)
 end);
 
 InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY, d)
-	local orbitElem, ergx, ergy, i, DessinList;
+	local orbitElem, ergx, ergy, points, i, DessinList;
 	DessinList := [];
 	ergx := [];
 	ergy := [];
+	points := Set([1..d]);
+	# fixed points that will lead to trivial connected components
+	SubtractSet(points, MovedPoints( Group( sigmaX, sigmaY ) ));
 	for orbitElem in OrbitsDomain (Group( sigmaX, sigmaY ) ) do
  		Add(ergx, RestrictedPermNC(sigmaX, orbitElem));
  		Add(ergy, RestrictedPermNC(sigmaY, orbitElem));
 	od;
 	for i in [1..Length(ergx)] do
+		d := Length(MovedPoints(Group(ergx[i], ergy[i])));
 		Add(DessinList, Dessin(ergx[i], ergy[i], d));
+	od;
+	for i in points do
+		Add(DessinList, Dessin((), (), 1));
 	od;
 	return DessinList;
 end);
