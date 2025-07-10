@@ -21,7 +21,7 @@ end);
 
 # Introductory statement: This section computes the number of equivalence classes of origamis of a given degree. Rather than plucking the apple directly we shake the branch on which it's attached by the following fact:
 
-# - The number of equivalence classes of origamis of a degree d is equal to the number conjugacy classes of subgroups of index d in the free group of rank 2. 
+# - The number of equivalence classes of origamis of a degree d is equal to the number of conjugacy classes of subgroups of index d in the free group of rank 2. 
 
 # Hence we want to compute the number of conjugacy classes of subgroups of a given index in the free group of a given rank. We follow closely the ways described in:
 
@@ -51,7 +51,7 @@ HowManySubgroups := function(leash, rank)
     return list;
 end;
 
-# Explanation: If G is a group and n a positive integer then the map from transitive actions on {1...n} to subgroups which sends a' -> Stab(a',1) hits all and only the index n subgroups and their fibers all have (n - 1)! elements. This relates the number an of index n subgroups to the number tn of transitive actions on [n]: an = tn/(n - 1)!. Furthermore an arbitrary action of G on a finite set can be considered as a transitive action on one of the orbits together with an arbitrary action on the remainder. This allows for recursive computation of the number hn of all actions if the number of transitive actions is known: hn = Sigma k=1..n: (n-1 choose k-1) * tk * h(n-k), h0 = 1. Plugging one formula into the other and rearranging yields another recursive equation: an = hn/(n-1)! - Sigma k=1..n-1: ak * h(n-k) / (n-k)!. But in our special case G = F simply hk = k!^r so an = n * n!^(r-1) - Sigma k=1..n: ak * (n-k)!^(r-1).
+# Explanation: If G is a group and n a positive integer then the map from transitive actions on {1...n} to subgroups of G which sends a' -> Stab(a',1) hits all and only the index n subgroups and their fibers all have (n - 1)! elements. This relates the number an of index n subgroups to the number tn of transitive actions on [n]: an = tn/(n - 1)!. Furthermore an arbitrary action of G on a finite set can be considered as a transitive action on one of the orbits together with an arbitrary action on the remainder. This allows for recursive computation of the number hn of all actions if the number of transitive actions is known: hn = Sigma k=1..n: (n-1 choose k-1) * tk * h(n-k), h0 = 1. Plugging one formula into the other and rearranging yields another recursive equation: an = hn/(n-1)! - Sigma k=1..n-1: ak * h(n-k) / (n-k)!. But in our special case G = F simply hk = k!^r so an = n * n!^(r-1) - Sigma k=1..n: ak * (n-k)!^(r-1).
 
 # Tests:
 # HowManySubgroups(5,0) = [1,0,0,0,0]
@@ -72,7 +72,7 @@ HowManyEpi := function(rank, order)
     return accu;
 end;
 
-# Explanation: All subgroups of Zd are of the form Zl with l | d and every such subgroup occurs exactly once in Zd. The set of homomorphisms Hom(F,Zd) can be partitioned by grouping together those whos images are the same. Together this implies #Hom(F,Zd) = Sigma l|d: #Epi(F,Zl). Now by Möbius inversion formula #Epi(F,Zd) = Sigma l|d: #Möb(d/l) * |Hom(F,Zl)|.
+# Explanation: All subgroups of Zd are of the form Zl with l | d and every such subgroup occurs exactly once in Zd. The set of homomorphisms Hom(F,Zd) can be partitioned by grouping together those whose images are the same. Together this implies #Hom(F,Zd) = Sigma l|d: #Epi(F,Zl). Now by Möbius inversion formula #Epi(F,Zd) = Sigma l|d: #Möb(d/l) * |Hom(F,Zl)|.
 
 # Tests: We should have:
 # HowManyEpi(0, 1) = 1
