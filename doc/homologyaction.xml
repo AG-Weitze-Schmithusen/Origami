@@ -160,7 +160,7 @@ gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]], NonTautPartOfHomologyOrigami(O, 
 <Oper Name="ShadowVeechGroup" Arg="O" Label="origami"/>
   <Returns> a matrix group  <M> S \subseteq Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
-	This function computes the image of the action of the Veech group on the non-tautological part of the homology of <A> O </A>. If <M> A </M> is in the Veech group of <A> O </A> and  <M> f</M> is an affine transformation with derivative <M> A </M> then <M> {f_\ast}_{|H^{NT}} \colon {H^{NT} \to {H^{NT} </M> is in the Shadow Veech group of <A> O </A>, encoded as matrix. The basis of the  homology is computed with  <Ref Oper="HomologyOrigami"/> and the basis of the non-tautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.
+	This function computes the image of the action of the Veech group on the non-tautological part of the homology of <A> O </A>. If <M> A </M> is in the Veech group of <A> O </A> and  <M> f</M> is an affine transformation with derivative <M> A </M> then <M> {f_\ast}_{|H^{NT}} \colon {H^{NT}} \to {H^{NT}} </M> is in the Shadow Veech group of <A> O </A>, encoded as matrix. The basis of the  homology is computed with  <Ref Oper="HomologyOrigami"/> and the basis of the non-tautological part is computed with <Ref Oper="NonTautPartOfHomologyOrigami"/>.
 <Example><![CDATA[
 gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
 Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
