@@ -75,7 +75,15 @@
   </Author>
   <Author>Gabriela Weitze-Schmithüsen
     <Email>weitze@math.uni-sb.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
+    <Homepage>
+        <Link>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html</Link>
+        <LinkText>
+            <Alt Not="LaTeX">https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html</Alt>
+            <Alt Only="LaTeX">
+            <C>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/</C><Br/><M>\indent\hspace{11.5mm}</M><C>team/gabriela-weitze-schmithuesen.html</C>
+            </Alt>
+        </LinkText>
+    </Homepage>
     <Address>
       AG Weitze-Schmithüsen<Br/>
       FR 6.1 Mathematik<Br/>
