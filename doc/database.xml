@@ -22,7 +22,7 @@ for your local ArangoDB-Server).
 
 
 <ManSection>
-  <Func Name="ConnectToOrigamiDB" Label="ConnectToOrigamiDB" Arg=""/>
+  <Func Name="ConnectToOrigamiDB" Arg=""/>
   <Returns>An <C>ArangoDatabase</C> object</Returns>
   <Description>
     Connects to the arango database 'origami' at the endpoint 'http+tcp://127.0.0.1:8529'
@@ -31,7 +31,7 @@ for your local ArangoDB-Server).
 </ManSection>
 
 <ManSection>
-  <Oper Name="InsertVeechGroupIntoDB" Label="InsertVeechGroupIntoDB" Arg="G"/>
+  <Oper Name="InsertVeechGroupIntoDB" Arg="G"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Takes a <C>ModularSubgroup</C> <A>G</A> and inserts it into the Veech group table.
@@ -43,7 +43,7 @@ for your local ArangoDB-Server).
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetVeechGroupDBEntry" Label="GetVeechGroupDBEntry" Arg="G"/>
+  <Oper Name="GetVeechGroupDBEntry" Arg="G"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Takes a <C>ModularSubgroup</C> <A>G</A> and returns the corresponding
@@ -52,7 +52,7 @@ for your local ArangoDB-Server).
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetVeechGroupsFromDB" Label="GetVeechGroupsFromDB" Arg="constraints"/>
+  <Oper Name="GetVeechGroupsFromDB" Arg="constraints"/>
   <Returns>A list of <C>ModularSubgroup</C>s</Returns>
   <Description>
     Returns all Veech groups in the database subject to the argument <A>constraints</A>
@@ -69,7 +69,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="UpdateVeechGroupDBEntry" Label="UpdateVeechGroupDBEntry" Arg="G"/>
+  <Oper Name="UpdateVeechGroupDBEntry" Arg="G"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Updates the Veech group entry in the database with newly computed data and
@@ -78,7 +78,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="RemoveVeechGroupFromDB" Label="RemoveVeechGroupFromDB" Arg="G"/>
+  <Oper Name="RemoveVeechGroupFromDB" Arg="G"/>
   <Returns>Nothing.</Returns>
   <Description>
     Removes the Veech group <A>G</A> from the database (if present).
@@ -87,7 +87,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="InsertOrigamiRepresentativeIntoDB" Label="InsertOrigamiRepresentativeIntoDB" Arg="O"/>
+  <Oper Name="InsertOrigamiRepresentativeIntoDB" Arg="O"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Inserts the normal form of the origami <A>O</A> into the origami representative
@@ -100,7 +100,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetOrigamiOrbitRepresentativeDBEntry" Label="GetOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
+  <Oper Name="GetOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Takes an Origami <A>O</A> and returns the corresponding database entry or
@@ -109,7 +109,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetOrigamiOrbitRepresentativesFromDB" Label="GetOrigamiOrbitRepresentativesFromDB" Arg="constraints"/>
+  <Oper Name="GetOrigamiOrbitRepresentativesFromDB" Arg="constraints"/>
   <Returns>A list of <C>Origami</C>s</Returns>
   <Description>
     Returns all origami orbit representatives in the database subject to the
@@ -124,7 +124,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetAllOrigamiOrbitRepresentativesFromDB" Label="GetAllOrigamiOrbitRepresentativesFromDB" Arg=""/>
+  <Oper Name="GetAllOrigamiOrbitRepresentativesFromDB" Arg=""/>
   <Returns>A list of <C>Origami</C>s</Returns>
   <Description>
     Returns all origami orbit representatives in the database.
@@ -133,7 +133,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="UpdateOrigamiOrbitRepresentativeDBEntry" Label="UpdateOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
+  <Oper Name="UpdateOrigamiOrbitRepresentativeDBEntry" Arg="O"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Updates the origami orbit representative entry in the database with newly
@@ -144,7 +144,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="RemoveOrigamiOrbitRepresentativeFromDB" Label="RemoveOrigamiOrbitRepresentativeFromDB" Arg="O"/>
+  <Oper Name="RemoveOrigamiOrbitRepresentativeFromDB" Arg="O"/>
   <Returns>Nothing.</Returns>
   <Description>
     Removes the origami orbit representative <A>O</A> from the database if present.
@@ -153,7 +153,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="InsertOrigamiWithOrbitRepresentativeIntoDB" Label="InsertOrigamiWithOrbitRepresentativeIntoDB" Arg="O, R"/>
+  <Oper Name="InsertOrigamiWithOrbitRepresentativeIntoDB" Arg="O, R"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Inserts the origami <A>O</A> into the origami list with orbit representative
@@ -163,7 +163,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="InsertOrigamiIntoDB" Label="InsertOrigamiIntoDB" Arg="O"/>
+  <Oper Name="InsertOrigamiIntoDB" Arg="O"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Inserts an origami <A>O</A> into the database.
@@ -178,7 +178,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetOrigamiDBEntry" Label="GetOrigamiDBEntry" Arg="O"/>
+  <Oper Name="GetOrigamiDBEntry" Arg="O"/>
   <Returns>An <C>ArangoDocument</C></Returns>
   <Description>
     Returns the <C>ArangoDocument</C> in the origami list corresponding to the
@@ -187,7 +187,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="GetOrigamiOrbit" Label="GetOrigamiOrbit" Arg="O"/>
+  <Oper Name="GetOrigamiOrbit" Arg="O"/>
   <Returns>A list of <C>Origami</C>s</Returns>
   <Description>
     Returns all origamis in the database which are in the orbit of <A>O</A>.
@@ -195,7 +195,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="UpdateRepresentativeOfOrigami" Label="UpdateRepresentativeOfOrigami" Arg="O, R"/>
+  <Oper Name="UpdateRepresentativeOfOrigami" Arg="O, R"/>
   <Returns>Nothing.</Returns>
   <Description>
     Updates the orbit representative of <A>O</A> to be <A>R</A>.
@@ -203,7 +203,7 @@ gap> GetOrigamiOrbitRepresentativesFromDB(rec(degree := 5));
 </ManSection>
 
 <ManSection>
-  <Oper Name="RemoveOrigamiFromDB" Label="RemoveOrigamiFromDB" Arg="O"/>
+  <Oper Name="RemoveOrigamiFromDB" Arg="O"/>
   <Returns>Nothing.</Returns>
   <Description>
     Removes the origami <A>O</A> from the database.
