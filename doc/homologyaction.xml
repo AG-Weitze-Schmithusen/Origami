@@ -82,7 +82,7 @@ gap> ActionOfMatrixOnHom(O, [[1,10],[0,1]]);
 </ManSection>
   
 <ManSection>
-<Oper Name="ActionOfMatrixOnHom" Arg="O,A, H "/>
+<Oper Name="ActionOfMatrixOnHom" Arg="O,A, H " Label="with a given homology basis"/>
   <Returns> a matrix in <M> Sp_{2g}(\mathbb{Z}) </M> </Returns>
   <Description>
 	In this method you can choose a basis <A> H </A> of the homology. 
@@ -117,7 +117,7 @@ gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]]);
 </ManSection>
   
 <ManSection>
-<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,H "/>
+<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,H " Label="with a given homology basis"/>
   <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
 	In this method you can choose in addition a basis <A> H </A> of the homology. 
@@ -137,7 +137,7 @@ gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]], H);
 </ManSection>
   
 <ManSection>
-<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,NT,H "/>
+<Oper Name="ActionOfMatrixOnNonTaut" Arg="O,A,NT,H " Label="with a given homology basis and a basis of the non-tautological part of the homology"/>
   <Returns> a matrix in <M> Sp_{2g-2}(\mathbb{Z}) </M> </Returns>
   <Description>
 	In this method you can choose in addition a basis <A> H </A> of the homology as well as a basis <A> NT</A> of the non-tautological part of the homology.  
