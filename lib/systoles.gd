@@ -1,8 +1,8 @@
 #! @Chapter Sytoles of Translation Surfaces
 #! @ChapterLabel systoles-of-origamis
 #! Let $X$ be a translation surface. Then a systole of $X$ is a shortest,
-#! simple closed, not null-homotopic geodesic of $\overline{X}$. We denote by $\text{sys}(X)$ the length of the systole.
-#! The systolic ratio of $X$ is the ratio $\text{SR}(X) := \text{sys}(X)^2/\text{area}(X)$.
+#! simple closed, not null-homotopic geodesic of $\overline{X}$. We denote by $\mathrm{sys}(X)$ the length of the systole.
+#! The systolic ratio of $X$ is the ratio $\mathrm{SR}(X) := \mathrm{sys}(X)^2/\mathrm{area}(X)$.
 #! @Section Computing Systoles of Origamis
 
 #! @Arguments O [equilateral]
@@ -21,7 +21,7 @@ DeclareGlobalFunction("SystoleLength");
 #! @Arguments O [equilateral]
 #! @Returns a record containing the systolic ratio and the combinatorial length of the systole used in the computation
 #! @Description
-#! Computes the systolic ratio $\text{SR}(\texttt{O})$ of $\texttt{O}$.
+#! Computes the systolic ratio $\mathrm{SR}(\texttt{O})$ of $\texttt{O}$.
 #! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that
 #! $\texttt{O}$ consists of equilateral triangles.
 #! @BeginExampleSession

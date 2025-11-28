@@ -79,19 +79,6 @@ DeclareAttribute("ValencyList", IsDessin);
 #! @EndExampleSession
 DeclareAttribute("Genus", IsDessin);
 
-#! @Arguments Dessin
-#! @Returns a natural number
-#! @Description
-#! This calculates the degree of the Dessin surface.
-#! @BeginExampleSession
-#! gap> D:=Dessin((1,2,3),(2,3), 3);
-#! Dessin((1,2,3), (2,3), 3)
-#! gap> DegreeDessin(D);
-#! 3
-#! @EndExampleSession
-DeclareAttribute("DegreeDessin", IsDessin);
-
-
 #! @Arguments A Dessin.
 #! @Returns A boolean.
 #! @Description
