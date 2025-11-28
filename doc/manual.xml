@@ -12,80 +12,73 @@
   <Subtitle>Computing Veech groups of origamis</Subtitle>
   <Date>&RELEASEDATE;</Date>
   <Version>Version &VERSION;</Version>
+  <Author>Leo Emmerich
+    <Email>leem00001@stud.uni-saarland.de</Email>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html</Homepage>
+  </Author>
+  <Author>Sebastian Engelhardt
+    <Email>seen00001@stud.uni-saarland.de</Email>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html</Homepage>
+  </Author>
   <Author>Simon Ertl
     <Email>s8siertl@stud.uni-saarland.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
-    <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
-    </Address>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html</Homepage>
   </Author>
   <Author>Luca L. Junk
     <Email>junk@math.uni-sb.de</Email>
     <Homepage>https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html</Homepage>
-    <Address>
-      Saarland University<Br/>
-      Department of Mathematics<Br/>
-      Postfach 15 11 50<Br/>
-      66041 Saarbrücken<Br/>
-      Germany<Br/>
-    </Address>
   </Author>
   <Author>Pascal Kattler
     <Email>kattler@math.uni-sb.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
-    <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
-    </Address>
+    <Homepage>
+        <Link>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html</Link>
+        <LinkText>
+            <Alt Not="LaTeX">https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html</Alt>
+            <Alt Only="LaTeX">
+            <C>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/</C><Br/><M>\indent\hspace{11.5mm}</M><C>team/pascal-kattler.html</C>
+            </Alt>
+        </LinkText>
+    </Homepage>
   </Author>
   <Author>Alexander Rogovskyy
     <Email>s8alrogo@stud.uni-saarland.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
-    <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
-    </Address>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html</Homepage>
   </Author>
   <Author>Pascal Schumann
     <Email>s8pcschu@stud.uni-saarland.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
-    <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
-    </Address>
+    <Homepage>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html</Homepage>
   </Author>
   <Author>Andrea Thevis
     <Email>thevis@math.uni-frankfurt.de</Email>
     <Homepage>https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis</Homepage>
-    <Address>
-      FB 12 - Institut für Mathematik<Br/>
-      Johann Wolfgang Goethe-Universität<Br/>
-      Robert-Mayer-Str. 6-8<Br/>
-      D-60325 Frankfurt am Main<Br/>
-    </Address>
+  </Author>
+  <Author>Hannah Wagmann
+    <Email>wagmann@math.uni-sb.de</Email>
+    <Homepage>
+        <Link>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html</Link>
+        <LinkText>
+            <Alt Not="LaTeX">https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html</Alt>
+            <Alt Only="LaTeX">
+            <C>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/</C><Br/><M>\indent\hspace{11.5mm}</M><C>team/hannah-wagmann.html</C>
+            </Alt>
+        </LinkText>
+    </Homepage>
   </Author>
   <Author>Gabriela Weitze-Schmithüsen
     <Email>weitze@math.uni-sb.de</Email>
-    <Homepage>http://www.math.uni-sb.de/ag/weitze/</Homepage>
-    <Address>
-      AG Weitze-Schmithüsen<Br/>
-      FR 6.1 Mathematik<Br/>
-      Universität des Saarlandes<Br/>
-      D-66041 Saarbrücken<Br/>
-    </Address>
+    <Homepage>
+        <Link>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html</Link>
+        <LinkText>
+            <Alt Not="LaTeX">https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html</Alt>
+            <Alt Only="LaTeX">
+            <C>https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/</C><Br/><M>\indent\hspace{11.5mm}</M><C>team/gabriela-weitze-schmithuesen.html</C>
+            </Alt>
+        </LinkText>
+    </Homepage>
   </Author>
 
-    <Copyright>&copyright; 2018-2024 by Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Pascal Schumann, 
-    Andrea Thevis and Gabriela Weitze-Schmithüsen
+    <Copyright>&copyright; 2018-2025 by Leo Emmerich, Sebastian Engelhardt, Simon Ertl, Luca Junk, Pascal Kattler, Alexander Rogovskyy, Pascal Schumann, 
+    Andrea Thevis, Hannah Wagmann and Gabriela Weitze-Schmithüsen
     </Copyright>
 
     <Acknowledgements>
