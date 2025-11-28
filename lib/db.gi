@@ -5,7 +5,7 @@ InstallGlobalFunction(ConnectToOrigamiDB, function()
     "--server.username", "origami"
   ]));
 end);
-InstallValue(ARANGODB_MAX_INT, (2-2^(-52))*2^1023);
+BindGlobal("ARANGODB_MAX_INT", (2-2^(-52))*2^1023);
 
 
 InstallMethod(InsertVeechGroupIntoDB, [IsModularSubgroup], function(VG)
