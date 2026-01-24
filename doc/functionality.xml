@@ -372,7 +372,7 @@ gap> SpinStructure(O);
   
 <ManSection>
   <Func Name="SumOfLyapunovExponents" Arg="O"/>
-  <Returns> A positive Integer. </Returns>
+  <Returns> A positive rational number. </Returns>
   <Description>
     This function calculates the sum of the positive Lyapunov exponents of the Origami <A>O</A>.
 <Example><![CDATA[
