@@ -116,16 +116,10 @@ InstallGlobalFunction(ConnectedComponentsDessin, function(dessin)
 end);
 
 InstallGlobalFunction(OrigamiGraph, function(O)
-	local x, y, cycle_list, D, conn_comp, adjacency_matrix, c, i, j;
+	local x, y, cycle_list, D, conn_comp, adjacency_matrix, c, i, j, k;
 	x := HorizontalPerm(O);
 	y := VerticalPerm(O);
-	cycle_list := [];
-	for i in [1..DegreeOrigami(O)] do
-		if not i in MovedPoints(HorizontalPerm(O)) then
-			Add(cycle_list, [i]);
-		fi;
-	od;
-	Append(cycle_list, Orbits(Group(x), MovedPoints(x))); #with trivial cycles
+	cycle_list := Orbits(Group(x), [1..DegreeOrigami(O)]); #with trivial cycles
 	#counterclockwise pathwise around the singularity
 	D := Dessin(Inverse(x), Inverse(y)*x*y, DegreeOrigami(O));
 	#decomposing D into connected components
@@ -135,9 +129,9 @@ InstallGlobalFunction(OrigamiGraph, function(O)
 	for c in cycle_list do
 		#finding the component with the first entry of the cycle, choice of the basepoint above singularity
 		i := Position(conn_comp, Filtered(conn_comp, j -> c[1]^y in j)[1]); 
-		j := Position(conn_comp, Filtered(conn_comp, j -> c[1] in j)[1]);
+		k := Position(conn_comp, Filtered(conn_comp, j -> c[1] in j)[1]);
 		#there is an edge between the i-th and j-th connected component
-		adjacency_matrix[i][j] := adjacency_matrix[i][j] + 1; 
+		adjacency_matrix[i][k] := adjacency_matrix[i][k] + 1; 
 	od;
 	conn_comp := ConnectedComponentsDessin(D);
 	conn_comp := List(conn_comp, i -> Genus(i));
