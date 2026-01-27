@@ -12,10 +12,10 @@ DeclareCategory("IsDessin", IsObject);
 #! @BeginExampleSession
 #! gap> D:=Dessin((1,2,3),(2,3), 3);
 #! Dessin((1,2,3), (2,3), 3)
-#! gap> PermX(D);
+#! gap> BlackPerm(D);
 #! (1,2,3)
 #! @EndExampleSession
-DeclareAttribute("PermX", IsDessin);
+DeclareAttribute("BlackPerm", IsDessin);
 
 #! @Arguments D
 #! @Returns A permutation
@@ -25,10 +25,10 @@ DeclareAttribute("PermX", IsDessin);
 #! @BeginExampleSession
 #! gap> D:=Dessin((1,2,3),(2,3), 3);
 #! Dessin((1,2,3), (2,3) ,3)
-#! gap> PermY(D);
+#! gap> WhitePerm(D);
 #! (2,3)
 #! @EndExampleSession
-DeclareAttribute("PermY", IsDessin);
+DeclareAttribute("WhitePerm", IsDessin);
 
 #! @Arguments D
 #! @Returns A positive integer

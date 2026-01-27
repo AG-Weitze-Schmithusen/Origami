@@ -1,22 +1,22 @@
 InstallMethod(String, [IsDessin], function(dessin)
-	return Concatenation("Dessin(", String(PermX(dessin)), ", ", String(PermY(dessin)), ", ", String(DegreeDessin(dessin)),  ")");
+	return Concatenation("Dessin(", String(BlackPerm(dessin)), ", ", String(WhitePerm(dessin)), ", ", String(DegreeDessin(dessin)),  ")");
 end);
 
-InstallGlobalFunction(NormalDessinsForm, function(sigmaX, sigmaY, d)
-	local orbitElem, ergx, ergy, points, i, DessinList;
+InstallGlobalFunction(NormalDessinsForm, function(sigmaB, sigmaW, d)
+	local orbitElem, ergB, ergW, points, i, DessinList;
 	DessinList := [];
-	ergx := [];
-	ergy := [];
+	ergB := [];
+	ergW := [];
 	points := Set([1..d]);
 	# fixed points that will lead to trivial connected components
-	SubtractSet(points, MovedPoints( Group( sigmaX, sigmaY ) ));
-	for orbitElem in OrbitsDomain (Group( sigmaX, sigmaY ) ) do
- 		Add(ergx, RestrictedPermNC(sigmaX, orbitElem));
- 		Add(ergy, RestrictedPermNC(sigmaY, orbitElem));
+	SubtractSet(points, MovedPoints( Group( sigmaB, sigmaW ) ));
+	for orbitElem in OrbitsDomain (Group( sigmaB, sigmaW ) ) do
+ 		Add(ergB, RestrictedPermNC(sigmaB, orbitElem));
+ 		Add(ergW, RestrictedPermNC(sigmaW, orbitElem));
 	od;
-	for i in [1..Length(ergx)] do
-		d := Length(MovedPoints(Group(ergx[i], ergy[i])));
-		Add(DessinList, Dessin(ergx[i], ergy[i], d));
+	for i in [1..Length(ergB)] do
+		d := Length(MovedPoints(Group(ergB[i], ergW[i])));
+		Add(DessinList, Dessin(ergB[i], ergW[i], d));
 	od;
 	for i in points do
 		Add(DessinList, Dessin((), (), 1));
@@ -28,62 +28,46 @@ InstallGlobalFunction( DessinOfOrigami, function( origami )
 	return NormalDessinsForm( Inverse(HorizontalPerm( origami )), VerticalPerm( origami ) ^(-1) * HorizontalPerm( origami ) * VerticalPerm( origami ), DegreeOrigami(origami) );
 end);
 
-InstallMethod(Dessin, [IsPerm, IsPerm, IsPosInt] , function(horizontal, vertical, d)
+InstallMethod(Dessin, [IsPerm, IsPerm, IsPosInt] , function(black, white, d)
 		local Obj, kind;
-		kind:= rec( x := horizontal, y := vertical, d := d);
+		kind:= rec( b := black, w := white, d := d);
 		Obj:= rec();
 
-		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y, DegreeDessin, kind.d);
+		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , BlackPerm, kind.b, WhitePerm, kind.w, DegreeDessin, kind.d);
 		return Obj;
 	end);
 
-#InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryCollections( IsPerm ) and IsList] ,function(horizontal, vertical)
+#InstallOtherMethod(Dessin, [CategoryCollections(IsPerm) and IsList, CategoryCollections( IsPerm ) and IsList] ,function(black, white)
 #		local Obj, kind;
-#		kind:= rec( x := horizontal, y := vertical);
+#		kind:= rec( b := black, w := white);
 #		Obj:= rec();
 #
-#		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , PermX, kind.x, PermY, kind.y );
+#		ObjectifyWithAttributes( Obj, NewType(DessinFamily, IsDessin and IsAttributeStoringRep) , BlackPerm, kind.b, WhitePerm, kind.w );
 #		return Obj;
 #	end
 #	);
 
 # InstallMethod(DegreeDessin, [IsDessin], function( dessin )
-# 	return  Maximum(LargestMovedPoint( PermX( dessin ) ), LargestMovedPoint( PermY( dessin ) )) - Minimum(SmallestMovedPoint( PermX( dessin ) ), SmallestMovedPoint( PermY( dessin ) ) ) + 1;
+# 	return  Maximum(LargestMovedPoint( BlackPerm( dessin ) ), LargestMovedPoint( WhitePerm( dessin ) )) - Minimum(SmallestMovedPoint( BlackPerm( dessin ) ), SmallestMovedPoint( WhitePerm( dessin ) ) ) + 1;
 # end);
 
 InstallMethod(ValencyList, [ IsDessin ], function( dessin )
-	local whiteValency, blackValency, i, j, counter, current;
-	whiteValency := [];
-	blackValency := [];
-	counter := 1;
-
-	for i in [1..Length( CycleStructurePerm( PermX( dessin ) ))] do
-		counter := counter + 1;
-		if IsBound(CycleStructurePerm( PermX( dessin ) )[i]) then current := CycleStructurePerm( PermX( dessin ) )[i]; else continue; fi;
-		for j in [1..current] do Add(blackValency, counter); od;
-		counter := counter + 1;
-	od;
-
-	counter := 1;
-
-	for i in [1..Length( CycleStructurePerm( PermY( dessin ) ))] do
-		counter := counter + 1;
-		if IsBound(CycleStructurePerm( PermY( dessin ) )[i]) then current := CycleStructurePerm( PermY( dessin ) )[i]; else continue; fi;
-		for j in [1..current] do Add(whiteValency, counter); od;
-	od;
-
-	return rec( white := whiteValency, black := blackValency);
+	local blackValency, whiteValency, d;
+	d := DegreeDessin(dessin);
+	blackValency := CycleLengths(BlackPerm(dessin), [1..d]);
+	whiteValency := CycleLengths(WhitePerm(dessin), [1..d]);
+	return rec( black := blackValency, white := whiteValency);
 end);
 
 InstallMethod( Genus, [ IsDessin ], function( D )
 local s1, s2, f, d, xi;
 d:=DegreeDessin(D);
-s1:= Sum(Flat(CycleStructurePerm(PermX(D)))); #all Cycles where points are MovedPoints
-s1:= s1+ d- Length(MovedPoints(PermX(D))); #all the points that are not moved are 1- cycles
-s2:= Sum(Flat(CycleStructurePerm(PermY(D))));
-s2:= s2+ d- Length(MovedPoints(PermY(D)));
-f:= Sum(Flat(CycleStructurePerm(PermY(D)*PermX(D))));
-f:= f+ d-Length(MovedPoints(PermY(D)*PermX(D)));
+s1:= Sum(Flat(CycleStructurePerm(BlackPerm(D)))); #all Cycles where points are MovedPoints
+s1:= s1+ d- Length(MovedPoints(BlackPerm(D))); #all the points that are not moved are 1- cycles
+s2:= Sum(Flat(CycleStructurePerm(WhitePerm(D))));
+s2:= s2+ d- Length(MovedPoints(WhitePerm(D)));
+f:= Sum(Flat(CycleStructurePerm(WhitePerm(D)*BlackPerm(D))));
+f:= f+ d-Length(MovedPoints(WhitePerm(D)*BlackPerm(D)));
 xi:=s1+s2+f-d;
 return ((2-xi)/2);
 end);
@@ -102,15 +86,15 @@ InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
 end);
 
 InstallMethod(IsConnectedDessin,[IsDessin], function(dessin)
-return(IsTransitive(Group(PermX(dessin), PermY(dessin)), [1.. DegreeDessin(dessin)]));
+return(IsTransitive(Group(BlackPerm(dessin), WhitePerm(dessin)), [1.. DegreeDessin(dessin)]));
 end);
 
 InstallGlobalFunction(ConnectedComponentsDessin, function(dessin)
-local sigmax, sigmay, orbits, conn_comp, o;
-sigmax:=PermX(dessin);
-sigmay:=PermY(dessin);
+local sigmaB, sigmaW, orbits, conn_comp, o;
+sigmaB:=BlackPerm(dessin);
+sigmaW:=WhitePerm(dessin);
 
-if sigmax=() and sigmay=()
+if sigmaB=() and sigmaW=()
 	then return [dessin];
 fi;
 
@@ -119,10 +103,10 @@ if IsConnectedDessin(dessin)
 fi;
 
 
-orbits:=Orbits(Group(PermX(dessin), PermY(dessin)), [1.. DegreeDessin(dessin)]);
+orbits:=Orbits(Group(BlackPerm(dessin), WhitePerm(dessin)), [1.. DegreeDessin(dessin)]);
 conn_comp:=[];
-for o in orbits do #for each orbit Mi we receive a sigmax_i=sigmax|Mi and sigmay_i=sigmay|Mi which are again a dessin
-	Add(conn_comp, Dessin(RestrictedPermNC(sigmax, o), RestrictedPermNC(sigmay, o), Length(o)));
+for o in orbits do #for each orbit Mi we receive a sigmaB_i=sigmaB|Mi and sigmaW_i=sigmaW|Mi which are again a dessin
+	Add(conn_comp, Dessin(RestrictedPermNC(sigmaB, o), RestrictedPermNC(sigmaW, o), Length(o)));
 od;
 return conn_comp;
 end);
@@ -137,7 +121,7 @@ for i in [1..DegreeOrigami(O)] do
 od;
 Append(cycle_list,(Orbits(Group(x), MovedPoints(x)))); # mit trivialen Zykeln
 D:=Dessin(Inverse(x), Inverse(y)*x*y, DegreeOrigami(O));#counterclockwise pathwise around the singularity
-conn_comp:=Orbits(Group(PermX(D),PermY(D)), [1..DegreeDessin(D)]); #decomposing D in connected Components
+conn_comp:=Orbits(Group(BlackPerm(D),WhitePerm(D)), [1..DegreeDessin(D)]); #decomposing D in connected Components
 adjacency_matrix:=NullMat(Length(conn_comp), Length(conn_comp)); #initiating adjecency matrix with dimension being number of connected components
 for c in cycle_list do
 	i:=Position(conn_comp, Filtered(conn_comp, j-> c[1]^y in j)[1]); #finding the component with the first entry of the cycle, choice of the basepoint above singularity
@@ -150,14 +134,14 @@ return [conn_comp, adjacency_matrix]; #returning the weigths of the vertices in 
 end);
 
 RandomDessin:=function(d) #analog to random Origami. Useful for testing, probably not a great distribution - use with caution
-local sigma_x, sigma_y, S_d;
+local sigmaB, sigmaW, S_d;
 	S_d := SymmetricGroup(d);
-	sigma_x := Random(GlobalMersenneTwister, S_d);
-	sigma_y := Random(GlobalMersenneTwister, S_d);
-	while not IsTransitive(Group(sigma_x, sigma_y), [1..d]) do
-		sigma_y := Random(GlobalMersenneTwister, S_d);
+	sigmaB := Random(GlobalMersenneTwister, S_d);
+	sigmaW := Random(GlobalMersenneTwister, S_d);
+	while not IsTransitive(Group(sigmaB, sigmaW), [1..d]) do
+		sigmaW := Random(GlobalMersenneTwister, S_d);
 	od;
-return Dessin(sigma_x, sigma_y, d);
+return Dessin(sigmaB, sigmaW, d);
 end;
 
 HorizontalDessinOfOrigami:=function(O)
