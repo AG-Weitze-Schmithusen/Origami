@@ -108,7 +108,7 @@ InstallGlobalFunction(ConnectedComponentsDessin, function(dessin)
 
 	orbits := Orbits(Group(BlackPerm(dessin), WhitePerm(dessin)), [1.. DegreeDessin(dessin)]);
 	conn_comp := [];
-	#for each orbit Mi we receive a sigmaB_i =s igmaB|Mi and sigmaW_i =s igmaW|Mi which are again a dessin
+	#for each orbit Mi we receive a sigmaB_i = sigmaB|Mi and sigmaW_i = sigmaW|Mi which are again a dessin
 	for o in orbits do
 		Add(conn_comp, Dessin(RestrictedPermNC(sigmaB, o), RestrictedPermNC(sigmaW, o), Length(o)));
 	od;
