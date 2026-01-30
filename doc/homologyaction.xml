@@ -150,7 +150,8 @@ gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 >           [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 ], 
 >           [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
 >           [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];;
-gap> ActionOfMatrixOnNonTaut(O, [[1,10],[0,1]], NonTautPartOfHomologyOrigami(O, H), H);
+gap> NT := NonTautPartOfHomologyOrigami(O, H);;
+gap> ActionOfMatrixOnNonTaut(O, [[1, 10], [0, 1]], NT, H);
 [ [ 1, 0, -4, -2 ], [ 0, 1, 5, 5 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ]
 ]]></Example>
   </Description>

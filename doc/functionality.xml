@@ -351,7 +351,8 @@ true
 gap> O := Origami((1,2),(2,3));
 Origami((1,2), (2,3), 3)
 gap> SymplecticBasisOfHomology(O);
-[ x*y^2*x^-1, x*y^-2*x^-2*y^2*x^-1, x*y^-2*x^-1*y^-1*x*y^4*x^-1, x*y^-3*x^-1*y*x^-1 ]
+[ x*y^2*x^-1, x*y^-2*x^-2*y^2*x^-1, x*y^-2*x^-1*y^-1*x*y^4*x^-1,
+  x*y^-3*x^-1*y*x^-1 ]
 ]]></Example>
   </Description>
 </ManSection>
@@ -649,7 +650,8 @@ Origami((1,2,3,4), (1,2)(3,4), 4)
 gap> sigma:=PointReflectionsOfOrigami(origami)[1];
 (1,2)(3,4)
 gap> FixedPointsOfPointReflections(origami, sigma);
-[ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ], [ 4, 0.5, 0 ] ]
+[ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ],
+  [ 4, 0.5, 0 ] ]
 ]]></Example>
   </Description>
 </ManSection>
