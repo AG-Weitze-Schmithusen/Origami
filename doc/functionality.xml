@@ -246,7 +246,7 @@ gap> Stratum(Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6)));
 </ManSection>
   
 <ManSection>
-  <Attr Name="Genus" Arg="O"/>
+  <Attr Name="Genus" Arg="O" Label="for IsOrigami"/>
   <Returns>A non-negative integer.</Returns>
   <Description>
     Calculates the genus of an origami.
