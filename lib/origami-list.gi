@@ -63,10 +63,6 @@ end;
 # rearranging yields another recursive equation: an = hn/(n-1)! - Sigma k=1..n-1: ak * h(n-k) / (n-k)!.
 # But in our special case G = F simply hk = k!^r so an = n * n!^(r-1) - Sigma k=1..n: ak * (n-k)!^(r-1).
 
-# Tests:
-# HowManySubgroups(5,0) = [1,0,0,0,0]
-# HowManySubgroups(5,1) = [1,1,1,1,1]
-
 
 # Function 2: Let d be a positive integer and Z the cyclic group of order d. HowManyEpi(r, d) is the number
 # of epimorphisms from F onto Z.
@@ -87,7 +83,7 @@ end;
 # the same. Together this implies #Hom(F,Zd) = Sigma l|d: #Epi(F,Zl). Now by Möbius inversion formula,
 # #Epi(F,Zd) = Sigma l|d: #Möb(d/l) * #Hom(F,Zl).
 
-# Tests: We should have:
+# We should have:
 # HowManyEpi(0, 1) = 1
 # HowManyEpi(0, d) = 0 for d > 1
 # HowManyEpi(1, d) = number of non-negative integers coprime to and < d:
@@ -110,18 +106,6 @@ HowManyConjugatedSubgroups := function(index, rank)
 end;
 
 # Source: This is Theorem 1 in (A) + index rank formula.
-
-# Tests:
-# HowManyConjugatedSubgroups(1,2) = 1
-# HowManyConjugatedSubgroups(2,2) = 3
-# HowManyConjugatedSubgroups(3,2) = 7
-# HowManyConjugatedSubgroups(4,2) = 26
-# HowManyConjugatedSubgroups(5,2) = 97
-# HowManyConjugatedSubgroups(6,2) = 624
-# HowManyConjugatedSubgroups(7,2) = 4163
-# HowManyConjugatedSubgroups(8,2) = 34470
-# HowManyConjugatedSubgroups(9,2) = 314493
-# HowManyConjugatedSubgroups(10,2) = 3202839
 
 
 # Function 3.1:
