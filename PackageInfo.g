@@ -208,21 +208,27 @@ ArchiveURL     := Concatenation(~.GithubWWW,
 
 BannerString := Concatenation("""
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-         ┌──┐
-         │  │           Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
-      ┌──┼──┼──┐        by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-      │  │  │  │           Sebastian Engelhardt (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-   ┌──┼──┼──┼──┼──┐        Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-   │  │  │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
-┌──┼──┼──┼──┼──┼──┼──┐     Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
-│  │  │  │  │  │  │  │     Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-└──┼──┼──┼──┼──┼──┼──┘ 	   Pascal Schumann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-   │  │  │  │  │  │        Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
-   └──┼──┼──┼──┼──┘        Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
-      │  │  │  │           Gabriela Weitze-Schmithüsen (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html).
-      └──┼──┼──┘        Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
-         │  │
-         └──┘
+Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
+by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Sebastian Engelhardt (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
+   Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
+   Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Pascal Schumann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
+   Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
+   Gabriela Weitze-Schmithüsen (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html).
+Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
+
+                +---+---+
+                |   |   |
++---+---+---+---+---+---+---+
+|   |   |   |   |   |   |   |
++---+---+---+---+---+---+---+
+    |   |   |   |
+    +---+---+---+
+
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 """),
 
