@@ -569,7 +569,7 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
-	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]));
+	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])); #TODO take Inverse
 end);
 
 InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
