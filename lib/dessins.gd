@@ -98,7 +98,7 @@ DeclareAttribute("IsConnectedDessin", IsDessin);
 
 
 #! @Arguments D
-#! @Returns A list
+#! @Returns A list of lists
 #! @Description
 #! This function returns the connected components of the dessin.
 #! @BeginExampleSession
@@ -115,7 +115,7 @@ DeclareGlobalFunction("ConnectedComponentsDessin");
 #! @Description
 #! This function returns the stable graph of an origami. It returns a list of lists.
 #! The first entry is a list of the genera of the connected components of the dessin of the origami.
-#! The  second entry is the adjacency matrix of the origami graph.
+#! The second entry is the adjacency matrix of the origami graph.
 #! @BeginExampleSession
 #! gap> O := Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8));
 #! Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8), 12)
@@ -124,8 +124,32 @@ DeclareGlobalFunction("ConnectedComponentsDessin");
 #! @EndExampleSession
 DeclareGlobalFunction("OrigamiGraph");
 
-DeclareGlobalFunction("NormalDessinsForm");
-
+#! @Arguments O
+#! @Returns A list of dessins
+#! @Description
+#! This function returns a list of the connected components of the dessin associated to the horizontal
+#! boundary point of the Teichmüller curve of the origami. Note that the components are "normalized" in
+#! the sense that a component of degree d only uses letters between 1 and d in the permutations.
+#! @BeginExampleSession
+#! gap> O := Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6));
+#! Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6), 6)
+#! gap> DessinOfOrigami(O);
+#! [ Dessin((1,3,2), (1,2,3), 3), Dessin(1,3,2), (1,2,3), 3) ]
+#! @EndExampleSession
 DeclareGlobalFunction("DessinOfOrigami");
 
+#! @Arguments O
+#! @Returns A list of lists of dessins
+#! @Description
+#! This function returns a list of the connected components for the dessins associated to the boundary
+#! points of the Teichmüller curve of the origami in all possible directions. Note that the components
+#! are "normalized" in the sense that a component of degree d only uses letters between 1 and d in the
+#! permutations.
+#! @BeginExampleSession
+#! gap> O := Origami((2,3,4), (1,2));
+#! Origami((2,3,4), (1,2), 4)
+#! gap> AllDessinsOfOrigami(O);
+#! [ [ Dessin((2,4,3), (1,3,4), 4) ], [ Dessin((2,3), (1,3), 3), Dessin((), (), 1) ], 
+#!   [ Dessin((2,4,3), (1,3,4), 4) ] ]
+#! @EndExampleSession
 DeclareGlobalFunction("AllDessinsOfOrigami");
