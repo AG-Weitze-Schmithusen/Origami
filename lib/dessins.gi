@@ -1,3 +1,5 @@
+# Dummy comment to prevent AutoDoc bug. Can be removed once
+# https://github.com/gap-packages/AutoDoc/issues/290 is fixed.
 InstallMethod(String, [IsDessin], function(dessin)
 	return Concatenation("Dessin(", String(BlackPerm(dessin)), ", ", String(WhitePerm(dessin)), ", ",
 		String(DegreeDessin(dessin)),  ")");
