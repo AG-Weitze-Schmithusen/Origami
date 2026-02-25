@@ -73,41 +73,25 @@ gap> DegreeOrigami(O);
 </Section>
 
 <Section Label="SL2Action">
-<Heading>The <M>SL_2(\mathbb Z)</M>-action</Heading>
-The group <M>SL_2(\mathbb Z)</M> acts on the set of all origamis via the following formulas:
+<Heading>The <M>\mathrm{SL}_2(\mathbb Z)</M>-action</Heading>
+The group <M>\mathrm{SL}_2(\mathbb Z)</M> acts on the set of all origamis via the following formulas:
 <Display>
-  S.O(\sigma_x, \sigma_y) = O(\sigma_y^{-1}, \sigma_x), \qquad T.O(\sigma_x, \sigma_y) = O(\sigma_x, \sigma_y \sigma_x^{-1})
+  S.O(\sigma_x, \sigma_y) = O(\sigma_y^{-1}, \sigma_x), \qquad T.O(\sigma_x, \sigma_y) = O(\sigma_x, \sigma_y \sigma_x^{-1}),
 </Display>
 where <M>S</M> and <M>T</M> denote the standard generators
-<Alt Only="LaTeX">
-  <![CDATA[
-  \[
-    S =
-    \left(
-      \begin{array}{rr}
-        0 & -1 \\
-        1 & 0
-      \end{array}
-    \right)
-    ,\quad
-    T =
-    \left(
-      \begin{array}{rr}
-        1 & 1 \\
-        0 & 1
-      \end{array}
-    \right)
-  \]
-]]>
-</Alt>
-<Alt Only="Text,HTML">
-  <Verb><![CDATA[
-                     [ 0 -1 ]            [ 1  1 ]
-                 S = [ 1  0 ],       T = [ 0  1 ]
-  ]]></Verb>
-</Alt>
-
-of <M>SL_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
+  <Display>
+      S =
+     \left( {\begin{array}{cc}
+      0 &amp; -1 \\
+      1 &amp; 0 \\
+     \end{array} } \right), \qquad
+      T =
+     \left( {\begin{array}{cc}
+      1 &amp; 1 \\
+      0 &amp; 1 \\
+     \end{array} } \right)
+   </Display>
+of <M>\mathrm{SL}_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
 
 <ManSection>
   <Oper Name="ActionOfS" Arg="O"/>
@@ -132,7 +116,7 @@ Origami((1,6,2,8,3,5,4), (1,6,4,7,5,3)(2,8), 8)
 gap> O:= Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8);
 Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8)
 gap> ActionOfT(O);
-Origami((1,6,4,7,5,3)(2,8), (1,6,3,2)(4,7), 8)
+Origami((1,6,4,7,5,3)(2,8), (1,8,6,4)(5,7), 8)
 ]]></Example>
   </Description>
 </ManSection>
@@ -160,7 +144,7 @@ Origami((1,4,5,3,8,2,6), (1,3,5,7,4,6)(2,8), 8)
 gap> O:= Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8);
 Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8)
 gap> ActionOfTInv(O);
-Origami((1,6,4,7,5,3)(2,8), (1,7,5)(2,4,3), 8)
+Origami((1,6,4,7,5,3)(2,8), (3,4,7)(5,8,6), 8)
 ]]></Example>
   </Description>
 </ManSection>
@@ -169,12 +153,12 @@ Origami((1,6,4,7,5,3)(2,8), (1,7,5)(2,4,3), 8)
   <Oper Name="ActionOfSL2" Arg="w, O"/>
   <Returns>An origami.</Returns>
   <Description>
-    For a given origami <A>O</A> and a word <A>w</A> in <M>S</M> and <M>T</M> (given as a string), this methods computes the origami <M>w^{-1}.O</M>.
+    For a given origami <A>O</A> and a word <A>w</A> in <M>S</M> and <M>T</M> (given as a string), this methods computes the origami <M>w . O</M>.
 <Example><![CDATA[
 gap> O:= Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8);
 Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8)
 gap> ActionOfSL2("S*T", O);
-Origami((1,6,2,8,3,5,4), (3,4,7)(5,8,6), 8)
+Origami((1,4,6,8)(5,7), (1,6,4,7,5,3)(2,8), 8)
 ]]></Example>
   </Description>
 </ManSection>
@@ -271,9 +255,9 @@ gap> IndexOfMonodromyGroup(Origami((1,3,6)(4,5),(2,4,3,5)(7,1)));
   
 <ManSection>
   <Attr Name="VeechGroup" Arg="O"/>
-  <Returns>A subgroup of <M>SL_2(\mathbb Z)</M>.</Returns>
+  <Returns>A subgroup of <M>\mathrm{SL}_2(\mathbb Z)</M>.</Returns>
   <Description>
-    The Veech group of an origami is a finite-index subgroup of <M>SL_2(\mathbb{Z})</M>. In GAP it is is represented as a <C>ModularSubgroup</C> from the <Package>ModularGroup</Package> package. It is determined by two permutations <M>\sigma_S</M> and <M>\sigma_T</M> describing how the generators <M>S</M> and <M>T</M> of <M>SL_2(\mathbb{Z})</M> act on the cosets.
+    The Veech group of an origami is a finite-index subgroup of <M>\mathrm{SL}_2(\mathbb{Z})</M>. In GAP it is is represented as a <C>ModularSubgroup</C> from the <Package>ModularGroup</Package> package. It is determined by two permutations <M>\sigma_S</M> and <M>\sigma_T</M> describing how the generators <M>S</M> and <M>T</M> of <M>\mathrm{SL}_2(\mathbb{Z})</M> act on the cosets.
 
     See <Cite Key="veech_alg_schmithuesen"/> for a detailed description of the algorithm used to compute the Veech group.
 <Example><![CDATA[
@@ -295,12 +279,12 @@ J : ( 1, 5, 6)( 2, 3, 7)( 4, 9, 8) )
   <Oper Name="VeechGroupAndOrbit" Arg="O"/>
   <Returns>A record.</Returns>
   <Description>
-    Computes both the Veech group and the orbit under the <M>SL_2(\mathbb Z)</M> action of a given origami <A>O</A>. Also returns the matrices with map the origami <A>O</A> to the corresponding orbit elements.
+    Computes both the Veech group and the orbit under the <M>\mathrm{SL}_2(\mathbb Z)</M> action of a given origami <A>O</A>. Also returns the matrices that map the origami <A>O</A> to the corresponding orbit elements.
 
     The returned record has the following format:
     <List>
       <Item><E>VeechGroup</E> : the Veech group as a <C>ModularSubgroup</C></Item>
-      <Item><E>orbit</E> : the <M>SL_2(\mathbb Z)</M>-orbit of <A>O</A> as a list of <C>Origami</C>s</Item>
+      <Item><E>orbit</E> : the <M>\mathrm{SL}_2(\mathbb Z)</M>-orbit of <A>O</A> as a list of <C>Origami</C>s</Item>
       <Item><E>matrices</E> : a list of matrices mapping <A>O</A> to the corresponding orbit elements</Item>
     </List>
   </Description>
@@ -514,7 +498,7 @@ More examples of some special constructions of families of orgamis are given in 
   <Description>
     Returns a list of all origamis of degree <A>d</A> in the given stratum.
 <Example><![CDATA[
-gap> OrigamiListInStratum(4, [1,1]);
+gap> AllOrigamisInStratum(4, [1, 1]);
 [ Origami((1,2), (1,3)(2,4), 4), Origami((1,2), (1,3,2,4), 4),
   Origami((1,2)(3,4), (2,3), 4), Origami((1,2)(3,4), (2,3,4), 4),
   Origami((1,2)(3,4), (1,2,3,4), 4), Origami((1,2,3), (2,3,4), 4),
@@ -533,14 +517,14 @@ gap> OrigamiListInStratum(4, [1,1]);
     We identify the tiles of the origami with the right cosets of H in G.
     The right neighbour of the tile <M>Hg</M> is the tile <M>Hgr</M> and the upper neighbour of
     <M>Hg</M> is <M>Hgu</M>.
-    <Example>
-      G:=SymmetricGroup(3);
-      Sym( [ 1 .. 3 ] )
-      gap> H:=Group(());
-      Group(())
-      gap>QuasiRegularOrigami(G,H,(1,2),(2,3));
-      Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
-    </Example>
+    <Example><![CDATA[
+gap> G := SymmetricGroup(3);
+Sym( [ 1 .. 3 ] )
+gap> H := Group(());
+Group(())
+gap> QuasiRegularOrigami(G, H, (1,2), (2,3));
+Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
+]]></Example>
   </Description>
 </ManSection>
   
@@ -565,12 +549,12 @@ gap> OrigamiListInStratum(4, [1,1]);
   <Returns>A list of permutations.</Returns>
   <Description>
     Calculates all permutations which yield a normal form when conjugated to the <Arg>O</Arg>.
-    <Example>
-  gap>origami:=Origami((1,2,3,4), (1,2)(3,4));
-  Origami((1,2,3,4), (1,2)(3,4), 4)
-  gap>NormalformConjugators(origami);
-  [ (), (1,3,2), (1,3)(2,4), (1,2,4) ]
-    </Example>
+    <Example><![CDATA[
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
+Origami((1,2,3,4), (1,2)(3,4), 4)
+gap> NormalformConjugators(O);
+[ (), (1,3,2), (1,3)(2,4), (1,2,4) ]
+]]></Example>
   </Description>
 </ManSection>
   
@@ -580,12 +564,12 @@ gap> OrigamiListInStratum(4, [1,1]);
   <Description>
     Computes all translations of the origami as permutations of the squares of <Arg>O</Arg>.
     This is equivalent to the permutations <M>t</M> which satisfy  <M>t\circ \sigma_x\circ t^{-1} = \sigma_x</M> and <M>t\circ\sigma_y\circ t^{-1} = \sigma_y </M>, where <M>\sigma_x, \sigma_y</M> are the permutations describing the horizontal and the vertical gluing of the origami, respectively.
-    <Example>
-      gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
-    Origami((1,2,3,4), (1,2)(3,4), 4)
-    gap> TranslationsOfOrigami(origami);
-    [ (), (1,3)(2,4) ]
-    </Example>
+    <Example><![CDATA[
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
+Origami((1,2,3,4), (1,2)(3,4), 4)
+gap> TranslationsOfOrigami(O);
+[ (), (1,3)(2,4) ]
+]]></Example>
   </Description>
 </ManSection>
   
@@ -594,16 +578,16 @@ gap> OrigamiListInStratum(4, [1,1]);
   <Returns>A boolean.</Returns>
   <Description>
     Tests whether an origami is hyperelliptic.
-      <Example>
-  gap> origami:=Origami((1,2,3,4), (1,2)(3,4));
-  Origami((1,2,3,4), (1,2)(3,4), 4)
-  gap> IsHyperelliptic(origami);
-  true
-  gap> origami:=Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6));
-  Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6), 6)
-  gap> IsHyperelliptic(origami);
-  false
-    </Example>
+    <Example><![CDATA[
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
+Origami((1,2,3,4), (1,2)(3,4), 4)
+gap> IsHyperelliptic(O);
+true
+gap> O := Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6));
+Origami((1,2,3,4,5,6), (1,2)(3,4)(5,6), 6)
+gap> IsHyperelliptic(O);
+false
+]]></Example>
   </Description>
 </ManSection>
   
@@ -613,12 +597,12 @@ gap> OrigamiListInStratum(4, [1,1]);
   <Description>
     Computes all point reflections of <M>O</M>, i.e. all affine homeomorphisms with derivative  <M>-I </M>, where  <M>I</M> is the identity matrix.
     This is equivalent to the permutations  <M> t </M> which satisfy <M>t\circ\sigma_x\circ t^{-1}=\sigma_x^{-1}</M> and <M>t\circ \sigma_y\circ t^{-1}=\sigma_y^{-1}</M>, where <M>\sigma_x,\sigma_y</M> are the permutations describing the horizontal and the vertical gluing of the origami, respectively.
-        <Example>
-          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
-          Origami((1,2,3,4), (1,2)(3,4), 4)
-          gap> PointReflectionsOfOrigami(o);
-          [ (1,2)(3,4), (1,4)(2,3) ]
-    </Example>
+        <Example><![CDATA[
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
+Origami((1,2,3,4), (1,2)(3,4), 4)
+gap> PointReflectionsOfOrigami(O);
+[ (1,2)(3,4), (1,4)(2,3) ]
+]]></Example>
   </Description>
 </ManSection>
   
@@ -627,12 +611,12 @@ gap> OrigamiListInStratum(4, [1,1]);
   <Returns>Two lists consisting of two entries: The first entry is a list of permutations and the second entry is 1 resp. -1.</Returns>
   <Description>
     Computes all automorphisms of the origami, i.e. the translations and the point reflections. More precisely it returns two lists. The first list contains the translations and is labelel with 1. The second list contains the point reflections and is labeled with -1.
-        <Example>
-          gap> o:=Origami((1,2,3,4),(1,2)(3,4));
-          Origami((1,2,3,4), (1,2)(3,4), 4)
-          gap> AutomorphismsOfOrigami(o);
-          [ [ [ (), (1,3)(2,4) ], 1 ], [ [ (1,2)(3,4), (1,4)(2,3) ], -1 ] ]
-    </Example>
+        <Example><![CDATA[
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
+Origami((1,2,3,4), (1,2)(3,4), 4)
+gap> AutomorphismsOfOrigami(O);
+[ [ [ (), (1,3)(2,4) ], 1 ], [ [ (1,2)(3,4), (1,4)(2,3) ], -1 ] ]
+]]></Example>
   </Description>
 </ManSection>
   
@@ -645,11 +629,11 @@ gap> OrigamiListInStratum(4, [1,1]);
     The fixed points are returned in a list with entries <M>[a,b,c]</M>, where <M>a</M> is the square in which the fixed point occurs
     and <M>(b,c)</M> are the local coordinates in the square <M>a</M> and for the lower left corners <M>a</M> is a representative of the connected lower left corners.
 <Example><![CDATA[
-gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
 Origami((1,2,3,4), (1,2)(3,4), 4)
-gap> sigma:=PointReflectionsOfOrigami(origami)[1];
+gap> sigma := PointReflectionsOfOrigami(O)[1];
 (1,2)(3,4)
-gap> FixedPointsOfPointReflections(origami, sigma);
+gap> FixedPointsOfPointReflections(O, sigma);
 [ [ 2, 0, 0.5 ], [ 4, 0, 0.5 ], [ 1, 0.5, 0 ], [ 2, 0.5, 0 ], [ 3, 0.5, 0 ],
   [ 4, 0.5, 0 ] ]
 ]]></Example>
@@ -664,13 +648,13 @@ gap> FixedPointsOfPointReflections(origami, sigma);
   The function does not check whether <M>\sigma</M> is a translation, i.e.  whether it satisfies  <M>\sigma\circ\sigma_x\circ \sigma^{-1}=\sigma_x</M> and <M>\sigma\circ \sigma_y\circ \sigma^{-1}=\sigma_y</M>.
   The fixed points of a translation are always vertices of the squares. Each fixed point is returned as list of vertices, more precisely as the labels of all squares such that the corresponding vertex is the fixed point.
 <Example><![CDATA[
-gap> origami:=Origami((1,2,3,4),(1,2)(3,4));
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
 Origami((1,2,3,4), (1,2)(3,4), 4)
-gap> TranslationsOfOrigami(origami);
+gap> TranslationsOfOrigami(O);
 [ (), (1,3)(2,4) ]
-gap> sigma:=TranslationsOfOrigami(origami)[2];
+gap> sigma := TranslationsOfOrigami(O)[2];
 (1,3)(2,4)
-gap> FixedPointsOfTranslation(origami, sigma);
+gap> FixedPointsOfTranslation(O, sigma);
 [ [ 1, 3 ], [ 2, 4 ] ]
 ]]></Example>
   </Description>
@@ -685,11 +669,11 @@ gap> FixedPointsOfTranslation(origami, sigma);
   If sigma is a point reflection, the fixed points are returned in a list with entries <M>[[a,b,c],d]</M>, where <M>a</M> is the square in which the fixed point occurs,
   <M>(b,c)</M> are the local coordinates in the square and <M>d</M> is <M>-1</M>. If <M>\sigma</M> is a translation it is returned as list of vertices labeled with 1.
 <Example><![CDATA[
-gap> O:=Origami((1,2,3,4),(1,2)(3,4));
+gap> O := Origami((1,2,3,4), (1,2)(3,4));
 Origami((1,2,3,4), (1,2)(3,4), 4)
-gap> sigma:=(1,3)(2,4);
+gap> sigma := (1,3)(2,4);
 (1,3)(2,4)
-gap> FixedPointsOfAutomorphism(O,sigma);
+gap> FixedPointsOfAutomorphism(O, sigma);
 [ [ [ 1, 3 ], [ 2, 4 ] ], 1 ]
 ]]></Example>
   </Description>
@@ -700,10 +684,10 @@ gap> FixedPointsOfAutomorphism(O,sigma);
   <Oper Name="GenusOfQuotient" Arg="O"/>
   <Returns>An integer.</Returns>
   <Description>
-   For a given origami this function computes the genus of the quotient <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
-   translation group.
+   For a given origami this function computes the genus of the quotient <M> O/\mathrm{Trans}(O) </M>, where <M>\mathrm{Trans}(O)</M>
+   is the translation group.
 <Example><![CDATA[
-gap> O:=Origami((1,2,3)(4,5,6),(3,4));
+gap> O := Origami((1,2,3)(4,5,6), (3,4));
 Origami((1,2,3)(4,5,6), (3,4), 6)
 gap> GenusOfQuotient(O);
 1
@@ -715,10 +699,10 @@ gap> GenusOfQuotient(O);
   <Oper Name="OrigamiQuotient" Arg="O"/>
   <Returns>An origami</Returns>
   <Description>
-   For a given origami this function computes the quotient origami <M> O/Trans(O) </M>, where <M>Trans(O)</M> is the
-   translation group.
+   For a given origami this function computes the quotient origami <M> O/\mathrm{Trans}(O) </M>, where <M>\mathrm{Trans}(O)</M>
+   is the translation group.
 <Example><![CDATA[
-gap> O:=Origami((1,2,3)(4,5,6),(3,4));
+gap> O := Origami((1,2,3)(4,5,6), (3,4));
 Origami((1,2,3)(4,5,6), (3,4), 6)
 gap> OrigamiQuotient(O);
 Origami((1,2,3), (), 3)

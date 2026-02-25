@@ -1,10 +1,10 @@
 #! @Chapter Cyclic Torus Covers
 #! @ChapterLabel cyclic-torus-covers
-#! Let $T_n$ be the $n \times n$-Torus. Hence topologically it is torus with $n^2$ punctures.
+#! Let $T_n$ be the $n \times n$-Torus. Hence topologically it is a torus with $n^2$ punctures.
 #! A **cyclic $n$-torus cover of degree $d$** is a normal covering $X \to T_n$ whose Deck-group is cyclic with $d$ elements.
 #! We can obtain an origami from each cyclic $n$-torus cover by appending the map $p_n: T_n \to T_1$, which sends each square to the singular square of the
 #! trivial torus. We call such origamis **cyclic torus cover origamis**.
-#! The functions described in this chapter were programmed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with these special class of origamis.
+#! The functions described in this chapter were programmed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with this special class of origamis.
 
 #! @Section Monodromy vectors and bases of the fundamental group
 #! A **cyclic $n$-torus cover of degree $d$** is determined by its monodromy map $m: \pi_1(T_n) \to \mathbb{Z}/d\mathbb{Z}$.
@@ -15,13 +15,13 @@
 #! The base point is chosen as the midpoint of the lower left square.
 #! 
 #! The basis $L$ consists of the full horizontal path to the right, the full vertical path upwards and
-#! loops around each of the $n^2 - 1$ corner points of the squares (numbered left to right and bottom up; the loop on the most upper right corner excluded)
+#! loops around each of the $n^2 - 1$ corner points of the squares (numbered left to right and bottom up; the loop on the rightmost upper corner excluded)
 #! in this order.
 #! 
 #! The basis $S$ consists of picking a maximal set of slits between squares such that $T_n$ without these is still simply connected. The crossing of one such
 #! slit bottom up (for horizontal slits) and left to right (for vertical slits) is then an element of the basis.
 #! 
-#! Convertion between these two bases is performed with <Ref Func="BaseChangeLToS" />
+#! Conversion between these two bases is performed with <Ref Func="BaseChangeLToS" />
 #!
 #! See <Cite Key="ba_rogovskyy" /> for more information regarding the construction of cyclic torus covers and the bases $L$ and $S$.
 
