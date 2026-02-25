@@ -1,7 +1,9 @@
 #! @Chapter Functions for Dessins d'enfants
 #! @ChapterLabel Functions for Dessins d'enfants
+
+#! @Section Functions for Dessins d'enfants
 #! This section lists all functions used for dessins d'enfants
-#! @Section  Functions for Dessins d'enfants
+
 BindGlobal("DessinFamily",NewFamily("Dessin"));
 DeclareCategory("IsDessin", IsObject);
 
@@ -56,7 +58,6 @@ DeclareAttribute("DegreeDessin", IsDessin);
 #! @EndExampleSession
 DeclareOperation("Dessin", [IsPerm, IsPerm, IsPosInt]);
 
-
 #! @Arguments D
 #! @Returns A record
 #! @Description
@@ -96,7 +97,6 @@ DeclareAttribute("Genus", IsDessin);
 #! @EndExampleSession
 DeclareAttribute("IsConnectedDessin", IsDessin);
 
-
 #! @Arguments D
 #! @Returns A list of lists
 #! @Description
@@ -108,7 +108,6 @@ DeclareAttribute("IsConnectedDessin", IsDessin);
 #! [ Dessin((1,2,3), (2,3), 3) ]
 #! @EndExampleSession
 DeclareGlobalFunction("ConnectedComponentsDessin");
-
 
 #! @Arguments O
 #! @Returns A list

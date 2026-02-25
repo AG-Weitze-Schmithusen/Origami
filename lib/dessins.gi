@@ -60,8 +60,7 @@ InstallMethod( Genus, [ IsDessin ], function( D )
 end);
 
 InstallGlobalFunction(AllDessinsOfOrigami, function( origami )
-	local VeechAndOrbit, TAct, orbit, current, DessinList, dessin;
-	dessin := DessinOfOrigami( origami );
+	local DessinList, VeechAndOrbit, TAct, orbit, current;
 	DessinList := [];
 	VeechAndOrbit := VeechGroupAndOrbit( origami );
 	TAct := TAction( VeechAndOrbit.veech_group );
@@ -132,12 +131,12 @@ end);
 
 # analogous to random Origami. Useful for testing, probably not a great distribution - use with caution
 RandomDessin := function(d) 
-local sigmaB, sigmaW, S_d;
+	local sigmaB, sigmaW, S_d;
 	S_d := SymmetricGroup(d);
 	sigmaB := Random(GlobalMersenneTwister, S_d);
 	sigmaW := Random(GlobalMersenneTwister, S_d);
 	while not IsTransitive(Group(sigmaB, sigmaW), [1..d]) do
 		sigmaW := Random(GlobalMersenneTwister, S_d);
 	od;
-return Dessin(sigmaB, sigmaW, d);
+	return Dessin(sigmaB, sigmaW, d);
 end;
