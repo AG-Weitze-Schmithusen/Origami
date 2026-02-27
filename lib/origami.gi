@@ -222,32 +222,48 @@ InstallGlobalFunction(DefinesQuasiRegularOrigami, function(G, U, r, u)
 end);
 
 InstallGlobalFunction(CylinderStructure, function(O)
-	local list, i, m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, mat_inv;
+	local list, i, m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, trans_mat, matCnt, cylCnt, vertCyls, currCylHght, cyl;
 	sigma_h := HorizontalPerm(O);
 	sigma_v := VerticalPerm(O);
-	if sigma_h=() then
-		list := [];
-	else
-		cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
-		#s is list of the cycles in the horizontal permutation of the origami
-		list := [];
-		cycleLength := List(cycles, i->(Length(i))); #Length of the cycles in the permutation
-		for m in [1..Maximum(cycleLength)] do
-			helpcycle := Filtered(cycles, i->Length(i)=m); #Zykel der Länge m
-			helpcycle := AsSet(helpcycle);
-			while helpcycle <> []  do
-				mat := [];
-				mat_inv := [];
-				for i in [1..Length(helpcycle[1])] do #calcutlatin the orbit under sigma_h and sigma_h^{-1} of each tile in the cycle
-					mat[i] := Orbit(Group(sigma_v), helpcycle[1][i]);
-					mat_inv[i] := Orbit(Group(Inverse(sigma_v)), helpcycle[1][i]);
-				od;
-				diff := Intersection(helpcycle, Union(TransposedMat(mat),TransposedMat(mat_inv))); #transposing the matrix to check on whether there are cylinders lying over each other
-				Add(list, [Length(diff), m]); #diff contains the cycles of same lenght which form a cylinder
-				helpcycle := Difference(helpcycle, diff);
+	cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
+	#cycles is list of the cycles in the horizontal permutation of the origami
+	list := [];
+	cycleLength := List(cycles, i->(Length(i))); #Length of the cycles in the permutation
+	for m in [1..Maximum(cycleLength)] do
+		helpcycle := Filtered(cycles, i->Length(i)=m); #cycles of length m
+		while helpcycle <> []  do
+			mat := [];
+			for i in [1..Length(helpcycle[1])] do #calculating the orbit under sigma_v of each tile in the cycle
+				mat[i] := Orbit(Group(sigma_v), helpcycle[1][i]);
 			od;
+			#transposing the matrix to check whether there are cylinders lying over each other
+			trans_mat := TransposedMat(mat);
+			diff := [];
+			for i in Intersection(helpcycle, trans_mat) do
+				Add(diff, ShallowCopy(i));
+			od;
+			# finding the maximal vertical extent of each cylinder
+			matCnt := 2;
+			cylCnt := 2;
+			vertCyls := [[diff[1]]];
+			while matCnt <= Length(trans_mat) and cylCnt <= Length(diff) do
+				if trans_mat[matCnt] = diff[cylCnt] then
+					#add squares to current (last in list) vertical cylinder
+					Add(vertCyls[Length(vertCyls)], diff[cylCnt]);
+				else
+					Add(vertCyls, [diff[cylCnt]]); #start new cylinder
+					
+				fi;
+				cylCnt := cylCnt + 1;
+				matCnt := matCnt + 1;
+			od;
+			for cyl in vertCyls do
+				Add(list, [Length(cyl), m]);
+			od;
+			helpcycle := Difference(helpcycle, trans_mat);
 		od;
-	fi;
+	od;
+	Sort(list, function(v, w) return v[2] > w[2] or v[2] = w[2] and v[1] > w[1]; end);
 	return list;
 end);
 
