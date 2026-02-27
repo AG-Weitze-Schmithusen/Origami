@@ -533,7 +533,7 @@ InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
 
 	ExpandTree([OrigamiNormalForm(O)]);
 
-	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]));
+	return ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1); #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 end);
 
 InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
@@ -569,7 +569,7 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
-	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])); #TODO take Inverse
+	return ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1); #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 end);
 
 InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
@@ -623,7 +623,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree([O]);
 
 	return rec(
-		veech_group := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
+		veech_group := ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1), #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 		orbit := orbit,
 		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
