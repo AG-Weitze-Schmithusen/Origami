@@ -342,14 +342,14 @@ gap> SymplecticBasisOfHomology(O);
 </ManSection>
   
 <ManSection>
-  <Attr Name="SpinStructure" Arg="O"/>
+  <Attr Name="SpinParity" Arg="O"/>
   <Returns><M>0</M> or <M>1</M></Returns>
   <Description>
     Computes the parity of the spin structure of <M>O</M>.
 <Example><![CDATA[
 gap> O := Origami((1,2,3,4,5), (), 5);
 Origami((1,2,3,4,5), (), 5)
-gap> SpinStructure(O);
+gap> SpinParity(O);
 1
 ]]></Example>
   </Description>
