@@ -222,47 +222,64 @@ InstallGlobalFunction(DefinesQuasiRegularOrigami, function(G, U, r, u)
 end);
 
 InstallGlobalFunction(CylinderStructure, function(O)
-	local list, i, m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, trans_mat, matCnt, cylCnt, vertCyls, currCylHght, cyl;
+	local sigma_h, sigma_v, cycles, cycleLengths, n, cycleOf, i, t, parent, heights, widths,
+		find, union, m, currCycles, j, applCyl, a, b, maxCyls, list;
 	sigma_h := HorizontalPerm(O);
 	sigma_v := VerticalPerm(O);
 	cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
-	#cycles is list of the cycles in the horizontal permutation of the origami
-	list := [];
-	cycleLength := List(cycles, i->(Length(i))); #Length of the cycles in the permutation
-	for m in [1..Maximum(cycleLength)] do
-		helpcycle := Filtered(cycles, i->Length(i)=m); #cycles of length m
-		while helpcycle <> []  do
-			mat := [];
-			for i in [1..Length(helpcycle[1])] do #calculating the orbit under sigma_v of each tile in the cycle
-				mat[i] := Orbit(Group(sigma_v), helpcycle[1][i]);
-			od;
-			#transposing the matrix to check whether there are cylinders lying over each other
-			trans_mat := TransposedMat(mat);
-			diff := [];
-			for i in Intersection(helpcycle, trans_mat) do
-				Add(diff, ShallowCopy(i));
-			od;
-			# finding the maximal vertical extent of each cylinder
-			matCnt := 2;
-			cylCnt := 2;
-			vertCyls := [[diff[1]]];
-			while matCnt <= Length(trans_mat) and cylCnt <= Length(diff) do
-				if trans_mat[matCnt] = diff[cylCnt] then
-					#add squares to current (last in list) vertical cylinder
-					Add(vertCyls[Length(vertCyls)], diff[cylCnt]);
-				else
-					Add(vertCyls, [diff[cylCnt]]); #start new cylinder
-					
-				fi;
-				cylCnt := cylCnt + 1;
-				matCnt := matCnt + 1;
-			od;
-			for cyl in vertCyls do
-				Add(list, [Length(cyl), m]);
-			od;
-			helpcycle := Difference(helpcycle, trans_mat);
+	cycleLengths := List(cycles, i -> Length(i));
+	n := Length(cycles);
+	cycleOf := [];
+	# map square t -> cycle i it belongs to
+	for i in [1..Length(cycles)] do
+		for t in cycles[i] do
+			cycleOf[t] := i;
 		od;
 	od;
+
+	#simple union-find structure, keeping track of heights and widths
+	parent := [1..n];
+	heights := List(parent, i -> 1);
+	widths := List(parent, i -> Length(cycles[i]));
+
+	find := function(x)
+		if parent[x] <> x then
+			parent[x] := find(parent[x]);
+		fi;
+		return parent[x];
+	end;
+
+	union := function(x, y)
+		local rx, ry;
+		rx := find(x);
+		ry := find(y);
+		if rx <> ry then
+			parent[ry] := rx;
+			heights[rx] := heights[rx] + 1;
+			heights[ry] := heights[ry] + 1;
+		fi;
+	end;
+
+	#merge cycles that are vertically adjacent
+	for m in [1..Maximum(cycleLengths)] do
+		currCycles := Filtered(cycles, i -> Length(i) = m); #cycles of length m
+		for i in [1..Length(currCycles)] do
+			for j in [1..Length(currCycles)] do
+				if i = j then
+					continue;
+				fi;
+				# application of vertical permutation to current horizontal cylinder
+				applCyl := List(currCycles[i], k -> k^sigma_v);
+				if Set(applCyl) = Set(currCycles[j]) then
+					a := cycleOf[currCycles[i][1]];
+					b := cycleOf[currCycles[j][1]];
+					union(a, b);
+				fi;
+			od;
+		od;
+	od;
+	maxCyls := Set(List([1..n], i -> find(i)));
+	list := List(maxCyls, i -> [heights[i], widths[i]]);
 	Sort(list, function(v, w) return v[2] > w[2] or v[2] = w[2] and v[1] > w[1]; end);
 	return list;
 end);
