@@ -598,7 +598,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree := function(new_leaves)
 		new_origami_list := [];
 		for P in new_leaves do
-			current_branch := [matrix_list[_IndexOrigami(P)] * S, matrix_list[_IndexOrigami(P)] * T];
+			current_branch := [S * matrix_list[_IndexOrigami(P)], T * matrix_list[_IndexOrigami(P)]];
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
 			for j in [1, 2] do
 				i := ContainsHash(canonical_origami_list, new_origamis[j], HashForOrigamis);
@@ -623,7 +623,10 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree([O]);
 
 	return rec(
-		veech_group := ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1), #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
+		#We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
+		#Also, we need the non-standard constructor of ModularGroup, since otherwise the relationship
+		#between the indices will be lost.
+		veech_group := ModularSubgroupNonStandard(PermList(sigma[1])^-1, PermList(sigma[2])^-1), 
 		orbit := orbit,
 		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
