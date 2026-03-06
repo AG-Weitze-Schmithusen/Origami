@@ -19,6 +19,9 @@ end);
 
 InstallMethod(ActionOfSL2, [IsString, IsOrigami], function(wordString, O)
 	local letter, F, word;
+	if wordString = "<identity ...>" then
+		return O;
+	fi;
 	F := FreeGroup("S","T");
 	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
 	for letter in Reversed(LetterRepAssocWord(word)) do
