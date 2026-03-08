@@ -398,7 +398,7 @@ end);
 InstallOtherMethod( ShadowVeechGroup, [IsOrigami, IsList], function( O, H )
 	local A, res, L, HomologyBasis, T, dim, M;
 	res := [];
-	L := MatrixGeneratorsOfGroup(VeechGroup(O));
+	L := GeneratorsOfGroup(VeechGroup(O));
 	HomologyBasis := H;
 	T := TransposedMat( NiceBasisForCurves( O, HomologyBasis ) );
 	dim := Length( HomologyBasis ) - 2;

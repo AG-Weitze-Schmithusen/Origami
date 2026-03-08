@@ -59,7 +59,7 @@ InstallGlobalFunction(SearchForCyclicTorusOrigamiWithVeechGroup, function(n, p, 
     fi;
 
     d := p;
-    mats_sl2z := MatrixGeneratorsOfGroup(H);
+    mats_sl2z := GeneratorsOfGroup(H);
     matrices := List(mats_sl2z, m->Inverse(ActionOfMatrixOnHomologyOfTn(n, m)));
     translations := TranslationGroupOnHomologyOfTn(n);
     eigSpaces := FindSimultaneousEigenvectorsRecursively(p, matrices, translations);
