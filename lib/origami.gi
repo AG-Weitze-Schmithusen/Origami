@@ -574,7 +574,8 @@ end);
 
 InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	local new_origami_list, new_origamis, sigma, ExpandTree, P, canonical_origami_list, i, j,
-	 				counter, orbit, F, S, T, matrix_list, current_branch;
+	 				counter, orbit, F, S, T, matrix_list, current_branch, tup, pi,
+					reorder_matrices, reorder_orbit;
 
 	O := OrigamiNormalForm(O);
 	F := FreeGroup("S", "T");
@@ -622,13 +623,25 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
+	#reorder matrices and orbit list to fit the rewriting in the standardization of the Veech group
+	tup := ModularSubgroupNonStandard(PermList(sigma[1])^-1, PermList(sigma[2])^-1);
+	pi := tup[2];
+
+	reorder_orbit := [];
+	reorder_matrices := [];
+
+	for i in [1..Length(orbit)] do
+		reorder_orbit[i] := orbit[i^(pi^-1)];
+		reorder_matrices[i] := matrix_list[i^(pi^-1)];
+	od;
+
 	return rec(
 		#We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 		#Also, we need the non-standard constructor of ModularGroup, since otherwise the relationship
 		#between the indices will be lost.
-		veech_group := ModularSubgroupNonStandard(PermList(sigma[1])^-1, PermList(sigma[2])^-1), 
-		orbit := orbit,
-		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
+		veech_group := tup[1],
+		orbit := reorder_orbit,
+		matrices := List(reorder_matrices, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
 end);
 
