@@ -4,7 +4,7 @@ gap> Genus(O);
 6
 gap> DessinOfOrigami(O);
 [ Dessin((2,4,3)(5,8,6)(9,12,10), (1,5,4)(7,9,8)(10,12,11), 12) ]
-gap> D:=last[1];
+gap> D := last[1];
 Dessin((2,4,3)(5,8,6)(9,12,10), (1,5,4)(7,9,8)(10,12,11), 12)
 gap> IsConnectedDessin(D);
 true
@@ -46,6 +46,6 @@ gap> AllDessinsOfOrigami(O);
 [ [ Dessin((1,3,5,6,4,2), (1,2,4,6,5,3), 6) ], 
   [ Dessin((), (), 1), Dessin((), (), 1), Dessin((), (), 1), 
       Dessin((), (), 1), Dessin((), (), 1), Dessin((), (), 1) ], 
-  [ Dessin((1,4,2), (1,2,4), 3), Dessin((3,6,5), (3,5,6), 3) ], 
-  [ Dessin((1,2), (1,2), 2), Dessin((3,4), (3,4), 2), Dessin((5,6), (5,6), 2) 
+  [ Dessin((1,3,2), (1,2,3), 3), Dessin((1,3,2), (1,2,3), 3) ], 
+  [ Dessin((1,2), (1,2), 2), Dessin((1,2), (1,2), 2), Dessin((1,2), (1,2), 2) 
      ] ]
