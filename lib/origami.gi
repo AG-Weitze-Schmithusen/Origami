@@ -566,7 +566,7 @@ InstallMethod(ComputeVeechGroup, [IsOrigami], function(O)
 
 	ExpandTree([OrigamiNormalForm(O)]);
 
-	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]));
+	return ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1); #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 end);
 
 InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
@@ -602,12 +602,13 @@ InstallMethod(ComputeVeechGroupWithHashTables, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
-	return ModularSubgroup(PermList(sigma[1]), PermList(sigma[2]));
+	return ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1); #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
 end);
 
 InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	local new_origami_list, new_origamis, sigma, ExpandTree, P, canonical_origami_list, i, j,
-	 				counter, orbit, F, S, T, matrix_list, current_branch;
+	 				counter, orbit, F, S, T, matrix_list, current_branch, tup, pi,
+					reorder_matrices, reorder_orbit;
 
 	O := OrigamiNormalForm(O);
 	F := FreeGroup("S", "T");
@@ -631,7 +632,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree := function(new_leaves)
 		new_origami_list := [];
 		for P in new_leaves do
-			current_branch := [matrix_list[_IndexOrigami(P)] * S, matrix_list[_IndexOrigami(P)] * T];
+			current_branch := [S * matrix_list[_IndexOrigami(P)], T * matrix_list[_IndexOrigami(P)]];
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
 			for j in [1, 2] do
 				i := ContainsHash(canonical_origami_list, new_origamis[j], HashForOrigamis);
@@ -655,10 +656,25 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
+	#reorder matrices and orbit list to fit the rewriting in the standardization of the Veech group
+	tup := ModularSubgroupNonStandard(PermList(sigma[1])^-1, PermList(sigma[2])^-1);
+	pi := tup[2];
+
+	reorder_orbit := [];
+	reorder_matrices := [];
+
+	for i in [1..Length(orbit)] do
+		reorder_orbit[i] := orbit[i^(pi^-1)];
+		reorder_matrices[i] := matrix_list[i^(pi^-1)];
+	od;
+
 	return rec(
-		veech_group := ModularSubgroup(PermList(sigma[1]), PermList(sigma[2])),
-		orbit := orbit,
-		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
+		#We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
+		#Also, we need the non-standard constructor of ModularGroup, since otherwise the relationship
+		#between the indices will be lost.
+		veech_group := tup[1],
+		orbit := reorder_orbit,
+		matrices := List(reorder_matrices, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
 end);
 
