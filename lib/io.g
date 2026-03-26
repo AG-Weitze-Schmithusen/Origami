@@ -1,3 +1,5 @@
+LoadPackage("io");
+
 InstallMethod(IO_Pickle, "for an origami", [IsFile, IsOrigami], function(f, O)
 	IO_AddToPickled(O);
 	if IO_Write(f, "ORIG") = fail then IO_FinalizePickled(); return IO_Error; fi;
