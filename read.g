@@ -9,7 +9,6 @@ ReadPackage("Origami", "lib/sage-methods.gi");
 ReadPackage("Origami", "lib/actions_on_tn_covers.gi");
 ReadPackage("Origami", "lib/cyclic-torus-covers.gi");
 ReadPackage("Origami", "lib/search-for-cyclic-torus-origamis-with-veech-group.gi");
-ReadPackage("Origami", "lib/homology.gi");
 ReadPackage("Origami", "lib/special_origamis.gi");
 ReadPackage("Origami", "lib/homologyaction.gi");
 ReadPackage("Origami", "lib/systoles.gi");
