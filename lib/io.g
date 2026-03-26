@@ -35,12 +35,6 @@ InstallMethod(IO_Pickle, "for an origami", [IsFile, IsOrigami], function(f, O)
     if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   fi;
 
-	if HasSpinParity(O) then
-    if IO_Pickle(f, SpinParity(O)) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
-  else
-    if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
-  fi;
-
 	if HasDeckGroup(O) then
     if IO_Pickle(f, IdGroup(DeckGroup(O))) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   else
@@ -78,8 +72,6 @@ IO_Unpicklers.ORIG := function(f)
 	if lyapunov = IO_Error then IO_FinalizeUnpickled(); return IO_Error; fi;
 	hyperelliptic := IO_Unpickle(f);
 	if hyperelliptic = IO_Error then IO_FinalizeUnpickled(); return IO_Error; fi;
-	spin := IO_Unpickle(f);
-	if spin = IO_Error then IO_FinalizeUnpickled(); return IO_Error; fi;
 	deckgroup := IO_Unpickle(f);
 	if deckgroup = IO_Error then IO_FinalizeUnpickled(); return IO_Error; fi;
 	vg := IO_Unpickle(f);
@@ -90,7 +82,6 @@ IO_Unpicklers.ORIG := function(f)
 	if index_of_monodromy_group <> fail then SetIndexOfMonodromyGroup(O, index_of_monodromy_group); fi;
 	if lyapunov <> fail then SetSumOfLyapunovExponents(O, lyapunov); fi;
 	if hyperelliptic <> fail then SetIsHyperelliptic(O, hyperelliptic); fi;
-	if spin <> fail then SetSpinParity(O, spin); fi;
 	if deckgroup <> fail then SetDeckGroup(O, OneSmallGroup(deckgroup)); fi;
 	if vg <> fail then SetVeechGroup(O, vg); fi;
 
