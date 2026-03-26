@@ -5,7 +5,6 @@ ReadPackage("Origami", "lib/hash.gi");
 ReadPackage("Origami", "lib/origami-list.gi");
 ReadPackage("Origami", "lib/deckGroup.gi");
 ReadPackage("Origami", "lib/normalorigami.gi");
-ReadPackage("Origami", "lib/sage-methods.gi");
 ReadPackage("Origami", "lib/actions_on_tn_covers.gi");
 ReadPackage("Origami", "lib/cyclic-torus-covers.gi");
 ReadPackage("Origami", "lib/search-for-cyclic-torus-origamis-with-veech-group.gi");

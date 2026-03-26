@@ -3,7 +3,6 @@ ReadPackage("Origami", "lib/action.gd");
 ReadPackage("Origami", "lib/canonical.gd");
 ReadPackage("Origami", "lib/hash.gd");
 ReadPackage("Origami", "lib/origami-list.gd");
-ReadPackage("Origami", "lib/sage-methods.gd");
 ReadPackage("Origami", "lib/deckGroup.gd");
 ReadPackage("Origami", "lib/normalorigami.gd");
 ReadPackage("Origami", "lib/cyclic-torus-covers.gd");
