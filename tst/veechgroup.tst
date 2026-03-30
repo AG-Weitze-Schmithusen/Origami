@@ -63,7 +63,7 @@ gap> V:=VeechGroup (O) ;
 <modular subgroup of index 4>
 gap> G:=[];
 [  ]
-gap> G:=GeneratorsOfGroup(V);
+gap> G:=WordGeneratorsOfGroup(V);
 [ S^-2, T^-1*S^-1, S*T^-2 ]
 gap> for i in [1..Length(G)] do if OrigamiNormalForm(ActionOfSL2(String(G[i]),O))=O then ; else Print("false");break; fi
 > ; od;
