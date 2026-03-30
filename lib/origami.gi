@@ -222,32 +222,65 @@ InstallGlobalFunction(DefinesQuasiRegularOrigami, function(G, U, r, u)
 end);
 
 InstallGlobalFunction(CylinderStructure, function(O)
-	local list, i, m, cycles, helpcycle, cycleLength, sigma_h, sigma_v, diff, mat, mat_inv;
+	local sigma_h, sigma_v, cycles, cycleLengths, n, cycleOf, i, t, parent, heights, widths,
+		find, union, m, currCycles, j, applCyl, a, b, maxCyls, list;
 	sigma_h := HorizontalPerm(O);
 	sigma_v := VerticalPerm(O);
-	if sigma_h=() then
-		list := [];
-	else
-		cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
-		#s is list of the cycles in the horizontal permutation of the origami
-		list := [];
-		cycleLength := List(cycles, i->(Length(i))); #Length of the cycles in the permutation
-		for m in [1..Maximum(cycleLength)] do
-			helpcycle := Filtered(cycles, i->Length(i)=m); #Zykel der Länge m
-			helpcycle := AsSet(helpcycle);
-			while helpcycle <> []  do
-				mat := [];
-				mat_inv := [];
-				for i in [1..Length(helpcycle[1])] do #calcutlatin the orbit under sigma_h and sigma_h^{-1} of each tile in the cycle
-					mat[i] := Orbit(Group(sigma_v), helpcycle[1][i]);
-					mat_inv[i] := Orbit(Group(Inverse(sigma_v)), helpcycle[1][i]);
-				od;
-				diff := Intersection(helpcycle, Union(TransposedMat(mat),TransposedMat(mat_inv))); #transposing the matrix to check on whether there are cylinders lying over each other
-				Add(list, [Length(diff), m]); #diff contains the cycles of same lenght which form a cylinder
-				helpcycle := Difference(helpcycle, diff);
+	cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
+	cycleLengths := List(cycles, i -> Length(i));
+	n := Length(cycles);
+	cycleOf := [];
+	# map square t -> cycle i it belongs to
+	for i in [1..Length(cycles)] do
+		for t in cycles[i] do
+			cycleOf[t] := i;
+		od;
+	od;
+
+	#simple union-find structure, keeping track of heights and widths
+	parent := [1..n];
+	heights := List(parent, i -> 1);
+	widths := List(parent, i -> Length(cycles[i]));
+
+	find := function(x)
+		if parent[x] <> x then
+			parent[x] := find(parent[x]);
+		fi;
+		return parent[x];
+	end;
+
+	union := function(x, y)
+		local rx, ry;
+		rx := find(x);
+		ry := find(y);
+		if rx <> ry then
+			parent[ry] := rx;
+			heights[rx] := heights[rx] + 1;
+			heights[ry] := heights[ry] + 1;
+		fi;
+	end;
+
+	#merge cycles that are vertically adjacent
+	for m in [1..Maximum(cycleLengths)] do
+		currCycles := Filtered(cycles, i -> Length(i) = m); #cycles of length m
+		for i in [1..Length(currCycles)] do
+			for j in [1..Length(currCycles)] do
+				if i = j then
+					continue;
+				fi;
+				# application of vertical permutation to current horizontal cylinder
+				applCyl := List(currCycles[i], k -> k^sigma_v);
+				if Set(applCyl) = Set(currCycles[j]) then
+					a := cycleOf[currCycles[i][1]];
+					b := cycleOf[currCycles[j][1]];
+					union(a, b);
+				fi;
 			od;
 		od;
-	fi;
+	od;
+	maxCyls := Set(List([1..n], i -> find(i)));
+	list := List(maxCyls, i -> [heights[i], widths[i]]);
+	Sort(list, function(v, w) return v[2] > w[2] or v[2] = w[2] and v[1] > w[1]; end);
 	return list;
 end);
 
@@ -574,7 +607,8 @@ end);
 
 InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	local new_origami_list, new_origamis, sigma, ExpandTree, P, canonical_origami_list, i, j,
-	 				counter, orbit, F, S, T, matrix_list, current_branch;
+	 				counter, orbit, F, S, T, matrix_list, current_branch, tup, pi,
+					reorder_matrices, reorder_orbit;
 
 	O := OrigamiNormalForm(O);
 	F := FreeGroup("S", "T");
@@ -598,7 +632,7 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 	ExpandTree := function(new_leaves)
 		new_origami_list := [];
 		for P in new_leaves do
-			current_branch := [matrix_list[_IndexOrigami(P)] * S, matrix_list[_IndexOrigami(P)] * T];
+			current_branch := [S * matrix_list[_IndexOrigami(P)], T * matrix_list[_IndexOrigami(P)]];
 			new_origamis := [OrigamiNormalForm(ActionOfS(P)), OrigamiNormalForm(ActionOfT(P))];
 			for j in [1, 2] do
 				i := ContainsHash(canonical_origami_list, new_origamis[j], HashForOrigamis);
@@ -622,10 +656,25 @@ InstallMethod(VeechGroupAndOrbit, [IsOrigami], function(O)
 
 	ExpandTree([O]);
 
+	#reorder matrices and orbit list to fit the rewriting in the standardization of the Veech group
+	tup := ModularSubgroupNonStandard(PermList(sigma[1])^-1, PermList(sigma[2])^-1);
+	pi := tup[2];
+
+	reorder_orbit := [];
+	reorder_matrices := [];
+
+	for i in [1..Length(orbit)] do
+		reorder_orbit[i] := orbit[i^(pi^-1)];
+		reorder_matrices[i] := matrix_list[i^(pi^-1)];
+	od;
+
 	return rec(
-		veech_group := ModularSubgroup(PermList(sigma[1])^-1, PermList(sigma[2])^-1), #We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
-		orbit := orbit,
-		matrices := List(matrix_list, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
+		#We take the inverse of these Permutations since ModularSubgroup works with Rightmultiplication
+		#Also, we need the non-standard constructor of ModularGroup, since otherwise the relationship
+		#between the indices will be lost.
+		veech_group := tup[1],
+		orbit := reorder_orbit,
+		matrices := List(reorder_matrices, w -> MappedWord(w, [S, T], [[[0,-1],[1,0]], [[1,1],[0,1]]]))
 	);
 end);
 

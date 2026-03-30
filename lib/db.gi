@@ -210,9 +210,6 @@ InstallMethod(InsertOrigamiRepresentativeIntoDB, [IsOrigami], function(O)
     sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
     origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
   fi;
-  if HasSpinParity(O) then
-    origami_entry.spin_parity := SpinParity(O);
-  fi;
   if HasIsHyperelliptic(O) then
     origami_entry.is_hyperelliptic := IsHyperelliptic(O);
   fi;
@@ -322,10 +319,6 @@ InstallMethod(GetOrigamiOrbitRepresentativesFromDB, [IsRecord], function(constra
     constraints.example_series := ["==", constraints.example_series];
   fi;
 
-  if IsBound(constraints.spin_parity) then
-    constraints.spin_parity := ["==", constraints.spin_parity];
-  fi;
-
   if IsBound(constraints.is_hyperelliptic) then
     constraints.is_hyperelliptic := ["==", constraints.is_hyperelliptic];
   fi;
@@ -391,9 +384,6 @@ InstallMethod(UpdateOrigamiOrbitRepresentativeDBEntry, [IsOrigami], function(O)
   if HasSumOfLyapunovExponents(O) then
     sum_of_lyapunov_exponents := SumOfLyapunovExponents(O);
     new_origami_entry.sum_of_lyapunov_exponents := [NumeratorRat(sum_of_lyapunov_exponents), DenominatorRat(sum_of_lyapunov_exponents)];
-  fi;
-  if HasSpinParity(O) then
-    new_origami_entry.spin_parity := SpinParity(O);
   fi;
   if HasIsHyperelliptic(O) then
     new_origami_entry.is_hyperelliptic := IsHyperelliptic(O);

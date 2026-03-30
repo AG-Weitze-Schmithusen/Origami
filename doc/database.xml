@@ -94,7 +94,7 @@ gap> GetVeechGroupsFromDB(rec(deficiency := 5));
     list.
     Inserts only precomputed data. If the Veech group of <A>O</A> does not already
     exist in the database, it is also inserted.
-    This function assumes that no other element of the <M>SL_2(\mathbb{Z})</M> orbit
+    This function assumes that no other element of the <M>\mathrm{SL}_2(\mathbb{Z})</M> orbit
     of <A>O</A> exists in the representative list, no test is performed to check this.
   </Description>
 </ManSection>

@@ -13,6 +13,6 @@ AutoDoc(rec(
         MainPage := false,
     ),
     autodoc := true,
-    #extract_examples := true,
+    extract_examples := true,
 ));
 QUIT;
