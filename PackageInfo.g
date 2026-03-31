@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.1",
-	Date := "09/07/2024",
+	Version := "2.0.2",
+	Date := "31/03/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -35,12 +35,42 @@ Dependencies := rec(
 
 Persons := [
 	rec(
+		LastName      := "Emmerich",
+		FirstNames    := "Leo",
+		IsAuthor      := true,
+		IsMaintainer  := false,
+		Email         := "leem00001@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Engelhardt",
+		FirstNames    := "Sebastian",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "seen00001@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
 		LastName      := "Ertl",
 		FirstNames    := "Simon",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "s8siertl@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
 										 	"FR 6.1 Mathematik\n",
@@ -71,7 +101,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "kattler@math.uni-sb.de",
-    WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+    WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html",
     PostalAddress := Concatenation( [
                       "AG Weitze-Schmithüsen\n",
                       "FR 6.1 Mathematik\n",
@@ -86,7 +116,7 @@ Persons := [
 		IsAuthor      := true,
 		IsMaintainer  := false,
 		Email         := "s8alrogo@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
 										 	"FR 6.1 Mathematik\n",
@@ -101,7 +131,7 @@ Persons := [
 		IsAuthor      := true,
 		IsMaintainer  := true,
 		Email         := "s8pcschu@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
 										 	"FR 6.1 Mathematik\n",
@@ -118,20 +148,35 @@ Persons := [
 		Email         := "thevis@math.uni-frankfurt.de",
 		WWWHome       := "https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/",
 		PostalAddress := Concatenation( [
-                       "FB 12 - Institut für Mathematik\n",
+                       "FB 12 – Institut für Mathematik\n",
                        "Johann Wolfgang Goethe-Universität\n",
                        "Robert-Mayer-Str. 6-8\n",
                        " D-60325 Frankfurt am Main"] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-  ),
+    ),
+    rec(
+		LastName      := "Wagmann",
+		FirstNames    := "Hannah",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "wagmann@math.uni-sb.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
 	rec(
 		LastName      := "Weitze-Schmithüsen",
 		FirstNames    := "Gabriela",
 		IsAuthor      := true,
 		IsMaintainer  := true,
 		Email         := "weitze@math.uni-sb.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
                        "AG Weitze-Schmithüsen\n",
                        "FR 6.1 Mathematik\n",
@@ -139,7 +184,7 @@ Persons := [
                        "D-66041 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-  ),
+    ),
 ],
 
 
@@ -163,17 +208,27 @@ ArchiveURL     := Concatenation(~.GithubWWW,
 
 BannerString := Concatenation("""
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-      ┌──┐
-      │  │        Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
-   ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
-   │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
-┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
-│  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
-└──┼──┼──┼──┼──┘     Pascal Schumann (http://www.math.uni-sb.de/ag/weitze/),
-   │  │  │  │        Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and
-   └──┼──┼──┘        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
-      │  │	   Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
-      └──┘
+Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
+by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Sebastian Engelhardt (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
+   Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
+   Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Pascal Schumann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
+   Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
+   Gabriela Weitze-Schmithüsen (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html).
+Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
+
+                +---+---+
+                |   |   |
++---+---+---+---+---+---+---+
+|   |   |   |   |   |   |   |
++---+---+---+---+---+---+---+
+    |   |   |   |
+    +---+---+---+
+
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 """),
 
