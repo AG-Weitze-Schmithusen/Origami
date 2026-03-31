@@ -66,7 +66,7 @@ DeclareOperation("Dessin", [IsPerm, IsPerm, IsPosInt]);
 #! @Label
 #! @BeginExampleSession
 #! gap> D := Dessin((1,2,3), (2,3), 3);
-#! Dessin((1,2,3), (2,3))
+#! Dessin((1,2,3), (2,3), 3)
 #! gap> ValencyList(D);
 #! rec( black := [ 3 ], white := [ 1, 2 ] )
 #! @EndExampleSession
@@ -79,6 +79,7 @@ DeclareAttribute("ValencyList", IsDessin);
 #! surface).
 #! @BeginExampleSession
 #! gap> D := Dessin((1,2,3), (2,3), 3);
+#! Dessin((1,2,3), (2,3), 3)
 #! gap> Genus(D);
 #! 0
 #! @EndExampleSession
@@ -134,7 +135,7 @@ DeclareGlobalFunction("OrigamiGraph");
 #! gap> O := Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6));
 #! Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6), 6)
 #! gap> DessinOfOrigami(O);
-#! [ Dessin((1,3,2), (1,2,3), 3), Dessin(1,3,2), (1,2,3), 3) ]
+#! [ Dessin((1,3,2), (1,2,3), 3), Dessin((1,3,2), (1,2,3), 3) ]
 #! @EndExampleSession
 DeclareGlobalFunction("DessinOfOrigami");
 
@@ -149,7 +150,8 @@ DeclareGlobalFunction("DessinOfOrigami");
 #! gap> O := Origami((2,3,4), (1,2));
 #! Origami((2,3,4), (1,2), 4)
 #! gap> AllDessinsOfOrigami(O);
-#! [ [ Dessin((2,4,3), (1,3,4), 4) ], [ Dessin((2,3), (1,3), 3), Dessin((), (), 1) ], 
-#!   [ Dessin((2,4,3), (1,3,4), 4) ] ]
+#! [ [ Dessin((2,4,3), (1,3,4), 4) ], 
+#!   [ Dessin((2,3), (1,3), 3), Dessin((), (), 1) ], 
+#!   [ Dessin((1,4,3,2), (1,4,2,3), 4) ] ]
 #! @EndExampleSession
 DeclareGlobalFunction("AllDessinsOfOrigami");
