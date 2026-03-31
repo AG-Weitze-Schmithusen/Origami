@@ -57,4 +57,14 @@ gap> IsSameVeechGroupForTestfile(SAction(VeechGroup(O)), TAction(VeechGroup(O)),
 > 100)(83,104,124,102)(85,105,127,107)(92,113,133,148,132,112)(98,120,108,119)(111,130,117,131)(125,142,135,143)(128,146,160,152,137,145)(140,155,167,159,147,154)(144,157,151,164,169,158)(149,161,153,
 > 165,172,162)(156,168,176,173,163,171,179,184,187,181,174,166)(170,175,180,185,183,178)(177,182)(186,190,188,189)(191,192) );
 true
+gap> O:= OrigamiNormalForm ( Origami ( ( 2 , 3 , 4 ) , ( 1 , 2 , 3 ) ) ) ;
+Origami((2,3,4), (1,2,3), 4)
+gap> V:=VeechGroup (O) ;
+<modular subgroup of index 4>
+gap> G:=[];
+[  ]
+gap> G:=WordGeneratorsOfGroup(V);
+[ S^-2, T^-1*S^-1, S*T^-2 ]
+gap> for i in [1..Length(G)] do if OrigamiNormalForm(ActionOfSL2(String(G[i]),O))=O then ; else Print("false");break; fi
+> ; od;
 gap> quit;
