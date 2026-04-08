@@ -157,7 +157,7 @@ InstallGlobalFunction(ContainsNormalSubgroups, function(G, H)
 	N := NormalSubgroups(G);
 	N := Filtered(N, K -> Size(K) <= Size(H));
 
-	if IsNormal(G, H) then
+	if IsNormal(G, H) and Size(H) > 1 then
 		return true;
   else
 		return Length(Filtered(N, K -> IsSubgroup(H, K))) <> 1;
