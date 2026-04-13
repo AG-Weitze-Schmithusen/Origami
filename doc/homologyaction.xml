@@ -166,8 +166,7 @@ gap> ActionOfMatrixOnNonTaut(O, [[1, 10], [0, 1]], NT, H);
 gap> O := Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7));
 Origami((1,2,3,4,5)(6,7), (1,6,8)(2,7), 8)
 gap> ShadowVeechGroup(O);
-#I  RRS defined 152 primary and 196 secondary subgroup generators
-<matrix group with 152 generators>
+<matrix group with 154 generators>
 ]]></Example>
   </Description>
 </ManSection>
@@ -187,8 +186,7 @@ gap> H := [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 >           [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ], 
 >           [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ] ];;	
 gap> ShadowVeechGroup(O, H);
-#I  RRS defined 152 primary and 196 secondary subgroup generators
-<matrix group with 152 generators>
+<matrix group with 154 generators>
 ]]></Example>
 
   </Description>
