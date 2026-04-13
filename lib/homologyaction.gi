@@ -86,11 +86,14 @@ HomologyActionOfChanged := function(A, O)
   n := DegreeOrigami(O);
   P := ShallowCopy(O);
   F := FreeGroup("S","T");
-  wordString := String(STDecomposition(A));
-	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
   N := IdentityMat(2*n, Integers);
-    #for letter in Reversed(LetterRepAssocWord(word)) do
-	for letter in LetterRepAssocWord(word)do
+  wordString := String(STDecomposition(A));
+  if wordString = "<identity ...>" then
+		return [N, P];
+  fi;
+	word := ParseRelators(GeneratorsOfGroup(F), wordString)[1];
+    for letter in Reversed(LetterRepAssocWord(word)) do
+	#for letter in LetterRepAssocWord(word)do
 		if letter = 1 then
       N := HomologyActionOfS(P) * N;
 			P := ActionOfS(P);
