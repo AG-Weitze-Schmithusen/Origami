@@ -113,7 +113,7 @@ end;
 
 CorrectActionOnHomologyByPermutation := function (O,A,pi)
 # Calculates the action on homology given the error permutation pi        
-   #Input: origami O, matrix A which presents the action of an affine homeom on non-taut Part w.r.t. a possibly new labeling of the sqaures, permutation pi which describes the relabeling O --> A*O
+   #Input: origami O, matrix A which presents the action of an affine homeom on non-taut Part w.r.t. a possibly new labeling of the squares, permutation pi which describes the relabeling O --> A*O
    #Output: matrix A which describes the acion on homology w.r.t the original labeling
    local ANew, i ,j, n;
    n := DegreeOrigami(O);
@@ -124,7 +124,7 @@ CorrectActionOnHomologyByPermutation := function (O,A,pi)
    end;
 
 
-# This function comptes a table which indicates which corner of each Square belongs to whih vertex in the following sense:
+# This function computes a table which indicates which corner of each Square belongs to which vertex in the following sense:
 # Let v_1, ... v_k be the singularities of the Origami
 # if VertexNumbering( O )[ 4* (i - 1) + j] = k means 
 # j=1 => The upper left corner of squre i is v_k
@@ -172,22 +172,22 @@ end;
 
 # This computes the boundary map C_1 -> C_0 of the Origami O as matrix.
 BoundaryMapInDimZero := function( O )
-	local Edges, res, k, n;
-	Edges := VertexNumbering( O );
+	local vertices, res, k, n;
+	vertices := VertexNumbering( O );
 	res := [];
-	n := Maximum( Edges );
+	n := Maximum( vertices );
 	for k in [1..DegreeOrigami( O )] do
-	 Add( res, - VecInDimZero( n,  Edges[ 4 * ( k-1 ) + 3] ) + VecInDimZero(n, Edges[ 4 * ( k-1 ) + 4]  ) );	
+	 Add( res, - VecInDimZero( n,  vertices[ 4 * ( k-1 ) + 3] ) + VecInDimZero(n, vertices[ 4 * ( k-1 ) + 4]  ) );	
 	od;
 	for k in [1..DegreeOrigami( O )] do
-	 Add( res, VecInDimZero( n,  Edges[ 4 * ( k-1 ) + 1] ) - VecInDimZero( n, Edges[ 4 * ( k-1 ) + 3 ] ) );
+	 Add( res, VecInDimZero( n,  vertices[ 4 * ( k-1 ) + 1] ) - VecInDimZero( n, vertices[ 4 * ( k-1 ) + 3 ] ) );
 	od;	
 	return TransposedMat( res );
 end;
 
 
 
-# This function returns a list of relations of the homology of O. In fact it is a basis of the modul ker( d: C_2 -> C_1 ).
+# This function returns a list of relations of the homology of O. In fact it is a basis of the module ker( d: C_2 -> C_1 ).
 HomologyRelations := function( O )
 	local res, k, l, rel;
 	res := [];
@@ -207,7 +207,7 @@ end;
 
 
 
-#Extents the Vector Space <V> \subsesteq Q^n to  Q^n. Returns a Basis of Q^n, which is a extension of V.
+#Extends the Vector Space <V> \subsesteq Q^n to  Q^n. Returns a Basis of Q^n, which is a extension of V.
 CompleteBasis := function( V, n)
 	local B, res, k;
 	B := Basis( Rationals^n );
@@ -281,7 +281,7 @@ NiceBasisForHomology := function( O, H)
 	return res;	
 end;
 
-# Computes a Bais of C_1 = < n_1, ..., n_i, h_1,h_2, b_1, ..., b_k, a_1, ..., a_l, >, where the n's generate the Nontaut part of the Homology, the h's and the n's generate the entire Homology, the b's genereate Im(d: C_2 ->C_1)
+# Computes a Basis of C_1 = < n_1, ..., n_i, h_1,h_2, b_1, ..., b_k, a_1, ..., a_l, >, where the n's generate the Nontaut part of the Homology, the h's and the n's generate the entire Homology, the b's genereate Im(d: C_2 ->C_1)
 NiceBasisForCurves := function( O, HomologyBasis )
 	local res;
 	res := NonTautPartOfHomologyOrigami( O, HomologyBasis );
@@ -304,6 +304,7 @@ HomologyActionOnTop := function( O, A )
 	h := HomologyActionOfChanged( A, O );
 	return CorrectActionOnHomologyByPermutation( O, h[1], CorPerm( O, h[2] ) );
 end;
+
 
 
 
