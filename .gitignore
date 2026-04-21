@@ -2,3 +2,5 @@ doc/*
 !doc/*.xml
 !doc/*.bib
 doc/_*
+
+tst/origami*.tst

@@ -19,51 +19,35 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-branch }}
+    name: ${{ matrix.gap-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        gap-branch:
-          - master
-          - stable-4.15
-          - stable-4.14
-          - stable-4.13
-          - stable-4.12
-          #- stable-4.11   # runs into warnings in the old atlasrep version there; harmless, but not worth the bother to resolve it properly
-          - stable-4.10
+        gap-version:
+          - 'devel'
+          - '4.15'
+          - '4.14'
+          - '4.13'
+          - '4.12'
+          - '4.11'
+          - '4.10'
 
     steps:
       - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v2
+      - uses: gap-actions/setup-gap@v3
         with:
-          GAP_PKGS_TO_CLONE: "AG-Weitze-Schmithusen/ModularGroup"
-          GAP_PKGS_TO_BUILD: 'io profiling orb'
-          GAPBRANCH: ${{ matrix.gap-branch }}
-      - uses: gap-actions/build-pkg@v1
-      - uses: gap-actions/run-pkg-tests@v3
-      - uses: gap-actions/run-pkg-tests@v3
+          gap-version: ${{ matrix.gap-version }}
+      - uses: gap-actions/install-pkg@v1
         with:
-          only-needed: true
-      - uses: gap-actions/process-coverage@v2
-      - uses: codecov/codecov-action@v5
+          packages: AG-Weitze-Schmithusen/ModularGroup@devel
+      - uses: gap-actions/build-pkg@v3
+      - uses: gap-actions/build-pkg-docs@v2  # to generate tst/*.tst files from manual examples
+      - uses: gap-actions/run-pkg-tests@v4
+      - uses: gap-actions/run-pkg-tests@v4
+        with:
+          mode: onlyneeded
+      - uses: gap-actions/process-coverage@v3
+      - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-  # The documentation job
-  manual:
-    name: Build manuals
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: gap-actions/setup-gap@v2
-      - uses: gap-actions/build-pkg-docs@v1
-        with:
-          use-latex: 'true'
-      - name: 'Upload documentation'
-        uses: actions/upload-artifact@v4
-        with:
-          name: manual
-          path: ./doc/manual.pdf
-          if-no-files-found: error
