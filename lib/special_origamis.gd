@@ -28,17 +28,17 @@ DeclareGlobalFunction("XOrigami");
 #! The elevator origami consists of $d$ steps of height $b$ and length $a$.
 #! The last step is connected to the first step. 
 #! @BeginExampleSession
-#! gap>  Elevator(2,0,3);
+#! gap> ElevatorOrigami(2,0,3);
 #! Origami((1,2)(3,5)(4,6), (1,3)(2,4)(5,6), 6)
 #! @EndExampleSession
  DeclareGlobalFunction("ElevatorOrigami");
 
- #! @Arguments a b d
- #! @Returns A special origami
- #! @Description
- #! The staircase origami consists of $d$ steps of height $b$ and length $a$.
-  #! @BeginExampleSession
- #! gap> Staircase(2,0,3);
- #! Origami((1,2)(3,4)(5,6), (2,3)(4,5), 6)
- #! @EndExampleSession
+#! @Arguments a b d
+#! @Returns A special origami
+#! @Description
+#! The staircase origami consists of $d$ steps of height $b$ and length $a$.
+#! @BeginExampleSession
+#! gap> StaircaseOrigami(2,0,3);
+#! Origami((1,2)(3,4)(5,6), (2,3)(4,5), 6)
+#! @EndExampleSession
 DeclareGlobalFunction("StaircaseOrigami");
