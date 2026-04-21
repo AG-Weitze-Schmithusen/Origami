@@ -108,7 +108,6 @@
   <#Include SYSTEM "intro.xml">
   <#Include SYSTEM "functionality.xml">
   <#Include SYSTEM "homologyaction.xml">
-  <#Include SYSTEM "database.xml">
   <#Include SYSTEM "_AutoDocMainFile.xml">
 
 </Body>
