@@ -17,7 +17,7 @@ SetPackageInfo( rec(
 ),
 
 Dependencies := rec(
-		GAP := "4.10",
+		GAP := "4.12",
 
 		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
 
