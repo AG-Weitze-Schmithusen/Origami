@@ -1,30 +1,25 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "1.0.0",
-	Date := "08/04/2020",
+	Version := "2.0.2",
+	Date := "31/03/2026",
 	AvailabilityTest := ReturnTrue,
-	Status := "dev",
+	Status := "other",
+	License := "GPL-3.0-or-later",
 
 	PackageDoc := rec(
 		BookName  := ~.PackageName,
 		ArchiveURLSubset := ["doc"],
-		HTMLStart := "gapdoc/chap0.html",
-		PDFFile   := "gapdoc/Origami.pdf",
-		SixFile   := "gapdoc/manual.six",
+		HTMLStart := "doc/chap0_mj.html",
+		PDFFile   := "doc/manual.pdf",
+		SixFile   := "doc/manual.six",
 		LongTitle := ~.Subtitle,
 ),
 
-##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "1.0.0">
-##  <!ENTITY RELEASEDATE "08 April 2020">
-##  <!ENTITY RELEASEYEAR "2020">
-##  <#/GAPDoc>
-
 Dependencies := rec(
-		GAP := "4.5.3",
+		GAP := "4.10",
 
-		NeededOtherPackages := [["ModularGroup", "1.0.0"], ["Orb", "4.7.6"]],
+		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
 
 		SuggestedOtherPackages := [
 			["HomalgToCAS" ,"2018.06.15"],
@@ -40,12 +35,12 @@ Dependencies := rec(
 
 Persons := [
 	rec(
-		LastName      := "Junk",
-		FirstNames    := "Luca",
+		LastName      := "Emmerich",
+		FirstNames    := "Leo",
 		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "junk@math.uni-sb.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		IsMaintainer  := false,
+		Email         := "leem00001@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
 										 	"AG Weitze-Schmithüsen\n",
 										 	"FR 6.1 Mathematik\n",
@@ -53,14 +48,60 @@ Persons := [
 										 	"D-66041 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-),
+	),
+	rec(
+		LastName      := "Engelhardt",
+		FirstNames    := "Sebastian",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "seen00001@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Ertl",
+		FirstNames    := "Simon",
+		IsAuthor      := true,
+		IsMaintainer  := false,
+		Email         := "s8siertl@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Junk",
+		FirstNames    := "Luca Leon",
+		IsAuthor      := true,
+		IsMaintainer  := false,
+		Email         := "junk@math.uni-sb.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html",
+		PostalAddress := Concatenation( [
+						"Saarland University\n",
+						"Department of Mathematics\n",
+						"Postfach 15 11 50\n",
+						"66041 Saarbrücken\n",
+						"Germany" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
   rec(
     LastName      := "Kattler",
     FirstNames    := "Pascal",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "kattler@math.uni-sb.de",
-    WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+    WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html",
     PostalAddress := Concatenation( [
                       "AG Weitze-Schmithüsen\n",
                       "FR 6.1 Mathematik\n",
@@ -69,14 +110,73 @@ Persons := [
     Place         := "Saarbrücken",
     Institution   := "Universität des Saarlandes"
   ),
-
+	rec(
+		LastName      := "Rogovskyy",
+		FirstNames    := "Alexander",
+		IsAuthor      := true,
+		IsMaintainer  := false,
+		Email         := "s8alrogo@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Schumann",
+		FirstNames    := "Pascal",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "s8pcschu@stud.uni-saarland.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
 	rec(
 		LastName      := "Thevis",
 		FirstNames    := "Andrea",
 		IsAuthor      := true,
+		IsMaintainer  := false,
+		Email         := "thevis@math.uni-frankfurt.de",
+		WWWHome       := "https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/",
+		PostalAddress := Concatenation( [
+                       "FB 12 – Institut für Mathematik\n",
+                       "Johann Wolfgang Goethe-Universität\n",
+                       "Robert-Mayer-Str. 6-8\n",
+                       " D-60325 Frankfurt am Main"] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+    ),
+    rec(
+		LastName      := "Wagmann",
+		FirstNames    := "Hannah",
+		IsAuthor      := true,
 		IsMaintainer  := true,
-		Email         := "thevis@math.uni-sb.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
+		Email         := "wagmann@math.uni-sb.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html",
+		PostalAddress := Concatenation( [
+										 	"AG Weitze-Schmithüsen\n",
+										 	"FR 6.1 Mathematik\n",
+										 	"Universität des Saarlandes\n",
+										 	"D-66041 Saarbrücken" ] ),
+		Place         := "Saarbrücken",
+		Institution   := "Universität des Saarlandes"
+	),
+	rec(
+		LastName      := "Weitze-Schmithüsen",
+		FirstNames    := "Gabriela",
+		IsAuthor      := true,
+		IsMaintainer  := true,
+		Email         := "weitze@math.uni-sb.de",
+		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html",
 		PostalAddress := Concatenation( [
                        "AG Weitze-Schmithüsen\n",
                        "FR 6.1 Mathematik\n",
@@ -84,18 +184,18 @@ Persons := [
                        "D-66041 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
-  ),
+    ),
 ],
 
 
 
-GithubUser := "PascalKattler",
+GithubUser := "AG-Weitze-Schmithusen",
 GithubRepository := ~.PackageName,
 GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
 PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
 
-ArchiveURL     := Concatenation( "https://github.com/PascalKattler/Origami/releases/download/Origami-", ~.Version, "/Origami-", ~.Version ),
+ArchiveURL     := Concatenation( "https://github.com/", ~.GithubUser, "/", ~.GithubRepository, "/releases/download/Origami-", ~.Version, "/", ~.GithubRepository, "-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
@@ -105,5 +205,49 @@ ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation(~.GithubWWW,
                     "/releases/download/v", ~.Version, "/",
 ~.GithubRepository, "-", ~.Version),
+
+BannerString := Concatenation("""
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
+by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Sebastian Engelhardt (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
+   Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
+   Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Pascal Schumann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
+   Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
+   Gabriela Weitze-Schmithüsen (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html).
+Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
+
+                +---+---+
+                |   |   |
++---+---+---+---+---+---+---+
+|   |   |   |   |   |   |   |
++---+---+---+---+---+---+---+
+    |   |   |   |
+    +---+---+---+
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+"""),
+
+TestFile := "tst/testall.g",
+
+AutoDoc := rec(
+    entities := rec(
+        VERSION := ~.Version,
+        RELEASEYEAR := ~.Date{[7..10]},
+        RELEASEDATE := function(date)
+          local day, month, year, allMonths;
+          day := Int(date{[1,2]});
+          month := Int(date{[4,5]});
+          year := Int(date{[7..10]});
+          allMonths := [ "January", "February", "March", "April", "May", "June", "July",
+                         "August", "September", "October", "November", "December"];
+          return Concatenation(String(day)," ", allMonths[month], " ", String(year));
+        end(~.Date),
+    ),
+),
 
 ) );

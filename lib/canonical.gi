@@ -121,5 +121,8 @@ InstallGlobalFunction(CopyOrigamiInNormalForm, function(origami)
   if HasIndexOfMonodromyGroup(origami) then
     SetIndexOfMonodromyGroup(normalform, IndexOfMonodromyGroup(origami));
   fi;
+  if HasSumOfLyapunovExponents(origami) then
+    SetSumOfLyapunovExponents(normalform, SumOfLyapunovExponents(origami));
+  fi;
 	return normalform;
 end);
