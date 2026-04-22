@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "2.0.2",
-	Date := "31/03/2026",
+	Date := "22/04/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -19,15 +19,7 @@ SetPackageInfo( rec(
 Dependencies := rec(
 		GAP := "4.12",
 
-		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
-
-		SuggestedOtherPackages := [
-			["HomalgToCAS" ,"2018.06.15"],
-			["IO_ForHomalg", "2017.09.02"],
-			["IO", "4.5.1"],
-			["RingsForHomalg", "2018.04.04"],
-			["ArangoDBInterface", "2019.07.30"]
-		],
+		NeededOtherPackages := [["ModularGroup", "2.0.1"], ["Orb", "4.7.6"]],
 
 		ExternalConditions := []
 
