@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Origami) - Chapter 5: Functions for Dessins d'enfants</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X797D2CEA85AA6F88" name="X797D2CEA85AA6F88"></a></p>
+<div class="ChapSects"><a href="chap5.html#X797D2CEA85AA6F88">5 <span class="Heading">Functions for Dessins d'enfants</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X797D2CEA85AA6F88">5.1 <span class="Heading">Functions for Dessins d'enfants</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X879BB76B7BF65BCB">5.1-1 BlackPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X789AABD57CA391DA">5.1-2 WhitePerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X804E00CA85F2B511">5.1-3 DegreeDessin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C3765D97EB7D35E">5.1-4 Dessin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X873E12657C08EE56">5.1-5 ValencyList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E7841028551B238">5.1-6 Genus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X822BB94D84705920">5.1-7 IsConnectedDessin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F228FE07E1027E3">5.1-8 ConnectedComponentsDessin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7AEA7521794A4DE8">5.1-9 OrigamiGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8702FBC285B0AF7E">5.1-10 DessinOfOrigami</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F78E8618027266A">5.1-11 AllDessinsOfOrigami</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Functions for Dessins d'enfants</span></h3>
+
+<p><a id="X797D2CEA85AA6F88" name="X797D2CEA85AA6F88"></a></p>
+
+<h4>5.1 <span class="Heading">Functions for Dessins d'enfants</span></h4>
+
+<p>This section lists all functions used for dessins d'enfants</p>
+
+<p><a id="X879BB76B7BF65BCB" name="X879BB76B7BF65BCB"></a></p>
+
+<h5>5.1-1 BlackPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BlackPerm</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A permutation</p>
+
+<p>This returns the permutation <span class="Math">\sigma_0</span> of the dessin that corresponds to the black vertices.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BlackPerm(D);</span>
+(1,2,3)
+</pre></div>
+
+<p><a id="X789AABD57CA391DA" name="X789AABD57CA391DA"></a></p>
+
+<h5>5.1-2 WhitePerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WhitePerm</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A permutation</p>
+
+<p>This returns the permutation <span class="Math">\sigma_1</span> of the dessin that corresponds to the white vertices.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3) ,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WhitePerm(D);</span>
+(2,3)
+</pre></div>
+
+<p><a id="X804E00CA85F2B511" name="X804E00CA85F2B511"></a></p>
+
+<h5>5.1-3 DegreeDessin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeDessin</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A positive integer</p>
+
+<p>This returns the degree of the dessin.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DegreeDessin(D);</span>
+3
+</pre></div>
+
+<p><a id="X7C3765D97EB7D35E" name="X7C3765D97EB7D35E"></a></p>
+
+<h5>5.1-4 Dessin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dessin</code>( <var class="Arg">black</var>, <var class="Arg">white</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A dessin</p>
+
+<p>This function constructs a dessin object given by monodromy actions. We expect the dessin to be connected, the permutations should act transitively on <span class="Math">\{1, \dots, d\}</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+</pre></div>
+
+<p><a id="X873E12657C08EE56" name="X873E12657C08EE56"></a></p>
+
+<h5>5.1-5 ValencyList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ValencyList</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A record</p>
+
+<p>This function returns the valency list of a dessin. It returns a record.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ValencyList(D);</span>
+rec( black := [ 3 ], white := [ 1, 2 ] )
+</pre></div>
+
+<p><a id="X7E7841028551B238" name="X7E7841028551B238"></a></p>
+
+<h5>5.1-6 Genus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Genus</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A non-negative integer</p>
+
+<p>This function calculates the genus of the dessin (so the genus of the underlying closed Riemann surface).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genus(D);</span>
+0
+</pre></div>
+
+<p><a id="X822BB94D84705920" name="X822BB94D84705920"></a></p>
+
+<h5>5.1-7 IsConnectedDessin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsConnectedDessin</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A boolean</p>
+
+<p>This checks whether the dessin is connected, so whether the group generated by <span class="Math">\sigma_0</span> and <span class="Math">\sigma_1</span> acts transitively on <span class="Math">\{1, \dots, \mathrm{deg}(D)\}</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsConnectedDessin(D);</span>
+true
+</pre></div>
+
+<p><a id="X7F228FE07E1027E3" name="X7F228FE07E1027E3"></a></p>
+
+<h5>5.1-8 ConnectedComponentsDessin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConnectedComponentsDessin</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A list of lists</p>
+
+<p>This function returns the connected components of the dessin.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Dessin((1,2,3), (2,3), 3);</span>
+Dessin((1,2,3), (2,3), 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConnectedComponentsDessin(D);</span>
+[ Dessin((1,2,3), (2,3), 3) ]
+</pre></div>
+
+<p><a id="X7AEA7521794A4DE8" name="X7AEA7521794A4DE8"></a></p>
+
+<h5>5.1-9 OrigamiGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrigamiGraph</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A list</p>
+
+<p>This function returns the stable graph of an origami. It returns a list of lists. The first entry is a list of the genera of the connected components of the dessin of the origami. The second entry is the adjacency matrix of the origami graph.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8));</span>
+Origami((1,5,6,9,10)(3,4)(7,8)(11,12), (1,3,5,7,9,11)(2,4,10,12,6,8), 12)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrigamiGraph(O);</span>
+[ [ 1, 0 ], [ [ 0, 3 ], [ 2, 0 ] ] ]
+</pre></div>
+
+<p><a id="X8702FBC285B0AF7E" name="X8702FBC285B0AF7E"></a></p>
+
+<h5>5.1-10 DessinOfOrigami</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DessinOfOrigami</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A list of dessins</p>
+
+<p>This function returns a list of the connected components of the dessin associated to the horizontal boundary point of the Teichmüller curve of the origami. Note that the components are "normalized" in the sense that a component of degree <span class="Math">d</span> only uses letters in <span class="Math">\{1, \dots, d\}</span> in the permutations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6));</span>
+Origami((1,2,3)(4,5,6), (1,4)(2,5)(3,6), 6)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DessinOfOrigami(O);</span>
+[ Dessin((1,3,2), (1,2,3), 3), Dessin((1,3,2), (1,2,3), 3) ]
+</pre></div>
+
+<p><a id="X7F78E8618027266A" name="X7F78E8618027266A"></a></p>
+
+<h5>5.1-11 AllDessinsOfOrigami</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllDessinsOfOrigami</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A list of lists of dessins</p>
+
+<p>This function returns a list of the connected components for the dessins associated to the boundary points of the Teichmüller curve of the origami in all possible directions. Note that the components are "normalized" in the sense that a component of degree <span class="Math">d</span> only uses letters in <span class="Math">\{1, \dots, d\}</span> the permutations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := Origami((2,3,4), (1,2));</span>
+Origami((2,3,4), (1,2), 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllDessinsOfOrigami(O);</span>
+[ [ Dessin((2,4,3), (1,3,4), 4) ], 
+  [ Dessin((2,3), (1,3), 3), Dessin((), (), 1) ], 
+  [ Dessin((1,4,3,2), (1,4,2,3), 4) ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
