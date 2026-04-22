@@ -1,185 +1,103 @@
+#############################################################################
+##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
+##
+
 SetPackageInfo( rec(
-	PackageName := "Origami",
-	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.1",
-	Date := "09/07/2024",
-	AvailabilityTest := ReturnTrue,
-	Status := "other",
 
-	PackageDoc := rec(
-		BookName  := ~.PackageName,
-		ArchiveURLSubset := ["doc"],
-		HTMLStart := "doc/chap0.html",
-		PDFFile   := "doc/manual.pdf",
-		SixFile   := "doc/manual.six",
-		LongTitle := ~.Subtitle,
-),
+PackageName := "GitHubPagesForGAP",
 
-##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "2.0.1">
-##  <!ENTITY RELEASEDATE "09 July 2024">
-##  <!ENTITY RELEASEYEAR "2024">
-##  <#/GAPDoc>
-
-Dependencies := rec(
-		GAP := "4.5.3",
-
-		NeededOtherPackages := [["ModularGroup", "2.0.0"], ["Orb", "4.7.6"]],
-
-		SuggestedOtherPackages := [
-			["HomalgToCAS" ,"2018.06.15"],
-			["IO_ForHomalg", "2017.09.02"],
-			["IO", "4.5.1"],
-			["RingsForHomalg", "2018.04.04"],
-			["ArangoDBInterface", "2019.07.30"]
-		],
-
-		ExternalConditions := []
-
-),
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
-	rec(
-		LastName      := "Ertl",
-		FirstNames    := "Simon",
-		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "s8siertl@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
-		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
-	),
-	rec(
-		LastName      := "Junk",
-		FirstNames    := "Luca Leon",
-		IsAuthor      := true,
-		IsMaintainer  := false,
-		Email         := "junk@math.uni-sb.de",
-		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html",
-		PostalAddress := Concatenation( [
-						"Saarland University\n",
-						"Department of Mathematics\n",
-						"Postfach 15 11 50\n",
-						"66041 Saarbrücken\n",
-						"Germany" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
-	),
   rec(
-    LastName      := "Kattler",
-    FirstNames    := "Pascal",
+    LastName      := "Horn",
+    FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "kattler@math.uni-sb.de",
-    WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
-    PostalAddress := Concatenation( [
-                      "AG Weitze-Schmithüsen\n",
-                      "FR 6.1 Mathematik\n",
-                      "Universität des Saarlandes\n",
-                      "D-66041 Saarbrücken" ] ),
-    Place         := "Saarbrücken",
-    Institution   := "Universität des Saarlandes"
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
   ),
-	rec(
-		LastName      := "Rogovskyy",
-		FirstNames    := "Alexander",
-		IsAuthor      := true,
-		IsMaintainer  := false,
-		Email         := "s8alrogo@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
-		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
-	),
-	rec(
-		LastName      := "Schumann",
-		FirstNames    := "Pascal",
-		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "s8pcschu@stud.uni-saarland.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
-		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
-	),
-	rec(
-		LastName      := "Thevis",
-		FirstNames    := "Andrea",
-		IsAuthor      := true,
-		IsMaintainer  := false,
-		Email         := "thevis@math.uni-frankfurt.de",
-		WWWHome       := "https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis/",
-		PostalAddress := Concatenation( [
-                       "FB 12 - Institut für Mathematik\n",
-                       "Johann Wolfgang Goethe-Universität\n",
-                       "Robert-Mayer-Str. 6-8\n",
-                       " D-60325 Frankfurt am Main"] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
+
+  rec(
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    #Email         := "author@example.com",
   ),
-	rec(
-		LastName      := "Weitze-Schmithüsen",
-		FirstNames    := "Gabriela",
-		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "weitze@math.uni-sb.de",
-		WWWHome       := "http://www.math.uni-sb.de/ag/weitze/",
-		PostalAddress := Concatenation( [
-                       "AG Weitze-Schmithüsen\n",
-                       "FR 6.1 Mathematik\n",
-                       "Universität des Saarlandes\n",
-                       "D-66041 Saarbrücken" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
+
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    #Email         := "janitor@example.com",
   ),
 ],
 
+Status := "other",
 
-
-GithubUser := "AG-Weitze-Schmithusen",
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
 GithubRepository := ~.PackageName,
 GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
 PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-
-ArchiveURL     := Concatenation( "https://github.com/", ~.GithubUser, "/", ~.GithubRepository, "/releases/download/Origami-", ~.Version, "/", ~.GithubRepository, "-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-
-AbstractHTML   := "<span class=\"pkgname\">Origami</span> is a package for computing the Veech group of square-tiled surfaces which are also known as origamis.",
-
-ArchiveFormats := ".tar.gz .zip",
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
 ArchiveURL     := Concatenation(~.GithubWWW,
                     "/releases/download/v", ~.Version, "/",
-~.GithubRepository, "-", ~.Version),
+                    ~.GithubRepository, "-", ~.Version),
 
-BannerString := """
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-      ┌──┐
-      │  │        Loading  Origami 2.0.1 (Computing Veech groups of origamis)
-   ┌──┼──┼──┐     by Simon Ertl (http://www.math.uni-sb.de/ag/weitze/),
-   │  │  │  │        Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
-┌──┼──┼──┼──┼──┐     Pascal Kattler (http://www.math.uni-sb.de/ag/weitze/),
-│  │  │  │  │  │     Alexander Rogovskyy (http://www.math.uni-sb.de/ag/weitze/),
-└──┼──┼──┼──┼──┘     Pascal Schumann (http://www.math.uni-sb.de/ag/weitze/),
-   │  │  │  │        Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis), and
-   └──┼──┼──┘        Gabriela Weitze-Schmithüsen (http://www.math.uni-sb.de/ag/weitze/).
-      │  │	   Homepage: https://AG-Weitze-Schmithusen.github.io/Origami/
-      └──┘
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-""",
+ArchiveFormats := ".tar.gz .tar.bz2",
 
-) );
+AbstractHTML := 
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
+
+PackageDoc := rec(
+  BookName  := "GitHubPagesForGAP",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
+  PDFFile   := "doc/manual.pdf",
+  SixFile   := "doc/manual.six",
+  LongTitle := "A GitHub Pages generator for GAP packages",
+),
+
+# The following dependencies are fake and for testing / demo purposes
+Dependencies := rec(
+  GAP := ">=4.8.1",
+  NeededOtherPackages := [
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+  ExternalConditions := []
+),
+
+AvailabilityTest := ReturnTrue,
+
+Keywords := ["GitHub Pages", "GAP"]
+
+));
+
+

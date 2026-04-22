@@ -7,10 +7,12 @@ layout: default
 {{site.data.package.abstract}}
 
 The current version of this package is version {{site.data.package.version}}, released on {{site.data.package.date}}.
+For more information, please refer to [the package manual]({{site.data.package.doc-html}}).
+There is also a [README](README.html) file.
 
- - [Documentation (HTML)]({{site.data.package.doc-html}})
- - [Documentation (PDF)]({{site.data.package.doc-pdf}})
- - [README](README.html)
+{% if site.data.package.license %}
+  License: [{{ site.data.package.license }}](https://spdx.org/licenses/{{ site.data.package.license }})
+{% endif %}
 
 ## Dependencies
 
@@ -65,6 +67,3 @@ You can get more info by typing `Cite("{{ site.data.package.name }}");` in the g
 For bug reports, feature requests and suggestions, please use the
 [issue tracker]({{site.github.issues_url}}).
 {% endif %}
-
-## License  
-This software is distributed under the terms of the GNU General Public License as published by the Free Software Foundation.
