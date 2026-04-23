@@ -10,9 +10,3 @@ ReadPackage("Origami", "lib/special_origamis.gd");
 ReadPackage("Origami", "lib/homologyaction.gd");
 ReadPackage("Origami", "lib/systoles.gd");
 ReadPackage("Origami", "lib/dessins.gd");
-
-if TestPackageAvailability("ArangoDBInterface", "2018.12.09") = fail then
-  Info(InfoWarning, 1, "The package 'ArangoDBInterface' is currently not installed. Without this package, the origami database is not available.");
-else
-  ReadPackage("Origami", "lib/db.gd");
-fi;
