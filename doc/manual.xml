@@ -84,12 +84,9 @@
       We thank Sergio Siccha for his support and valuable input at the
       beginning of this project. Furthermore, we would like to thank Vincent
       Delecroix and Samuel Lelièvre for fruitful discussions about algorithms
-      implemented in the surface_dynamics package in sage. Some of the
-      functionality of the surface_dynamics package can be used in this
-      package as well. For this we use an interface between &GAP; and sage. We
-      are grateful to Mohamed Barakat and Markus Pfeiffer for helping teaching us
-      how to use these interfaces. Moreover, we thank Thomas Breuer for helpful
-      ideas and comments on some algorithms implemented in this package.
+      implemented in the surface_dynamics package in sage. Moreover, we thank
+      Thomas Breuer for helpful ideas and comments on some algorithms implemented
+      in this package.
 
       <Par/>
 
