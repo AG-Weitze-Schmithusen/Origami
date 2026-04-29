@@ -73,25 +73,44 @@ gap> DegreeOrigami(O);
 </Section>
 
 <Section Label="SL2Action">
-<Heading>The <M>\mathrm{SL}_2(\mathbb Z)</M>-action</Heading>
-The group <M>\mathrm{SL}_2(\mathbb Z)</M> acts on the set of all origamis via the following formulas:
+<Heading>The <M>{\rm SL}_2(&ZZ;)</M>-action</Heading>
+The group <M>{\rm SL}_2(&ZZ;)</M> acts on the set of all origamis via the following formulas:
+<Alt Only="Text, HTML noMathJax">
+  <Br/>
+  <M>S.O(\sigma_x, \sigma_y) = O(\sigma_y^{-1}, \sigma_x),     T.O(\sigma_x, \sigma_y) = O(\sigma_x, \sigma_y \sigma_x^{-1}),</M>
+</Alt>
+<Alt Not="Text, HTML noMathJax">
 <Display>
   S.O(\sigma_x, \sigma_y) = O(\sigma_y^{-1}, \sigma_x), \qquad T.O(\sigma_x, \sigma_y) = O(\sigma_x, \sigma_y \sigma_x^{-1}),
 </Display>
+</Alt>
 where <M>S</M> and <M>T</M> denote the standard generators
-  <Display>
-      S =
-     \left( {\begin{array}{cc}
-      0 &amp; -1 \\
-      1 &amp; 0 \\
-     \end{array} } \right), \qquad
-      T =
-     \left( {\begin{array}{cc}
-      1 &amp; 1 \\
-      0 &amp; 1 \\
-     \end{array} } \right)
-   </Display>
-of <M>\mathrm{SL}_2(\mathbb Z)</M>. The succeeding methods implement this action in GAP.
+  <Alt Only="Text, HTML noMathJax"><Verb><![CDATA[
+                 [ 0 -1 ]            [ 1  1 ]
+             S = [ 1  0 ],       T = [ 0  1 ]
+]]></Verb></Alt>
+<Alt Not="Text, HTML noMathJax">
+  <![CDATA[
+  \[
+        S =
+        \left(
+           \begin{array}{rr}
+              0 & -1 \\
+              1 & 0
+           \end{array}
+        \right)
+        \quad
+        T =
+        \left(
+           \begin{array}{rr}
+              1 & 1 \\
+              0 & 1
+           \end{array}
+        \right)
+  \]
+  ]]>
+</Alt>
+of <M>{\rm SL}_2(&ZZ;)</M>. The succeeding methods implement this action in GAP.
 
 <ManSection>
   <Oper Name="ActionOfS" Arg="O"/>
@@ -255,9 +274,9 @@ gap> IndexOfMonodromyGroup(Origami((1,3,6)(4,5),(2,4,3,5)(7,1)));
   
 <ManSection>
   <Attr Name="VeechGroup" Arg="O"/>
-  <Returns>A subgroup of <M>\mathrm{SL}_2(\mathbb Z)</M>.</Returns>
+  <Returns>A subgroup of <M>{\rm SL}_2(&ZZ;)</M>.</Returns>
   <Description>
-    The Veech group of an origami is a finite-index subgroup of <M>\mathrm{SL}_2(\mathbb{Z})</M>. In GAP it is is represented as a <C>ModularSubgroup</C> from the <Package>ModularGroup</Package> package. It is determined by two permutations <M>\sigma_S</M> and <M>\sigma_T</M> describing how the generators <M>S</M> and <M>T</M> of <M>\mathrm{SL}_2(\mathbb{Z})</M> act on the left cosets.
+    The Veech group of an origami is a finite-index subgroup of <M>{\rm SL}_2(&ZZ;)</M>. In GAP it is is represented as a <C>ModularSubgroup</C> from the <Package>ModularGroup</Package> package. It is determined by two permutations <M>\sigma_S</M> and <M>\sigma_T</M> describing how the generators <M>S</M> and <M>T</M> of <M>{\rm SL}_2(&ZZ;)</M> act on the left cosets.
   Be aware that <C>ModularSubgroup</C> objects are internally stored as two permutations which describe the right action on the right
     cosets. However, there are also setters and getters for the left action on left cosets. To get back <M>\sigma_S</M>
     and <M>\sigma_T</M> from the defined <C>ModularSubgroup</C> object, you have to use the getters <C>SLeftAction</C> and
@@ -283,12 +302,12 @@ ModularSubgroup(
   <Oper Name="VeechGroupAndOrbit" Arg="O"/>
   <Returns>A record.</Returns>
   <Description>
-    Computes both the Veech group and the orbit under the <M>\mathrm{SL}_2(\mathbb Z)</M> action of a given origami <A>O</A>. Also returns the matrices that map the origami <A>O</A> to the corresponding orbit elements.
+    Computes both the Veech group and the orbit under the <M>{\rm SL}_2(&ZZ;)</M> action of a given origami <A>O</A>. Also returns the matrices that map the origami <A>O</A> to the corresponding orbit elements.
 
     The returned record has the following format:
     <List>
       <Item><E>VeechGroup</E> : the Veech group as a <C>ModularSubgroup</C> as in <Ref Attr= "VeechGroup"/></Item>
-      <Item><E>orbit</E> : the <M>\mathrm{SL}_2(\mathbb Z)</M>-orbit of <A>O</A> as a list of <C>Origami</C>s</Item>
+      <Item><E>orbit</E> : the <M>{\rm SL}_2(&ZZ;)</M>-orbit of <A>O</A> as a list of <C>Origami</C>s</Item>
       <Item><E>matrices</E> : a list of matrices mapping <A>O</A> to the corresponding orbit elements</Item>
     </List>
   </Description>
@@ -673,7 +692,7 @@ gap> FixedPointsOfAutomorphism(O, sigma);
   <Oper Name="GenusOfQuotient" Arg="O"/>
   <Returns>An integer.</Returns>
   <Description>
-   For a given origami this function computes the genus of the quotient <M> O/\mathrm{Trans}(O) </M>, where <M>\mathrm{Trans}(O)</M>
+   For a given origami this function computes the genus of the quotient <M> O/{\rm Trans}(O) </M>, where <M>{\rm Trans}(O)</M>
    is the translation group.
 <Example><![CDATA[
 gap> O := Origami((1,2,3)(4,5,6), (3,4));
@@ -688,7 +707,7 @@ gap> GenusOfQuotient(O);
   <Oper Name="OrigamiQuotient" Arg="O"/>
   <Returns>An origami</Returns>
   <Description>
-   For a given origami this function computes the quotient origami <M> O/\mathrm{Trans}(O) </M>, where <M>\mathrm{Trans}(O)</M>
+   For a given origami this function computes the quotient origami <M> O/{\rm Trans}(O) </M>, where <M>{\rm Trans}(O)</M>
    is the translation group.
 <Example><![CDATA[
 gap> O := Origami((1,2,3)(4,5,6), (3,4));

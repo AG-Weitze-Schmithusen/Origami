@@ -1,16 +1,17 @@
 #! @Chapter Sytoles of Translation Surfaces
 #! @ChapterLabel systoles-of-origamis
-#! Let $X$ be a translation surface. Then a systole of $X$ is a shortest,
-#! simple closed, not null-homotopic geodesic of $\overline{X}$. We denote by $\mathrm{sys}(X)$ the length of the systole.
-#! The systolic ratio of $X$ is the ratio $\mathrm{SR}(X) := \mathrm{sys}(X)^2/\mathrm{area}(X)$.
+#! Let <M>X</M> be a translation surface. Then a systole of <M>X</M> is a shortest,
+#! simple closed, not null-homotopic geodesic of the completion of <M>X</M>. We denote by <M>{\rm sys}(X)</M>
+#! the length of the systole.
+#! The systolic ratio of <M>X</M> is the ratio <M>{\rm SR}(X) := {\rm sys}(X)^2/{\rm area}(X)</M>.
 #! @Section Computing Systoles of Origamis
 
 #! @Arguments O [equilateral]
 #! @Returns a record containing the length of the systole and its combinatorial length
 #! @Description
-#! Computes the length of a systole $\gamma$ of $\texttt{O}$ and the combinatorial length of $\gamma$.
-#! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that
-#! $\texttt{O}$ consists of equilateral triangles.
+#! Computes the length of a systole <M>\gamma</M> of <C>O</C> and the combinatorial length of <M>\gamma</M>.
+#! If the optional parameter <C>equilateral</C> is true, then it is assumed that
+#! <C>O</C> consists of equilateral triangles.
 #! @BeginExampleSession
 #! gap> O := Origami((1,8,4,6,2,3,5), (2,5,7,6,8), 8);
 #! Origami((1,8,4,6,2,3,5), (2,5,7,6,8), 8)
@@ -21,9 +22,9 @@ DeclareGlobalFunction("SystoleLength");
 #! @Arguments O [equilateral]
 #! @Returns a record containing the systolic ratio and the combinatorial length of the systole used in the computation
 #! @Description
-#! Computes the systolic ratio $\mathrm{SR}(\texttt{O})$ of $\texttt{O}$.
-#! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that
-#! $\texttt{O}$ consists of equilateral triangles.
+#! Computes the systolic ratio <M>{\rm SR}(O)</M> of <C>O</C>.
+#! If the optional parameter <C>equilateral</C> is true, then it is assumed that
+#! <C>O</C> consists of equilateral triangles.
 #! @BeginExampleSession
 #! gap> O := Origami((1,8,4,6,2,3,5), (2,5,7,6,8), 8);
 #! Origami((1,8,4,6,2,3,5), (2,5,7,6,8), 8)
@@ -32,12 +33,12 @@ DeclareGlobalFunction("SystoleLength");
 #! @EndExampleSession
 DeclareGlobalFunction("SystolicRatio");
 #! @Arguments from to stratum [equilateral]
-#! @Returns a record containing the maximal systolic ratio in $\texttt{stratum}$, an origami representing the maximum and
+#! @Returns a record containing the maximal systolic ratio in <C>stratum</C>, an origami representing the maximum and
 #! a bool value indicating if a combinatorial length of three occured during the computation
 #! @Description
-#! Computes the maximal systolic ratio of all origamis from degree $\texttt{from}$ to degree $\texttt{to}$ in the stratum
-#! $\texttt{stratum}$.
-#! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that all origamis
+#! Computes the maximal systolic ratio of all origamis from degree <C>from</C> to degree <C>to</C> in the stratum
+#! <C>stratum</C>.
+#! If the optional parameter <C>equilateral</C> is true, then it is assumed that all origamis
 #! consist of equilateral triangles.
 #! @BeginExampleSession
 #! gap> MaximalSystolicRatioInStratum(4,7,[1,1]);
@@ -46,11 +47,11 @@ DeclareGlobalFunction("SystolicRatio");
 #! @EndExampleSession
 DeclareGlobalFunction("MaximalSystolicRatioInStratum");
 #! @Arguments d [equilateral]
-#! @Returns a record containing the maximal systolic ratio of all origamis with degree $\texttt{d}$, an origami representing the maximum and
+#! @Returns a record containing the maximal systolic ratio of all origamis with degree <C>d</C>, an origami representing the maximum and
 #! a bool value indicating if a combinatorial length of three occured during the computation
 #! @Description
-#! Computes the maximal systolic ratio of all origamis with degree $\texttt{d}$.
-#! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that all origamis
+#! Computes the maximal systolic ratio of all origamis with degree <C>d</C>.
+#! If the optional parameter <C>equilateral</C> is true, then it is assumed that all origamis
 #! consist of equilateral triangles.
 #! @BeginExampleSession
 #! gap> MaximalSystolicRatioByDegree(6);      
@@ -59,11 +60,11 @@ DeclareGlobalFunction("MaximalSystolicRatioInStratum");
 #! @EndExampleSession
 DeclareGlobalFunction("MaximalSystolicRatioByDegree");
 #! @Arguments origamis [equilateral]
-#! @Returns a record containing the maximal systolic ratio of all origamis in the list $\texttt{origamis}$, an origami representing the maximum and
+#! @Returns a record containing the maximal systolic ratio of all origamis in the list <C>origamis</C>, an origami representing the maximum and
 #! a bool value indicating if a combinatorial length of three occured during the computation
 #! @Description
-#! Computes the maximal systolic ratio of all origamis in the list $\texttt{origamis}$.
-#! If the optional parameter $\texttt{equilateral}$ is true, then it is assumed that all origamis
+#! Computes the maximal systolic ratio of all origamis in the list <C>origamis</C>.
+#! If the optional parameter <C>equilateral</C> is true, then it is assumed that all origamis
 #! consist of equilateral triangles.
 #! @BeginExampleSession
 #! gap> o1 := Origami((1,3,5,2), (2,4,3,5), 5);
