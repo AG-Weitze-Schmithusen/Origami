@@ -12,6 +12,7 @@ ReadPackage("Origami", "lib/special_origamis.gi");
 ReadPackage("Origami", "lib/homologyaction.gi");
 ReadPackage("Origami", "lib/systoles.gi");
 ReadPackage("Origami", "lib/dessins.gi");
+ReadPackage("Origami", "lib/veech_fibrations.gi");
 
 if TestPackageAvailability("IO", "4.5.1") <> fail then
   ReadPackage("Origami", "lib/io.g");

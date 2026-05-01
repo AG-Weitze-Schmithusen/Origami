@@ -10,3 +10,4 @@ ReadPackage("Origami", "lib/special_origamis.gd");
 ReadPackage("Origami", "lib/homologyaction.gd");
 ReadPackage("Origami", "lib/systoles.gd");
 ReadPackage("Origami", "lib/dessins.gd");
+ReadPackage("Origami", "lib/veech_fibrations.gd");
