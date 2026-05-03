@@ -90,8 +90,8 @@ where <M>S</M> and <M>T</M> denote the standard generators
              S = [ 1  0 ],       T = [ 0  1 ]
 ]]></Verb></Alt>
 <Alt Not="Text, HTML noMathJax">
+<Display>
   <![CDATA[
-  \[
         S =
         \left(
            \begin{array}{rr}
@@ -107,8 +107,8 @@ where <M>S</M> and <M>T</M> denote the standard generators
               0 & 1
            \end{array}
         \right)
-  \]
   ]]>
+</Display>
 </Alt>
 of <M>{\rm SL}_2(&ZZ;)</M>. The succeeding methods implement this action in GAP.
 
