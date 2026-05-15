@@ -116,7 +116,7 @@ of <M>{\rm SL}_2(&ZZ;)</M>. The succeeding methods implement this action in GAP.
   <Oper Name="ActionOfS" Arg="O"/>
   <Returns>An origami.</Returns>
   <Description>
-    For a given origami <A>O</A> this methods computes the origami <M>S.O</M> as described above.
+    For a given origami <A>O</A> this method computes the origami <M>S.O</M> as described above.
 <Example><![CDATA[
 gap> O:= Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8);
 Origami((1,6,4,7,5,3)(2,8), (1,4,5,3,8,2,6), 8)
