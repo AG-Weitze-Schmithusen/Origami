@@ -1,49 +1,44 @@
 InstallMethod(PrimeKernel, [IsOrigami, IsPosInt], function(O, p)
-  local G, gens, M, A, kernelGens, rep, g, C, D, queue, successor,
-    foundKernelElm;
+  local G, VeechGens, gens, M, A, kernelGens, rep, g, C, D, queue, foundKernelElm, i, j, VeechRep, VeechQueue, VeechM, VeechC;
   if not IsPrime(p) then
     return "Error: p must be prime.";
   fi;
   G := VeechGroup(O);
-  gens := GeneratorsOfGroup(G);
-  kernelGens := [];
-  M := One(G);
+  VeechGens := GeneratorsOfGroup(G);
+  gens := ShallowCopy(VeechGens);
+  Apply(gens, A -> ActionOfMatrixOnHom(O, A) * One(GL(2 * Genus(O), p)));
+  M := One(GL(2 * Genus(O), p));
   rep := [M];
+  VeechRep := [One(G)];
   queue := [M];
-
-  #successor := function(L, M)
-  #  local elm, decomp;
-  #  for elm in L do
-  #    if M^-1 * elm in [[[0, -1], [1, 0]], [[1, 1], [0, 1]]] then
-  #      return elm;
-  #    fi;
-  #  od;
-  #  return fail;
-  # end;
+  VeechQueue := [One(G)];
+  kernelGens := [];
 
   while not IsEmpty(queue) do
     M := queue[1];
+    VeechM := VeechQueue[1];
     Remove(queue, 1);
-    for g in gens do
-      C := M * g;
+    Remove(VeechQueue, 1);
+    for i in [1..Length(gens)] do
+      C := M * gens[i];
+      VeechC := VeechM * VeechGens[i];
       foundKernelElm := false;
-      for D in rep do
-        A := ActionOfMatrixOnHom(O, C * D^-1) * One(GF(p));
-        if IsOne(A) then
+      for j in [1..Length(rep)] do
+        D := rep[j];
+        if C = D then
           foundKernelElm := true;
-          if not C * D^-1 in kernelGens then
-            Add(kernelGens, C * D^-1);
-            Print("kernel: ", kernelGens, "\n");
+          if not VeechC * VeechRep[j]^-1 in kernelGens then
+            Add(kernelGens, VeechC * VeechRep[j]^-1);
           fi;
         fi;
       od;
       if not foundKernelElm and not C in rep then
         Add(rep, C);
+        Add(VeechRep, VeechC);
         Add(queue, C);
-        Print("Added: ", STDecomposition(C), "\n");
+        Add(VeechQueue, VeechC);
       fi;
     od;
-    Print("Removed: ", STDecomposition(M), "\n");
   od;
   return kernelGens;
   # if kernelGens = [] then
