@@ -47,14 +47,59 @@ InstallMethod(PrimeKernel, [IsOrigami, IsPosInt], function(O, p)
   # return ModularSubgroup(kernelGens);
 end);
 
-InstallMethod(PrimeKernelAlt, [IsOrigami, IsPosInt], function(O, p)
-  local G, gens, A, H;
+InstallMethod(PrimeKernelOrder, [IsOrigami, IsPosInt], function(O, p)
+  local G, gens, A, H, J;
   G := VeechGroup(O);
   gens := ShallowCopy(GeneratorsOfGroup(G));
   Apply(gens, A -> ActionOfMatrixOnHom(O, A) * One(Sp(2 * Genus(O), p)));
-  Print(gens);
   H := Group(gens);
-  return H;
+  return Order(H);
+end);
+
+InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
+  local cuspGens, cusps, originalCusps, totalT, i, c, c2, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k, k0, T, widLcm, tup;
+  cuspGens := CuspGenerators(PM);
+  cusps := Cusps(PM);
+  originalCusps := Cusps(VeechGroup(O));
+  totalT := [];
+  for i in [1..Length(cusps)] do
+    c := cusps[i];
+    if c in originalCusps then
+      cGen := cuspGens[i];
+      v := Eigenvectors(Rationals, TransposedMat(cGen))[1];
+      # make v integer
+      d := Lcm(List(v, DenominatorRat));
+      v := d * v;
+      A := [[1, 0], [0, 1]];
+      if v[2] <> 0 then
+        if v[1] = 0 then
+          A := [[0, 1], [-1, 0]];
+        else
+          d := Gcd(List(v, AbsInt));
+          v := 1/d * v;
+          Bezout := Gcdex(v[1], v[2]);
+          x := Bezout.coeff1;
+          y := Bezout.coeff2;
+          A := [[x, y], [-v[2], v[1]]];
+        fi;
+      fi;
+      horiO := ActionOfSL2(A, O);
+      cylStruc := CylinderStructure(horiO);
+
+      #compute the minimal Dehn multi-twist exponent
+      kmin := 1;
+      k0 := (cGen^(A^-1))[1][2];
+      for i in [1..Length(cylStruc)] do
+        kmin := Lcm(kmin, cylStruc[i][2] / Gcd(cylStruc[i][1], cylStruc[i][2]));
+      od;
+      k := kmin / Gcd(kmin, k0);
+
+      widLcm := Lcm(List(cylStruc, tup -> tup[2]));
+      T := Sum(cylStruc, tup -> widLcm / tup[2]);
+      Add(totalT, [T, k]);
+    fi;
+  od;
+  return totalT;
 end);
 
 

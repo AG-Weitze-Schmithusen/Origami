@@ -1,2 +1,3 @@
 DeclareOperation("PrimeKernel", [IsOrigami, IsPosInt]);
-DeclareOperation("PrimeKernelAlt", [IsOrigami, IsPosInt]);
+DeclareOperation("PrimeKernelOrder", [IsOrigami, IsPosInt]);
+DeclareOperation("TotalTwisting", [IsOrigami, IsModularSubgroup]);
