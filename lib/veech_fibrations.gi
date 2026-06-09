@@ -97,12 +97,12 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
 
       a := CustomLcm(List(cylStruc, tup -> tup[2] / tup[1]));
       widLcm := Lcm(List(cylStruc, tup -> tup[2]));
-      T := Sum(cylStruc, tup -> widLcm / tup[2]);
+      T := Sum(cylStruc, tup -> tup[2] / a);
       k := 1;
       while not ([[1, k], [0, 1]])^A in VG do
         k := k + 1;
       od;
-      Add(totalT, [k0, a/k]);
+      Add(totalT, [T, a/k]);
     fi;
   od;
   return totalT;
