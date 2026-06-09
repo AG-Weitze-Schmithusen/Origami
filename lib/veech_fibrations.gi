@@ -95,7 +95,7 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
       # od;
       # k := kmin / Gcd(kmin, k0);
 
-      a := Lcm(List(cylStruc, tup -> tup[2] / tup[1]));
+      a := CustomLcm(List(cylStruc, tup -> tup[2] / tup[1]));
       widLcm := Lcm(List(cylStruc, tup -> tup[2]));
       T := Sum(cylStruc, tup -> widLcm / tup[2]);
       k := 1;
@@ -107,3 +107,10 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
   od;
   return totalT;
 end);
+
+CustomLcm := function(L)
+  local denomLcm, numLcm;
+  denomLcm := Lcm(List(L, DenominatorRat));
+  numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
+  return Lcm(denomLcm, numLcm);
+end;
