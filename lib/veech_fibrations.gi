@@ -57,10 +57,11 @@ InstallMethod(PrimeKernelOrder, [IsOrigami, IsPosInt], function(O, p)
 end);
 
 InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
-  local cuspGens, cusps, originalCusps, totalT, i, c, c2, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k, k0, T, widLcm, tup;
+  local cuspGens, cusps, originalCusps, VG, totalT, i, c, c2, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k, a, k0, T, widLcm, tup;
   cuspGens := CuspGenerators(PM);
   cusps := Cusps(PM);
-  originalCusps := Cusps(VeechGroup(O));
+  VG := VeechGroup(O);
+  originalCusps := Cusps(VG);
   totalT := [];
   for i in [1..Length(cusps)] do
     c := cusps[i];
@@ -89,17 +90,20 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
       #compute the minimal Dehn multi-twist exponent
       kmin := 1;
       k0 := (cGen^(A^-1))[1][2];
-      for i in [1..Length(cylStruc)] do
-        kmin := Lcm(kmin, cylStruc[i][2] / Gcd(cylStruc[i][1], cylStruc[i][2]));
-      od;
-      k := kmin / Gcd(kmin, k0);
+      # for i in [1..Length(cylStruc)] do
+      #   kmin := Lcm(kmin, cylStruc[i][1] / Gcd(cylStruc[i][1], cylStruc[i][2]));
+      # od;
+      # k := kmin / Gcd(kmin, k0);
 
+      a := Lcm(List(cylStruc, tup -> tup[2] / tup[1]));
       widLcm := Lcm(List(cylStruc, tup -> tup[2]));
       T := Sum(cylStruc, tup -> widLcm / tup[2]);
-      Add(totalT, [T, k]);
+      k := 1;
+      while not ([[1, k], [0, 1]])^A in VG do
+        k := k + 1;
+      od;
+      Add(totalT, [k0, a/k]);
     fi;
   od;
   return totalT;
 end);
-
-
