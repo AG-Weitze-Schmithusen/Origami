@@ -56,6 +56,13 @@ InstallMethod(PrimeKernelOrder, [IsOrigami, IsPosInt], function(O, p)
   return Order(H);
 end);
 
+CustomLcm := function(L)
+  local denomLcm, numLcm;
+  denomLcm := Lcm(List(L, DenominatorRat));
+  numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
+  return Lcm(denomLcm, numLcm);
+end;
+
 InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
   local cuspGens, cusps, originalCusps, VG, totalT, i, c, c2, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k, a, k0, T, widLcm, tup;
   cuspGens := CuspGenerators(PM);
@@ -108,9 +115,3 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
   return totalT;
 end);
 
-CustomLcm := function(L)
-  local denomLcm, numLcm;
-  denomLcm := Lcm(List(L, DenominatorRat));
-  numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
-  return Lcm(denomLcm, numLcm);
-end;
