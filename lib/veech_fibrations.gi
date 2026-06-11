@@ -57,9 +57,14 @@ InstallMethod(PrimeKernelOrder, [IsOrigami, IsPosInt], function(O, p)
 end);
 
 CustomLcm := function(L)
-  local denomLcm, numLcm;
+  local denomLcm, numLcm, intL;
   denomLcm := Lcm(List(L, DenominatorRat));
-  numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
+  intL := Filtered(L, a -> IsPosInt(a));
+  if not IsEmpty(intL) then
+    numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
+  else
+    numLcm := 1;
+  fi;
   return Lcm(denomLcm, numLcm);
 end;
 
