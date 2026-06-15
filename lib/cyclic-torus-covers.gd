@@ -1,17 +1,17 @@
 #! @Chapter Cyclic Torus Covers
 #! @ChapterLabel cyclic-torus-covers
 #! Let <M>T_n</M> be the <M>n \times n</M>-Torus. Hence topologically it is a torus with <M>n^2</M> punctures.
-#! A **cyclic <M>n</M>-torus cover of degree <M>d</M>\** is a normal covering <M>X \to T_n</M> whose Deck-group is cyclic with <M>d</M> elements.
+#! A **cyclic <M>n</M>-torus cover of degree <M>d</M>** is a normal covering <M>X \to T_n</M> whose Deck-group is cyclic with <M>d</M> elements.
 #! We can obtain an origami from each cyclic <M>n</M>-torus cover by appending the map <M>p_n: T_n \to T_1</M>, which sends each square to the singular square of the
 #! trivial torus. We call such origamis **cyclic torus cover origamis**.
 #! The functions described in this chapter were programmed and used in the context of  <Cite Key="ba_rogovskyy" /> and provide a toolkit to work with this special class of origamis.
 
 #! @Section Monodromy vectors and bases of the fundamental group
-#! A **cyclic <M>n</M>-torus cover of degree <M>d</M>\** is determined by its monodromy map <M>m: \pi_1(T_n) \to &ZZ;/d&ZZ;</M>.
+#! A **cyclic <M>n</M>-torus cover of degree <M>d</M>** is determined by its monodromy map <M>m: \pi_1(T_n) \to &ZZ;/d&ZZ;</M>.
 #! Recall that the fundamental group <M>\pi_1(T_n)</M> is a free
 #! group in <M>N = n^2 + 1</M> generators. If we choose a basis of <M>\pi_1(T_n)</M>, every cyclic torus cover origami can be
 #! described as vector in <M>(&ZZ;/d&ZZ;)^N</M>. We call this vector ** monodromy vector with respect to this basis**.
-#! There are two bases (which we will call <M>L</M> and <M>S</M>\) of the fundamental group of <M>T_n</M> which we will use.
+#! There are two bases (which we will call <M>L</M> and <M>S</M>) of the fundamental group of <M>T_n</M> which we will use.
 #! The base point is chosen as the midpoint of the lower left square.
 #! 
 #! The basis <M>L</M> consists of the full horizontal path to the right, the full vertical path upwards and
@@ -72,7 +72,7 @@ DeclareGlobalFunction("SearchForCyclicTorusOrigamiWithVeechGroup");
 DeclareGlobalFunction("CyclicTorusCoverOrigamiS");
 
 #! @Arguments n d v
-#! @Returns a cyclic torus cover origami whose monodromy vector with respect to the basis <M>S</M> (respectively <M>L</M>\) is <M>v</M>.
+#! @Returns a cyclic torus cover origami whose monodromy vector with respect to the basis <M>S</M> (respectively <M>L</M>) is <M>v</M>.
 #! @Description <M>n</M> must be <M>\geq 2</M>, <M>d\geq 1</M> and <M>v \in (&ZZ;/d&ZZ;)^{n^2+1}</M> a vector such that its elements generate <M>&ZZ;/d&ZZ;</M>.
 #! @BeginExampleSession
 #! gap> CyclicTorusCoverOrigamiS(2,2,[1,0,1,0,0]);
