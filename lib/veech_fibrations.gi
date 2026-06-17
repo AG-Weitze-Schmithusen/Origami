@@ -56,20 +56,8 @@ InstallMethod(PrimeKernelOrder, [IsOrigami, IsPosInt], function(O, p)
   return Order(H);
 end);
 
-CustomLcm := function(L)
-  local denomLcm, numLcm, intL;
-  denomLcm := Lcm(List(L, DenominatorRat));
-  intL := Filtered(L, a -> IsPosInt(a));
-  if not IsEmpty(intL) then
-    numLcm := Lcm(Filtered(L, a -> IsPosInt(a)));
-  else
-    numLcm := 1;
-  fi;
-  return Lcm(denomLcm, numLcm);
-end;
-
 InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
-  local cuspGens, cusps, originalCusps, VG, totalT, i, c, c2, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k, a, k0, T, widLcm, tup;
+  local cuspGens, cusps, originalCusps, VG, totalT, i, c, cGen, v, d, A, Bezout, x, y, horiO, cylStruc, kmin, k0, T, tup, kc;
   cuspGens := CuspGenerators(PM);
   cusps := Cusps(PM);
   VG := VeechGroup(O);
@@ -100,21 +88,18 @@ InstallMethod(TotalTwisting, [IsOrigami, IsModularSubgroup], function(O, PM)
       cylStruc := CylinderStructure(horiO);
 
       #compute the minimal Dehn multi-twist exponent
-      kmin := 1;
-      k0 := (cGen^(A^-1))[1][2];
-      # for i in [1..Length(cylStruc)] do
-      #   kmin := Lcm(kmin, cylStruc[i][1] / Gcd(cylStruc[i][1], cylStruc[i][2]));
-      # od;
-      # k := kmin / Gcd(kmin, k0);
-
-      a := CustomLcm(List(cylStruc, tup -> tup[2] / tup[1]));
-      widLcm := Lcm(List(cylStruc, tup -> tup[2]));
-      T := Sum(cylStruc, tup -> a/ tup[2]);
-      k := 1;
-      while not ([[1, k], [0, 1]])^A in VG do
-        k := k + 1;
-      od;
-      Add(totalT, [T, a/k]);
+      k0 := AbsInt((cGen^(A^-1))[1][2]);
+      # For a horizontal shear [[1, k], [0, 1]], the twist number on the i-th cylinder
+      # is k * h_i / w_i. Thus, the smallest positive k giving an honest multitwist is
+      # the smallest integer s.t. w_i | k*h_i for all i, i.e.
+      # kmin = lcm_i w_i / gcd(w_i, h_i).
+      kmin := Lcm(List(cylStruc, tup -> tup[2] / Gcd(tup[1], tup[2])));
+      T := Sum(cylStruc, tup -> kmin * tup[1] / tup[2]);
+      kc := kmin / Gcd(kmin, k0);
+      if not IsPosInt(kc) then
+        Error("Something went wrong in computing the minimal exponent k_c!");
+      fi;
+      Add(totalT, [T, kc]);
     fi;
   od;
   return totalT;
