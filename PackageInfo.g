@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.3",
-	Date := "04/05/2026",
+	Version := "2.0.4",
+	Date := "15/08/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -151,7 +151,7 @@ Persons := [
 		LastName      := "Wagmann",
 		FirstNames    := "Hannah",
 		IsAuthor      := true,
-		IsMaintainer  := true,
+		IsMaintainer  := false,
 		Email         := "wagmann@math.uni-sb.de",
 		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html",
 		PostalAddress := Concatenation( [
