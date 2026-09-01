@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.4",
-	Date := "15/08/2026",
+	Version := "2.0.5",
+	Date := "01/09/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -42,19 +42,19 @@ Persons := [
 		Institution   := "Universität des Saarlandes"
 	),
 	rec(
-		LastName      := "Engelhardt",
-		FirstNames    := "Sebastian",
-		IsAuthor      := true,
-		IsMaintainer  := true,
-		Email         := "seen00001@stud.uni-saarland.de",
-		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
-		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
+	LastName      := "Engelhardt",
+	FirstNames    := "Sebastian",
+	IsAuthor      := true,
+	IsMaintainer  := true,
+	Email         := "sebastian.engelhardt@tugraz.at",
+	WWWHome       := "https://www.geometrie.tugraz.at/engelhardt",
+	PostalAddress := Concatenation( [
+									 	"Institute of Geometry, TU Graz\n",
+									 	"Kopernikusgasse 24\n",
+									 	"8010 Graz\n",
+                    "Austria \n" ] ),
+	Place         := "Graz",
+	Institution   := "Technische Universität Graz"
 	),
 	rec(
 		LastName      := "Ertl",
