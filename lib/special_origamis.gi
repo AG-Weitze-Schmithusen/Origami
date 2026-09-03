@@ -60,10 +60,11 @@ InstallGlobalFunction(ElevatorOrigami, function(length, height, steps)
 		sigma_v_step[step] := CycleFromList([step*length+(step-1)*height .. step*(length+height)+1]);
 		sigma_v := sigma_v * sigma_v_step[step];
 	od;
-	sigma_v_step := [steps*length+(steps-1)*height .. steps*(length+height)];
-	Add(sigma_v_step, 1); #connecting the last tile of the last step to the first tile of the first step
-
-	sigma_v := sigma_v * CycleFromList(sigma_v_step);
+	if length > 1 then # connecting only necessary if length > 1; otherwise the connection is already given
+		sigma_v_step := [steps*length+(steps-1)*height .. steps*(length+height)];
+		Add(sigma_v_step, 1); #connecting the last tile of the last step to the first tile of the first step
+		sigma_v := sigma_v * CycleFromList(sigma_v_step);
+	fi;
 
 	return OrigamiNormalForm(Origami(sigma_h, sigma_v));
 end);
