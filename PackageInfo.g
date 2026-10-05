@@ -209,7 +209,7 @@ BannerString := Concatenation("""
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Loading  Origami """, ~.Version, """ (Computing Veech groups of origamis)
 by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-   Sebastian Engelhardt (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Sebastian Engelhardt (https://www.geometrie.tugraz.at/engelhardt),
    Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
    Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
    Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
