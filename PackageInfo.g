@@ -17,13 +17,20 @@ SetPackageInfo( rec(
 ),
 
 Dependencies := rec(
-		GAP := "4.12",
+		GAP := ">= 4.13",
 
 		NeededOtherPackages := [["ModularGroup", "2.0.1"], ["Orb", "4.7.6"], ["SmallGrp", "1.3"]],
+
+		SuggestedOtherPackages := [["IO", "4.5.1"]],
 
 		ExternalConditions := []
 
 ),
+
+# pickling of origamis, loaded as soon as IO is loaded
+Extensions := [
+	rec( needed := [ [ "IO", "4.5.1" ] ], filename := "lib/io.g" ),
+],
 
 Persons := [
 	rec(

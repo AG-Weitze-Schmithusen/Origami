@@ -1,4 +1,4 @@
-LoadPackage("io");
+# Package extension, read by GAP once the IO package is loaded.
 
 InstallMethod(IO_Pickle, "for an origami", [IsFile, IsOrigami], function(f, O)
 	IO_AddToPickled(O);
