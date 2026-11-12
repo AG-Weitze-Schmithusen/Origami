@@ -44,7 +44,7 @@ DeclareGlobalFunction("GeneralizedCyclicTorusCover");
 #! @Arguments n x y
 #! @Returns a comb origami, which is a cyclic torus cover of degree 2 specified by a single point <M>P=(x,y)</M>
 #! @Description A comb origami is a special cyclic torus cover of degree 2, specified by a single point <M>P</M>
-#!  on <M>T_n</M>. The coordinates are given in the range <M>{0,..,n-1}^2</M>, where the
+#!  on <M>T_n</M>. The coordinates are given in the range <M>\{0,..,n-1\}^2</M>, where the
 #!  point <M>(0,0)</M> is located in the lower left corner. <M>P</M> must not be a 2-torsion point, that is, it must not be
 #!  <M>(0,0)</M>, <M>(n/2, n/2)</M>, <M>(n/2,0)</M> or <M>(0,n/2)</M>. The coordinates are considered modulo <M>n</M>. See <Cite Key="comb" /> for more details.
 #! @BeginExampleSession
