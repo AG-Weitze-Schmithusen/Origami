@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
 	Version := "2.0.6",
-	Date := "12/11/2026",
+	Date := "15/11/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -59,7 +59,7 @@ Persons := [
 									 	"Institute of Geometry, TU Graz\n",
 									 	"Kopernikusgasse 24\n",
 									 	"8010 Graz\n",
-                    "Austria \n" ] ),
+                    					"Austria" ] ),
 	Place         := "Graz",
 	Institution   := "Technische Universität Graz"
 	),
@@ -129,13 +129,12 @@ Persons := [
 		FirstNames    := "Pascal",
 		IsAuthor      := true,
 		IsMaintainer  := true,
-		Email         := "s8pcschu@stud.uni-saarland.de",
-		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		Email         := "pascal.schumann@dfki.de",
+		WWWHome       := "https://mosi.uni-saarland.de/person/pascal-schumann/",
 		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
+										 	"Saarland Informatics Campus\n",
+										 	"Campus D3.1 (DFKI)\n",
+										 	"D-66123 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
 	),
@@ -151,8 +150,8 @@ Persons := [
                        "Johann Wolfgang Goethe-Universität\n",
                        "Robert-Mayer-Str. 6-8\n",
                        " D-60325 Frankfurt am Main"] ),
-		Place         := "Saarbrücken",
-		Institution   := "Universität des Saarlandes"
+		Place         := "Frankfurt am Main",
+		Institution   := "Johann Wolfgang Goethe-Universität"
     ),
     rec(
 		LastName      := "Wagmann",
@@ -214,7 +213,7 @@ by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html)
    Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
    Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
    Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
-   Pascal Schumann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Pascal Schumann (https://mosi.uni-saarland.de/person/pascal-schumann),
    Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
    Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
    Gabriela Weitze-Schmithüsen (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/gabriela-weitze-schmithuesen.html).
