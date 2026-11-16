@@ -414,35 +414,30 @@ InstallOtherMethod( ShadowVeechGroup, [IsOrigami, IsList], function( O, H )
 end);
 
 InstallGlobalFunction( HomologyToString, function( H )
-	local i, res, m, n;
+	local i, res, n;
 	n := Length(H)/2;
-	m := -1;
 	res := "";
 	for i in [1..Length(H)] do
-		if H[i] <> 0 then m := i; break; fi;
-	od;
-	if m = -1 then return "0"; fi;
-	
-	if m<= n  then 
-		for i in [(m )..n] do
-			if H[i] <> 0 then 
-				if H[i] > 0 then Append( res, " + "); else Append(res, " - "); fi;
-				Append( res, String(AbsoluteValue(H[i]) ) );
-				Append( res, "s_");
-				Append( res, String(i));
+		if H[i] <> 0 then
+			# sign: a separator between terms, but only a plain "-" for the first term
+			if res = "" then
+				if H[i] < 0 then Append( res, "-" ); fi;
+			elif H[i] > 0 then
+				Append( res, " + " );
+			else
+				Append( res, " - " );
 			fi;
-		od;
-	fi;	
-	for i in [ Maximum( m, n + 1 ) ..Length(H)] do
-		if H[i] <> 0 then 
-			if H[i] > 0 then Append( res, " + "); else Append(res, " - "); fi;
-			Append( res, String(AbsoluteValue(H[i]) ) );
-			Append( res, "z_");
-			Append( res, String(i - n));
+			Append( res, String( AbsoluteValue(H[i]) ) );
+			# the first n entries are the sigma_i ("s"), the last n the xi_i ("z")
+			if i <= n then
+				Append( res, "s_" );
+				Append( res, String(i) );
+			else
+				Append( res, "z_" );
+				Append( res, String(i - n) );
+			fi;
 		fi;
-	od;	
-	Remove( res, 1);
-	Remove( res, 1);
-	Remove( res, 1);	
+	od;
+	if res = "" then return "0"; fi;
 	return res;
 end);
