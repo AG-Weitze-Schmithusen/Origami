@@ -467,7 +467,7 @@ InstallGlobalFunction(GenusOfQuotient, function(O)
   trans := Filtered(trans, i -> i <> ()); #Removing the trivial translation under which all points are fixed
 	fixedpoints := List(trans, i->FixedPointsOfTranslation(O,i));
 	fixedpoints := DuplicateFreeList(fixedpoints);
-	fixedpoints := Concatenation(fixedpoints);
+	fixedpoints := DuplicateFreeList(Concatenation(fixedpoints));
 	fixedpoints := List(fixedpoints, i -> Minimum(i)); #choosing a representative tile for each fixedpoint
   if n=1 then return g; fi; #if n=1, then all ramification indices are 1 thus, the sum over e-1=0
   singularities := OrigamiSingularities(O); #returns the points [[a,..,b],..,[c,..,d]] where the bottom left corners of a,b form the singularity
