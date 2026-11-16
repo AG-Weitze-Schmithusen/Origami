@@ -32,6 +32,15 @@ gap> List( HomologyOrigami( O ), HomologyToString);
 [ "1s_3 + 1s_4 + 1s_5 - 1s_6 + 1z_1 - 1z_4 - 1z_7", "1s_7 - 1z_2 - 2z_7", "1s_8 - 1z_3", "1z_5", "1z_6", "1z_8" ]
 gap> List( HomologyOrigami( O1 ), HomologyToString);
 [ "1s_4 - 1s_5 + 1s_6 - 1s_8 + 1z_2 - 1z_6 + 1z_7 - 2z_9", "1s_7 - 1z_1 - 1z_7", "1s_9 - 1z_3 - 1z_7 - 1z_9", "1s_10", "1z_4", "1z_5", "1z_8", "1z_10" ]
+gap> # a negative leading coefficient must keep its sign
+gap> List( -HomologyOrigami( O ){[1, 2, 4]}, HomologyToString);
+[ "-1s_3 - 1s_4 - 1s_5 + 1s_6 - 1z_1 + 1z_4 + 1z_7", "-1s_7 + 1z_2 + 2z_7", "-1z_5" ]
+gap> HomologyToString( [ -2, 0, 3, 0 ] );
+"-2s_1 + 3z_1"
+gap> HomologyToString( [ 0, 0, -1, -1 ] );
+"-1z_1 - 1z_2"
+gap> HomologyToString( [ 0, 0, 0, 0 ] );
+"0"
 gap> #Now the tests for ActionOfMatrixOnHom
 gap> L := GeneratorsOfGroup(VeechGroup(O));;
 gap> A := L[2]; ActionOfMatrixOnHom( O, A );
