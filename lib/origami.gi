@@ -48,7 +48,7 @@ InstallMethod(DisplayString, [IsOrigami], function(O)
 	if HasGenus(O) then
 		s := Concatenation(s, "Genus : ", String(Genus(O)), "\n");
 	fi;
-	if HasStratum() then
+	if HasStratum(O) then
 		s := Concatenation(s, "Stratum : ", String(Stratum(O)), "\n");
 	fi;
 	return s;
