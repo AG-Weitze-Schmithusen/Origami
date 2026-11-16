@@ -37,8 +37,11 @@ InstallMethod(IO_Pickle, "for an origami", [IsFile, IsOrigami], function(f, O)
     if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   fi;
 
-	if HasDeckGroup(O) then
-    if IO_Pickle(f, IdGroup(DeckGroup(O))) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
+	# The deck group is stored by its generators as permutations of the squares.
+	# For a NormalStoredOrigami the deck group is an abstract group and not a group
+	# of permutations of the squares of the unpickled origami, so it is not stored.
+	if HasDeckGroup(O) and IsPermGroup(DeckGroup(O)) then
+    if IO_Pickle(f, GeneratorsOfGroup(DeckGroup(O))) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   else
     if IO_Pickle(f, fail) = IO_Error then IO_FinalizePickled(); return IO_Error; fi;
   fi;
@@ -84,7 +87,11 @@ IO_Unpicklers.ORIG := function(f)
 	if index_of_monodromy_group <> fail then SetIndexOfMonodromyGroup(O, index_of_monodromy_group); fi;
 	if lyapunov <> fail then SetSumOfLyapunovExponents(O, lyapunov); fi;
 	if hyperelliptic <> fail then SetIsHyperelliptic(O, hyperelliptic); fi;
-	if deckgroup <> fail then SetDeckGroup(O, OneSmallGroup(deckgroup)); fi;
+	# Older versions stored IdGroup(DeckGroup(O)) here, which does not determine the
+	# deck group as a group of permutations of the squares; such data is ignored.
+	if IsList(deckgroup) and ForAll(deckgroup, IsPerm) then
+		SetDeckGroup(O, Group(deckgroup, ()));
+	fi;
 	if vg <> fail then SetVeechGroup(O, vg); fi;
 
 	IO_FinalizeUnpickled();
