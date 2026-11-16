@@ -3,7 +3,7 @@ PQueue_push := function(q, elem)
     local low, high, mid;
 
     low := 1;
-    high := Length(q);
+    high := Length(q) + 1;
     
     while low < high do
         mid := Int((low + high) * 0.5);
