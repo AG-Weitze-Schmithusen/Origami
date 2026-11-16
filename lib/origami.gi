@@ -72,7 +72,7 @@ end);
 
 InstallMethod(SparseIntKey, [IsObject, IsOrigami], function(origami_collection, origami)
 	return function(O)
-    	return (HashForPermutations(HorizontalPerm(O)) + HashForPermutations(HorizontalPerm(O)));
+    	return (HashForPermutations(HorizontalPerm(O)) + HashForPermutations(VerticalPerm(O)));
 	end;
 end);
 
