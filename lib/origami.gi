@@ -226,7 +226,7 @@ end);
 
 InstallGlobalFunction(CylinderStructure, function(O)
 	local sigma_h, sigma_v, cycles, cycleLengths, n, cycleOf, i, t, parent, heights, widths,
-		find, union, m, currCycles, j, applCyl, a, b, maxCyls, list;
+		find, union, m, currCycles, j, applCyl, a, b, maxCyls, list, height_sum;
 	sigma_h := HorizontalPerm(O);
 	sigma_v := VerticalPerm(O);
 	cycles := Cycles(sigma_h, [1..DegreeOrigami(O)]);
@@ -258,8 +258,9 @@ InstallGlobalFunction(CylinderStructure, function(O)
 		ry := find(y);
 		if rx <> ry then
 			parent[ry] := rx;
-			heights[rx] := heights[rx] + 1;
-			heights[ry] := heights[ry] + 1;
+			height_sum := heights[rx] + heights[ry];
+			heights[rx] := height_sum;
+			heights[ry] := height_sum;
 		fi;
 	end;
 
@@ -273,7 +274,8 @@ InstallGlobalFunction(CylinderStructure, function(O)
 				fi;
 				# application of vertical permutation to current horizontal cylinder
 				applCyl := List(currCycles[i], k -> k^sigma_v);
-				if Set(applCyl) = Set(currCycles[j]) then
+				if Set(applCyl) = Set(currCycles[j]) and
+						ForAll(currCycles[i], k -> (k^sigma_h)^sigma_v = (k^sigma_v)^sigma_h) then
 					a := cycleOf[currCycles[i][1]];
 					b := cycleOf[currCycles[j][1]];
 					union(a, b);
