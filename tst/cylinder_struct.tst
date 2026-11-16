@@ -18,3 +18,11 @@ gap> O := Origami((2,3)(5,6), (1,7,5,4,2));
 Origami((2,3)(5,6), (1,7,5,4,2), 7)
 gap> CylinderStructure(O);
 [ [ 1, 2 ], [ 1, 2 ], [ 2, 1 ], [ 1, 1 ] ]
+gap> O := Origami((), (1,3,2,4));
+Origami((), (1,3,2,4), 4)
+gap> CylinderStructure(O);
+[ [ 4, 1 ] ]
+gap> O := Origami((1,2,3)(4,5,6), (1,4)(2,6)(3,5));
+Origami((1,2,3)(4,5,6), (1,4)(2,6)(3,5), 6)
+gap> CylinderStructure(O);
+[ [ 1, 3 ], [ 1, 3 ] ]

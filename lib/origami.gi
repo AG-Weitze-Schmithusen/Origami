@@ -271,7 +271,8 @@ InstallGlobalFunction(CylinderStructure, function(O)
 				fi;
 				# application of vertical permutation to current horizontal cylinder
 				applCyl := List(currCycles[i], k -> k^sigma_v);
-				if ForAll(currCycles[i], k -> (k^sigma_h)^sigma_v = (k^sigma_v)^sigma_h) then
+				if Set(applCyl) = Set(currCycles[j]) and
+						ForAll(currCycles[i], k -> (k^sigma_h)^sigma_v = (k^sigma_v)^sigma_h) then
 					a := cycleOf[currCycles[i][1]];
 					b := cycleOf[currCycles[j][1]];
 					union(a, b);
