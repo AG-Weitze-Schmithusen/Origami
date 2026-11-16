@@ -451,7 +451,7 @@ SystolicRatioOfNormalOrigamis := function(from, to)
 
         result1 := SystolicRatio(o);
         result2 := SystolicRatio(o, true);
-        if result1.combinatorial_length = true or result2.combinatorial_length = true then
+        if result1.combinatorial_length = 3 or result2.combinatorial_length = 3 then
             return [o, Stratum(o), result1.systolic_ratio, result2.systolic_ratio, true];
         fi;
         return [o, Stratum(o), result1.systolic_ratio, result2.systolic_ratio, false];
