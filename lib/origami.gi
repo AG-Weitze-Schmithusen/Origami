@@ -292,24 +292,25 @@ end);
 InstallMethod(SumOfLyapunovExponents, [IsOrigami], function(O)
   local stratum, orbit,i,j, sum;
 	sum := 0;
-	if not Stratum(O)=[] then
-		if IsNormalOrigami(O) then
-			sum := SumOfLyapunovExponents(AsNormalStoredOrigami(O));
-		else
-  		orbit := VeechGroupAndOrbit(O).orbit;
-			if Length(orbit) > 1 then
-				for i in [1.. Length(orbit)] do
-  				for j in [1.. Length(CylinderStructure(orbit[i]))] do
-    			sum := sum + CylinderStructure(orbit[i])[j][1]/CylinderStructure(orbit[i])[j][2]; #height/width of the cylinders of the orbit
-  				od;
-				od;
-				sum := sum/Length(orbit);
-			fi;
-  		stratum := Stratum(O);
-  		for i in [1..Length(stratum)] do
-    		sum := sum + (1/12)*(stratum[i])*(stratum[i]+2)/(stratum[i]+1);
+	if Genus(O) = 1 then
+		return 1;
+	fi;
+	if IsNormalOrigami(O) then
+		sum := SumOfLyapunovExponents(AsNormalStoredOrigami(O));
+	else
+		orbit := VeechGroupAndOrbit(O).orbit;
+		if Length(orbit) > 1 then
+			for i in [1.. Length(orbit)] do
+			for j in [1.. Length(CylinderStructure(orbit[i]))] do
+			sum := sum + CylinderStructure(orbit[i])[j][1]/CylinderStructure(orbit[i])[j][2]; #height/width of the cylinders of the orbit
 			od;
+			od;
+			sum := sum/Length(orbit);
 		fi;
+	stratum := Stratum(O);
+	for i in [1..Length(stratum)] do
+		sum := sum + (1/12)*(stratum[i])*(stratum[i]+2)/(stratum[i]+1);
+		od;
 	fi;
 	return sum;
 end);
@@ -330,6 +331,8 @@ InstallOtherMethod(SumOfLyapunovExponents, [IsNormalStoredOrigami], function(O)
 		# 1/12*k*a(a+2)/(a+1)
 		stratum_data := [Stratum(O)[1], Length(Stratum(O))];
 		sum := sum + (1/12)*stratum_data[2]*( stratum_data[1])*(stratum_data[1]+2)/(stratum_data[1]+1);
+	else
+		return 1;
 	fi;
 	return sum;
 end);
