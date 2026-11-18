@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 	PackageName := "Origami",
 	Subtitle := "Computing Veech groups of origamis",
-	Version := "2.0.6",
-	Date := "16/11/2026",
+	Version := "2.0.7",
+	Date := "18/11/2026",
 	AvailabilityTest := ReturnTrue,
 	Status := "other",
 	License := "GPL-3.0-or-later",
@@ -114,13 +114,12 @@ Persons := [
 		FirstNames    := "Alexander",
 		IsAuthor      := true,
 		IsMaintainer  := false,
-		Email         := "s8alrogo@stud.uni-saarland.de",
-		WWWHome       := "https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html",
+		Email         := "rogovskyy@cs.uni-saarland.de",
+		WWWHome       := "https://cc.cs.uni-saarland.de/rogovskyy",
 		PostalAddress := Concatenation( [
-										 	"AG Weitze-Schmithüsen\n",
-										 	"FR 6.1 Mathematik\n",
-										 	"Universität des Saarlandes\n",
-										 	"D-66041 Saarbrücken" ] ),
+										 	"Saarland Informatics Campus\n",
+										 	"Building E1 3\n",
+										 	"D-66123 Saarbrücken" ] ),
 		Place         := "Saarbrücken",
 		Institution   := "Universität des Saarlandes"
 	),
@@ -212,7 +211,7 @@ by Leo Emmerich (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html)
    Simon Ertl (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
    Luca Junk (https://www.uni-saarland.de/lehrstuhl/weber-moritz/team/luca-junk.html),
    Pascal Kattler (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/pascal-kattler.html),
-   Alexander Rogovskyy (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen.html),
+   Alexander Rogovskyy (https://cc.cs.uni-saarland.de/rogovskyy),
    Pascal Schumann (https://mosi.uni-saarland.de/person/pascal-schumann),
    Andrea Thevis (https://www.uni-frankfurt.de/115635174/Dr__Andrea_Thevis),
    Hannah Wagmann (https://www.uni-saarland.de/lehrstuhl/weitze-schmithuesen/team/hannah-wagmann.html), and
