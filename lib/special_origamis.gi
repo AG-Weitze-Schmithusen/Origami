@@ -12,19 +12,17 @@ end);
 InstallGlobalFunction(StaircaseOrigami, function(length, height, steps)
 	local sigma_h, sigma_h_step, sigma_v, sigma_v_step, step;
 	sigma_h := ();
-	sigma_h_step := [];
 	for step in [1 .. steps] do
+		sigma_h_step := [];
 		sigma_h_step[step] := CycleFromList([(step-1)*(length+height)+1 .. (step-1)*(length+height)+length]);
 		sigma_h := sigma_h * sigma_h_step[step];
 	od;
-
 	sigma_v := ();
-	sigma_v_step := [];
 	for step in [1 .. steps-1] do
+		sigma_v_step := [];
 		sigma_v_step[step] := CycleFromList([step*length+(step-1)*height .. step*(length+height)+1]);
 		sigma_v := sigma_v * sigma_v_step[step];
 	od;
-
 	sigma_v := sigma_v * CycleFromList([steps*length+(steps-1)*height .. steps*(length+height)]);	#Loop one shorter because the last cycle is one shorter.
 
 	return OrigamiNormalForm(Origami(sigma_h, sigma_v));
